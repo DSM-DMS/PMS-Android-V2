@@ -57,7 +57,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.0.1'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.0.1'
 
-    //rxandroid
+    //rxAndroid
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     //rxjava
     implementation 'io.reactivex.rxjava3:rxjava:3.0.3'
@@ -65,6 +65,11 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
     //rx retrofit
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+    //RxDogTag
+    implementation("com.uber.rxdogtag2:rxdogtag:2.0.1")
+    implementation 'me.relex:circleindicator:2.1.4'
+    //rxBinding
+    implementation 'com.jakewharton.rxbinding4:rxbinding-material:4.0.0'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -72,4 +77,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     // Retrofit2-Gson converter
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+
+    // 기본 Kotlin 확장
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
 }
