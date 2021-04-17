@@ -1,4 +1,6 @@
 package com.dms.pmsandroid.ui
 
-class MainViewModel {
+import androidx.lifecycle.ViewModel
+
+class MainViewModel : ViewModel(){
 }

@@ -2,9 +2,21 @@ package com.dms.pmsandroid.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.base.BaseActivity
+import com.dms.pmsandroid.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
+    private val vm by lazy {
+        ViewModelProvider(this,object : ViewModelProvider.Factory{
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return MainViewModel() as T
+            }
+        })[MainViewModel::class.java]
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

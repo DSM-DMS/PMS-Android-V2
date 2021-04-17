@@ -5,4 +5,7 @@
     <string name="signup">회원가입</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_email">이메일을 입력해주세요</string>
+    <string name="please_password">비밀번호를 입력해주세요</string>
+    <string name="please_password_again">비밀번호를 한번 더 입력해주세요</string>
 </resources>
