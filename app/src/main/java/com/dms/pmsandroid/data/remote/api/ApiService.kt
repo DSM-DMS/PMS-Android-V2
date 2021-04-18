@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.api
+package com.dms.pmsandroid.data.remote.api
 
 import io.reactivex.Single
 import retrofit2.Response
