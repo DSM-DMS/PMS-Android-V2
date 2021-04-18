@@ -8,4 +8,9 @@
     <string name="please_email">이메일을 입력해주세요</string>
     <string name="please_password">비밀번호를 입력해주세요</string>
     <string name="please_password_again">비밀번호를 한번 더 입력해주세요</string>
+    <string name="title_calendar">일정</string>
+    <string name="title_meal">급식</string>
+    <string name="title_notify">공지</string>
+    <string name="title_info">소개</string>
+    <string name="title_mypage">마이페이지</string>
 </resources>
