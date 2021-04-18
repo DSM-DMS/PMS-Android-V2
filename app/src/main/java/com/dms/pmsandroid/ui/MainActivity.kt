@@ -10,11 +10,14 @@ import com.dms.pmsandroid.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val vm by lazy {
-        ViewModelProvider(this,object : ViewModelProvider.Factory{
+        ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return MainViewModel() as T
             }
         })[MainViewModel::class.java]
+    }
+    private val sharedPreferences by lazy {
+        SharedPreferenceStorage(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
