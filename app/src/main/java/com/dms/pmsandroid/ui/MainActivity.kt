@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
+import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -17,8 +18,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         })[MainViewModel::class.java]
     }
+
+    private val sharedPreferences by lazy {
+        SharedPreferenceStorage(this)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
     }
 }
