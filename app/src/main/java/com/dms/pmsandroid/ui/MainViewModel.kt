@@ -5,4 +5,4 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel(){
     val tabSelectedItem = MutableLiveData<Int>()
-} 
+}
