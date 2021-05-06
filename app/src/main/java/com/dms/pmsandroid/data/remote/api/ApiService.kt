@@ -1,12 +1,10 @@
 package com.dms.pmsandroid.data.remote.api
 
+import com.dms.pmsandroid.feature.introduce.model.ClubDetail
 import com.dms.pmsandroid.feature.introduce.model.ClubsModel
 import io.reactivex.Single
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
     @POST("/auth")
@@ -20,6 +18,17 @@ interface ApiService {
     @GET("/introduce/clubs")
     fun club(@Header("Authorization") accessToken: String)
     : Single<Response<ClubsModel>>
+
+    //동아리 상세
+    @GET("/introduce/clubs/{clubname}")
+    fun clubDetail(@Header("Authorization")
+                   @Path("clubname") accessToken: String
+    ): Single<Response<ClubDetail>>
+
+
+
+
+
 
 
 
