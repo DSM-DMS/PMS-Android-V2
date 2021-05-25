@@ -21,9 +21,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         SharedPreferenceStorage(this)
     }
 
+    lateinit var mainActivityMainBinding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainActivityMainBinding.root)
 
     }
 }

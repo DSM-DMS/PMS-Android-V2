@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.data.remote.api
+package com.dms.pmsandroid.data.remote
 
 import com.dms.pmsandroid.feature.introduce.model.ClubsModel
 import io.reactivex.Single
