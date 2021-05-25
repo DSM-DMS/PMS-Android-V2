@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.data.remote.api
+package com.dms.pmsandroid.data.remote
 
 import android.util.Log
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
