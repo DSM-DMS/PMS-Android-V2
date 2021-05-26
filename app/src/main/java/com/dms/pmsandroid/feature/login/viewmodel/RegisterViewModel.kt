@@ -1,12 +1,11 @@
 package com.dms.pmsandroid.feature.login.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.remote.login.LoginApiProvider
 import com.dms.pmsandroid.feature.login.model.RegisterRequest
 
-class RegisterViewModel(private val loginApiProvider:LoginApiProvider) : ViewModel(){
+class RegisterViewModel(private val apiProvider:LoginApiProvider) : ViewModel(){
 
     val userName = MutableLiveData<String>()
     val nEmptyName = MutableLiveData<Boolean>(false)
@@ -25,7 +24,7 @@ class RegisterViewModel(private val loginApiProvider:LoginApiProvider) : ViewMod
     fun doRegister(){
         if(doneRegister.value == true){
             val request = RegisterRequest(userEmail.value!!,userName.value!!, userPassword.value!!)
-            loginApiProvider.registerApi(request).subscribe { subscribe ->
+            apiProvider.registerApi(request).subscribe { subscribe ->
                 when(subscribe.code()){
                     201 -> {
 

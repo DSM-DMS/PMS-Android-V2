@@ -19,10 +19,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })[MainViewModel::class.java]
     }
 
-    private val sharedPreferences by lazy {
-        SharedPreferenceStorage(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner=this
