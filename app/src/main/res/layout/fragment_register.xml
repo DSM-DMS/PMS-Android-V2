@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,7 +26,7 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/signup_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signup"
@@ -36,14 +35,34 @@
         app:layout_constraintTop_toTopOf="@+id/signup_top_gl" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/signup_name_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:paddingTop="0dp"
         app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
         app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/signup_title_tv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/signup_get_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:drawablePadding="16dp"
+            android:hint="@string/please_name"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signup_email_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingTop="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
+        app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
+        app:layout_constraintTop_toBottomOf="@+id/signup_name_layout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/signup_get_id"
@@ -65,7 +84,7 @@
         app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/signup_email_layout"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +120,7 @@
         android:id="@+id/signup_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/shape_border_gray"
         android:text="@string/signup"
         android:textColor="@color/white"

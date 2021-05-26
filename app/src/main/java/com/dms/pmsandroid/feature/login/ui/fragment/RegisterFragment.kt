@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.dms.pmsandroid.R
 
-class SignUpFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
 }

@@ -28,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainActivityMainBinding.root)
-
+        vm.checkLogin()
     }
 
     private fun startLogin(){
