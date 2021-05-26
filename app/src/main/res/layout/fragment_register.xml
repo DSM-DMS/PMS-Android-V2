@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.login.viewmodel.RegisterViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -130,13 +130,15 @@
             android:id="@+id/signup_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/shape_border_gray"
+            android:onClick="@{()->vm.doRegister()}"
             android:text="@string/signup"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:onClick="@{()->vm.doRegister()}"
+            app:check_done="@{vm.doneRegister}"
             app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
             app:layout_constraintTop_toBottomOf="@+id/check_password_layout" />
 

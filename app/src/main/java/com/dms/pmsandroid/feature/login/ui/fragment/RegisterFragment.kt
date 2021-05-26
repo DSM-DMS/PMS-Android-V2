@@ -33,6 +33,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
         vm.userPassword.observe(viewLifecycleOwner, Observer {
             vm.nEmptyPassword.value = !it.isNullOrEmpty()&&it.length>8&&it.length<20
+            passwordErrorMessage()
             checkDoneRegister()
         })
 
@@ -40,10 +41,25 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             if (vm.userPasswordCheck.value != null && vm.userPassword.value != null) {
                 vm.samePassword.value = vm.userPassword == vm.userPasswordCheck
             }
+            checkPasswordError()
             checkDoneRegister()
         })
+    }
 
+    private fun passwordErrorMessage(){
+        if(vm.nEmptyPassword.value!!){
+            binding.makePasswordLayout.error = null
+        }else{
+            binding.makePasswordLayout.error = "8~20자리 사이의 비밀번호를 입력해주세요"
+        }
+    }
 
+    private fun checkPasswordError(){
+        if(vm.samePassword.value!!){
+            binding.checkPasswordLayout.error = null
+        }else{
+            binding.checkPasswordLayout.error = "비밀번호가 다릅니다"
+        }
     }
 
     private fun checkDoneRegister() {
