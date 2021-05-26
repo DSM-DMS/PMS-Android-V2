@@ -23,11 +23,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         SharedPreferenceStorage(this)
     }
 
-    lateinit var mainActivityMainBinding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainActivityMainBinding.root)
+        binding.lifecycleOwner=this
         vm.checkLogin()
     }
 
