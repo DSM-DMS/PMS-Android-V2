@@ -13,4 +13,5 @@
     <string name="title_notify">공지</string>
     <string name="title_info">소개</string>
     <string name="title_mypage">마이페이지</string>
+    <string name="please_name">이름을 입력해주세요</string>
 </resources>

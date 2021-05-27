@@ -39,3 +39,4 @@
 ## Tech
 1. MVVM
 2. RxJava
+3. Koin
