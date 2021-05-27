@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 
 class IntroduceDeveloperViewModel : ViewModel() {
 
-    private val _developList = ListLiveData<developModel>()
-
-    val develop : LiveData<Array<developModel>>
-    get() = _developList
+//    private val _developList = ListLiveData<developModel>()
+//
+//    val develop : LiveData<Array<developModel>>
+//    get() = _developList
 
 }

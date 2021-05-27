@@ -17,7 +17,7 @@ object ApiProvider {
     private val WRITE_TIME_OUT: Long = 15
     private val READ_TIME_OUT: Long = 15
     private var okHttpClient: OkHttpClient
-    private var mRetroFit: Retrofit
+    var mRetroFit: Retrofit
     private var retrofitInterFace:ApiService
 
     init {

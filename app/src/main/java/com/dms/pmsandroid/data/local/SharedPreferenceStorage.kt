@@ -5,7 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.dms.pmsandroid.ui.MainActivity
 
-class SharedPreferenceStorage(private val context: MainActivity){
+class SharedPreferenceStorage(private val context: Context){
     private lateinit var pref:SharedPreferences
 
     fun getInfo(content: String?): String{
