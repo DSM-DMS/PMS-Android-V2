@@ -9,24 +9,20 @@ import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private val vm by lazy {
-        ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return MainViewModel() as T
-            }
-        })[MainViewModel::class.java]
-    }
+
+    private val vm: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.lifecycleOwner=this
+        binding.lifecycleOwner = this
         vm.checkLogin()
     }
 
-    private fun startLogin(){
-        val loginIntent = Intent(this,LoginActivity::class.java)
+    private fun startLogin() {
+        val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
     }
 }
