@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val mainModule = module{
     single { SharedPreferenceStorage(androidApplication()) }
 
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(),get()) }
 }
