@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.login.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
@@ -17,17 +18,20 @@ class LoginViewModel(
     val userPassword = MutableLiveData<String>()
     val passwordDone = MutableLiveData<Boolean>()
 
-    val doneLogin = MutableLiveData<Boolean>(false)
+    val doneInput = MutableLiveData<Boolean>(false)
 
-
+    private val _doneLogin = MutableLiveData<Boolean>(false)
+    val doneLogin : LiveData<Boolean> get() = _doneLogin
 
     fun login(){
-        if(doneLogin.value!!){
+        if(doneInput.value!!){
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
             apiProvider.loginApi(request).subscribe { response->
                 when(response.code()){
                     201->{
-
+                        sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
+                        sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
+                        _doneLogin.value = true
                     }
                     else->{
 

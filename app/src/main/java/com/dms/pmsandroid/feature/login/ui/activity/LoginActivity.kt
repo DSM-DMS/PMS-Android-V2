@@ -27,7 +27,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         vm.userPassword.observe(this, Observer{
             vm.passwordDone.value = !it.isNullOrBlank()
         })
-        vm.doneLogin.value = vm.emailDone.value!!&&vm.passwordDone.value!!
+        vm.doneInput.value = vm.emailDone.value!!&&vm.passwordDone.value!!
     }
 
     private fun startRegister(){

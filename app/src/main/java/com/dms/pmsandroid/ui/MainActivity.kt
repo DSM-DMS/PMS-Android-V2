@@ -2,6 +2,7 @@ package com.dms.pmsandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dms.pmsandroid.R
@@ -19,6 +20,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
         vm.checkLogin()
+        observeNeedLogin()
+    }
+
+    private fun observeNeedLogin(){
+        vm.needToLogin.observe(this, Observer {
+            if(it){
+                startLogin()
+                vm.needToLogin.value = false
+            }
+        })
     }
 
     private fun startLogin() {
