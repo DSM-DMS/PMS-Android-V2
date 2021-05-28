@@ -1,6 +1,7 @@
 package com.dms.pmsandroid.feature.login.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
@@ -44,14 +45,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         vm.needRegister.observe(this, Observer {
             if(it){
                 startRegister()
-                vm.needRegister.value = false
             }
         })
     }
 
     private fun startRegister(){
+        binding.loginPage.visibility = View.VISIBLE
         val fragmentManager = supportFragmentManager.beginTransaction()
         fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
         fragmentManager.add(R.id.login_page,RegisterFragment()).commit()
+        vm.needRegister.value = false
     }
 }
