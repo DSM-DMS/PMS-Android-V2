@@ -19,10 +19,10 @@ class RegisterViewModel(private val apiProvider:LoginApiProvider) : ViewModel(){
     val userPasswordCheck = MutableLiveData<String>()
     val samePassword = MutableLiveData<Boolean>(false)
 
-    val doneRegister = MutableLiveData<Boolean>()
+    val doneInput = MutableLiveData<Boolean>()
 
     fun doRegister(){
-        if(doneRegister.value == true){
+        if(doneInput.value == true){
             val request = RegisterRequest(userEmail.value!!,userName.value!!, userPassword.value!!)
             apiProvider.registerApi(request).subscribe { subscribe ->
                 when(subscribe.code()){
