@@ -22,17 +22,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
     private fun observeInputData() {
         vm.userEmail.observe(viewLifecycleOwner, Observer {
-            vm.nEmptyEmail.value = !it.isNullOrEmpty()
+            vm.nEmptyEmail.value = !it.isNullOrBlank()
             checkDoneRegister()
         })
 
         vm.userName.observe(viewLifecycleOwner, Observer {
-            vm.nEmptyName.value = !it.isNullOrEmpty()
+            vm.nEmptyName.value = !it.isNullOrBlank()
             checkDoneRegister()
         })
 
         vm.userPassword.observe(viewLifecycleOwner, Observer {
-            vm.nEmptyPassword.value = !it.isNullOrEmpty()&&it.length>8&&it.length<20
+            vm.nEmptyPassword.value = !it.isNullOrBlank()&&it.length>8&&it.length<20
             passwordErrorMessage()
             checkDoneRegister()
         })

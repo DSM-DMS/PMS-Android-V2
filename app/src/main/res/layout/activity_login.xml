@@ -43,8 +43,9 @@
             android:id="@+id/login_get_email_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_perm_identity_24"
+            android:drawableStart="@drawable/ic_baseline_email_24"
             android:drawablePadding="10dp"
+            android:text = "@={vm.userEmail}"
             android:hint="@string/please_email" />
 
 
@@ -67,6 +68,7 @@
             android:drawableStart="@drawable/ic_baseline_lock_24"
             android:drawablePadding="16dp"
             android:hint="@string/please_password"
+            android:text="@={vm.userPassword}"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
