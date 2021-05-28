@@ -23,6 +23,9 @@ class LoginViewModel(
     private val _doneLogin = MutableLiveData<Boolean>(false)
     val doneLogin : LiveData<Boolean> get() = _doneLogin
 
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage : LiveData<String> get() = _toastMessage
+
     fun login(){
         if(doneInput.value!!){
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
@@ -31,10 +34,11 @@ class LoginViewModel(
                     201->{
                         sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
                         sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
+                        sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"access_token")
                         _doneLogin.value = true
                     }
                     else->{
-
+                        _toastMessage.value = "잘못된 로그인 정보입니다"
                     }
                 }
             }
