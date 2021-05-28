@@ -21,6 +21,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         binding.vm = vm
         observeInput()
         observeToast()
+        observeRegister()
     }
 
     private fun observeInput(){
@@ -36,6 +37,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private fun observeToast(){
         vm.toastMessage.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun observeRegister(){
+        vm.needRegister.observe(this, Observer {
+            if(it){
+                startRegister()
+                vm.needRegister.value = false
+            }
         })
     }
 

@@ -13,10 +13,10 @@ class LoginViewModel(
 ) : ViewModel() {
 
     val userEmail = MutableLiveData<String>()
-    val emailDone = MutableLiveData<Boolean>()
+    val emailDone = MutableLiveData<Boolean>(false)
 
     val userPassword = MutableLiveData<String>()
-    val passwordDone = MutableLiveData<Boolean>()
+    val passwordDone = MutableLiveData<Boolean>(false)
 
     val needRegister = MutableLiveData<Boolean>(false)
 

@@ -6,9 +6,11 @@
             name="vm"
             type="com.dms.pmsandroid.feature.login.viewmodel.RegisterViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/signup_left_gl"
@@ -56,9 +58,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:drawablePadding="16dp"
-                android:text="@={vm.userName}"
                 android:hint="@string/please_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:text="@={vm.userName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -77,9 +79,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="16dp"
-                android:text="@={vm.userEmail}"
                 android:hint="@string/please_email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="@={vm.userEmail}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -101,9 +103,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="16dp"
-                android:text="@={vm.userPassword}"
                 android:hint="@string/please_password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={vm.userPassword}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -119,11 +121,11 @@
                 android:id="@+id/signup_check_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="16dp"
-                android:text="@={vm.userPasswordCheck}"
                 android:drawableStart="@drawable/ic_baseline_check_circle_outline_24"
+                android:drawablePadding="16dp"
                 android:hint="@string/please_password_again"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={vm.userPasswordCheck}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton

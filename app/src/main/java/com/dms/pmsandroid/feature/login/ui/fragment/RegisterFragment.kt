@@ -32,7 +32,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         })
 
         vm.userPassword.observe(viewLifecycleOwner, Observer {
-            vm.nEmptyPassword.value = !it.isNullOrBlank()&&it.length>8&&it.length<20
+            vm.nEmptyPassword.value = !it.isNullOrBlank()&&it.length>7&&it.length<21
             passwordErrorMessage()
             checkDoneRegister()
         })
