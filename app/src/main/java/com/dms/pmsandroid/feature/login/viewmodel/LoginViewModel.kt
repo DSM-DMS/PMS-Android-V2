@@ -18,6 +18,8 @@ class LoginViewModel(
     val userPassword = MutableLiveData<String>()
     val passwordDone = MutableLiveData<Boolean>()
 
+    val needRegister = MutableLiveData<Boolean>(false)
+
     val doneInput = MutableLiveData<Boolean>(false)
 
     private val _doneLogin = MutableLiveData<Boolean>(false)
@@ -43,5 +45,9 @@ class LoginViewModel(
                 }
             }
         }
+    }
+
+    fun needRegister(){
+        needRegister.value = true
     }
 }

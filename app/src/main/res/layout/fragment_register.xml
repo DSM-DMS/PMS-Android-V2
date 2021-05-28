@@ -136,7 +136,7 @@
             android:text="@string/signup"
             android:textColor="@color/white"
             android:textSize="25sp"
-            app:check_done="@{vm.doneRegister}"
+            app:check_done="@{vm.doneInput}"
             app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/signup_left_gl"

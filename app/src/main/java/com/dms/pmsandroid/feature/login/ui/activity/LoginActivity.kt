@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityLoginBinding
+import com.dms.pmsandroid.feature.login.ui.fragment.RegisterFragment
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,6 +40,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun startRegister(){
-
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
+        fragmentManager.add(R.id.login_page,RegisterFragment()).commit()
     }
 }
