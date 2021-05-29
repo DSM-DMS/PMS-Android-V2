@@ -25,10 +25,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     private fun observeInput(){
         vm.userEmail.observe(viewLifecycleOwner, Observer {
             vm.emailDone.value = !it.isNullOrBlank()
+            checkDone()
         })
         vm.userPassword.observe(viewLifecycleOwner, Observer{
             vm.passwordDone.value = !it.isNullOrBlank()
+            checkDone()
         })
+
+    }
+
+    private fun checkDone(){
         vm.doneInput.value = vm.emailDone.value!!&&vm.passwordDone.value!!
     }
 
