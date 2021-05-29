@@ -45,6 +45,9 @@ class LoginViewModel(
                 }
             }
         }
+        else{
+            _toastMessage.value = "정보를 모두 입력해주세요"
+        }
     }
 
     fun needRegister(){

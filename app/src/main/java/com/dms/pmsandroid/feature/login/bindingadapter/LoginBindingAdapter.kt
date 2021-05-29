@@ -12,9 +12,9 @@ object LoginBindingAdapter {
     @BindingAdapter("check_done")
     fun checkDoneColor(view: View, done:Boolean){
         if(done){
-            view.setBackgroundColor(R.color.green)
+            view.background.setTint(R.color.green)
         }else{
-            view.setBackgroundColor(R.color.gray)
+            view.background.setTint(R.color.gray)
         }
     }
 }
