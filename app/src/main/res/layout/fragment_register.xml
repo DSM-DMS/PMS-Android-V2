@@ -6,6 +6,7 @@
             name="vm"
             type="com.dms.pmsandroid.feature.login.viewmodel.RegisterViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -56,9 +57,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:drawablePadding="16dp"
-                android:text="@={vm.userName}"
                 android:hint="@string/please_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:text="@={vm.userName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -77,9 +78,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="16dp"
-                android:text="@={vm.userEmail}"
                 android:hint="@string/please_email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="@={vm.userEmail}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -101,9 +102,9 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="16dp"
-                android:text="@={vm.userPassword}"
                 android:hint="@string/please_password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={vm.userPassword}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -119,11 +120,12 @@
                 android:id="@+id/signup_check_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="16dp"
-                android:text="@={vm.userPasswordCheck}"
                 android:drawableStart="@drawable/ic_baseline_check_circle_outline_24"
+                android:drawablePadding="16dp"
                 android:hint="@string/please_password_again"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={vm.userPasswordCheck}"
+                android:imeOptions="actionDone"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -131,12 +133,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:background="@drawable/shape_border_gray"
+            android:background="@{vm.doneInput?@drawable/shape_border_blue:@drawable/shape_border_gray}"
             android:onClick="@{()->vm.doRegister()}"
             android:text="@string/signup"
             android:textColor="@color/white"
             android:textSize="25sp"
-            app:check_done="@{vm.doneRegister}"
             app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
@@ -146,6 +147,7 @@
             android:id="@+id/signin_back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:onClick="@{()->vm.finishRegister()}"
             android:background="@drawable/ic_baseline_cancel_24"
             app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
             app:layout_constraintTop_toTopOf="@+id/signup_top_gl" />
