@@ -54,7 +54,6 @@ class LoginViewModel(
     }
 
     fun needRegister(){
-        _toastMessage.value = null
         userEmail.value = null
         userPassword.value = null
         needRegister.value = true
