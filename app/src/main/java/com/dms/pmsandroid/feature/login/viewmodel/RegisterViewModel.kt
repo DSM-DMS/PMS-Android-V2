@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.feature.login.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -46,7 +45,6 @@ class RegisterViewModel(private val apiProvider: LoginApiProvider) : ViewModel()
                     }
                 }
             },{
-                Log.e("throwable",it.toString())
                 _toastMessage.value = "회원가입에 실패하였습니다"
             })
 
