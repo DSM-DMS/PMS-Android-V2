@@ -1,36 +1,68 @@
 package com.dms.pmsandroid.feature.login.ui.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityLoginBinding
+import com.dms.pmsandroid.feature.login.ui.fragment.LoginFragment
+import com.dms.pmsandroid.feature.login.ui.fragment.RegisterFragment
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.system.exitProcess
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    private val vm :LoginViewModel by viewModel()
+    private val vm : LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
-        binding.vm = vm
-        observeInput()
+        startLogin()
+        observeRegister()
+        observeDoneLogin()
     }
 
-    private fun observeInput(){
-        vm.userEmail.observe(this, Observer {
-            vm.emailDone.value = !it.isNullOrBlank()
+    private fun startLogin(){
+        supportFragmentManager.beginTransaction().add(R.id.login_container,LoginFragment()).commit()
+    }
+
+    private fun observeRegister(){
+        vm.needRegister.observe(this, Observer {
+            if(it){
+                startRegister()
+            }
         })
-        vm.userPassword.observe(this, Observer{
-            vm.passwordDone.value = !it.isNullOrBlank()
+    }
+
+    private fun observeDoneLogin(){
+        vm.doneLogin.observe(this, Observer {
+            if(it){
+                finish()
+            }
         })
-        vm.doneInput.value = vm.emailDone.value!!&&vm.passwordDone.value!!
     }
 
     private fun startRegister(){
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
+        fragmentManager.replace(R.id.login_container,RegisterFragment()).commit()
+        vm.needRegister.value = false
+    }
+
+    private var lastTimeBackPressed: Long = -1500
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - lastTimeBackPressed <= 1500) {
+            moveTaskToBack(true)
+            finish()
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }
+        lastTimeBackPressed = System.currentTimeMillis()
+        Toast.makeText(this, "뒤로가 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
 
     }
 }

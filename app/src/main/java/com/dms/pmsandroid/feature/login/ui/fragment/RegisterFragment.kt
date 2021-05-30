@@ -2,6 +2,7 @@ package com.dms.pmsandroid.feature.login.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
@@ -17,7 +18,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.vm = vm
+        observeToast()
         observeInputData()
+        observeFinish()
     }
 
     private fun observeInputData() {
@@ -32,32 +35,30 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         })
 
         vm.userPassword.observe(viewLifecycleOwner, Observer {
-            vm.nEmptyPassword.value = !it.isNullOrBlank()&&it.length>8&&it.length<20
+            vm.nEmptyPassword.value = !it.isNullOrBlank() && it.length > 7 && it.length < 21
             passwordErrorMessage()
             checkDoneRegister()
         })
 
         vm.userPasswordCheck.observe(viewLifecycleOwner, Observer {
-            if (vm.userPasswordCheck.value != null && vm.userPassword.value != null) {
-                vm.samePassword.value = vm.userPassword == vm.userPasswordCheck
-            }
+            vm.samePassword.value = vm.userPassword.value == vm.userPasswordCheck.value
             checkPasswordError()
             checkDoneRegister()
         })
     }
 
-    private fun passwordErrorMessage(){
-        if(vm.nEmptyPassword.value!!){
+    private fun passwordErrorMessage() {
+        if (vm.nEmptyPassword.value!!) {
             binding.makePasswordLayout.error = null
-        }else{
+        } else {
             binding.makePasswordLayout.error = "8~20자리 사이의 비밀번호를 입력해주세요"
         }
     }
 
-    private fun checkPasswordError(){
-        if(vm.samePassword.value!!){
+    private fun checkPasswordError() {
+        if (vm.samePassword.value!!) {
             binding.checkPasswordLayout.error = null
-        }else{
+        } else {
             binding.checkPasswordLayout.error = "비밀번호가 다릅니다"
         }
     }
@@ -65,6 +66,26 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private fun checkDoneRegister() {
         vm.doneInput.value =
             vm.nEmptyEmail.value!! && vm.nEmptyName.value!! && vm.nEmptyPassword.value!! && vm.samePassword.value!!
+    }
+
+    private fun observeToast() {
+        vm.toastMessage.observe(viewLifecycleOwner, Observer { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun observeFinish(){
+        vm.finishRegister.observe(viewLifecycleOwner, Observer {
+            if(it){
+                finishRegister()
+            }
+        })
+    }
+
+    private fun finishRegister(){
+        val fragment = activity!!.supportFragmentManager
+        val fragmentManager = fragment.beginTransaction().setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
+        fragmentManager.replace(R.id.login_container,LoginFragment()).commit()
     }
 
 }

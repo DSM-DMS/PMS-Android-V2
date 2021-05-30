@@ -13,7 +13,7 @@ import retrofit2.Response
 class LoginApiProvider{
     private fun provideLoginApi():LoginApi=ApiProvider.mRetroFit.create(LoginApi::class.java)
 
-    fun registerApi(request: RegisterRequest):@NonNull Single<Response<Any>> = provideLoginApi().register(request)
+    fun registerApi(request: RegisterRequest):@NonNull Single<Response<Void>> = provideLoginApi().register(request)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
