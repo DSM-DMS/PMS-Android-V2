@@ -1,7 +1,6 @@
 package com.dms.pmsandroid.feature.login.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
@@ -11,8 +10,6 @@ import com.dms.pmsandroid.feature.login.ui.fragment.LoginFragment
 import com.dms.pmsandroid.feature.login.ui.fragment.RegisterFragment
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.system.exitProcess
-
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
