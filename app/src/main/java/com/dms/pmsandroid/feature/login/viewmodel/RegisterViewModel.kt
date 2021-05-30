@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.login.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.remote.login.LoginApiProvider
@@ -21,6 +22,9 @@ class RegisterViewModel(private val apiProvider:LoginApiProvider) : ViewModel(){
 
     val doneInput = MutableLiveData<Boolean>()
 
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage:LiveData<String> get() = _toastMessage
+
     fun doRegister(){
         if(doneInput.value == true){
             val request = RegisterRequest(userEmail.value!!,userName.value!!, userPassword.value!!)
@@ -37,6 +41,8 @@ class RegisterViewModel(private val apiProvider:LoginApiProvider) : ViewModel(){
                     }
                 }
             }
+        }else{
+            _toastMessage.value = "정보를 정확히 입력해주세요"
         }
 
     }

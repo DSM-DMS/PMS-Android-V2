@@ -2,6 +2,7 @@ package com.dms.pmsandroid.feature.login.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
@@ -17,6 +18,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.vm = vm
+        observeToast()
         observeInputData()
     }
 
@@ -38,7 +40,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         })
 
         vm.userPasswordCheck.observe(viewLifecycleOwner, Observer {
-            if (vm.userPasswordCheck.value != null && vm.userPassword.value != null) {
+            if (!it.isNullOrBlank() && vm.userPassword.value != null) {
                 vm.samePassword.value = vm.userPassword == vm.userPasswordCheck
             }
             checkPasswordError()
@@ -65,6 +67,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private fun checkDoneRegister() {
         vm.doneInput.value =
             vm.nEmptyEmail.value!! && vm.nEmptyName.value!! && vm.nEmptyPassword.value!! && vm.samePassword.value!!
+    }
+
+    private fun observeToast(){
+        vm.toastMessage.observe(viewLifecycleOwner, Observer { message->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        })
     }
 
 }
