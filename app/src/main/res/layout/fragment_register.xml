@@ -124,7 +124,8 @@
                 android:drawablePadding="16dp"
                 android:hint="@string/please_password_again"
                 android:inputType="textPassword"
-                android:text="@={vm.userPasswordCheck}" />
+                android:text="@={vm.userPasswordCheck}"
+                android:imeOptions="actionDone"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton

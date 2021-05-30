@@ -72,7 +72,8 @@
                 android:drawablePadding="16dp"
                 android:hint="@string/please_password"
                 android:inputType="textPassword"
-                android:text="@={vm.userPassword}" />
+                android:text="@={vm.userPassword}"
+                android:imeOptions="actionDone"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
