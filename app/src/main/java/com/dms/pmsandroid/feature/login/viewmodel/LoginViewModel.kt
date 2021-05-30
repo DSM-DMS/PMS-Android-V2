@@ -33,7 +33,6 @@ class LoginViewModel(
         if(doneInput.value!!){
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
             apiProvider.loginApi(request).subscribe({
-                Log.d("통신",it.raw().toString())
                 when(it.code()){
                     201->{
                         sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")

@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.login.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,7 +32,7 @@ class RegisterViewModel(private val apiProvider: LoginApiProvider) : ViewModel()
     fun doRegister() {
         if (doneInput.value == true) {
             val request = RegisterRequest(userEmail.value!!, userName.value!!, userPassword.value!!)
-            apiProvider.registerApi(request).subscribe { subscribe ->
+            apiProvider.registerApi(request).subscribe({ subscribe ->
                 when (subscribe.code()) {
                     201 -> {
                         _toastMessage.value = "회원가입에 성공하셨습니다"
@@ -44,7 +45,11 @@ class RegisterViewModel(private val apiProvider: LoginApiProvider) : ViewModel()
                         _toastMessage.value = "해당 정보로 회원가입된 계정이 있습니다"
                     }
                 }
-            }
+            },{
+                Log.e("throwable",it.toString())
+                _toastMessage.value = "회원가입에 실패하였습니다"
+            })
+
         } else {
             _toastMessage.value = "정보를 정확히 입력해주세요"
         }
