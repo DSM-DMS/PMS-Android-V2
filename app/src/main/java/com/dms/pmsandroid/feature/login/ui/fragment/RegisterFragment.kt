@@ -20,6 +20,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         binding.vm = vm
         observeToast()
         observeInputData()
+        observeFinish()
     }
 
     private fun observeInputData() {
@@ -71,6 +72,20 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         vm.toastMessage.observe(viewLifecycleOwner, Observer { message ->
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    private fun observeFinish(){
+        vm.finishRegister.observe(viewLifecycleOwner, Observer {
+            if(it){
+                finishRegister()
+            }
+        })
+    }
+
+    private fun finishRegister(){
+        val fragment = activity!!.supportFragmentManager
+        val fragmentManager = fragment.beginTransaction().setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
+        fragmentManager.replace(R.id.login_container,LoginFragment()).commit()
     }
 
 }
