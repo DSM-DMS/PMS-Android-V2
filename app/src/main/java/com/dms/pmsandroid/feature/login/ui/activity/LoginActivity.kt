@@ -11,6 +11,7 @@ import com.dms.pmsandroid.feature.login.ui.fragment.LoginFragment
 import com.dms.pmsandroid.feature.login.ui.fragment.RegisterFragment
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.system.exitProcess
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -22,6 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         binding.lifecycleOwner = this
         startLogin()
         observeRegister()
+        observeDoneLogin()
     }
 
     private fun startLogin(){
@@ -36,10 +38,31 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         })
     }
 
+    private fun observeDoneLogin(){
+        vm.doneLogin.observe(this, Observer {
+            if(it){
+                finish()
+            }
+        })
+    }
+
     private fun startRegister(){
         val fragmentManager = supportFragmentManager.beginTransaction()
         fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
         fragmentManager.replace(R.id.login_container,RegisterFragment()).commit()
         vm.needRegister.value = false
+    }
+
+    private var lastTimeBackPressed: Long = -1500
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - lastTimeBackPressed <= 1500) {
+            moveTaskToBack(true)
+            finish()
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }
+        lastTimeBackPressed = System.currentTimeMillis()
+        Toast.makeText(this, "뒤로가 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
+
     }
 }

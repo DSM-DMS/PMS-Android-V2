@@ -34,7 +34,7 @@ class LoginViewModel(
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
             apiProvider.loginApi(request).subscribe({
                 when(it.code()){
-                    201->{
+                    200->{
                         sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
                         sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
                         sharedPreferenceStorage.saveInfo(it.body()!!.accessToken,"access_token")
@@ -54,6 +54,9 @@ class LoginViewModel(
     }
 
     fun needRegister(){
+        _toastMessage.value = null
+        userEmail.value = null
+        userPassword.value = null
         needRegister.value = true
     }
 }
