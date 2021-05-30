@@ -34,32 +34,30 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         })
 
         vm.userPassword.observe(viewLifecycleOwner, Observer {
-            vm.nEmptyPassword.value = !it.isNullOrBlank()&&it.length>7&&it.length<21
+            vm.nEmptyPassword.value = !it.isNullOrBlank() && it.length > 7 && it.length < 21
             passwordErrorMessage()
             checkDoneRegister()
         })
 
         vm.userPasswordCheck.observe(viewLifecycleOwner, Observer {
-            if (!it.isNullOrBlank() && vm.userPassword.value != null) {
-                vm.samePassword.value = vm.userPassword == vm.userPasswordCheck
-            }
+            vm.samePassword.value = vm.userPassword.value == vm.userPasswordCheck.value
             checkPasswordError()
             checkDoneRegister()
         })
     }
 
-    private fun passwordErrorMessage(){
-        if(vm.nEmptyPassword.value!!){
+    private fun passwordErrorMessage() {
+        if (vm.nEmptyPassword.value!!) {
             binding.makePasswordLayout.error = null
-        }else{
+        } else {
             binding.makePasswordLayout.error = "8~20자리 사이의 비밀번호를 입력해주세요"
         }
     }
 
-    private fun checkPasswordError(){
-        if(vm.samePassword.value!!){
+    private fun checkPasswordError() {
+        if (vm.samePassword.value!!) {
             binding.checkPasswordLayout.error = null
-        }else{
+        } else {
             binding.checkPasswordLayout.error = "비밀번호가 다릅니다"
         }
     }
@@ -69,8 +67,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             vm.nEmptyEmail.value!! && vm.nEmptyName.value!! && vm.nEmptyPassword.value!! && vm.samePassword.value!!
     }
 
-    private fun observeToast(){
-        vm.toastMessage.observe(viewLifecycleOwner, Observer { message->
+    private fun observeToast() {
+        vm.toastMessage.observe(viewLifecycleOwner, Observer { message ->
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         })
     }
