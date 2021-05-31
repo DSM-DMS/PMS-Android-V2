@@ -2,11 +2,14 @@ package com.dms.pmsandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
+import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -18,11 +21,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.lifecycleOwner = this
         vm.checkLogin()
         observeNeedLogin()
+        binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
+        initFragment()
+        observeFragment()
     }
 
-    private fun observeNeedLogin(){
+    private fun observeNeedLogin() {
         vm.needToLogin.observe(this, Observer {
-            if(it){
+            if (it) {
                 startLogin()
                 vm.needToLogin.value = false
             }
@@ -32,5 +38,48 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun startLogin() {
         val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
+    }
+
+    private val itemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            vm.tabSelectedItem.value = item.itemId
+            true
+        }
+
+    private val calendarFragment = CalendarFragment()
+
+    private var activeFragment: Fragment = calendarFragment
+
+    private fun initFragment() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, calendarFragment)
+            .hide(calendarFragment).commit()
+    }
+
+    private fun observeFragment() {
+        vm.tabSelectedItem.observe(this, Observer { id ->
+            when (id) {
+                R.id.menu_calendar_it -> {
+                    changeFragment(calendarFragment)
+                }
+                R.id.menu_info_it -> {
+
+                }
+                R.id.menu_meal_it -> {
+
+                }
+                R.id.menu_mypage_it -> {
+
+                }
+                R.id.menu_notify_it -> {
+
+                }
+            }
+        })
+    }
+
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
+        activeFragment = fragment
     }
 }
