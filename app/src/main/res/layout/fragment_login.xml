@@ -49,7 +49,7 @@
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_email"
-                android:text="@={vm.userEmail}" />
+                android:text="@={vm.userEmail}"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:text="@string/login"
-            android:textSize="40sp"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
             app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
