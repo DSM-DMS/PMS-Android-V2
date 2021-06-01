@@ -38,13 +38,13 @@ class MainViewModel(
             when (response.code()) {
                 200 -> {
                     sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"token")
-                    _doneToken.value = true
-                    Log.d("스케줄","토큰:${sharedPreferenceStorage.getInfo("access_token")}")
+                    Log.d("스케줄","토큰:${sharedPreferenceStorage.getInfo("token")}")
                 }
                 else -> {
                     needToLogin.value = true
                 }
             }
+            _doneToken.value = true
         }
     }
 

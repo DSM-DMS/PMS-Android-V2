@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PmsAndroid">
+        android:theme="@style/Theme.PmsAndroid"
+        android:usesCleartextTraffic="true">
         <activity android:name=".feature.login.ui.activity.LoginActivity"
             android:theme="@style/NoActionBar"/>
         <activity android:name=".ui.MainActivity">

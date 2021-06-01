@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
 class CalendarApiProvider {
-    private fun provideCalendarApi(): CalendarApi = ApiProvider.retroFitBuilder.create(CalendarApi::class.java)
+    private fun provideCalendarApi(): CalendarApi = ApiProvider.jiWooRetrofitBuilder.create(CalendarApi::class.java)
 
     fun scheduleApi(request: String): @NonNull Single<Response<SchedulesResponse>> = provideCalendarApi().schedules(request)
         .observeOn(AndroidSchedulers.mainThread())

@@ -22,18 +22,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         vm.checkLogin()
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
-        observeDoneLogin()
+        setFragment()
     }
 
-    private fun observeDoneLogin(){
-        vm.doneToken.observe(this, Observer {
-            if(it){
-                doFragment()
-            }
-        })
-    }
-
-    private fun doFragment(){
+    private fun setFragment(){
         initFragment()
         observeFragment()
     }
@@ -58,7 +50,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             true
         }
 
-    private val calendarFragment by lazy { CalendarFragment() }
+    private val calendarFragment = CalendarFragment()
 
     private var activeFragment: Fragment = calendarFragment
 

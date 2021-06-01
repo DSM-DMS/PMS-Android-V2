@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiProvider {
     private const val JUNG_BIN_BASE_URL: String = "https://api.smooth-bear.live/"
+    private const val JI_WOO_BASE_URL: String = "https://api.potatochips.live/"
     private const val CONNECT_TIME_OUT: Long = 15
     private const val WRITE_TIME_OUT: Long = 15
     private const val READ_TIME_OUT: Long = 15
@@ -28,8 +29,15 @@ object ApiProvider {
         readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
     }.build()
 
-    val retroFitBuilder: Retrofit = Retrofit.Builder().apply {
+    val jungBinRetroFitBuilder: Retrofit = Retrofit.Builder().apply {
         baseUrl(JUNG_BIN_BASE_URL)
+        client(okHttpClient)
+        addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+        addConverterFactory(GsonConverterFactory.create())
+    }.build()
+
+    val jiWooRetrofitBuilder: Retrofit = Retrofit.Builder().apply {
+        baseUrl(JI_WOO_BASE_URL)
         client(okHttpClient)
         addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         addConverterFactory(GsonConverterFactory.create())
