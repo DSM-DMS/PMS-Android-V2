@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.di.register
+package com.dms.pmsandroid.di.module
 
 import com.dms.pmsandroid.data.remote.login.LoginApiProvider
 import com.dms.pmsandroid.feature.login.viewmodel.RegisterViewModel

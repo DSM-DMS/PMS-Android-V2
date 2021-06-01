@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.di.calendar
+package com.dms.pmsandroid.di.module
 
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel

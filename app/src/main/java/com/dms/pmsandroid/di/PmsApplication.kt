@@ -1,10 +1,10 @@
 package com.dms.pmsandroid.di
 
 import android.app.Application
-import com.dms.pmsandroid.di.calendar.calendarModule
-import com.dms.pmsandroid.di.login.loginModule
-import com.dms.pmsandroid.di.main.mainModule
-import com.dms.pmsandroid.di.register.registerModule
+import com.dms.pmsandroid.di.module.calendarModule
+import com.dms.pmsandroid.di.module.loginModule
+import com.dms.pmsandroid.di.module.mainModule
+import com.dms.pmsandroid.di.module.registerModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
