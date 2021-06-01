@@ -38,4 +38,8 @@
 
 ## Tech
 1. MVVM
-2. RxJava
+2. Databinding
+3. RxJava
+4. Koin
+5. OkHttp
+6. Retrofit2
