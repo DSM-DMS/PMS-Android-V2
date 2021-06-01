@@ -9,7 +9,7 @@ class CalendarViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
     val accessToken = sharedPreferenceStorage.getInfo("access-token")
-    
+
     fun loadSchedules() {
         calendarApiProvider.scheduleApi(accessToken).subscribe({response->
 

@@ -1,7 +1,5 @@
 package com.dms.pmsandroid.feature.login.ui.fragment
 
-import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
