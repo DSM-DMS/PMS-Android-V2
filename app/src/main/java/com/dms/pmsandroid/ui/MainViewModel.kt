@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.ui
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.R
@@ -32,7 +33,8 @@ class MainViewModel(
         loginApiProvider.loginApi(request).subscribe { response ->
             when (response.code()) {
                 200 -> {
-                    sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"access_token")
+                    sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"token")
+                    Log.d("스케줄","토큰:${sharedPreferenceStorage.getInfo("access_token")}")
                 }
                 else -> {
                     needToLogin.value = true

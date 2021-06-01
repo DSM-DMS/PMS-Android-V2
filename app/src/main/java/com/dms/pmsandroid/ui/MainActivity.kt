@@ -46,7 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             true
         }
 
-    private val calendarFragment = CalendarFragment()
+    private val calendarFragment by lazy { CalendarFragment() }
 
     private var activeFragment: Fragment = calendarFragment
 

@@ -15,6 +15,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.vm = vm
+        vm.loadSchedules()
     }
 
 }
