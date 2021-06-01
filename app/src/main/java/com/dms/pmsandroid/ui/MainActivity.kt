@@ -22,6 +22,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         vm.checkLogin()
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
+        observeDoneLogin()
+    }
+
+    private fun observeDoneLogin(){
+        vm.doneToken.observe(this, Observer {
+            if(it){
+                doFragment()
+            }
+        })
+    }
+
+    private fun doFragment(){
         initFragment()
         observeFragment()
     }
