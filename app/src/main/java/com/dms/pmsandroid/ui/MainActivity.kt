@@ -22,6 +22,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         vm.checkLogin()
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
+        setFragment()
+    }
+
+    private fun setFragment(){
         initFragment()
         observeFragment()
     }

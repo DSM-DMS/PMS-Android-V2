@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.di.login
+package com.dms.pmsandroid.di.module
 
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
