@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".feature.introduce.ui.fragment.IntroduceFragment">
 
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
-            android:name="vm"
-            android:type="com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel" />
+            name="vm"
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel"
+            />
     </data>
+
+
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.introduce.ui.fragment.IntroduceFragment">
 
 
     <TextView
@@ -45,8 +50,8 @@
             android:layout_width="413dp"
             android:layout_height="125dp"
             android:layout_marginTop="16dp"
+            android:onClick="@{()->vm.devClicked()}"
             android:src="@drawable/box3"
-            android:onClick="@{()->vm.onClick()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,3 +157,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
+</layout>
