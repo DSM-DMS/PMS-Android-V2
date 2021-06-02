@@ -14,8 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.login.ui.activity.LoginActivity"
-            android:theme="@style/NoActionBar"/>
+        <activity android:name=".feature.introduce.ui.activity.IntroWorkActivity"></activity>
+        <activity android:name=".feature.introduce.ui.activity.IntroClubActivity" />
+        <activity
+            android:name=".feature.login.ui.activity.LoginActivity"
+            android:theme="@style/NoActionBar" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

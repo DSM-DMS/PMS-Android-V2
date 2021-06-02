@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
-import com.dms.pmsandroid.feature.introduce.bindingadapter.DeveloperBindingAdapter
+//import com.dms.pmsandroid.feature.introduce.bindingadapter.DeveloperBindingAdapter
 import com.dms.pmsandroid.feature.introduce.model.DevelopModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
 import com.dms.pmsandroid.ui.MainViewModel
