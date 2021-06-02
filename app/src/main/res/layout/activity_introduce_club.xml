@@ -4,31 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.introduce.ui.activity.IntroduceDeveloperActivity">
+    tools:context=".feature.introduce.ui.activity.IntroClubActivity">
+
 
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="416dp"
         android:layout_height="97dp"
         android:gravity="center"
-        android:text="개발자 소개"
+        android:text="동아리 소개"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/intro_developer_rc"
-        android:layout_width="407dp"
-        android:layout_height="636dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_tv"
-        app:layout_constraintVertical_bias="0.0">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/back_img"
@@ -41,4 +29,14 @@
         app:layout_constraintTop_toTopOf="@+id/title_tv"
         app:layout_constraintVertical_bias="0.479"
         app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="633dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
