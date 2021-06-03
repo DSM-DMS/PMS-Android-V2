@@ -8,6 +8,7 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
+import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -51,13 +52,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
 
     private val calendarFragment = CalendarFragment()
-
+    private val introduceFragment = IntroduceFragment()
     private var activeFragment: Fragment = calendarFragment
 
     private fun initFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container, calendarFragment)
             .hide(calendarFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, introduceFragment)
+            .hide(introduceFragment).commit()
     }
 
     private fun observeFragment() {
@@ -67,7 +71,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     changeFragment(calendarFragment)
                 }
                 R.id.menu_info_it -> {
-
+                    changeFragment(introduceFragment)
                 }
                 R.id.menu_meal_it -> {
 
