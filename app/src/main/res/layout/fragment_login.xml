@@ -49,7 +49,8 @@
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_email"
-                android:text="@={vm.userEmail}"/>
+                android:text="@={vm.userEmail}"
+                android:singleLine="true"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
