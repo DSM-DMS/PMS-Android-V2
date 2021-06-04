@@ -45,7 +45,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private fun startRegister(){
         val fragmentManager = supportFragmentManager.beginTransaction()
-        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container,RegisterFragment()).commit()
         vm.needRegister.value = false
     }
@@ -59,7 +59,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             android.os.Process.killProcess(android.os.Process.myPid())
         }
         lastTimeBackPressed = System.currentTimeMillis()
-        Toast.makeText(this, "뒤로가 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
 
     }
 }
