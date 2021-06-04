@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.login.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,6 +45,7 @@ class LoginViewModel(
                     }
                 }
             },{
+                Log.d("일정","$it")
                 _toastMessage.value = "로그인에 실패하였습니다"
             })
         }
