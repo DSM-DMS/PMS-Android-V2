@@ -10,6 +10,7 @@ import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.di.module.introduceModule
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
+import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
@@ -24,6 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
+        binding.vm = vm
         vm.checkLogin()
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
