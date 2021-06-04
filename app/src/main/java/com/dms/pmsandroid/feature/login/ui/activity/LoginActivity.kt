@@ -45,6 +45,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private fun startRegister(){
         val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container,RegisterFragment()).commit()
         vm.needRegister.value = false
     }

@@ -85,6 +85,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private fun finishRegister(){
         val fragment = activity!!.supportFragmentManager
         val fragmentManager = fragment.beginTransaction()
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container,LoginFragment()).commit()
     }
 
