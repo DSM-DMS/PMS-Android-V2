@@ -38,6 +38,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            app:boxBackgroundColor="@android:color/transparent"
+            android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
             app:layout_constraintTop_toBottomOf="@+id/login_title_tv">
@@ -60,6 +62,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            app:boxBackgroundColor="@android:color/transparent"
+            android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
             app:layout_constraintTop_toBottomOf="@+id/login_email_layout"
@@ -110,6 +114,7 @@
             android:onClick="@{()->vm.needRegister()}"
             android:text="@string/ask_need_register"
             android:textColor="@color/blue"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_button" />
