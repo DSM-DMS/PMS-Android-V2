@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,8 +17,7 @@ class MainViewModel(
 
     val needToLogin = MutableLiveData<Boolean>()
 
-    private val _doneToken = MutableLiveData<Boolean>(false)
-    val doneToken: LiveData<Boolean> get() = _doneToken
+    val doneToken = MutableLiveData<Boolean>(false)
 
     fun checkLogin() {
         val email = sharedPreferenceStorage.getInfo("user_email")
@@ -38,13 +36,12 @@ class MainViewModel(
             when (response.code()) {
                 200 -> {
                     sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"token")
-                    Log.d("스케줄","토큰:${sharedPreferenceStorage.getInfo("token")}")
                 }
                 else -> {
                     needToLogin.value = true
                 }
             }
-            _doneToken.value = true
+            doneToken.value = true
         }
     }
 

@@ -21,13 +21,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
         observeNeedLogin()
+        vm.checkLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        vm.checkLogin()
     }
 
     private fun setFragment(){
