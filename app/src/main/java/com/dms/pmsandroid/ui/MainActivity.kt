@@ -7,7 +7,11 @@ import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
+import com.dms.pmsandroid.di.module.introduceModule
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
+import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
+import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val vm: MainViewModel by viewModel()
+    private val introvm : MainIntroViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
+        observerdevIntent()
     }
 
     private fun setFragment(){
@@ -44,6 +50,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
+    private fun observerdevIntent(){
+        introvm.introduceClick.observe(this, Observer {
+            if(it){
+                introIntent()
+                introvm.introduceClick.value = false
+            }
+        })
+    }
+
+    private fun introIntent(){
+        val divintent = Intent(this,IntroduceDeveloperActivity::class.java)
+        startActivity(divintent)
+
+
+    }
+
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             vm.tabSelectedItem.value = item.itemId
@@ -51,13 +73,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
 
     private val calendarFragment = CalendarFragment()
-
+    private val introduceFragment = IntroduceFragment()
     private var activeFragment: Fragment = calendarFragment
 
     private fun initFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container, calendarFragment)
             .hide(calendarFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, introduceFragment)
+            .hide(introduceFragment).commit()
     }
 
     private fun observeFragment() {
@@ -67,7 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     changeFragment(calendarFragment)
                 }
                 R.id.menu_info_it -> {
-
+                    changeFragment(introduceFragment)
                 }
                 R.id.menu_meal_it -> {
 
@@ -86,4 +111,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
         activeFragment = fragment
     }
+
+
+
 }

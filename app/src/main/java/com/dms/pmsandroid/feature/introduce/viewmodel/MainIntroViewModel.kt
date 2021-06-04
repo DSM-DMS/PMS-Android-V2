@@ -3,16 +3,18 @@ package com.dms.pmsandroid.feature.introduce.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 
-class MainIntroViewModel {
+class MainIntroViewModel : ViewModel() {
 
-    fun onClick(view: View, productId: Long) {
-        val context: Context = view.getContext()
-        val intent = Intent(context, IntroduceDeveloperActivity::class.java)
-        context.startActivity(intent)
+    val introduceClick = MutableLiveData<Boolean>(false)
+
+
+    fun devClicked(){
+        introduceClick.value = true
     }
-
-
 
 }
