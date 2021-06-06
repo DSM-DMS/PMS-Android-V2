@@ -13,12 +13,30 @@
         android:layout_width="300dp"
         android:layout_height="400dp">
 
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/itemMeal_left_guideline"
+            app:layout_constraintGuide_begin="10dp"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/itemMeal_right_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="284dp" />
+
+
+
         <ImageView
             android:id="@+id/item_img"
             android:layout_width="270dp"
             android:layout_height="370dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/meal_title" />
@@ -27,25 +45,44 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="122dp"
-            tools:layout_editor_absoluteY="44dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/item_img"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="181dp"
+            android:layout_height="168dp"
+            android:layout_marginTop="56dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="123dp"
-            tools:layout_editor_absoluteY="190dp" />
+            app:layout_constraintEnd_toEndOf="@+id/item_img"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="@+id/item_img"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/turning_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/item_img"
-            app:srcCompat="@drawable/turn_img"
-            tools:layout_editor_absoluteX="88dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="40dp"
+            app:srcCompat="@drawable/turn_img" />
+
+        <ImageView
+            android:id="@+id/meal_img"
+            android:layout_width="181dp"
+            android:layout_height="207dp"
+            android:layout_marginTop="36dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
