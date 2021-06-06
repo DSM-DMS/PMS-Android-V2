@@ -7,11 +7,11 @@ import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
-import com.dms.pmsandroid.di.module.introduceModule
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroClubActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceWorkActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
-import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,6 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
         observerdevIntent()
+        observerworkIntent()
+        observerclubIntent()
     }
 
     private fun setFragment(){
@@ -53,20 +55,47 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun observerdevIntent(){
-        introvm.introduceClick.observe(this, Observer {
+        introvm.devintroduceClick.observe(this, Observer {
             if(it){
                 introIntent()
-                introvm.introduceClick.value = false
+                introvm.devintroduceClick.value = false
             }
         })
     }
 
-    private fun introIntent(){
-        val divintent = Intent(this,IntroduceDeveloperActivity::class.java)
-        startActivity(divintent)
-
-
+    private fun observerworkIntent() {
+        introvm.workIntroduceClick.observe(this, Observer {
+            if (it)
+                workintroIntent()
+            introvm.workIntroduceClick.value = false
+        })
     }
+
+    private fun observerclubIntent() {
+        introvm.clubIntroduceClick.observe(this, Observer {
+            if (it)
+                clubIntent()
+            introvm.clubIntroduceClick.value = false
+        })
+    }
+
+
+    private fun introIntent(){
+        val devintent = Intent(this,IntroduceDeveloperActivity::class.java)
+        startActivity(devintent)
+    }
+
+    private fun workintroIntent(){
+        val workintent = Intent(this,IntroduceWorkActivity::class.java)
+        startActivity(workintent)
+    }
+
+    private fun clubIntent(){
+        val clubintent = Intent(this,IntroClubActivity::class.java)
+        startActivity(clubintent)
+    }
+
+
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->

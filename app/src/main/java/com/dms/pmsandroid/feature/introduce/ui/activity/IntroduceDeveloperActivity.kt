@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.base.BaseActivity
+import com.dms.pmsandroid.databinding.ActivityIntroduceDeveloperBinding
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
 //import com.dms.pmsandroid.feature.introduce.bindingadapter.DeveloperBindingAdapter
@@ -19,11 +21,10 @@ import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewMode
 import com.dms.pmsandroid.ui.MainViewModel
 
 @Suppress("DEPRECATION")
-class IntroduceDeveloperActivity : AppCompatActivity() {
+class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBinding>(R.layout.activity_introduce_developer) {
 
     var data = MutableLiveData<ArrayList<DevelopModel>>()
     lateinit var adapter: DeveloperAdapter
-    lateinit var binding: ActivityMainBinding
     lateinit var viewmodel: IntroduceDeveloperViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,6 @@ class IntroduceDeveloperActivity : AppCompatActivity() {
         setContentView(R.layout.activity_introduce_developer)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_introduce_developer)
         viewmodel = ViewModelProviders.of(this).get(IntroduceDeveloperViewModel::class.java)
-        
 
     }
 

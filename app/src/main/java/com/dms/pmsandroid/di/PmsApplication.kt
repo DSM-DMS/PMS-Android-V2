@@ -16,7 +16,9 @@ class PmsApplication:Application() {
                     loginModule,
                     registerModule,
                     calendarModule,
-                    introduceModule
+                    developerModule,
+                    workModule,
+                    clubModule
                 )
             )
         }

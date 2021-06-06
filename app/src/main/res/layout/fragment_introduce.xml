@@ -39,124 +39,136 @@
         android:layout_marginLeft="50dp"
         />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="540dp"
-        android:layout_marginTop="150dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="540dp"
+            android:layout_marginTop="130dp">
 
 
-        <ImageView
-            android:id="@+id/intro_club_tv"
-            android:layout_width="413dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="16dp"
-            android:onClick="@{()->vm.devClicked()}"
-            android:src="@drawable/box3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/intro_club_tv"
+                android:layout_width="413dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/box3"
+                android:onClick="@{()->vm.clubClicked()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/intro_work_tv"
-            android:layout_width="413dp"
-            android:layout_height="125dp"
-            android:src="@drawable/box3"
-            android:layout_marginTop="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intro_club_tv" />
+            <ImageView
+                android:id="@+id/intro_work_tv"
+                android:layout_width="413dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/box3"
+                android:onClick="@{()->vm.workClicked()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/intro_club_tv" />
 
-        <ImageView
-            android:id="@+id/intro_dev_tv"
-            android:layout_width="413dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/box3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intro_work_tv" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="대마고의 동아리를 소개합니다"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.367"
+                app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
+                app:layout_constraintTop_toBottomOf="@+id/choice_club_tv" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PMS 개발자를 소개합니다"
-            android:textSize="12dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.342"
-            app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
-            app:layout_constraintTop_toBottomOf="@+id/choice_dev_tv" />
+            <ImageView
+                android:id="@+id/intro_dev_tv"
+                android:layout_width="413dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="40dp"
+                android:onClick="@{()->vm.devClicked()}"
+                android:src="@drawable/box3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/intro_work_tv" />
 
-        <TextView
-            android:id="@+id/choice_club_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="동아리 소개"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.29"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/intro_club_tv" />
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="PMS 개발자를 소개합니다"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.342"
+                app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
+                app:layout_constraintTop_toBottomOf="@+id/choice_dev_tv" />
 
-        <TextView
-            android:id="@+id/choice_work_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="취업처 소개"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.291"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/intro_work_tv" />
+            <TextView
+                android:id="@+id/choice_club_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="동아리 소개"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.29"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/intro_club_tv" />
 
-        <TextView
-            android:id="@+id/choice_dev_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="개발자 소개"
-            android:textSize="17dp"
-            android:layout_marginTop="30dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.291"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/intro_dev_tv" />
+            <TextView
+                android:id="@+id/choice_work_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="취업처 소개"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.291"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/intro_work_tv" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="대마고의 동아리를 소개합니다"
-            android:textSize="12dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.367"
-            app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
-            app:layout_constraintTop_toBottomOf="@+id/choice_club_tv" />
+            <TextView
+                android:id="@+id/choice_dev_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="개발자 소개"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.291"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/intro_dev_tv" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="대마고 학생들이 취업한 회사를 소개합니다"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="@+id/intro_club_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
-            app:layout_constraintTop_toBottomOf="@+id/choice_work_tv"
-            app:layout_constraintVertical_bias="0.054" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="대마고의 동아리를 소개합니다"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.367"
+                app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
+                app:layout_constraintTop_toBottomOf="@+id/choice_club_tv" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="대마고 학생들이 취업한 회사를 소개합니다"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/intro_work_tv"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/choice_work_tv" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+    </FrameLayout>
 </layout>
