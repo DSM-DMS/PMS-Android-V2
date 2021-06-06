@@ -1,10 +1,7 @@
 package com.dms.pmsandroid.di
 
 import android.app.Application
-import com.dms.pmsandroid.di.module.calendarModule
-import com.dms.pmsandroid.di.module.loginModule
-import com.dms.pmsandroid.di.module.mainModule
-import com.dms.pmsandroid.di.module.registerModule
+import com.dms.pmsandroid.di.module.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -18,7 +15,8 @@ class PmsApplication:Application() {
                     mainModule,
                     loginModule,
                     registerModule,
-                    calendarModule
+                    calendarModule,
+                    mealModule
                 )
             )
         }
