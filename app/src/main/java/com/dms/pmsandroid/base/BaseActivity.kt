@@ -16,6 +16,8 @@ abstract class BaseActivity <B : ViewDataBinding>(
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         binding = DataBindingUtil.setContentView(this,layoutResId)
+
+        
     }
 
 }
