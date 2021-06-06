@@ -5,15 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.base.BaseFragment
+import com.dms.pmsandroid.databinding.FragmentLoginBinding
+import com.dms.pmsandroid.databinding.FragmentMealBinding
 
-class MealFragment : Fragment() {
+class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meal, container, false)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 }
