@@ -61,6 +61,8 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     //rxjava
     implementation 'io.reactivex.rxjava3:rxjava:3.0.3'
+    //rxjava adapter
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     //rxkotlin
     implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
     //rx retrofit
@@ -84,4 +86,16 @@ dependencies {
     // 기본 Kotlin 확장
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+
+    //koin
+    def koin_version = "2.1.6"
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+    //dms view library
+    implementation 'com.dsm.dms.library:dmsviewlibrary:0.0.7'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'com.google.android.material:material:1.4.0-beta01'
 }

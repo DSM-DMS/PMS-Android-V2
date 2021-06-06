@@ -5,15 +5,15 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.dms.pmsandroid.ui.MainActivity
 
-class SharedPreferenceStorage(private val context: MainActivity){
-    private lateinit var pref:SharedPreferences
+class SharedPreferenceStorage(private val context: Context){
+    private var pref:SharedPreferences? = null
 
     fun getInfo(content: String?): String{
         if(pref == null)pref = context.getSharedPreferences(content,MODE_PRIVATE)
-        return if (content == "pms"){
-            "Bearer " + pref.getString(content,"")
+        return if (content == "token"){
+            "Bearer " + pref!!.getString(content,"")
         } else
-            pref.getString(content, "").toString()
+            pref!!.getString(content, "").toString()
     }
 
     fun saveInfo(info: String, content: String){
@@ -25,6 +25,6 @@ class SharedPreferenceStorage(private val context: MainActivity){
 
     fun clearToken(content: String){
         if(pref == null) pref = context.getSharedPreferences(content, MODE_PRIVATE)
-        pref.edit().remove(content).apply()
+        pref!!.edit().remove(content).apply()
     }
 }
