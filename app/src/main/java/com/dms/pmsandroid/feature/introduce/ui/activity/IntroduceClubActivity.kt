@@ -20,14 +20,12 @@ import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceWorkViewModel
 class IntroClubActivity :  BaseActivity<ActivityIntroduceClubBinding>(R.layout.activity_introduce_club) {
 
 
-    var data = MutableLiveData<ArrayList<ClubsModel>>()
+    //var data = MutableLiveData<ArrayList<ClubsModel>>()
     lateinit var viewmodel: IntroduceClubViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_introduce_club)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_introduce_club)
 
     }
 }

@@ -23,15 +23,12 @@ import com.dms.pmsandroid.ui.MainViewModel
 @Suppress("DEPRECATION")
 class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBinding>(R.layout.activity_introduce_developer) {
 
-    var data = MutableLiveData<ArrayList<DevelopModel>>()
+    //var data = MutableLiveData<ArrayList<DevelopModel>>()
     lateinit var adapter: DeveloperAdapter
     lateinit var viewmodel: IntroduceDeveloperViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_introduce_developer)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_introduce_developer)
         viewmodel = ViewModelProviders.of(this).get(IntroduceDeveloperViewModel::class.java)
 
     }
