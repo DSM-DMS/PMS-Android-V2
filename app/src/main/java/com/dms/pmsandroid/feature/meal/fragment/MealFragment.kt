@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.meal
+package com.dms.pmsandroid.feature.meal.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -17,7 +17,7 @@ abstract class BaseActivity <B : ViewDataBinding>(
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,layoutResId)
 
-        
+
     }
 
 }
