@@ -63,6 +63,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
     }
 
+
+
     private fun observerworkIntent() {
         introvm.workIntroduceClick.observe(this, Observer {
             if (it)
