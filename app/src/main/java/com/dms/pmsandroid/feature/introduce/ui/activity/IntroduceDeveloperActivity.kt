@@ -2,41 +2,32 @@ package com.dms.pmsandroid.feature.introduce.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.base.BaseActivity
-import com.dms.pmsandroid.databinding.ActivityIntroduceDeveloperBinding
-import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
 //import com.dms.pmsandroid.feature.introduce.bindingadapter.DeveloperBindingAdapter
 import com.dms.pmsandroid.feature.introduce.model.DevelopModel
-import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
 import com.dms.pmsandroid.ui.MainViewModel
 
-@Suppress("DEPRECATION")
-class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBinding>(R.layout.activity_introduce_developer) {
-
-    //var data = MutableLiveData<ArrayList<DevelopModel>>()
-    lateinit var adapter: DeveloperAdapter
-    lateinit var viewmodel: IntroduceDeveloperViewModel
-
+class IntroduceDeveloperActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewmodel = ViewModelProviders.of(this).get(IntroduceDeveloperViewModel::class.java)
 
-    }
+        val intro_developer_rc = findViewById<RecyclerView>(R.id.intro_developer_rc)
 
-    //뒤로 가기
-    override fun onBackPressed() {
-        super.onBackPressed()
-        setContentView(R.layout.activity_introduce_developer)
+
+
+        val developers = arrayListOf(
+            DevelopModel("김재원", "Android"),
+            DevelopModel("이은별", "Android"),
+            DevelopModel("정고은", "IOS"),
+            DevelopModel("강은빈", "FrontEnd"),
+            DevelopModel("이진우", "FrontEnd"),
+            DevelopModel("김정빈", "Server"),
+            DevelopModel("정지우", "Server")
+        )
+        intro_developer_rc.adapter = DeveloperAdapter(developers)
+        intro_developer_rc.adapter!!.notifyDataSetChanged()
 
     }
 }

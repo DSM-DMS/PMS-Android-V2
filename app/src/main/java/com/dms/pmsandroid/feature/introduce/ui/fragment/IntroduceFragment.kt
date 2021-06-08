@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragment_introduce) {
 
-    private val vm :  MainIntroViewModel by sharedViewModel()
+    private val vm : MainIntroViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
