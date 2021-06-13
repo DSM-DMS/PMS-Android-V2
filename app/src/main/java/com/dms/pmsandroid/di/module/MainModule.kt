@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.di.main
+package com.dms.pmsandroid.di.module
 
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.ui.MainViewModel

@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
 class LoginApiProvider{
-    private fun provideLoginApi():LoginApi=ApiProvider.mRetroFit.create(LoginApi::class.java)
+    private fun provideLoginApi():LoginApi=ApiProvider.jungBinRetroFitBuilder.create(LoginApi::class.java)
 
     fun registerApi(request: RegisterRequest):@NonNull Single<Response<Void>> = provideLoginApi().register(request)
         .observeOn(AndroidSchedulers.mainThread())
