@@ -45,7 +45,6 @@ class LoginViewModel(
                     }
                 }
             },{
-                Log.d("일정","$it")
                 _toastMessage.value = "로그인에 실패하였습니다"
             })
         }
