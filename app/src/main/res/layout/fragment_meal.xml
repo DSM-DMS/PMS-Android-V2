@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="40dp"
-            android:text="급식"
+            android:text="@string/title_meal"
             android:textColor="@color/black"
             android:textSize="40dp" />
 
