@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.base.BaseFragment
+import com.dms.pmsandroid.databinding.FragmentIntroduceDeveloperBinding
 
-class IntroduceDeveloperFragment : BaseFragment<Fragment> {
+class IntroduceDeveloperFragment :
+    BaseFragment<FragmentIntroduceDeveloperBinding>(R.layout.fragment_introduce_developer) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        }
     }
 
     override fun onCreateView(
@@ -23,3 +25,6 @@ class IntroduceDeveloperFragment : BaseFragment<Fragment> {
         return inflater.inflate(R.layout.fragment_introduce_developer, container, false)
 
     }
+}
+
+
