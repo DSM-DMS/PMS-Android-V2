@@ -6,5 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class IntroduceDeveloperViewModel : ViewModel() {
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 }

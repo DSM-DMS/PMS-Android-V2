@@ -14,7 +14,7 @@ import com.dms.pmsandroid.databinding.FragmentMealBinding
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

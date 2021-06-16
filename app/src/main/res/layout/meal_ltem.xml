@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.meal.viewmodel.mealviewmodel" />
+            type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,14 +14,14 @@
         android:layout_height="400dp">
 
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/itemMeal_left_guideline"
             app:layout_constraintGuide_begin="10dp"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/itemMeal_right_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,17 +42,19 @@
             app:srcCompat="@drawable/meal_title" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/data_meal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="TextView"
+            android:text="2021-23-23"
+            android:textColor="@color/white"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/item_img"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/menu_tv"
             android:layout_width="181dp"
             android:layout_height="168dp"
             android:layout_marginTop="56dp"
@@ -60,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="@+id/item_img"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="@+id/item_img"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/data_meal" />
 
         <ImageView
             android:id="@+id/turning_img"
@@ -76,12 +78,12 @@
             android:id="@+id/meal_img"
             android:layout_width="181dp"
             android:layout_height="207dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="28dp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/data_meal"
             tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
