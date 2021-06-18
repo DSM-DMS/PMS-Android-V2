@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:text="@{vm.date}"
             tools:text="2021/06/18"
             app:layout_constraintBottom_toBottomOf="@+id/meal_next_btn"
             app:layout_constraintEnd_toStartOf="@+id/meal_next_btn"
