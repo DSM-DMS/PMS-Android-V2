@@ -68,6 +68,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container, introduceFragment)
             .hide(introduceFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, mealFragment)
+            .hide(mealFragment).commit()
     }
 
     private fun observeFragment() {

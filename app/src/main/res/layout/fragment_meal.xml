@@ -11,51 +11,65 @@
             type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".feature.meal.fragment.MealFragment">
+        android:layout_height="match_parent">
 
 
         <TextView
             android:id="@+id/meal_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/title_meal"
             android:textColor="@color/black"
-            android:textSize="40dp" />
+            android:textSize="40sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/meal_next_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_title_tv" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/meal_before_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_baseline_keyboard_arrow_left_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_title_tv" />
 
         <TextView
-            android:id="@+id/date_tv"
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="145dp"
-            android:layout_marginTop="120dp"
-            android:text="2011/21/23"
-            android:textSize="20dp" />
-
-        <ImageView
-            android:id="@+id/before_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="120dp"
-            android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
-
-        <ImageView
-            android:id="@+id/after_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="120dp"
-            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="2021/06/18"
+            app:layout_constraintBottom_toBottomOf="@+id/meal_next_btn"
+            app:layout_constraintEnd_toStartOf="@+id/meal_next_btn"
+            app:layout_constraintStart_toEndOf="@+id/meal_before_btn"
+            app:layout_constraintTop_toTopOf="@+id/meal_next_btn" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="200dp" />
-    </FrameLayout>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_next_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
