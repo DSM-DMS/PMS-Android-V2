@@ -10,13 +10,16 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="206dp"
-        android:layout_height="273dp">
+        android:layout_width="170dp"
+        android:layout_height="230dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/work_img"
-            android:layout_width="132dp"
-            android:layout_height="130dp"
+            android:layout_width="99dp"
+            android:layout_height="92dp"
             android:layout_marginTop="35dp"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp"
@@ -30,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="마이다스아이티"
-            android:textSize="20dp"
+            android:textSize="10dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
