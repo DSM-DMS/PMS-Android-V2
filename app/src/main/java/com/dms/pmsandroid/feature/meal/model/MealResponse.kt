@@ -1,3 +1,3 @@
 package com.dms.pmsandroid.feature.meal.model
 
-data class MealResponse(val breakfast: List<String>, val lunch: List<String>, val dinner: List<String>)
+data class MealResponse(val breakfast: ArrayList<String>, val lunch: ArrayList<String>, val dinner: ArrayList<String>)

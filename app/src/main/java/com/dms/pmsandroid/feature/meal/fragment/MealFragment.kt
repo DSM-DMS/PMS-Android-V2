@@ -13,6 +13,7 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentLoginBinding
 import com.dms.pmsandroid.databinding.FragmentMealBinding
+import com.dms.pmsandroid.feature.meal.MealAdapter
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -23,12 +24,19 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private val vm : MealViewModel by viewModel()
 
+    private val mealAdapter = MealAdapter()
+
     @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.vm = vm
+        setCurrentTime()
+        vm.getMeal()
+    }
+
+    private fun setCurrentTime(){
         val currentTime = Calendar.getInstance().time
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.KOREA).format(currentTime)
         vm.date.value = dateFormat
