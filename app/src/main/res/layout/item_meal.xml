@@ -9,7 +9,7 @@
             type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
         <variable
             name="meal"
-            type="com.dms.pmsandroid.feature.meal.model.MealResponse" />
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +45,7 @@
             android:layout_height="0dp"
             tools:text="급식\n급식밥\n급식국\n급식김치"
             android:gravity="center"
+            android:text="@{meal}"
             app:layout_constraintBottom_toBottomOf="@+id/meal_img"
             app:layout_constraintEnd_toEndOf="@+id/meal_img"
             app:layout_constraintHorizontal_bias="0.494"
@@ -55,10 +56,10 @@
             android:id="@+id/turning_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             app:layout_constraintBottom_toBottomOf="@+id/item_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_img"
             app:srcCompat="@drawable/turn_img" />
 
         <ImageView
@@ -69,6 +70,7 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="30dp"
             android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/turning_img"
             app:layout_constraintEnd_toEndOf="@+id/item_img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/item_img"
