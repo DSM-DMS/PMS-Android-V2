@@ -12,6 +12,7 @@ import com.dms.pmsandroid.feature.introduce.ui.activity.IntroClubActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceWorkActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
+import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,6 +22,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val vm: MainViewModel by viewModel()
     private val introvm : MainIntroViewModel by viewModel()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         observerdevIntent()
         observerworkIntent()
         observerclubIntent()
+
     }
 
     private fun setFragment(){
@@ -63,6 +67,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
     }
 
+    private fun observerclubIntent(){
+
+    }
+
 
 
     private fun observerworkIntent() {
@@ -72,15 +80,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             introvm.workIntroduceClick.value = false
         })
     }
-
-    private fun observerclubIntent() {
-        introvm.clubIntroduceClick.observe(this, Observer {
-            if (it)
-                clubIntent()
-            introvm.clubIntroduceClick.value = false
-        })
-    }
-
 
     private fun introIntent(){
         val devintent = Intent(this,IntroduceDeveloperActivity::class.java)

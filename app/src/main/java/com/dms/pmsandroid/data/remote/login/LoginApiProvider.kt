@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.schedulers.Schedulers.*
 import retrofit2.Response
 
 class LoginApiProvider{
@@ -15,9 +16,9 @@ class LoginApiProvider{
 
     fun registerApi(request: RegisterRequest):@NonNull Single<Response<Void>> = provideLoginApi().register(request)
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
+        .subscribeOn(io())
 
     fun loginApi(request: LoginRequest):@NonNull Single<Response<LoginResponse>> = provideLoginApi().login(request)
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
+        .subscribeOn(io())
 }

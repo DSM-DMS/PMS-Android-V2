@@ -26,26 +26,62 @@ class DeveloperAdapter(val model: ArrayList<DevelopModel>) :
 
     override fun getItemCount() = model.size
 
-    override fun onBindViewHolder(p0: IntroDeveloperViewHolder, p1: Int) = p0.bind(model[p1])
+    override fun onBindViewHolder(p0: IntroDeveloperViewHolder, p1: Int) = p0.bind(model[p1], p1)
 
     class IntroDeveloperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name = itemView.findViewById<TextView>(R.id.dev_name_tv)
         val part = itemView.findViewById<TextView>(R.id.dev_part_tv)
         val image = itemView.findViewById<ImageView>(R.id.dev_img)
-        fun bind(model: DevelopModel) {
+        fun bind(model: DevelopModel, position: Int) {
             val base64Name = Base64.encodeToString(model.developName.toByteArray(), 0)
                 .replace("\n", "").replace("+", "%2B")
             name.text = model.developName
             part.text = model.developPart
-            Glide.with(image)
-                .load("http://211.38.86.92/media/pms/static/jaewonkim1468.png$base64Name.png")
-                .load("http://211.38.86.92/media/pms/static/dlswer23.png$base64Name.png")
-                .load("http://211.38.86.92/media/pms/static/Goeun1001.png$base64Name.png")
-                .load("http://211.38.86.92/media/pms/static/silverbeen.png$base64Name.png")
-                .load("http://211.38.86.92/media/pms/static/wlsdn1101.png$base64Name.png")
-                .load("http://211.38.86.92/media/pms/static/smoothbear.png$base64Name.png")
-                .load("http://211.38.86.92/media/pms/static/jeongjiwoo0522.png$base64Name.png")
-                .into(image)
+            when (position) {
+                0 -> {
+                    Glide.with(image)
+                        .load("http://211.38.86.92/media/pms/static/jaewonkim1468.png")
+                        .into(image)
+                }
+                1 -> {
+                    Glide.with(image)
+                        .load(
+                            "http://211.38.86.92/media/pms/static/dlswer23.png"
+                        )
+                        .into(image)
+                }
+                2 -> {
+                    Glide.with(image)
+                        .load("http://211.38.86.92/media/pms/static/Goeun1001.png")
+                        .into(image)
+
+                }
+                3 -> {
+                    Glide.with(image)
+                        .load("http://211.38.86.92/media/pms/static/silverbeen.png")
+                        .into(image)
+
+                }
+                4 -> {
+                    Glide.with(image)
+                        .load("http://211.38.86.92/media/pms/static/wlsdn1101.png")
+                        .into(image)
+
+                }
+                5 -> {
+                    Glide.with(image)
+                        .load("http://211.38.86.92/media/pms/static/smoothbear.png")
+                        .into(image)
+
+                }
+                6 -> {
+                    Glide.with(image)
+                        .load("http://211.38.86.92/media/pms/static/jeongjiwoo0522.png")
+                        .into(image)
+
+                }
+            }
+
         }
     }
 }

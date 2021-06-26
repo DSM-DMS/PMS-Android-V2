@@ -4,12 +4,12 @@ import android.os.Bundle
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceWorkBinding
-import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceWorkViewModel
+import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceCompanyViewModel
 
 @Suppress("DEPRECATION")
-class IntroduceWorkActivity :  BaseActivity<ActivityIntroduceWorkBinding>(R.layout.activity_introduce_work)  {
+class IntroduceCompanyActivity :  BaseActivity<ActivityIntroduceWorkBinding>(R.layout.activity_introduce_company)  {
 
-    lateinit var viewmodel: IntroduceWorkViewModel
+    lateinit var viewmodel: IntroduceCompanyViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

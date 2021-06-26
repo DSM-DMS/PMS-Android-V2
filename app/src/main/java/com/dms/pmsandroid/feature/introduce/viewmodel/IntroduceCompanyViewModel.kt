@@ -2,7 +2,7 @@ package com.dms.pmsandroid.feature.introduce.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class IntroduceWorkViewModel : ViewModel() {
+class IntroduceCompanyViewModel : ViewModel() {
 
 
 }
