@@ -1,6 +1,7 @@
 package com.dms.pmsandroid.data.remote.meal
 
 import com.dms.pmsandroid.data.remote.ApiProvider
+import com.dms.pmsandroid.feature.meal.model.MealPictureResponse
 import com.dms.pmsandroid.feature.meal.model.MealResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
@@ -12,6 +13,10 @@ class MealApiImpl {
     private fun provideMealApi(): MealApi = ApiProvider.jiWooRetrofitBuilder.create(MealApi::class.java)
 
     fun getMeal(accessToken:String,dateTime:String):@NonNull Single<Response<MealResponse>> = provideMealApi().getMeal(accessToken,dateTime)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+
+    fun getMealPicture(accessToken:String,dateTime: String):@NonNull Single<Response<MealPictureResponse>> = provideMealApi().getMealPicture(accessToken,dateTime)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 }
