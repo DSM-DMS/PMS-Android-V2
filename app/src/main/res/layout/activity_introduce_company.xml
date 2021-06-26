@@ -5,13 +5,13 @@
     <data>
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceWorkViewModel" />
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceCompanyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.introduce.ui.activity.IntroWorkActivity">
+    tools:context=".feature.introduce.ui.activity.IntroduceCompanyActivity">
 
     <TextView
         android:id="@+id/title_tv"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_tv"
-        tools:listitem="@layout/item_work"
+        tools:listitem="@layout/item_company"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
         tools:layout_editor_absoluteX="0dp"/>
