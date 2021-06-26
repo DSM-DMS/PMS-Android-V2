@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.databinding.ItemMealBinding
 import com.dms.pmsandroid.feature.meal.model.MealResponse
-import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 
 class MealAdapter(private val viewModel: MealViewModel) :
     RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
@@ -23,7 +22,7 @@ class MealAdapter(private val viewModel: MealViewModel) :
             if (meal != null) {
                 var mealList = ""
                 for(m in meal){
-                    mealList+=m
+                    mealList+=m+"\n"
                 }
                 if(mealList.isBlank()){
                     binding.meal = "급식이 없습니다"
@@ -52,7 +51,8 @@ class MealAdapter(private val viewModel: MealViewModel) :
 
     override fun getItemCount(): Int = 3
 
-    fun setItems() {
-
+    fun setItems(meals:MealResponse) {
+        this.meals = meals
+        notifyDataSetChanged()
     }
 }

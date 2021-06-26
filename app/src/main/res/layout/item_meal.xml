@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
+            type="com.dms.pmsandroid.feature.meal.MealViewModel" />
         <variable
             name="meal"
             type="String" />
@@ -46,6 +46,7 @@
             tools:text="급식\n급식밥\n급식국\n급식김치"
             android:gravity="center"
             android:text="@{meal}"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/meal_img"
             app:layout_constraintEnd_toEndOf="@+id/meal_img"
             app:layout_constraintHorizontal_bias="0.494"
