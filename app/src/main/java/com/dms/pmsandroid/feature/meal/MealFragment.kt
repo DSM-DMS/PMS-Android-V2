@@ -10,7 +10,6 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
@@ -38,10 +37,13 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         observeMeals()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setCurrentTime(){
-        val currentTime = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.KOREA).format(currentTime)
+        val currentTime = LocalDate.now()
+        val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd",Locale.KOREA))
+        val weekDay = currentTime.dayOfWeek
         vm.date.value = dateFormat
+        vm.weekDate.value = weekDay.value
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -61,9 +63,11 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         if(isPlus){
             val plusDate = calculateDate.plus(Period.ofDays(1))
             vm.date.value = plusDate.format(DateTimeFormatter.ofPattern("yyyyMMdd",Locale.KOREA))
+            vm.weekDate.value = plusDate.dayOfWeek.value
         }else{
             val minusDate = calculateDate.minus(Period.ofDays(1))
             vm.date.value = minusDate.format(DateTimeFormatter.ofPattern("yyyyMMdd",Locale.KOREA))
+            vm.weekDate.value = minusDate.dayOfWeek.value
         }
         vm.getMeal()
     }

@@ -17,6 +17,8 @@ class MealViewModel(
 
     val date = MutableLiveData<String>()
 
+    val weekDate = MutableLiveData<Int>()
+
     private val _meals = MutableLiveData<MealResponse>()
     val meals : LiveData<MealResponse> get() = _meals
 
@@ -28,8 +30,11 @@ class MealViewModel(
             mealApiImpl.getMeal(accessToken, it.format(formatter)).subscribe({ response ->
                 if(response.isSuccessful){
                     _meals.value = response.body()
+                }else{
+                    _meals.value = MealResponse(null,null,null)
                 }
             }, {
+                _meals.value = MealResponse(null,null,null)
             })
         }
     }
