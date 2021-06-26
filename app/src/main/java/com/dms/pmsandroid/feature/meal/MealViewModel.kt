@@ -1,7 +1,6 @@
-package com.dms.pmsandroid.feature.meal.viewmodel
+package com.dms.pmsandroid.feature.meal
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,8 +17,8 @@ class MealViewModel(
 
     val date = MutableLiveData<String>()
 
-    private val _dayMeals = MutableLiveData<MealResponse>()
-    val dayMeals : LiveData<MealResponse> get() = _dayMeals
+    private val _meals = MutableLiveData<MealResponse>()
+    val meals : LiveData<MealResponse> get() = _meals
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getMeal() {
@@ -28,7 +27,7 @@ class MealViewModel(
         date.value?.let {
             mealApiImpl.getMeal(accessToken, it.format(formatter)).subscribe({ response ->
                 if(response.isSuccessful){
-                    _dayMeals.value = response.body()
+                    _meals.value = response.body()
                 }
             }, {
             })
