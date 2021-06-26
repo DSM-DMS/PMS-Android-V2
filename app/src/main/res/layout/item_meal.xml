@@ -7,16 +7,19 @@
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
+        <variable
+            name="meal"
+            type="com.dms.pmsandroid.feature.meal.model.MealResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="300dp"
-        android:layout_height="400dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/item_img"
-            android:layout_width="270dp"
-            android:layout_height="370dp"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +33,8 @@
             android:layout_marginTop="25dp"
             tools:text="아침"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/item_img" />

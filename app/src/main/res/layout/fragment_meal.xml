@@ -9,6 +9,10 @@
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.dms.pmsandroid.feature.meal.MealAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,15 +59,16 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:meal_time="@{vm.date}"
-            tools:text="2021/06/18"
             app:layout_constraintBottom_toBottomOf="@+id/meal_next_btn"
             app:layout_constraintEnd_toStartOf="@+id/meal_next_btn"
             app:layout_constraintStart_toEndOf="@+id/meal_before_btn"
-            app:layout_constraintTop_toTopOf="@+id/meal_next_btn" />
+            app:layout_constraintTop_toTopOf="@+id/meal_next_btn"
+            app:meal_time="@{vm.date}"
+            tools:text="2021/06/18" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:layout_width="0dp"
+            android:id="@+id/meal_view_vp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
