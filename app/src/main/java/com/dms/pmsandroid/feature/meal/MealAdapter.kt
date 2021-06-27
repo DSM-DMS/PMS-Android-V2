@@ -16,15 +16,15 @@ class MealAdapter(private val viewModel: MealViewModel) :
             when (position) {
                 0 -> {
                     binding.mealTimeTv.text = "아침"
-                    binding.picture = viewModel.mealPicture.value.breakfast
+                    binding.picture = viewModel.mealPicture.value!!.breakfast
                 }
                 1 -> {
                     binding.mealTimeTv.text = "점심"
-                    binding.picture = viewModel.mealPicture.value.lunch
+                    binding.picture = viewModel.mealPicture.value!!.lunch
                 }
                 2 -> {
                     binding.mealTimeTv.text = "저녁"
-                    binding.picture = viewModel.mealPicture.value.dinner
+                    binding.picture = viewModel.mealPicture.value!!.dinner
                 }
             }
             binding.vm = viewModel
