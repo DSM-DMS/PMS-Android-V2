@@ -36,6 +36,6 @@ object MealBindingAdapter {
             viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             viewPager.adapter = adapter
         }
-
     }
+
 }
