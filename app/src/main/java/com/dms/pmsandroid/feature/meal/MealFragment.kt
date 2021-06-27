@@ -9,6 +9,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.Period
@@ -35,6 +37,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         vm.getMeal()
         changeTime()
         observeMeals()
+        setIndicator()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -77,4 +80,11 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             adapter.setItems(it)
         })
     }
+
+    private fun setIndicator(){
+        TabLayoutMediator(binding.tabMealBanner,binding.mealViewVp){ tab, _ ->
+            binding.mealViewVp.currentItem = tab.position
+        }.attach()
+    }
+
 }

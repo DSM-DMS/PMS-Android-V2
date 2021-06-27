@@ -92,5 +92,19 @@
             app:layout_constraintStart_toEndOf="@+id/meal_before_btn"
             app:layout_constraintTop_toBottomOf="@+id/meal_date_tv" />
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_meal_banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollIndicators="none"
+            app:layout_constraintBottom_toBottomOf="@id/meal_view_vp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tabBackground="@drawable/selector_tab_blue"
+            app:tabGravity="center"
+            app:tabIndicator="@null"
+            app:tabPaddingEnd="@dimen/dot_padding"
+            app:tabPaddingStart="@dimen/dot_padding" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
