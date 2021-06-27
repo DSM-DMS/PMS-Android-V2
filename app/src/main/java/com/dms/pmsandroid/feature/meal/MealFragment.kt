@@ -37,6 +37,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         vm.getMeal()
         changeTime()
         observeMeals()
+        observePicture()
         setIndicator()
     }
 
@@ -78,6 +79,12 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     private fun observeMeals(){
         vm.meals.observe(viewLifecycleOwner, androidx.lifecycle.Observer{
             adapter.setItems(it)
+        })
+    }
+
+    private fun observePicture(){
+        vm.showPicture.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            adapter.notifyDataSetChanged()
         })
     }
 

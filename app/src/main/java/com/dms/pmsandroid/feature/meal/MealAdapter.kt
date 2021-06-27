@@ -19,6 +19,7 @@ class MealAdapter(private val viewModel: MealViewModel) :
                 2 -> binding.mealTimeTv.text = "저녁"
             }
             binding.vm = viewModel
+            binding.executePendingBindings()
             if (meal != null) {
                 var mealList = ""
                 for(m in meal){

@@ -20,18 +20,6 @@
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/meal_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/title_meal"
-            android:textColor="@color/black"
-            android:textSize="40sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/meal_next_btn"
             android:layout_width="30dp"
@@ -41,7 +29,7 @@
             android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_title_tv" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/meal_before_btn"
@@ -51,7 +39,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/ic_baseline_keyboard_arrow_left_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_title_tv" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/meal_date_tv"
@@ -72,11 +60,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tab_meal_banner"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_next_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/meal_next_btn"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/meal_week_tv"
@@ -96,8 +85,9 @@
             android:id="@+id/tab_meal_banner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:scrollIndicators="none"
-            app:layout_constraintBottom_toBottomOf="@id/meal_view_vp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tabBackground="@drawable/selector_tab_blue"

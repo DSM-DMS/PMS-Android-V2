@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.meal.MealViewModel" />
+
         <variable
             name="meal"
             type="String" />
@@ -21,6 +24,7 @@
             android:id="@+id/item_img"
             android:layout_width="300dp"
             android:layout_height="400dp"
+            android:onClick="@{()->vm.showPicture()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,27 +36,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            tools:text="아침"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_img" />
+            app:layout_constraintTop_toTopOf="@+id/item_img"
+            tools:text="아침" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/menu_tv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:text="급식\n급식밥\n급식국\n급식김치"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
             android:gravity="center"
             android:text="@{meal}"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/meal_img"
-            app:layout_constraintEnd_toEndOf="@+id/meal_img"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="@+id/meal_img"
-            app:layout_constraintTop_toTopOf="@+id/meal_img" />
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/turning_img"
+            app:layout_constraintEnd_toEndOf="@+id/item_img"
+            app:layout_constraintStart_toStartOf="@+id/item_img"
+            app:layout_constraintTop_toBottomOf="@+id/meal_time_tv"
+            tools:text="급식\n급식밥\n급식국\n급식김치" />
 
         <ImageView
             android:id="@+id/turning_img"
@@ -60,28 +67,23 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:padding="5dp"
-            android:onClick="@{()->vm.showPicture()}"
             app:layout_constraintBottom_toBottomOf="@+id/item_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/turn_img" />
+            app:srcCompat="@drawable/ic_baseline_360_24" />
 
         <ImageView
-            android:id="@+id/meal_img"
+            android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="28dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:src="@drawable/img_no_picture"
             android:visibility="@{vm.showPicture?View.VISIBLE:View.INVISIBLE}"
-            app:layout_constraintBottom_toTopOf="@+id/turning_img"
-            app:layout_constraintEnd_toEndOf="@+id/item_img"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/item_img"
-            app:layout_constraintTop_toBottomOf="@+id/meal_time_tv"
-            app:layout_constraintVertical_bias="1.0"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintBottom_toBottomOf="@+id/menu_tv"
+            app:layout_constraintEnd_toEndOf="@+id/menu_tv"
+            app:layout_constraintStart_toStartOf="@+id/menu_tv"
+            app:layout_constraintTop_toTopOf="@+id/menu_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
