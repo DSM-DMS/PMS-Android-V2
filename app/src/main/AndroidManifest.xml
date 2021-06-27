@@ -14,10 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.login.ui.activity.LoginActivity"
-            android:theme="@style/NoActionBar"/>
-        <activity android:name=".ui.MainActivity"
-            android:theme="@style/NoActionBar">
+        <activity android:name=".feature.login.ui.activity.LoginActivity"/>
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
