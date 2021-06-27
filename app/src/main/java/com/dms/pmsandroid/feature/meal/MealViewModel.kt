@@ -20,6 +20,9 @@ class MealViewModel(
 
     val weekDate = MutableLiveData<Int>()
 
+    private val _showPicture = MutableLiveData(false)
+    val showPicture:LiveData<Boolean> get() = _showPicture
+
     private val _meals = MutableLiveData<MealResponse>()
     val meals: LiveData<MealResponse> get() = _meals
 
@@ -53,6 +56,10 @@ class MealViewModel(
         }, {
             _mealsPicture.value = MealPictureResponse(null,null,null)
         })
+    }
+
+    fun showPicture(){
+        _showPicture.value = !_showPicture.value!!
     }
 
 
