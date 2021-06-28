@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".feature.introduce.ui.fragment.IntroduceDeveloperFragment">
 
-    <data>
-
-        <variable
-            name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
-    </data>
 
     <TextView
         android:id="@+id/textView"

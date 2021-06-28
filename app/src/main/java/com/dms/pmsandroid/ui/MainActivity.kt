@@ -15,14 +15,14 @@ import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
+import com.dms.pmsandroid.feature.meal.MealFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val vm: MainViewModel by viewModel()
-    private val introvm : MainIntroViewModel by viewModel()
-
+    private val introvm: MainIntroViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         vm.checkLogin()
     }
 
-    private fun setFragment(){
+    private fun setFragment() {
         initFragment()
         observeFragment()
     }
@@ -63,19 +63,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    private fun observerdevIntent(){
+    private fun observerdevIntent() {
         introvm.devintroduceClick.observe(this, Observer {
-            if(it){
+            if (it) {
                 introIntent()
                 introvm.devintroduceClick.value = false
             }
         })
     }
 
-    private fun observerclubIntent(){
+    private fun observerclubIntent() {
 
     }
-
 
 
     private fun observerworkIntent() {
@@ -86,40 +85,42 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
     }
 
-    private fun introIntent(){
-        val devintent = Intent(this,IntroduceDeveloperActivity::class.java)
+    private fun introIntent() {
+        val devintent = Intent(this, IntroduceDeveloperActivity::class.java)
         startActivity(devintent)
     }
 
-    private fun workintroIntent(){
-        val workintent = Intent(this,IntroduceCompanyActivity::class.java)
+    private fun workintroIntent() {
+        val workintent = Intent(this, IntroduceCompanyActivity::class.java)
         startActivity(workintent)
     }
 
-    private fun clubIntent(){
-        val clubintent = Intent(this,IntroClubActivity::class.java)
+    private fun clubIntent() {
+        val clubintent = Intent(this, IntroClubActivity::class.java)
         startActivity(clubintent)
     }
 
 
-
     private val itemSelectedListener =
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            vm.tabSelectedItem.value = item.itemId
-            true
-        }
-
+            BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                vm.tabSelectedItem.value = item.itemId
+                true
+            }
     private val calendarFragment = CalendarFragment()
     private val introduceFragment = IntroduceFragment()
+    private val mealFragment = MealFragment()
     private var activeFragment: Fragment = calendarFragment
 
     private fun initFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, calendarFragment)
-            .hide(calendarFragment).commit()
+                .add(R.id.main_container, calendarFragment)
+                .hide(calendarFragment).commit()
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, introduceFragment)
-            .hide(introduceFragment).commit()
+                .add(R.id.main_container, introduceFragment)
+                .hide(introduceFragment).commit()
+        supportFragmentManager.beginTransaction()
+                .add(R.id.main_container, mealFragment)
+                .hide(mealFragment).commit()
     }
 
     private fun observeFragment() {
@@ -132,7 +133,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     changeFragment(introduceFragment)
                 }
                 R.id.menu_meal_it -> {
-
+                    changeFragment(mealFragment)
                 }
                 R.id.menu_mypage_it -> {
 
@@ -148,7 +149,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
         activeFragment = fragment
     }
-
 
 
 }
