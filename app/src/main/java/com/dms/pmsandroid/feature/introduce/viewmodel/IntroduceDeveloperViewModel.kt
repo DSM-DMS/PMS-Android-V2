@@ -6,5 +6,4 @@ import androidx.lifecycle.ViewModel
 
 class IntroduceDeveloperViewModel : ViewModel() {
 
-
 }

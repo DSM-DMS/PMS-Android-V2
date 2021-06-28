@@ -1,19 +1,97 @@
 package com.dms.pmsandroid.feature.meal
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.base.BaseFragment
+import com.dms.pmsandroid.databinding.FragmentMealBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
+import java.util.*
 
-class MealFragment : Fragment() {
+class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meal, container, false)
+    private val vm: MealViewModel by viewModel()
+
+    private val adapter by lazy {
+        MealAdapter(vm)
     }
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        binding.vm = vm
+        binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.mealViewVp.adapter = adapter
+        setCurrentTime()
+        vm.getMeal()
+        changeTime()
+        observeMeals()
+        observePicture()
+        setIndicator()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setCurrentTime() {
+        val currentTime = LocalDate.now()
+        val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
+        val weekDay = currentTime.dayOfWeek
+        vm.date.value = dateFormat
+        vm.weekDate.value = weekDay.value
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun changeTime() {
+        binding.mealNextBtn.setOnClickListener {
+            calculateTime(true)
+        }
+        binding.mealBeforeBtn.setOnClickListener {
+            calculateTime(false)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun calculateTime(isPlus: Boolean) {
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA)
+        val calculateDate = LocalDate.parse(vm.date.value, formatter)
+        if (isPlus) {
+            val plusDate = calculateDate.plus(Period.ofDays(1))
+            vm.date.value = plusDate.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
+            vm.weekDate.value = plusDate.dayOfWeek.value
+        } else {
+            val minusDate = calculateDate.minus(Period.ofDays(1))
+            vm.date.value = minusDate.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
+            vm.weekDate.value = minusDate.dayOfWeek.value
+        }
+        vm.getMeal()
+    }
+
+    private fun observeMeals() {
+        vm.meals.observe(viewLifecycleOwner, {
+            adapter.setItems(it)
+        })
+    }
+
+    private fun observePicture() {
+        vm.showPicture.observe(viewLifecycleOwner, {
+            adapter.notifyDataSetChanged()
+        })
+    }
+
+    private fun setIndicator() {
+        TabLayoutMediator(binding.tabMealBanner, binding.mealViewVp) { _, _ ->
+            binding.mealViewVp.currentItem = binding.tabMealBanner.selectedTabPosition
+        }.attach()
+    }
+
 }
