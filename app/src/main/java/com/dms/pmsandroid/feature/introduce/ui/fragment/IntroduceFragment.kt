@@ -6,11 +6,11 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentIntroduceBinding
 import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.android.ext.android.inject
 
 class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragment_introduce) {
 
-    private val vm : MainIntroViewModel by sharedViewModel()
+    private val vm : MainIntroViewModel by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

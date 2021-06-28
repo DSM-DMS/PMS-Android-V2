@@ -17,12 +17,13 @@ import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.MealFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val vm: MainViewModel by viewModel()
-    private val introvm: MainIntroViewModel by viewModel()
+    private val introvm: MainIntroViewModel by inject()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +34,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
-        observerdevIntent()
-        observerworkIntent()
-        observerclubIntent()
+        //observerdevIntent()
+        //observerworkIntent()
 
     }
 
@@ -64,7 +64,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun observerdevIntent() {
-        introvm.devintroduceClick.observe(this, Observer {
+        introvm.devintroduceClick.observe(this, {
             if (it) {
                 introIntent()
                 introvm.devintroduceClick.value = false
@@ -72,13 +72,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
     }
 
-    private fun observerclubIntent() {
-
-    }
-
-
     private fun observerworkIntent() {
-        introvm.workIntroduceClick.observe(this, Observer {
+        introvm.workIntroduceClick.observe(this, {
             if (it)
                 workintroIntent()
             introvm.workIntroduceClick.value = false

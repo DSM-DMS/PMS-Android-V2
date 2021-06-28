@@ -20,8 +20,7 @@
         <activity android:name=".feature.introduce.ui.activity.IntroClubActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity" />
         <activity
-            android:name=".feature.login.ui.activity.LoginActivity"
-            android:theme="@style/NoActionBar" />
+            android:name=".feature.login.ui.activity.LoginActivity"/>
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

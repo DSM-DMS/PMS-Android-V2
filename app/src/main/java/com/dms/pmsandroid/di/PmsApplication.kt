@@ -11,14 +11,15 @@ class PmsApplication : Application() {
         startKoin {
             androidContext(this@PmsApplication)
             modules(
-                    listOf(
-                            mainModule,
-                            loginModule,
-                            registerModule,
-                            calendarModule,
-                            developerModule,
-                            introduceModule
-                    )
+                listOf(
+                    mainModule,
+                    loginModule,
+                    registerModule,
+                    calendarModule,
+                    developerModule,
+                    introduceModule,
+                    mealModule
+                )
             )
         }
     }
