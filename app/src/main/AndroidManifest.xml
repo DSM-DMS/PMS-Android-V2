@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.introduce.ui.activity.CompanyDetailActivity"></activity>
+        <activity android:name=".feature.introduce.ui.activity.MainActivityte"></activity>
+        <activity android:name=".feature.introduce.ui.activity.CompanyDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.Club_DetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroWorkActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroClubActivity" />

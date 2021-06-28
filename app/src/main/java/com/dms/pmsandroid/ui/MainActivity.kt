@@ -9,8 +9,8 @@ import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroClubActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceWorkActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
@@ -87,7 +87,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun workintroIntent(){
-        val workintent = Intent(this,IntroduceWorkActivity::class.java)
+        val workintent = Intent(this,IntroduceCompanyActivity::class.java)
         startActivity(workintent)
     }
 

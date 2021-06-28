@@ -8,13 +8,10 @@
             type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".feature.introduce.ui.activity.IntroduceDeveloperActivity">
-
-
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<TextView
         android:id="@+id/title_tv"
         android:layout_width="416dp"
         android:layout_height="97dp"
@@ -51,7 +48,7 @@
         app:layout_constraintStart_toStartOf="@+id/title_tv"
         app:layout_constraintTop_toTopOf="@+id/title_tv"
         app:layout_constraintVertical_bias="0.479"
-
         app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceWorkViewModel" />
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
