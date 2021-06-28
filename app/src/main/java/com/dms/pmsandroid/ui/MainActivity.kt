@@ -8,7 +8,12 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroClubActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
+import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
+import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.MealFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,13 +22,21 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val vm: MainViewModel by viewModel()
+    private val introvm: MainIntroViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
+        binding.vm = vm
+        vm.checkLogin()
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
+        observerdevIntent()
+        observerworkIntent()
+        observerclubIntent()
+
     }
 
     override fun onResume() {
@@ -31,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         vm.checkLogin()
     }
 
-    private fun setFragment(){
+    private fun setFragment() {
         initFragment()
         observeFragment()
     }
@@ -50,12 +63,49 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    private val itemSelectedListener =
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            vm.tabSelectedItem.value = item.itemId
-            true
-        }
+    private fun observerdevIntent() {
+        introvm.devintroduceClick.observe(this, Observer {
+            if (it) {
+                introIntent()
+                introvm.devintroduceClick.value = false
+            }
+        })
+    }
 
+    private fun observerclubIntent() {
+
+    }
+
+
+    private fun observerworkIntent() {
+        introvm.workIntroduceClick.observe(this, Observer {
+            if (it)
+                workintroIntent()
+            introvm.workIntroduceClick.value = false
+        })
+    }
+
+    private fun introIntent() {
+        val devintent = Intent(this, IntroduceDeveloperActivity::class.java)
+        startActivity(devintent)
+    }
+
+    private fun workintroIntent() {
+        val workintent = Intent(this, IntroduceCompanyActivity::class.java)
+        startActivity(workintent)
+    }
+
+    private fun clubIntent() {
+        val clubintent = Intent(this, IntroClubActivity::class.java)
+        startActivity(clubintent)
+    }
+
+
+    private val itemSelectedListener =
+            BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                vm.tabSelectedItem.value = item.itemId
+                true
+            }
     private val calendarFragment = CalendarFragment()
     private val introduceFragment = IntroduceFragment()
     private val mealFragment = MealFragment()
@@ -63,14 +113,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun initFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, calendarFragment)
-            .hide(calendarFragment).commit()
+                .add(R.id.main_container, calendarFragment)
+                .hide(calendarFragment).commit()
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, introduceFragment)
-            .hide(introduceFragment).commit()
+                .add(R.id.main_container, introduceFragment)
+                .hide(introduceFragment).commit()
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, mealFragment)
-            .hide(mealFragment).commit()
+                .add(R.id.main_container, mealFragment)
+                .hide(mealFragment).commit()
     }
 
     private fun observeFragment() {
@@ -99,4 +149,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
         activeFragment = fragment
     }
+
+
 }
