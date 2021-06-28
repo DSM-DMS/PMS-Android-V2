@@ -15,4 +15,9 @@
     <string name="title_mypage">마이페이지</string>
     <string name="please_name">이름을 입력해주세요</string>
     <string name="ask_need_register">아직 계정이 없으신가요?</string>
+    <string name="intro_work">취업처 소개</string>
+    <string name="intro_developer">개발자 소개</string>
+    <string name="intro_club">동아리 소개</string>
+    <string name="children_club">자녀의 동아리</string>
+    <string name="intro_main_dms">대마고의 자랑거리를 소개합니다</string>
 </resources>

@@ -1,16 +1,5 @@
 package com.dms.pmsandroid.feature.introduce.model
 
+import com.bumptech.glide.Glide
 
-data class DevelopModel(
-    val developName : String,
-    val developPart : String
-
-import retrofit2.http.Url
-
-data class DevelopModel(
-    val developPhoto : Int,
-    val developName : String,
-    val developPart : String
-
-
-)
+data class DevelopModel(val developName: String, val developPart: String)

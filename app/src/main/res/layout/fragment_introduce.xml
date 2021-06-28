@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel"
+            />
+    </data>
+
+
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.introduce.ui.fragment.IntroduceFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
+    <TextView
+        android:id="@+id/main_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="55dp"
+        android:text="@string/title_info"
+        android:textSize="40dp"
+        android:textStyle="bold" />
 
 </FrameLayout>

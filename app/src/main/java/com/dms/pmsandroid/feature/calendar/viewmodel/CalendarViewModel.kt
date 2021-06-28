@@ -12,10 +12,8 @@ class CalendarViewModel(
     val accessToken = sharedPreferenceStorage.getInfo("token")
 
     fun loadSchedules() {
-        calendarApiProvider.scheduleApi(accessToken).subscribe({response->
-            Log.d("일정",response.raw().toString())
-        },{
-            Log.d("일정","예외: $it")
+        calendarApiProvider.scheduleApi(accessToken).subscribe({ response ->
+        }, {
         })
     }
 

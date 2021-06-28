@@ -1,4 +1,8 @@
 package com.dms.pmsandroid.feature.introduce.viewmodel
 
-class IntroduceCompanyViewModel {
+import androidx.lifecycle.ViewModel
+
+class IntroduceCompanyViewModel : ViewModel() {
+
+
 }

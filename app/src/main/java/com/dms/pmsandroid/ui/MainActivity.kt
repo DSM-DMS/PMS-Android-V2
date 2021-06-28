@@ -8,7 +8,12 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroClubActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
+import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
+import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,13 +21,22 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val vm: MainViewModel by viewModel()
+    private val introvm : MainIntroViewModel by viewModel()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
+        binding.vm = vm
+        vm.checkLogin()
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
+        observerdevIntent()
+        observerworkIntent()
+        observerclubIntent()
+
     }
 
     override fun onResume() {
@@ -48,6 +62,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
     }
+
+    private fun observerdevIntent(){
+        introvm.devintroduceClick.observe(this, Observer {
+            if(it){
+                introIntent()
+                introvm.devintroduceClick.value = false
+            }
+        })
+    }
+
+    private fun observerclubIntent(){
+
+    }
+
+
+
+    private fun observerworkIntent() {
+        introvm.workIntroduceClick.observe(this, Observer {
+            if (it)
+                workintroIntent()
+            introvm.workIntroduceClick.value = false
+        })
+    }
+
+    private fun introIntent(){
+        val devintent = Intent(this,IntroduceDeveloperActivity::class.java)
+        startActivity(devintent)
+    }
+
+    private fun workintroIntent(){
+        val workintent = Intent(this,IntroduceCompanyActivity::class.java)
+        startActivity(workintent)
+    }
+
+    private fun clubIntent(){
+        val clubintent = Intent(this,IntroClubActivity::class.java)
+        startActivity(clubintent)
+    }
+
+
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -94,4 +148,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
         activeFragment = fragment
     }
+
+
+
 }
