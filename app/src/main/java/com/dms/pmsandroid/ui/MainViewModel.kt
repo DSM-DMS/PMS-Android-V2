@@ -37,8 +37,7 @@ class MainViewModel(
         loginApiImpl.loginApi(request).subscribe { response ->
             when (response.code()) {
                 200 -> {
-                    sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"token")
-                    Log.d("스케줄","토큰:${sharedPreferenceStorage.getInfo("token")}")
+                    sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"access_token")
                 }
                 else -> {
                     needToLogin.value = true
