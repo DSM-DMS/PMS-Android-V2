@@ -10,8 +10,8 @@ import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class MainViewModel(
-    private val loginApiImpl: LoginApiImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+        private val loginApiImpl: LoginApiImpl,
+        private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val tabSelectedItem = MutableLiveData<Int>(R.id.menu_calendar_it)

@@ -11,6 +11,7 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.Period
@@ -19,7 +20,7 @@ import java.util.*
 
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
-    private val vm: MealViewModel by viewModel()
+    private val vm: MealViewModel by inject()
 
     private val adapter by lazy {
         MealAdapter(vm)

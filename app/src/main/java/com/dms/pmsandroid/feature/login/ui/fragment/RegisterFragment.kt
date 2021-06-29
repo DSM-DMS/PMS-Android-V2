@@ -65,7 +65,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
     private fun checkDoneRegister() {
         vm.doneInput.value =
-            vm.nEmptyEmail.value!! && vm.nEmptyName.value!! && vm.nEmptyPassword.value!! && vm.samePassword.value!!
+                vm.nEmptyEmail.value!! && vm.nEmptyName.value!! && vm.nEmptyPassword.value!! && vm.samePassword.value!!
     }
 
     private fun observeToast() {

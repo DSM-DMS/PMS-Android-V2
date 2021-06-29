@@ -5,7 +5,7 @@ import com.dms.pmsandroid.di.module.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class PmsApplication:Application() {
+class PmsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
@@ -16,6 +16,8 @@ class PmsApplication:Application() {
                     loginModule,
                     registerModule,
                     calendarModule,
+                    developerModule,
+                    introduceModule,
                     mealModule
                 )
             )
