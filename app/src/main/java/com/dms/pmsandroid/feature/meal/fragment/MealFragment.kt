@@ -44,7 +44,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCurrentTime() {
-        val currentTime = LocalDate.now()
+        val currentTime = LocalDate.now().minus(Period.ofDays(1))
         val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
         val weekDay = currentTime.dayOfWeek
         vm.date.value = dateFormat
@@ -85,7 +85,9 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private fun observePicture() {
         vm.showPicture.observe(viewLifecycleOwner, {
+            val position = binding.mealViewVp.currentItem
             adapter.notifyDataSetChanged()
+            binding.mealViewVp.currentItem = position
         })
     }
 
