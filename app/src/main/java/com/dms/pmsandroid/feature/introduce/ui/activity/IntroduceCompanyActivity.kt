@@ -15,10 +15,4 @@ class IntroduceCompanyActivity :  BaseActivity<ActivityIntroduceCompanyBinding>(
         super.onCreate(savedInstanceState)
 
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        
-    }
-
 }

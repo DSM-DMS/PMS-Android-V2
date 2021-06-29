@@ -23,8 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val vm: MainViewModel by viewModel()
-    private val introvm: MainIntroViewModel by inject()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +32,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
-        //observerdevIntent()
-        //observerworkIntent()
-
     }
 
     override fun onResume() {
@@ -50,7 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun observeNeedLogin() {
-        vm.needToLogin.observe(this, Observer {
+        vm.needToLogin.observe(this, {
             if (it) {
                 startLogin()
                 vm.needToLogin.value = false
@@ -63,34 +58,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    private fun observerdevIntent() {
-        introvm.devintroduceClick.observe(this, {
-            if (it) {
-                introIntent()
-                introvm.devintroduceClick.value = false
-            }
-        })
-    }
 
-    private fun observerworkIntent() {
-        introvm.workIntroduceClick.observe(this, {
-            if (it)
-                workintroIntent()
-            introvm.workIntroduceClick.value = false
-        })
-    }
-
-    private fun introIntent() {
+    fun startDeveloper() {
         val devintent = Intent(this, IntroduceDeveloperActivity::class.java)
         startActivity(devintent)
     }
 
-    private fun workintroIntent() {
+    fun startCompany() {
         val workintent = Intent(this, IntroduceCompanyActivity::class.java)
         startActivity(workintent)
     }
 
-    private fun clubIntent() {
+    fun startClub() {
         val clubintent = Intent(this, IntroClubActivity::class.java)
         startActivity(clubintent)
     }
@@ -119,7 +98,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun observeFragment() {
-        vm.tabSelectedItem.observe(this, Observer { id ->
+        vm.tabSelectedItem.observe(this, { id ->
             when (id) {
                 R.id.menu_calendar_it -> {
                     changeFragment(calendarFragment)

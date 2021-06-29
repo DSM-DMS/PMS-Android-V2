@@ -46,39 +46,36 @@
 
 
             <ImageView
-                android:id="@+id/intro_club_tv"
+                android:id="@+id/intro_club_btn"
                 android:layout_width="413dp"
                 android:layout_height="125dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/box3"
-                android:onClick="@{()->vm.clubClicked()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/intro_work_tv"
+                android:id="@+id/intro_work_btn"
                 android:layout_width="413dp"
                 android:layout_height="125dp"
                 android:layout_marginTop="40dp"
                 android:src="@drawable/box3"
-                android:onClick="@{()->vm.workClicked()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/intro_club_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/intro_club_btn" />
 
             <ImageView
-                android:id="@+id/intro_dev_tv"
+                android:id="@+id/intro_dev_btn"
                 android:layout_width="413dp"
                 android:layout_height="125dp"
                 android:layout_marginTop="40dp"
-                android:onClick="@{()->vm.devClicked()}"
                 android:src="@drawable/box3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/intro_work_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/intro_work_btn" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -90,7 +87,7 @@
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.342"
-                app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
+                app:layout_constraintStart_toStartOf="@+id/intro_club_btn"
                 app:layout_constraintTop_toBottomOf="@+id/choice_dev_tv" />
 
             <TextView
@@ -104,7 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.29"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/intro_club_tv" />
+                app:layout_constraintTop_toTopOf="@+id/intro_club_btn" />
 
             <TextView
                 android:id="@+id/choice_work_tv"
@@ -117,7 +114,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.291"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/intro_work_tv" />
+                app:layout_constraintTop_toTopOf="@+id/intro_work_btn" />
 
             <TextView
                 android:id="@+id/choice_dev_tv"
@@ -130,7 +127,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.291"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/intro_dev_tv" />
+                app:layout_constraintTop_toTopOf="@+id/intro_dev_btn" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -142,7 +139,7 @@
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.367"
-                app:layout_constraintStart_toStartOf="@+id/intro_club_tv"
+                app:layout_constraintStart_toStartOf="@+id/intro_club_btn"
                 app:layout_constraintTop_toBottomOf="@+id/choice_club_tv" />
 
             <TextView
@@ -153,7 +150,7 @@
                 android:text="대마고 학생들이 취업한 회사를 소개합니다"
                 android:textSize="12dp"
                 android:textColor="#6C6C6C"
-                app:layout_constraintEnd_toEndOf="@+id/intro_work_tv"
+                app:layout_constraintEnd_toEndOf="@+id/intro_work_btn"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/choice_work_tv" />

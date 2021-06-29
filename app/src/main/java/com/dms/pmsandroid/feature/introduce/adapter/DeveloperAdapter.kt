@@ -41,6 +41,7 @@ class DeveloperAdapter(val model: ArrayList<DevelopModel>) :
                 0 -> {
                     Glide.with(image)
                             .load("http://211.38.86.92/media/pms/static/jaewonkim1468.png")
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .into(image)
                 }
                 1 -> {
@@ -48,35 +49,41 @@ class DeveloperAdapter(val model: ArrayList<DevelopModel>) :
                             .load(
                                     "http://211.38.86.92/media/pms/static/dlswer23.png"
                             )
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .into(image)
                 }
                 2 -> {
                     Glide.with(image)
                             .load("http://211.38.86.92/media/pms/static/Goeun1001.png")
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .into(image)
 
                 }
                 3 -> {
                     Glide.with(image)
                             .load("http://211.38.86.92/media/pms/static/silverbeen.png")
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .into(image)
 
                 }
                 4 -> {
                     Glide.with(image)
                             .load("http://211.38.86.92/media/pms/static/wlsdn1101.png")
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .into(image)
 
                 }
                 5 -> {
                     Glide.with(image)
                             .load("http://211.38.86.92/media/pms/static/smoothbear.png")
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .into(image)
 
                 }
                 6 -> {
                     Glide.with(image)
                             .load("http://211.38.86.92/media/pms/static/jeongjiwoo0522.png")
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .into(image)
 
                 }
