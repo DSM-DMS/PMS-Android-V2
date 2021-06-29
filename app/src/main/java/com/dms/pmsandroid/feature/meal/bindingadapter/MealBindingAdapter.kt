@@ -1,9 +1,8 @@
-package com.dms.pmsandroid.feature.meal
+package com.dms.pmsandroid.feature.meal.bindingadapter
 
 import android.annotation.SuppressLint
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 

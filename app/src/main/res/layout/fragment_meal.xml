@@ -8,11 +8,11 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.meal.MealViewModel" />
+            type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
 
         <variable
             name="adapter"
-            type="com.dms.pmsandroid.feature.meal.MealAdapter" />
+            type="com.dms.pmsandroid.feature.meal.adapter.MealAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.meal
+package com.dms.pmsandroid.feature.meal.fragment
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -9,10 +9,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
-import com.google.android.material.tabs.TabLayout
+import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
+import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
