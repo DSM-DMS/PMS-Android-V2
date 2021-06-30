@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.meal
+package com.dms.pmsandroid.feature.meal.fragment
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -9,10 +9,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
-import com.google.android.material.tabs.TabLayout
+import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
+import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
@@ -44,7 +44,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCurrentTime() {
-        val currentTime = LocalDate.now()
+        val currentTime = LocalDate.now().minus(Period.ofDays(1))
         val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
         val weekDay = currentTime.dayOfWeek
         vm.date.value = dateFormat
@@ -85,8 +85,17 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private fun observePicture() {
         vm.showPicture.observe(viewLifecycleOwner, {
-            adapter.notifyDataSetChanged()
+            updatePageView()
         })
+        vm.mealPicture.observe(viewLifecycleOwner,{
+            updatePageView()
+        })
+    }
+
+    private fun updatePageView(){
+        val position = binding.mealViewVp.currentItem
+        adapter.notifyDataSetChanged()
+        binding.mealViewVp.currentItem = position
     }
 
     private fun setIndicator() {
