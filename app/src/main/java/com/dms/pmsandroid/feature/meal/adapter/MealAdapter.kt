@@ -1,9 +1,10 @@
-package com.dms.pmsandroid.feature.meal
+package com.dms.pmsandroid.feature.meal.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.databinding.ItemMealBinding
+import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.model.MealResponse
 
 class MealAdapter(private val viewModel: MealViewModel) :

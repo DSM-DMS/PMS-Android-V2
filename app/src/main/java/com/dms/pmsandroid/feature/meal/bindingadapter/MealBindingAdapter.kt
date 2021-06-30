@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.meal
+package com.dms.pmsandroid.feature.meal.bindingadapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color

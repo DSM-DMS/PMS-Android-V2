@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.meal
+package com.dms.pmsandroid.feature.meal.viewmodel
 
 import android.os.Build
 import androidx.annotation.RequiresApi
