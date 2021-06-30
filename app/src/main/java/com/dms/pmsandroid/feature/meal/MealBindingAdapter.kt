@@ -1,11 +1,17 @@
 package com.dms.pmsandroid.feature.meal
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.dms.pmsandroid.R
 
 object MealBindingAdapter {
     @SuppressLint("SetTextI18n")
@@ -36,6 +42,22 @@ object MealBindingAdapter {
             viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             viewPager.adapter = adapter
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("glide_meal_image_load")
+    fun glideMealImageLoad(imageView: ImageView, resource: String?) {
+        val circularProgressDrawable = CircularProgressDrawable(imageView.context)
+        circularProgressDrawable.strokeWidth = 10f
+        circularProgressDrawable.centerRadius = 40f
+        circularProgressDrawable.setColorFilter(ContextCompat.getColor(imageView.context, R.color.blue), PorterDuff.Mode.SRC_IN )
+        circularProgressDrawable.start()
+
+        Glide.with(imageView.context)
+            .load(resource)
+            .placeholder(circularProgressDrawable)
+            .error(R.drawable.img_no_picture)
+            .into(imageView)
     }
 
 }

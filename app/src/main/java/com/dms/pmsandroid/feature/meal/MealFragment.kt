@@ -85,10 +85,17 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private fun observePicture() {
         vm.showPicture.observe(viewLifecycleOwner, {
-            val position = binding.mealViewVp.currentItem
-            adapter.notifyDataSetChanged()
-            binding.mealViewVp.currentItem = position
+            updatePageView()
         })
+        vm.mealPicture.observe(viewLifecycleOwner,{
+            updatePageView()
+        })
+    }
+
+    private fun updatePageView(){
+        val position = binding.mealViewVp.currentItem
+        adapter.notifyDataSetChanged()
+        binding.mealViewVp.currentItem = position
     }
 
     private fun setIndicator() {
