@@ -7,7 +7,7 @@ import com.dms.pmsandroid.databinding.ActivityIntroduceClubBinding
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 
 class IntroClubActivity :
-    BaseActivity<ActivityIntroduceClubBinding>(R.layout.activity_introduce_club) {
+        BaseActivity<ActivityIntroduceClubBinding>(R.layout.activity_introduce_club) {
 
     lateinit var viewmodel: IntroduceClubViewModel
 

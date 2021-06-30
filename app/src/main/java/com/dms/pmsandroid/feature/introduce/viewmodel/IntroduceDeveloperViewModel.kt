@@ -15,5 +15,4 @@ class IntroduceDeveloperViewModel: ViewModel() {
         backPressed.value = true
     }
 
-
 }

@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.login.LoginApiProvider
+import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class LoginViewModel(
-    private val apiProvider: LoginApiProvider,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+        private val apiImpl: LoginApiImpl,
+        private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val userEmail = MutableLiveData<String>()
@@ -31,12 +31,12 @@ class LoginViewModel(
     fun login(){
         if(doneInput.value!!){
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
-            apiProvider.loginApi(request).subscribe({
+            apiImpl.loginApi(request).subscribe({
                 when(it.code()){
                     200->{
                         sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
                         sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
-                        sharedPreferenceStorage.saveInfo(it.body()!!.accessToken,"token")
+                        sharedPreferenceStorage.saveInfo(it.body()!!.accessToken,"access_token")
                         _doneLogin.value = true
                     }
                     else->{

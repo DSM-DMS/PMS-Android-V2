@@ -65,7 +65,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
     private fun checkDoneRegister() {
         vm.doneInput.value =
-            vm.nEmptyEmail.value!! && vm.nEmptyName.value!! && vm.nEmptyPassword.value!! && vm.samePassword.value!!
+                vm.nEmptyEmail.value!! && vm.nEmptyName.value!! && vm.nEmptyPassword.value!! && vm.samePassword.value!!
     }
 
     private fun observeToast() {
@@ -84,7 +84,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
     private fun finishRegister(){
         val fragment = activity!!.supportFragmentManager
-        val fragmentManager = fragment.beginTransaction().setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_up)
+        val fragmentManager = fragment.beginTransaction()
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container,LoginFragment()).commit()
     }
 
