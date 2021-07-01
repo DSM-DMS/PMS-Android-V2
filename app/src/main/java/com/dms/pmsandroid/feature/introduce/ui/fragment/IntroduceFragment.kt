@@ -11,11 +11,10 @@ import org.koin.android.ext.android.inject
 
 class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragment_introduce) {
 
-    private val vm : MainIntroViewModel by inject()
+    override val vm : MainIntroViewModel by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = vm
         setClickEvent()
     }
 
@@ -29,5 +28,8 @@ class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragme
         binding.introWorkBtn.setOnClickListener {
             (activity as MainActivity).startCompany()
         }
+    }
+
+    override fun observeEvent() {
     }
 }
