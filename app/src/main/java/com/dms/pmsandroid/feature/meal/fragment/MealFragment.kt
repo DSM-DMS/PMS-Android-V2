@@ -20,25 +20,22 @@ import java.util.*
 
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
-    private val vm: MealViewModel by inject()
+    override val vm: MealViewModel by inject()
 
     private val adapter by lazy {
         MealAdapter(vm)
     }
 
+
     @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
-        binding.vm = vm
         binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.mealViewVp.adapter = adapter
         setCurrentTime()
         vm.getMeal()
         changeTime()
-        observeMeals()
-        observePicture()
         setIndicator()
     }
 
@@ -77,22 +74,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         vm.getMeal()
     }
 
-    private fun observeMeals() {
-        vm.meals.observe(viewLifecycleOwner, {
-            adapter.setItems(it)
-        })
-    }
-
-    private fun observePicture() {
-        vm.showPicture.observe(viewLifecycleOwner, {
-            updatePageView()
-        })
-        vm.mealPicture.observe(viewLifecycleOwner,{
-            updatePageView()
-        })
-    }
-
-    private fun updatePageView(){
+    private fun updatePageView() {
         val position = binding.mealViewVp.currentItem
         adapter.notifyDataSetChanged()
         binding.mealViewVp.currentItem = position
@@ -102,6 +84,18 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         TabLayoutMediator(binding.tabMealBanner, binding.mealViewVp) { _, _ ->
             binding.mealViewVp.currentItem = binding.tabMealBanner.selectedTabPosition
         }.attach()
+    }
+
+    override fun observeEvent() {
+        vm.showPicture.observe(viewLifecycleOwner, {
+            updatePageView()
+        })
+        vm.mealPicture.observe(viewLifecycleOwner, {
+            updatePageView()
+        })
+        vm.meals.observe(viewLifecycleOwner, {
+            adapter.setItems(it)
+        })
     }
 
 }

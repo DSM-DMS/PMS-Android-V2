@@ -17,16 +17,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-
     private val vm: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.lifecycleOwner = this
-        binding.vm = vm
-        observeNeedLogin()
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
+        observeEvent()
     }
 
     override fun onResume() {
@@ -36,16 +33,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun setFragment() {
         initFragment()
-        observeFragment()
-    }
-
-    private fun observeNeedLogin() {
-        vm.needToLogin.observe(this, {
-            if (it) {
-                startLogin()
-                vm.needToLogin.value = false
-            }
-        })
     }
 
     private fun startLogin() {
@@ -71,10 +58,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
 
     private val itemSelectedListener =
-            BottomNavigationView.OnNavigationItemSelectedListener { item ->
-                vm.tabSelectedItem.value = item.itemId
-                true
-            }
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            vm.tabSelectedItem.value = item.itemId
+            true
+        }
     private val calendarFragment = CalendarFragment()
     private val introduceFragment = IntroduceFragment()
     private val mealFragment = MealFragment()
@@ -82,17 +69,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun initFragment() {
         supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, calendarFragment)
-                .hide(calendarFragment).commit()
+            .add(R.id.main_container, calendarFragment)
+            .hide(calendarFragment).commit()
         supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, introduceFragment)
-                .hide(introduceFragment).commit()
+            .add(R.id.main_container, introduceFragment)
+            .hide(introduceFragment).commit()
         supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, mealFragment)
-                .hide(mealFragment).commit()
+            .add(R.id.main_container, mealFragment)
+            .hide(mealFragment).commit()
     }
 
-    private fun observeFragment() {
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
+        activeFragment = fragment
+    }
+
+    private fun observeEvent() {
         vm.tabSelectedItem.observe(this, { id ->
             when (id) {
                 R.id.menu_calendar_it -> {
@@ -112,11 +104,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
             }
         })
-    }
-
-    private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
-        activeFragment = fragment
+        vm.needToLogin.observe(this, {
+            if (it) {
+                startLogin()
+                vm.needToLogin.value = false
+            }
+        })
     }
 
 
