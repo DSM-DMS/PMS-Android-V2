@@ -9,7 +9,7 @@ import com.dms.pmsandroid.databinding.ActivityIntroduceDeveloperBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
 import com.dms.pmsandroid.feature.introduce.model.DevelopModel
 
-class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBinding>(R.layout.activity_introduce_developer) {
+class IntroduceDeveloperActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
