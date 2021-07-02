@@ -14,7 +14,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
 ) : AppCompatActivity() {
 
     protected lateinit var binding: B
-    //abstract val vm: ViewModel
+    abstract val vm: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
         //observeEvent()
     }
 
-   // abstract fun observeEvent()
+   abstract fun observeEvent()
 
 
 }
