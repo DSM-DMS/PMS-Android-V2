@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    private val vm : LoginViewModel by viewModel()
+    override val vm : LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     }
 
-    private fun observeEvent() {
+    override fun observeEvent() {
 //        apply, with, also, let, run
         with(vm){
             needRegister.observe(this@LoginActivity, {
