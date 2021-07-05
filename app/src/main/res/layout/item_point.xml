@@ -7,9 +7,6 @@
 
         <import type="android.view.View" />
 
-        <variable
-            name="vm"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.PointContentViewModel" />
 
         <variable
             name="content"
