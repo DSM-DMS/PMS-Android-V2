@@ -1,16 +1,15 @@
 package com.dms.pmsandroid.feature.login.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.login.LoginApiProvider
+import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class LoginViewModel(
-    private val apiProvider: LoginApiProvider,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+        private val apiImpl: LoginApiImpl,
+        private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val userEmail = MutableLiveData<String>()
@@ -18,6 +17,7 @@ class LoginViewModel(
 
     val userPassword = MutableLiveData<String>()
     val passwordDone = MutableLiveData<Boolean>(false)
+    // SingleLiveEvent & Event Wrapper
 
     val needRegister = MutableLiveData<Boolean>(false)
 
@@ -32,12 +32,12 @@ class LoginViewModel(
     fun login(){
         if(doneInput.value!!){
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
-            apiProvider.loginApi(request).subscribe({
+            apiImpl.loginApi(request).subscribe({
                 when(it.code()){
                     200->{
                         sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
                         sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
-                        sharedPreferenceStorage.saveInfo(it.body()!!.accessToken,"token")
+                        sharedPreferenceStorage.saveInfo(it.body()!!.accessToken,"access_token")
                         _doneLogin.value = true
                     }
                     else->{
@@ -45,7 +45,6 @@ class LoginViewModel(
                     }
                 }
             },{
-                Log.d("일정","$it")
                 _toastMessage.value = "로그인에 실패하였습니다"
             })
         }

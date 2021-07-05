@@ -4,7 +4,7 @@
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
-/.idea/workspace.xml
+/PMS_Android/.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
@@ -17,3 +17,10 @@ local.properties
 .idea/jarRepositories.xml
 
 /PMS_Android/.idea
+.idea/runConfigurations.xml
+
+.idea/compiler.xml
+
+.idea/misc.xml
+
+gradle/wrapper/gradle-wrapper.properties

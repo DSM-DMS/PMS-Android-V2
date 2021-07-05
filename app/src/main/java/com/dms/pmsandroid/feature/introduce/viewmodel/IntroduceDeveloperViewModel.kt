@@ -1,13 +1,13 @@
 package com.dms.pmsandroid.feature.introduce.viewmodel
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class IntroduceDeveloperViewModel : ViewModel() {
+class IntroduceDeveloperViewModel: ViewModel() {
+    val backPressed = MutableLiveData<Boolean>(false)
 
-//    private val _developList = ListLiveData<developModel>()
-//
-//    val develop : LiveData<Array<developModel>>
-//    get() = _developList
+    fun backIntent(){
+        backPressed.value = true
+    }
 
 }

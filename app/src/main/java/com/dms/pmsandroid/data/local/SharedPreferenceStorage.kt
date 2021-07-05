@@ -10,7 +10,7 @@ class SharedPreferenceStorage(private val context: Context){
 
     fun getInfo(content: String?): String{
         if(pref == null)pref = context.getSharedPreferences(content,MODE_PRIVATE)
-        return if (content == "token"){
+        return if (content == "access_token"){
             "Bearer " + pref!!.getString(content,"")
         } else
             pref!!.getString(content, "").toString()
