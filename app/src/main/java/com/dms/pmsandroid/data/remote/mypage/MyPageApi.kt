@@ -4,5 +4,10 @@ import retrofit2.http.GET
 
 interface MyPageApi {
     @GET("/user")
-    fun getUserStudents()
+    fun getStudents()
+
+    @GET("/user/student/{number}")
+    fun getStudentPoint(){
+
+    }
 }
