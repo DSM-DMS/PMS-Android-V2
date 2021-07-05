@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar) {
 
     override val vm: CalendarViewModel by viewModel()
-    private val mainVm: MainViewModel by sharedViewModel()
+    private val mainVm: MainViewModel by inject()
 
     override fun observeEvent() {
         mainVm.doneToken.observe(viewLifecycleOwner, {
