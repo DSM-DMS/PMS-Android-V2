@@ -44,8 +44,10 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         val currentTime = LocalDate.now().minus(Period.ofDays(1))
         val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
         val weekDay = currentTime.dayOfWeek
-        vm.date.value = dateFormat
-        vm.weekDate.value = weekDay.value
+        vm.run {
+            date.value = dateFormat
+            weekDate.value = weekDay.value
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -87,15 +89,17 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     }
 
     override fun observeEvent() {
-        vm.showPicture.observe(viewLifecycleOwner, {
-            updatePageView()
-        })
-        vm.mealPicture.observe(viewLifecycleOwner, {
-            updatePageView()
-        })
-        vm.meals.observe(viewLifecycleOwner, {
-            adapter.setItems(it)
-        })
+        vm.run {
+            showPicture.observe(viewLifecycleOwner, {
+                updatePageView()
+            })
+            mealPicture.observe(viewLifecycleOwner, {
+                updatePageView()
+            })
+            meals.observe(viewLifecycleOwner, {
+                adapter.setItems(it)
+            })
+        }
     }
 
 }
