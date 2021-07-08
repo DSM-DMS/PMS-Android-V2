@@ -5,6 +5,7 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentLoginBinding
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
+import com.dms.pmsandroid.ui.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
