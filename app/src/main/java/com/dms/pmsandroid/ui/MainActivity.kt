@@ -14,10 +14,11 @@ import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private val vm: MainViewModel by viewModel()
+    override val vm: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         activeFragment = fragment
     }
 
-    private fun observeEvent() {
+    override fun observeEvent() {
         vm.tabSelectedItem.observe(this, { id ->
             when (id) {
                 R.id.menu_calendar_it -> {

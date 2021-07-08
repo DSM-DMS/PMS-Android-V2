@@ -18,8 +18,7 @@ class MainViewModel(
 
     val needToLogin = MutableLiveData<Boolean>()
 
-    private val _doneToken = MutableLiveData<Boolean>(false)
-    val doneToken: LiveData<Boolean> get() = _doneToken
+    val doneToken = MutableLiveData<Boolean>(false)
 
     fun checkLogin() {
         val email = sharedPreferenceStorage.getInfo("user_email")
@@ -43,7 +42,7 @@ class MainViewModel(
                     needToLogin.value = true
                 }
             }
-            _doneToken.value = true
+            doneToken.value = true
         }
     }
 

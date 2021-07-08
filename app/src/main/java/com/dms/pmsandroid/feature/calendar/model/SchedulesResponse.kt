@@ -1,3 +1,5 @@
 package com.dms.pmsandroid.feature.calendar.model
 
-data class SchedulesResponse(val schedules:List<OneDay>)
+import com.google.gson.JsonObject
+
+data class SchedulesResponse(val schedules:List<JsonObject>)
