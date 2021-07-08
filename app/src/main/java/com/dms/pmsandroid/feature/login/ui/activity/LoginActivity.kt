@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    override val vm : LoginViewModel by viewModel()
+    override val vm: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +23,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         observeEvent()
     }
 
-    private fun startLogin(){
-        supportFragmentManager.beginTransaction().add(R.id.login_container,LoginFragment()).commit()
+    private fun startLogin() {
+        supportFragmentManager.beginTransaction().add(R.id.login_container, LoginFragment())
+            .commit()
     }
 
-    private fun startRegister(){
+    private fun startRegister() {
         val fragmentManager = supportFragmentManager.beginTransaction()
-        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_down)
-        fragmentManager.replace(R.id.login_container,RegisterFragment()).commit()
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
+        fragmentManager.replace(R.id.login_container, RegisterFragment()).commit()
         vm.needRegister.value = false
     }
 
@@ -48,15 +49,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     override fun observeEvent() {
-//        apply, with, also, let, run
-        with(vm){
+        vm.run {
             needRegister.observe(this@LoginActivity, {
-                if(it){
+                if (it) {
                     startRegister()
                 }
             })
             doneLogin.observe(this@LoginActivity, {
-                if(it){
+                if (it) {
                     finish()
                 }
             })
