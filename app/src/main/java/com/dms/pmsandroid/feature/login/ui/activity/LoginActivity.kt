@@ -13,34 +13,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    private val vm : LoginViewModel by viewModel()
+    override val vm : LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
         startLogin()
-        observeRegister()
-        observeDoneLogin()
+
+        observeEvent()
     }
 
     private fun startLogin(){
         supportFragmentManager.beginTransaction().add(R.id.login_container,LoginFragment()).commit()
-    }
-
-    private fun observeRegister(){
-        vm.needRegister.observe(this, Observer {
-            if(it){
-                startRegister()
-            }
-        })
-    }
-
-    private fun observeDoneLogin(){
-        vm.doneLogin.observe(this, Observer {
-            if(it){
-                finish()
-            }
-        })
     }
 
     private fun startRegister(){
@@ -61,6 +45,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         lastTimeBackPressed = System.currentTimeMillis()
         Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
 
+    }
+
+    override fun observeEvent() {
+//        apply, with, also, let, run
+        with(vm){
+            needRegister.observe(this@LoginActivity, {
+                if(it){
+                    startRegister()
+                }
+            })
+            doneLogin.observe(this@LoginActivity, {
+                if(it){
+                    finish()
+                }
+            })
+        }
     }
 
 
