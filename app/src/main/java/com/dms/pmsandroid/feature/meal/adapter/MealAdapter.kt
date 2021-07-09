@@ -1,11 +1,15 @@
 package com.dms.pmsandroid.feature.meal.adapter
 
+import android.animation.AnimatorInflater
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dms.pmsandroid.R
 import com.dms.pmsandroid.databinding.ItemMealBinding
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.model.MealResponse
+import kotlin.collections.ArrayList
 
 class MealAdapter(private val viewModel: MealViewModel) :
     RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
@@ -17,35 +21,44 @@ class MealAdapter(private val viewModel: MealViewModel) :
             when (position) {
                 0 -> {
                     binding.mealTimeTv.text = "아침"
-                    binding.picture = viewModel.mealPicture.value?.breakfast?:""
+                    binding.picture = viewModel.mealPicture.value?.breakfast ?: ""
                 }
                 1 -> {
                     binding.mealTimeTv.text = "점심"
-                    binding.picture = viewModel.mealPicture.value?.lunch?:""
+                    binding.picture = viewModel.mealPicture.value?.lunch ?: ""
                 }
                 2 -> {
                     binding.mealTimeTv.text = "저녁"
-                    binding.picture = viewModel.mealPicture.value?.dinner?:""
+                    binding.picture = viewModel.mealPicture.value?.dinner ?: ""
                 }
             }
             binding.vm = viewModel
             binding.executePendingBindings()
             if (meal != null) {
                 var mealList = ""
-                for(m in meal){
-                    mealList+=m+"\n"
+                for (m in meal) {
+                    mealList += m + "\n"
                 }
-                if(mealList.isBlank()){
+                if (mealList.isBlank()) {
                     binding.meal = "급식이 없습니다"
-                }else{
+                } else {
                     binding.meal = mealList
                 }
-            }else{
+            } else {
                 binding.meal = "급식이 없습니다"
+            }
+
+
+            binding.mealContainer.setOnClickListener {
+                val animator: ObjectAnimator = (AnimatorInflater.loadAnimator(it.context,R.animator.anim_flip_180) as ObjectAnimator).apply {
+                    target = binding.mealItem
+                    duration = 500
+                }
+                animator.start()
+                viewModel.showPicture()
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         val binding =
             ItemMealBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -62,7 +75,7 @@ class MealAdapter(private val viewModel: MealViewModel) :
 
     override fun getItemCount(): Int = 3
 
-    fun setItems(meals:MealResponse) {
+    fun setItems(meals: MealResponse) {
         this.meals = meals
         notifyDataSetChanged()
     }
