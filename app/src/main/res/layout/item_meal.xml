@@ -21,14 +21,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/meal_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/item_img"
+            android:id="@+id/meal_container"
             android:layout_width="300dp"
             android:layout_height="400dp"
-            android:onClick="@{()->vm.showPicture()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_img"
+            app:layout_constraintTop_toTopOf="@+id/meal_container"
             tools:text="아침" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -60,8 +60,8 @@
             android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintBottom_toTopOf="@+id/turning_img"
-            app:layout_constraintEnd_toEndOf="@+id/item_img"
-            app:layout_constraintStart_toStartOf="@+id/item_img"
+            app:layout_constraintEnd_toEndOf="@+id/meal_container"
+            app:layout_constraintStart_toStartOf="@+id/meal_container"
             app:layout_constraintTop_toBottomOf="@+id/meal_time_tv"
             tools:text="급식\n급식밥\n급식국\n급식김치" />
 
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:padding="5dp"
-            app:layout_constraintBottom_toBottomOf="@+id/item_img"
+            app:layout_constraintBottom_toBottomOf="@+id/meal_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_baseline_360_24" />
