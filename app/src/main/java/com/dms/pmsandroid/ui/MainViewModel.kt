@@ -8,8 +8,8 @@ import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class MainViewModel(
-        private val loginApiImpl: LoginApiImpl,
-        private val sharedPreferenceStorage: SharedPreferenceStorage
+    private val loginApiImpl: LoginApiImpl,
+    private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val tabSelectedItem = MutableLiveData(R.id.menu_calendar_it)
@@ -19,13 +19,15 @@ class MainViewModel(
     val doneToken = MutableLiveData(false)
 
     fun checkLogin() {
-        val email = sharedPreferenceStorage.getInfo("user_email")
-        val password = sharedPreferenceStorage.getInfo("user_password")
+        if (!doneToken.value!!) {
+            val email = sharedPreferenceStorage.getInfo("user_email")
+            val password = sharedPreferenceStorage.getInfo("user_password")
 
-        if (email.isNotBlank() && password.isNotBlank()) {
-            doLogin(email, password)
-        } else {
-            needToLogin.value = true
+            if (email.isNotBlank() || password.isNotBlank()) {
+                doLogin(email, password)
+            } else {
+                needToLogin.value = true
+            }
         }
     }
 
@@ -34,7 +36,7 @@ class MainViewModel(
         loginApiImpl.loginApi(request).subscribe { response ->
             when (response.code()) {
                 200 -> {
-                    sharedPreferenceStorage.saveInfo(response.body()!!.accessToken,"access_token")
+                    sharedPreferenceStorage.saveInfo(response.body()!!.accessToken, "access_token")
                 }
                 else -> {
                     needToLogin.value = true
