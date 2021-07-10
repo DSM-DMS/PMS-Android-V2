@@ -13,40 +13,25 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    private val vm : LoginViewModel by viewModel()
+    override val vm: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
         startLogin()
-        observeRegister()
-        observeDoneLogin()
+
+        observeEvent()
     }
 
-    private fun startLogin(){
-        supportFragmentManager.beginTransaction().add(R.id.login_container,LoginFragment()).commit()
+    private fun startLogin() {
+        supportFragmentManager.beginTransaction().add(R.id.login_container, LoginFragment())
+            .commit()
     }
 
-    private fun observeRegister(){
-        vm.needRegister.observe(this, Observer {
-            if(it){
-                startRegister()
-            }
-        })
-    }
-
-    private fun observeDoneLogin(){
-        vm.doneLogin.observe(this, Observer {
-            if(it){
-                finish()
-            }
-        })
-    }
-
-    private fun startRegister(){
+    private fun startRegister() {
         val fragmentManager = supportFragmentManager.beginTransaction()
-        fragmentManager.setCustomAnimations(R.anim.silde_in_up,R.anim.slide_out_down)
-        fragmentManager.replace(R.id.login_container,RegisterFragment()).commit()
+        fragmentManager.setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
+        fragmentManager.replace(R.id.login_container, RegisterFragment()).commit()
         vm.needRegister.value = false
     }
 
@@ -61,6 +46,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         lastTimeBackPressed = System.currentTimeMillis()
         Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
 
+    }
+
+    override fun observeEvent() {
+        vm.run {
+            needRegister.observe(this@LoginActivity, {
+                if (it) {
+                    startRegister()
+                }
+            })
+            doneLogin.observe(this@LoginActivity, {
+                if (it) {
+                    finish()
+                }
+            })
+        }
     }
 
 

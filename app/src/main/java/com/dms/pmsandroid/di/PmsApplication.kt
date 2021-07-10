@@ -18,7 +18,8 @@ class PmsApplication : Application() {
                     calendarModule,
                     developerModule,
                     introduceModule,
-                    mealModule
+                    mealModule,
+                    myPageModule
                 )
             )
         }

@@ -17,6 +17,7 @@ class LoginViewModel(
 
     val userPassword = MutableLiveData<String>()
     val passwordDone = MutableLiveData<Boolean>(false)
+    // SingleLiveEvent & Event Wrapper
 
     val needRegister = MutableLiveData<Boolean>(false)
 
