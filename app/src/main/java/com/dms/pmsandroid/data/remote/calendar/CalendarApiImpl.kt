@@ -11,7 +11,7 @@ import retrofit2.Response
 class CalendarApiImpl {
     private fun provideCalendarApi(): CalendarApi = ApiProvider.jiWooRetrofitBuilder.create(CalendarApi::class.java)
 
-    fun scheduleApi(request: String): @NonNull Single<Response<List<JsonObject>>> = provideCalendarApi().schedules(request)
+    fun scheduleApi(request: String): @NonNull Single<Response<JsonObject>> = provideCalendarApi().schedules(request)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 }

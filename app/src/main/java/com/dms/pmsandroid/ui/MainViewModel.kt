@@ -1,7 +1,5 @@
 package com.dms.pmsandroid.ui
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.R
@@ -14,11 +12,11 @@ class MainViewModel(
         private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
-    val tabSelectedItem = MutableLiveData<Int>(R.id.menu_calendar_it)
+    val tabSelectedItem = MutableLiveData(R.id.menu_calendar_it)
 
     val needToLogin = MutableLiveData<Boolean>()
 
-    val doneToken = MutableLiveData<Boolean>(false)
+    val doneToken = MutableLiveData(false)
 
     fun checkLogin() {
         val email = sharedPreferenceStorage.getInfo("user_email")

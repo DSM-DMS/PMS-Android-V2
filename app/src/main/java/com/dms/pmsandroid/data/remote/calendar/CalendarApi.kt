@@ -8,6 +8,6 @@ import retrofit2.http.Header
 
 interface CalendarApi {
     @GET("/calendar")
-    fun schedules(@Header("Authorization") accessToken: String): Single<Response<List<JsonObject>>>
+    fun schedules(@Header("Authorization") accessToken: String): Single<Response<JsonObject>>
 
 }
