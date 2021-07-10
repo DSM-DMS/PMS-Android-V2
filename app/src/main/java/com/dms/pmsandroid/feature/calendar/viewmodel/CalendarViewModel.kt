@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.feature.calendar.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,9 +21,7 @@ class CalendarViewModel(
             if (response.isSuccessful) {
                 parseEvents(response.body()!!)
             }
-            Log.e("date", response.raw().toString())
         }, {
-            Log.e("date", it.toString())
         })
     }
 
@@ -33,15 +30,14 @@ class CalendarViewModel(
             val monthEvents = body.getAsJsonObject("$month")
             val dates = monthEvents.keySet()
             for (date in dates) {
-                var eventName = "🟢  "
+                var eventName = "🔵  "
                 val events = monthEvents.getAsJsonArray(date)
                 eventName += events[0]
                 if (events.size() > 1) {
                     for (pos in 1 until events.size() - 1) {
-                        eventName += "\n🟢  ${events[pos]}"
+                        eventName += "\n🔵  ${events[pos]}"
                     }
                 }
-
                 _events.value!![date] = eventName
             }
 
