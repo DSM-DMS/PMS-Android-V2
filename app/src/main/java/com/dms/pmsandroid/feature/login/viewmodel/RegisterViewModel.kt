@@ -9,27 +9,31 @@ import com.dms.pmsandroid.feature.login.model.RegisterRequest
 class RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
 
     val userName = MutableLiveData<String>()
-    val nEmptyName = MutableLiveData<Boolean>(false)
+    val nEmptyName = MutableLiveData(false)
 
     val userEmail = MutableLiveData<String>()
-    val nEmptyEmail = MutableLiveData<Boolean>(false)
+    val nEmptyEmail = MutableLiveData(false)
 
     val userPassword = MutableLiveData<String>()
-    val nEmptyPassword = MutableLiveData<Boolean>(false)
+    val nEmptyPassword = MutableLiveData(false)
 
     val userPasswordCheck = MutableLiveData<String>()
-    val samePassword = MutableLiveData<Boolean>(false)
+    val samePassword = MutableLiveData(false)
 
     val doneInput = MutableLiveData<Boolean>()
 
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
-    private val _finishRegister = MutableLiveData<Boolean>(false)
+    private val _finishRegister = MutableLiveData(false)
     val finishRegister: LiveData<Boolean> get() = _finishRegister
+
+    private val _inProgress = MutableLiveData(false)
+    val inProgress: LiveData<Boolean> get() = _inProgress
 
     fun doRegister() {
         if (doneInput.value == true) {
+            _inProgress.value = true
             val request = RegisterRequest(userEmail.value!!, userName.value!!, userPassword.value!!)
             apiImpl.registerApi(request).subscribe({ subscribe ->
                 when (subscribe.code()) {
@@ -38,14 +42,16 @@ class RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
                         _finishRegister.value = true
                     }
                     400 -> {
-                        _toastMessage.value = "입력하신 정보가 잘못되었습니다"
+                        _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"
                     }
                     409 -> {
                         _toastMessage.value = "해당 정보로 회원가입된 계정이 있습니다"
                     }
                 }
+                _inProgress.value = false
             },{
                 _toastMessage.value = "회원가입에 실패하였습니다"
+                _inProgress.value = false
             })
 
         } else {
