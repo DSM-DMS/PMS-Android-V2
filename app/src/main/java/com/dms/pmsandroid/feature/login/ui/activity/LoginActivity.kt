@@ -9,11 +9,14 @@ import com.dms.pmsandroid.databinding.ActivityLoginBinding
 import com.dms.pmsandroid.feature.login.ui.fragment.LoginFragment
 import com.dms.pmsandroid.feature.login.ui.fragment.RegisterFragment
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
+import com.dms.pmsandroid.ui.MainViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     override val vm: LoginViewModel by viewModel()
+    private val mainVm:MainViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +60,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             })
             doneLogin.observe(this@LoginActivity, {
                 if (it) {
+                    mainVm.doneToken.value = true
                     finish()
                 }
             })

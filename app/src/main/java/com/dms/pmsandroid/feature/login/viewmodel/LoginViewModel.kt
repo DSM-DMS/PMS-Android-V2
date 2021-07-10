@@ -32,6 +32,8 @@ class LoginViewModel(
     private val _inProgress = MutableLiveData(false)
     val inProgress: LiveData<Boolean> get() = _inProgress
 
+    val autoLogin = MutableLiveData(false)
+
     fun login(){
         if(doneInput.value!!){
             _inProgress.value = true
@@ -39,8 +41,10 @@ class LoginViewModel(
             apiImpl.loginApi(request).subscribe({
                 when(it.code()){
                     200->{
-                        sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
-                        sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
+                        if(autoLogin.value!!){
+                            sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
+                            sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
+                        }
                         sharedPreferenceStorage.saveInfo(it.body()!!.accessToken,"access_token")
                         _doneLogin.value = true
                     }
