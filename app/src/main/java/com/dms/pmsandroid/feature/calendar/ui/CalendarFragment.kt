@@ -2,7 +2,6 @@ package com.dms.pmsandroid.feature.calendar.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
@@ -16,7 +15,8 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar),OnDateSelectedListener {
+class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar),
+    OnDateSelectedListener {
 
     override val vm: CalendarViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
@@ -24,7 +24,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setCalendarView()
     }
 
@@ -37,10 +36,12 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun setCalendarView(){
+    private fun setCalendarView() {
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
-        calendarView.setDateSelected(currentDate,true)
+        val formatDate = formatDate(currentDate)
+        setEventTv(formatDate)
+        calendarView.setDateSelected(currentDate, true)
         calendarView.setOnDateChangedListener(this)
     }
 
@@ -49,6 +50,32 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         date: CalendarDay,
         selected: Boolean
     ) {
+        val selectedDate = formatDate(date)
+        setEventTv(selectedDate)
+    }
+
+    private fun formatDate(date: CalendarDay): String {
+        val month = if (date.month < 10) {
+            "0${date.month}"
+        } else {
+            date.month
+        }
+
+        val day = if (date.day < 10) {
+            "0${date.day}"
+        } else {
+            date.day
+        }
+        return "${date.year}-$month-$day"
+    }
+
+
+    private fun setEventTv(date: String) {
+        val event = vm.events.value?.get(date) ?: "일정이 없습니다"
+        with(binding){
+            calendarEventTv.text = event
+            calendarDateTv.text = date
+        }
     }
 
 }
