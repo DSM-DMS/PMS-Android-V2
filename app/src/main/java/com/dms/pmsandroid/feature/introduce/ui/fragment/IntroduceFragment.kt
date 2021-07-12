@@ -1,5 +1,7 @@
 package com.dms.pmsandroid.feature.introduce.ui.fragment
 
+import android.os.Bundle
+import android.view.View
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentIntroduceBinding
@@ -11,26 +13,21 @@ class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragme
 
     override val vm: MainIntroduceViewModel by viewModel()
 
-    override fun observeEvent() {
-        vm.run {
-            devintroduceClick.observe(viewLifecycleOwner,{
-                if(it){
-                    (activity as MainActivity).startDeveloper()
-                }
-                devintroduceClick.value = false
-            })
-            clubIntroduceClick.observe(viewLifecycleOwner,{
-                if(it){
-                    (activity as MainActivity).startClub()
-                }
-                clubIntroduceClick.value = false
-            })
-            workIntroduceClick.observe(viewLifecycleOwner,{
-                if(it){
-                    (activity as MainActivity).startCompany()
-                }
-                workIntroduceClick.value = false
-            })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.introWorkBtn.setOnClickListener {
+            (activity as MainActivity).startCompany()
         }
+        binding.introDevBtn.setOnClickListener {
+            (activity as MainActivity).startDeveloper()
+        }
+        binding.introClubBtn.setOnClickListener {
+            (activity as MainActivity).startClub()
+        }
+
+    }
+
+    override fun observeEvent() {
+
     }
 }
