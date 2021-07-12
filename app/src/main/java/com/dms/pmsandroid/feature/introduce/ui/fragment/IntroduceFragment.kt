@@ -1,26 +1,18 @@
 package com.dms.pmsandroid.feature.introduce.ui.fragment
 
-import android.os.Bundle
-import android.view.View
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentIntroduceBinding
 import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel
 import com.dms.pmsandroid.ui.MainActivity
-import org.koin.android.ext.android.bind
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragment_introduce) {
 
-    override val vm: MainIntroduceViewModel by inject()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        observeEvent()
-    }
+    override val vm: MainIntroduceViewModel by viewModel()
 
     override fun observeEvent() {
-        with(vm) {
+        vm.run {
             devintroduceClick.observe(viewLifecycleOwner,{
                 if(it){
                     (activity as MainActivity).startDeveloper()

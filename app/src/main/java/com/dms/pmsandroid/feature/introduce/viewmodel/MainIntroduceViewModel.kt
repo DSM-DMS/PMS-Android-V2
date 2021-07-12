@@ -3,11 +3,11 @@ package com.dms.pmsandroid.feature.introduce.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainIntroduceViewModel() : ViewModel() {
+class MainIntroduceViewModel : ViewModel() {
 
-    val devintroduceClick = MutableLiveData<Boolean>(false)
-    val clubIntroduceClick = MutableLiveData<Boolean>(false)
-    val workIntroduceClick = MutableLiveData<Boolean>(false)
+    val devintroduceClick = MutableLiveData(false)
+    val clubIntroduceClick = MutableLiveData(false)
+    val workIntroduceClick = MutableLiveData(false)
 
     fun clubIntroClicked(){
         clubIntroduceClick.value = true
