@@ -3,18 +3,17 @@ package com.dms.pmsandroid.di.module
 import com.dms.pmsandroid.data.remote.Introduce.IntroduceClubApiImpl
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceCompanyViewModel
-import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
-import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
+import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val introduceModule = module {
-    single { MainIntroViewModel() }
+    viewModel{ MainIntroduceViewModel() }
 
     single { IntroduceClubApiImpl() }
 
-    viewModel { IntroduceClubViewModel(get()) }
+    viewModel { IntroduceClubViewModel(get(),get()) }
 
-    viewModel { IntroduceCompanyViewModel() }
+    viewModel { IntroduceCompanyViewModel(get()) }
 
 }

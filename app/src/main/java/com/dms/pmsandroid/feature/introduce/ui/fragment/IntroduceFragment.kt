@@ -5,31 +5,29 @@ import android.view.View
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentIntroduceBinding
-import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
+import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel
 import com.dms.pmsandroid.ui.MainActivity
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragment_introduce) {
 
-    override val vm : MainIntroViewModel by inject()
+    override val vm: MainIntroduceViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setClickEvent()
-    }
-
-    private fun setClickEvent(){
+        binding.introWorkBtn.setOnClickListener {
+            (activity as MainActivity).startCompany()
+        }
         binding.introDevBtn.setOnClickListener {
             (activity as MainActivity).startDeveloper()
         }
         binding.introClubBtn.setOnClickListener {
             (activity as MainActivity).startClub()
         }
-        binding.introWorkBtn.setOnClickListener {
-            (activity as MainActivity).startCompany()
-        }
+
     }
 
     override fun observeEvent() {
+
     }
 }
