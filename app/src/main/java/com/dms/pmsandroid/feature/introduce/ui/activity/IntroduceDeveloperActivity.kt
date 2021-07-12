@@ -17,7 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBinding>(R.layout.activity_introduce_developer) {
 
-
     override val vm: IntroduceDeveloperViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +27,11 @@ class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBindin
         val developers = arrayListOf(
                 DevelopModel("김재원", "Android"),
                 DevelopModel("이은별", "Android"),
-                DevelopModel("정고은", "iOS"),
-                DevelopModel("강은빈", "FrontEnd"),
-                DevelopModel("이진우", "FrontEnd"),
-                DevelopModel("김정빈", "Server"),
-                DevelopModel("정지우", "Server")
+                DevelopModel("정고은", "iOS/PM"),
+                DevelopModel("강은빈", "Web"),
+                DevelopModel("이진우", "Web"),
+                DevelopModel("김정빈", "Back-End"),
+                DevelopModel("정지우", "Back-End")
         )
         intro_developer_rc.adapter = DeveloperAdapter(developers)
         intro_developer_rc.adapter!!.notifyDataSetChanged()
@@ -41,7 +40,7 @@ class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBindin
 
     override fun observeEvent() {
         binding.backImg.setOnClickListener(){
-            onBackPressed()
+            finish()
         }
     }
 
