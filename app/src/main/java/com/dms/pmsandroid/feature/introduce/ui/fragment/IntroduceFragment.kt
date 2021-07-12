@@ -5,31 +5,40 @@ import android.view.View
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentIntroduceBinding
-import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroViewModel
+import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel
 import com.dms.pmsandroid.ui.MainActivity
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 
 class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragment_introduce) {
 
-    override val vm : MainIntroViewModel by inject()
+    override val vm: MainIntroduceViewModel by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setClickEvent()
-    }
-
-    private fun setClickEvent(){
-        binding.introDevBtn.setOnClickListener {
-            (activity as MainActivity).startDeveloper()
-        }
-        binding.introClubBtn.setOnClickListener {
-            (activity as MainActivity).startClub()
-        }
-        binding.introWorkBtn.setOnClickListener {
-            (activity as MainActivity).startCompany()
-        }
+        observeEvent()
     }
 
     override fun observeEvent() {
+        with(vm) {
+            devintroduceClick.observe(viewLifecycleOwner,{
+                if(it){
+                    (activity as MainActivity).startDeveloper()
+                }
+                devintroduceClick.value = false
+            })
+            clubIntroduceClick.observe(viewLifecycleOwner,{
+                if(it){
+                    (activity as MainActivity).startClub()
+                }
+                clubIntroduceClick.value = false
+            })
+            workIntroduceClick.observe(viewLifecycleOwner,{
+                if(it){
+                    (activity as MainActivity).startCompany()
+                }
+                workIntroduceClick.value = false
+            })
+        }
     }
 }

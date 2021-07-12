@@ -4,10 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="picture"
+            type="String" />
+
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="170dp"
