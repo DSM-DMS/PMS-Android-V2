@@ -9,7 +9,7 @@ import com.dms.pmsandroid.feature.introduce.adapter.ClubAdapter
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IntroClubActivity :
+class IntroduceClubActivity :
     BaseActivity<ActivityIntroduceClubBinding>(R.layout.activity_introduce_club) {
 
     override val vm: IntroduceClubViewModel by viewModel()
@@ -27,6 +27,9 @@ class IntroClubActivity :
         vm.clubs.observe(this, {
             clubAdapter.setItem(it)
         })
+        binding.backImg.setOnClickListener() {
+            finish()
+        }
     }
 
 
