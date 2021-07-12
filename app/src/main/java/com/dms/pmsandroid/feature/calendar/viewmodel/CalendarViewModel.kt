@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.feature.calendar.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,7 +38,6 @@ class CalendarViewModel(
                         eventName += "\n\n🔵  ${events[pos]}"
                     }
                 }
-                Log.d("date",eventName)
                 _events.value!![date] = eventName
             }
 

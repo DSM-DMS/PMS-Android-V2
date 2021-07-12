@@ -72,7 +72,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     private fun setEventTv(date: String) {
         val event = vm.events.value?.get(date) ?: "일정이 없습니다"
-        binding.calendarEventTv.text = event
+        with(binding){
+            calendarEventTv.text = event
+            calendarDateTv.text = date
+        }
     }
 
 }

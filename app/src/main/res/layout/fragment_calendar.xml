@@ -39,16 +39,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calendarView">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                tools:text="일정"
-                android:background="@color/gray_100"
-                android:id="@+id/calendar_event_tv"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:padding="15dp"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/gray_100">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/calendar_event_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    tools:text="일정" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/calendar_date_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp"
+                    android:gravity="right"
+                    android:layout_gravity="center_vertical"
+                    tools:ignore="RtlHardcoded" />
+
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
