@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.calendar.ui
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -40,7 +41,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
         val formatDate = formatDate(currentDate)
-        setEventTv(formatDate)
+        setEventTv(formatDate,currentDate)
         calendarView.setDateSelected(currentDate, true)
         calendarView.setOnDateChangedListener(this)
     }
@@ -51,7 +52,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         selected: Boolean
     ) {
         val selectedDate = formatDate(date)
-        setEventTv(selectedDate)
+        setEventTv(selectedDate,date)
     }
 
     private fun formatDate(date: CalendarDay): String {
@@ -70,11 +71,12 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
 
-    private fun setEventTv(date: String) {
+    @SuppressLint("SetTextI18n")
+    private fun setEventTv(date: String, calendarDay: CalendarDay) {
         val event = vm.events.value?.get(date) ?: "일정이 없습니다"
         with(binding){
             calendarEventTv.text = event
-            calendarDateTv.text = date
+            calendarDateTv.text = "${calendarDay.month}월${calendarDay.day}일"
         }
     }
 
