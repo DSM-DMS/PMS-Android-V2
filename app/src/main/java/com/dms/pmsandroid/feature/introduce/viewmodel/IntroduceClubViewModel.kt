@@ -11,14 +11,10 @@ class IntroduceClubViewModel(
     private val introduceClubApiImpl: IntroduceClubApiImpl,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
-    val backClick = MutableLiveData<Boolean>(false)
 
     private val _clubs = MutableLiveData<List<ClubModel>>()
     val clubs: LiveData<List<ClubModel>> get() = _clubs
 
-    fun backClicked() {
-        backClick.value = true
-    }
 
     fun loadClubs() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")

@@ -10,7 +10,7 @@ import com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IntroduceFragment : BaseFragment<FragmentIntroduceBinding>(R.layout.fragment_introduce) {
+class IntroduceFragment : BaseFragment<FragmentIntroduceBinding >(R.layout.fragment_introduce) {
 
     override val vm: MainIntroduceViewModel by viewModel()
 
