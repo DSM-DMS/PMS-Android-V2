@@ -13,13 +13,17 @@ class IntroduceClubActivity :
     BaseActivity<ActivityIntroduceClubBinding>(R.layout.activity_introduce_club) {
 
     override val vm: IntroduceClubViewModel by viewModel()
-    private val clubAdapter = ClubAdapter(vm)
+    private val clubAdapter by lazy { ClubAdapter(vm) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm.loadClubs()
         val gridLayoutManager = GridLayoutManager(this, 2)
-        binding.IntroClubRc.layoutManager = gridLayoutManager
+        binding.introClubRc.layoutManager = gridLayoutManager
+
+        binding.backImg.setOnClickListener() {
+            finish()
+        }
 
     }
 
@@ -27,10 +31,5 @@ class IntroduceClubActivity :
         vm.clubs.observe(this, {
             clubAdapter.setItem(it)
         })
-        binding.backImg.setOnClickListener() {
-            finish()
-        }
     }
-
-
 }

@@ -7,9 +7,7 @@ import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceDeveloperBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
 import com.dms.pmsandroid.feature.introduce.model.DevelopModel
-import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceCompanyViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
-import com.dms.pmsandroid.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBinding>(R.layout.activity_introduce_developer) {

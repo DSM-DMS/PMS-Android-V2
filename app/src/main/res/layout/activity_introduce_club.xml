@@ -39,7 +39,7 @@
         app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Intro_club_rc"
+        android:id="@+id/intro_club_rc"
         tools:listitem="@layout/item_club"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:layout_width="405dp"
@@ -67,7 +67,7 @@
         android:layout_height="6dp"
         android:layout_marginBottom="28dp"
         android:background="#F6F6F6"
-        app:layout_constraintBottom_toTopOf="@+id/Intro_club_rc"
+        app:layout_constraintBottom_toTopOf="@+id/intro_club_rc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />

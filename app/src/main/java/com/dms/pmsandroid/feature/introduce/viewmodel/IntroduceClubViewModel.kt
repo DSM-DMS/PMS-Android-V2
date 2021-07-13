@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.introduce.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,11 +22,11 @@ class IntroduceClubViewModel(
         introduceClubApiImpl.clubApi(accessToken).subscribe({
              if(it.isSuccessful){
                  _clubs.value = it.body()
+                 Log.e("qer","qwe")
              }
+            Log.e("qer","q33")
         }, {
-
+            Log.e("qer",it.toString())
         })
     }
-
-
 }

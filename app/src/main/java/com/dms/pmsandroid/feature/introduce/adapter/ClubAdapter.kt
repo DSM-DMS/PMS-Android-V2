@@ -7,6 +7,7 @@ import com.dms.pmsandroid.databinding.ItemClubBinding
 import com.dms.pmsandroid.feature.introduce.model.ClubModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 
+
 class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
     RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
     private var clubList = ArrayList<ClubModel>()
@@ -21,7 +22,9 @@ class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
         }
     }
 
-    override fun getItemCount(): Int = clubList.size
+    override fun getItemCount(): Int {
+        return clubList.size
+    }
 
     fun setItem(clubs: List<ClubModel>) {
         this.clubList = clubs as ArrayList<ClubModel>
