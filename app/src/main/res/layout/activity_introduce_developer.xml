@@ -21,7 +21,6 @@
             android:background="@color/title_bar"
             android:gravity="center"
             android:text="@string/intro_developer"
-            android:background="@color/title_bar"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
