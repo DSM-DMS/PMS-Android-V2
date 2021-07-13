@@ -22,4 +22,10 @@
     <string name="children_club">자녀의 동아리</string>
     <string name="intro_main_dms">대마고의 자랑거리를 소개합니다</string>
     <string name="save_login_info">로그인정보 저장</string>
+    <string name="school_notify">학교소식</string>
+    <string name="pms">PMS</string>
+    <string name="notify_subtitle">는 학교생활의 전반적인 정보를 제공합니다</string>
+    <string name="photo_album">포토앨법</string>
+    <string name="notice">공지사항</string>
+    <string name="home_notice">가정통신문</string>
 </resources>
