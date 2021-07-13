@@ -1,4 +1,6 @@
-package com.dms.pmsandroid.ui
+package com.dms.pmsandroid.feature.notify.viewmodel
 
-class NotifyViewModel {
+import androidx.lifecycle.ViewModel
+
+class NotifyViewModel:ViewModel() {
 }
