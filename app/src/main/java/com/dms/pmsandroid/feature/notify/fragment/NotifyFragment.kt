@@ -10,6 +10,6 @@ class NotifyFragment : BaseFragment<FragmentNotifyBinding>(R.layout.fragment_not
     override val vm : NotifyViewModel by viewModel()
 
     override fun observeEvent() {
-        
+
     }
 }
