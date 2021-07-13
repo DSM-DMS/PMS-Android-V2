@@ -29,7 +29,7 @@ class IntroduceClubActivity :
 
     override fun observeEvent() {
         vm.clubs.observe(this, {
-            clubAdapter.setItem(it)
+            clubAdapter.setItem(it.clubs)
         })
     }
 }
