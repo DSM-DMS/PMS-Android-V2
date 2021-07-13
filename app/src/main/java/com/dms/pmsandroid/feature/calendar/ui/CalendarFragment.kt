@@ -35,6 +35,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 vm.loadSchedules()
             }
         })
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -70,7 +71,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         }
         return "${date.year}-$month-$day"
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun setEventTv(date: String, calendarDay: CalendarDay) {
