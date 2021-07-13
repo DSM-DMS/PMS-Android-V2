@@ -32,10 +32,10 @@ class CalendarViewModel(
             for (date in dates) {
                 var eventName = "🔵  "
                 val events = monthEvents.getAsJsonArray(date)
-                eventName += events[0]
+                eventName += events[0].toString().substring(1,events[0].toString().length-1)
                 if (events.size() > 1) {
                     for (pos in 1 until events.size()) {
-                        eventName += "\n\n🔵  ${events[pos]}"
+                        eventName += "\n\n🔵  ${events[pos].toString().substring(1,events[0].toString().length-2)}"
                     }
                 }
                 _events.value!![date] = eventName
