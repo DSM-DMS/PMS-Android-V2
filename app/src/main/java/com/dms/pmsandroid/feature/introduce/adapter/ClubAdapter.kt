@@ -12,6 +12,7 @@ class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
     RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
     private var clubList = ArrayList<ClubModel>()
 
+
     inner class ClubViewHolder(private val binding: ItemClubBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {

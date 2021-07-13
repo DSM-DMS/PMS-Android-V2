@@ -23,6 +23,7 @@ class IntroduceClubViewModel(
         introduceClubApiImpl.clubApi(accessToken).subscribe({
              if(it.isSuccessful){
                  _clubs.value = it.body()
+                 Log.e("오류","오류")
              }
         }, {
         })

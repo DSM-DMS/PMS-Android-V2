@@ -20,7 +20,7 @@ class IntroduceClubActivity :
         vm.loadClubs()
         val gridLayoutManager = GridLayoutManager(this, 2)
         binding.introClubRc.layoutManager = gridLayoutManager
-
+        binding.introClubRc.adapter = clubAdapter
         binding.backImg.setOnClickListener() {
             finish()
         }
