@@ -27,26 +27,7 @@
             app:tabIndicatorColor="@color/blue"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/blue"
-            app:tabTextColor="@color/gray">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/photo_album"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/web"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notice"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home_notice"/>
-        </com.google.android.material.tabs.TabLayout>
+            app:tabTextColor="@color/gray"/>
 
         <TextView
             android:id="@+id/notify_sub_title_tv"

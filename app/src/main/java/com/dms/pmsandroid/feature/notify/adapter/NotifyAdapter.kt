@@ -8,7 +8,7 @@ import com.dms.pmsandroid.feature.notify.fragment.InNoticeFragment
 import com.dms.pmsandroid.feature.notify.fragment.PhotoFragment
 
 class NotifyAdapter(fragmentActivity:FragmentActivity):FragmentStateAdapter(fragmentActivity) {
-    override fun getItemCount(): Int =4
+    override fun getItemCount(): Int =3
 
     override fun createFragment(position: Int): Fragment {
         return when(position){

@@ -14,6 +14,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class NotifyFragment : BaseFragment<FragmentNotifyBinding>(R.layout.fragment_notify) {
     override val vm: NotifyViewModel by viewModel()
 
+    private val titleList = arrayListOf("포토앨범","공지사항","가정통신문")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewpager()
@@ -21,20 +23,10 @@ class NotifyFragment : BaseFragment<FragmentNotifyBinding>(R.layout.fragment_not
 
     private fun initViewpager() {
         binding.notifyVp.adapter = NotifyAdapter(requireActivity())
-
-        binding.notifyMainTl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                binding.notifyVp.currentItem = tab!!.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                binding.notifyVp.currentItem = tab!!.position
-            }
-
-        })
+        TabLayoutMediator(binding.notifyMainTl, binding.notifyVp) { tab, position ->
+            binding.notifyVp.currentItem = binding.notifyMainTl.selectedTabPosition
+            tab.text = titleList[position]
+        }.attach()
     }
 
     override fun observeEvent() {
