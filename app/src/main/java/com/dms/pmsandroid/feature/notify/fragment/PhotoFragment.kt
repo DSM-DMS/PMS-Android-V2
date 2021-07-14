@@ -10,6 +10,6 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
     override val vm: NotifyViewModel by sharedViewModel()
 
     override fun observeEvent() {
-        
+
     }
 }
