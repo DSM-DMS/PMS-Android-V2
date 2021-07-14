@@ -11,4 +11,6 @@
     <color name="red">#D37C7C</color>
     <color name="green">#56AD77</color>
     <color name="gray">#999999</color>
+    <color name="gray_100">#F7F7F7</color>
+    <color name="title_bar">#F6F6F6</color>
 </resources>

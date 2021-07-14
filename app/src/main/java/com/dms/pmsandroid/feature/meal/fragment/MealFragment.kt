@@ -11,6 +11,7 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
+import com.dms.pmsandroid.ui.MainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
@@ -21,6 +22,7 @@ import java.util.*
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     override val vm: MealViewModel by inject()
+    private val mainVm :MainViewModel by inject()
 
     private val adapter by lazy {
         MealAdapter(vm)
@@ -44,8 +46,10 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         val currentTime = LocalDate.now().minus(Period.ofDays(1))
         val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
         val weekDay = currentTime.dayOfWeek
-        vm.date.value = dateFormat
-        vm.weekDate.value = weekDay.value
+        vm.run {
+            date.value = dateFormat
+            weekDate.value = weekDay.value
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -86,15 +90,23 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         }.attach()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
-        vm.showPicture.observe(viewLifecycleOwner, {
-            updatePageView()
-        })
-        vm.mealPicture.observe(viewLifecycleOwner, {
-            updatePageView()
-        })
-        vm.meals.observe(viewLifecycleOwner, {
-            adapter.setItems(it)
+        vm.run {
+            showPicture.observe(viewLifecycleOwner, {
+                updatePageView()
+            })
+            mealPicture.observe(viewLifecycleOwner, {
+                updatePageView()
+            })
+            meals.observe(viewLifecycleOwner, {
+                adapter.setItems(it)
+            })
+        }
+        mainVm.doneToken.observe(viewLifecycleOwner,{
+            if(it){
+                vm.getMeal()
+            }
         })
     }
 

@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val clubModule = module{
     single { IntroduceClubApiImpl() }
 
-    viewModel { IntroduceClubViewModel(get()) }
+    viewModel { IntroduceClubViewModel(get(),get()) }
 
 }

@@ -18,7 +18,7 @@
         <activity android:name=".feature.introduce.ui.activity.CompanyDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.ClubDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity" />
-        <activity android:name=".feature.introduce.ui.activity.IntroClubActivity" />
+        <activity android:name=".feature.introduce.ui.activity.IntroduceClubActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity" />
         <activity android:name=".feature.login.ui.activity.LoginActivity" />
         <activity android:name=".ui.MainActivity">

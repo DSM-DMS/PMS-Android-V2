@@ -3,7 +3,7 @@
     <string name="login_title">Parents Management Service</string>
     <string name="login">로그인</string>
     <string name="signup">회원가입</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="loading">로딩중</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="please_email">이메일을 입력해주세요</string>
     <string name="please_password">비밀번호를 입력해주세요</string>
@@ -21,4 +21,5 @@
     <string name="intro_club">동아리 소개</string>
     <string name="children_club">자녀의 동아리</string>
     <string name="intro_main_dms">대마고의 자랑거리를 소개합니다</string>
+    <string name="save_login_info">로그인정보 저장</string>
 </resources>
