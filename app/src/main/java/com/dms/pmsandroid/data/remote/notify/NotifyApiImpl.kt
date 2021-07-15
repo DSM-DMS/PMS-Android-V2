@@ -1,6 +1,7 @@
 package com.dms.pmsandroid.data.remote.notify
 
 import com.dms.pmsandroid.data.remote.ApiProvider
+import com.dms.pmsandroid.feature.notify.model.GalleryDetailResponse
 import com.dms.pmsandroid.feature.notify.model.GalleryListModel
 import com.dms.pmsandroid.feature.notify.model.NoticeListModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -32,10 +33,16 @@ class NotifyApiImpl {
             .subscribeOn(Schedulers.io())
 
     fun getGalleryList(
-        page:Int,
-        size:Int
-    ):@NonNull Single<Response<GalleryListModel>> =
-        provideNotifyApi().getGallery(page,size)
+        page: Int,
+        size: Int
+    ): @NonNull Single<Response<GalleryListModel>> =
+        provideNotifyApi().getGallery(page, size)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
+
+    fun getGalleryDetail(
+        id: Int
+    ): @NonNull Single<Response<GalleryDetailResponse>> = provideNotifyApi().getGalleryDetail(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
 }
