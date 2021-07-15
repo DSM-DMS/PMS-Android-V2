@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.GalleryListContent
-import com.dms.pmsandroid.feature.notify.model.GalleryListModel
 
 class NotifyViewModel(private val notifyApiImpl: NotifyApiImpl) : ViewModel() {
     private val _galleryPage = MutableLiveData(1)
@@ -14,13 +13,16 @@ class NotifyViewModel(private val notifyApiImpl: NotifyApiImpl) : ViewModel() {
     private val _galleryList = MutableLiveData<List<GalleryListContent>>()
     val galleryList: LiveData<List<GalleryListContent>> get() = _galleryList
 
+    private val _clickedGalleryId = MutableLiveData<Int>()
+    val clickedGalleryId: LiveData<Int> get() = _clickedGalleryId
+
     var totalLength = 1
 
     fun getGalleryList() {
         notifyApiImpl.getGalleryList(galleryPage.value!! - 1, 6).subscribe({
             if (it.isSuccessful) {
                 _galleryList.value = it.body()!!.galleries
-                totalLength = (it.body()!!.totalLength / 6)+1
+                totalLength = (it.body()!!.totalLength / 6) + 1
             }
         }, {
         })
@@ -38,6 +40,9 @@ class NotifyViewModel(private val notifyApiImpl: NotifyApiImpl) : ViewModel() {
             _galleryPage.value = _galleryPage.value!! + 1
             getGalleryList()
         }
+    }
 
+    fun onGalleryClicked(id: Int) {
+        _clickedGalleryId.value = id
     }
 }

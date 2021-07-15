@@ -16,6 +16,7 @@ class GalleryAdapter:RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
                 date = galleryList[position].uploadDate
                 title = galleryList[position].title
                 photo = galleryList[position].thumbnail
+                id = galleryList[position].id
             }
         }
     }
