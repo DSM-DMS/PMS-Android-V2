@@ -38,5 +38,8 @@ class GalleryDetailActivity :
             val attach = it.attach
             detailAdapter.setGalleryDetail(attach,title, body)
         })
+        vm.close.observe(this,{
+            finish()
+        })
     }
 }
