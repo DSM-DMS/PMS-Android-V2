@@ -3,9 +3,9 @@ package com.dms.pmsandroid.feature.notify.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dms.pmsandroid.feature.notify.fragment.HomeNoticeFragment
-import com.dms.pmsandroid.feature.notify.fragment.InNoticeFragment
-import com.dms.pmsandroid.feature.notify.fragment.PhotoFragment
+import com.dms.pmsandroid.feature.notify.ui.fragment.HomeNoticeFragment
+import com.dms.pmsandroid.feature.notify.ui.fragment.InNoticeFragment
+import com.dms.pmsandroid.feature.notify.ui.fragment.PhotoFragment
 
 class NotifyAdapter(fragmentActivity:FragmentActivity):FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int =3

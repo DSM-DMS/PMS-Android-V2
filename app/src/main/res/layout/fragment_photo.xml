@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.notify.fragment.PhotoFragment">
+        tools:context=".feature.notify.ui.fragment.PhotoFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photo_rv"

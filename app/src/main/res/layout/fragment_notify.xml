@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.notify.fragment.NotifyFragment">
+        tools:context=".feature.notify.ui.fragment.NotifyFragment">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/notify_main_tl"

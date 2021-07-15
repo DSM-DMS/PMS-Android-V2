@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.notify.fragment
+package com.dms.pmsandroid.feature.notify.ui.fragment
 
 import android.os.Bundle
 import android.view.View

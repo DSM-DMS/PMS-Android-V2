@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.notify.activity
+package com.dms.pmsandroid.feature.notify.ui.activity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager

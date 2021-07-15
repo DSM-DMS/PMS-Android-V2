@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.notify.fragment
+package com.dms.pmsandroid.feature.notify.ui.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,6 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentNotifyBinding
 import com.dms.pmsandroid.feature.notify.adapter.NotifyAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
-import com.dms.pmsandroid.ui.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,6 +22,7 @@ class NotifyFragment : BaseFragment<FragmentNotifyBinding>(R.layout.fragment_not
 
     private fun initViewpager() {
         binding.notifyVp.adapter = NotifyAdapter(requireActivity())
+        binding.notifyVp.isUserInputEnabled = false
         TabLayoutMediator(binding.notifyMainTl, binding.notifyVp) { tab, position ->
             binding.notifyVp.currentItem = binding.notifyMainTl.selectedTabPosition
             tab.text = titleList[position]
