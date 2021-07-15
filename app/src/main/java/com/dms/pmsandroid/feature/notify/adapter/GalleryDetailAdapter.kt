@@ -11,6 +11,7 @@ class GalleryDetailAdapter(private val viewModel:GalleryDetailViewModel) : Recyc
     private var attach = ArrayList<String>()
     var title = ""
     var body = ""
+    var date = ""
 
     private val _HEADER = 0
     private val _BODY = 1

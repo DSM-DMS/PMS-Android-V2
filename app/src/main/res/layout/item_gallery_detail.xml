@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="5dp">
 
-        <ImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/gallery_detail_iv"
             app:glide_image_load="@{photo}"
             android:layout_width="match_parent"
