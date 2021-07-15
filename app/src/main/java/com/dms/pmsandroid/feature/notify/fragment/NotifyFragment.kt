@@ -7,7 +7,7 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentNotifyBinding
 import com.dms.pmsandroid.feature.notify.adapter.NotifyAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
-import com.google.android.material.tabs.TabLayout
+import com.dms.pmsandroid.ui.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

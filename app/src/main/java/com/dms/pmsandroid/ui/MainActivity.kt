@@ -14,6 +14,7 @@ import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivi
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
+import com.dms.pmsandroid.feature.notify.activity.GalleryDetailActivity
 import com.dms.pmsandroid.feature.notify.fragment.NotifyFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -55,6 +56,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     fun startClub() {
         val clubintent = Intent(this, IntroduceClubActivity::class.java)
         startActivity(clubintent)
+    }
+
+    fun startGalleryDetail(id:Int){
+        val galleryIntent = Intent(this,GalleryDetailActivity::class.java)
+        galleryIntent.putExtra("id",id)
+        startActivity(galleryIntent)
     }
 
 

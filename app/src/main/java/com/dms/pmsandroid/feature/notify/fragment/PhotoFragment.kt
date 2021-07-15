@@ -9,12 +9,15 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentPhotoBinding
 import com.dms.pmsandroid.feature.notify.adapter.GalleryAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
+import com.dms.pmsandroid.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo) {
     override val vm: NotifyViewModel by sharedViewModel()
 
-    private val photoAdapter = GalleryAdapter()
+    private val photoAdapter: GalleryAdapter by lazy {
+        GalleryAdapter(vm)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,7 +28,7 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
     private fun initRecyclerView() {
         val photoLayoutManager = LinearLayoutManager(binding.photoRv.context)
         photoLayoutManager.orientation = RecyclerView.VERTICAL
-        binding.photoRv.run{
+        binding.photoRv.run {
             layoutManager = photoLayoutManager
             adapter = photoAdapter
 
@@ -35,6 +38,9 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
     override fun observeEvent() {
         vm.galleryList.observe(viewLifecycleOwner, {
             photoAdapter.setItems(it)
+        })
+        vm.clickedGalleryId.observe(viewLifecycleOwner,{
+            (activity as MainActivity).startGalleryDetail(it)
         })
     }
 }
