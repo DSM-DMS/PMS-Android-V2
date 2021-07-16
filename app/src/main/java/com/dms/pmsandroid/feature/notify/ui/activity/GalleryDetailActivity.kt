@@ -39,7 +39,9 @@ class GalleryDetailActivity :
             detailAdapter.setGalleryDetail(attach,title, body)
         })
         vm.close.observe(this,{
-            finish()
+            if(it){
+                finish()
+            }
         })
     }
 }
