@@ -15,6 +15,7 @@ import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
 import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
+import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,6 +63,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val galleryIntent = Intent(this,GalleryDetailActivity::class.java)
         galleryIntent.putExtra("id",id)
         startActivity(galleryIntent)
+    }
+
+    fun startNoticeDetail(id:Int){
+        val noticeIntent = Intent(this,NoticeDetailActivity::class.java)
+        noticeIntent.putExtra("id",id)
+        startActivity(noticeIntent)
     }
 
 

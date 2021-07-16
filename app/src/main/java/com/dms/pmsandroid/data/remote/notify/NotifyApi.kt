@@ -2,6 +2,7 @@ package com.dms.pmsandroid.data.remote.notify
 
 import com.dms.pmsandroid.feature.notify.model.GalleryDetailResponse
 import com.dms.pmsandroid.feature.notify.model.GalleryListModel
+import com.dms.pmsandroid.feature.notify.model.NoticeDetailModel
 import com.dms.pmsandroid.feature.notify.model.NoticeListModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
@@ -18,12 +19,20 @@ interface NotifyApi {
         @Query("size") size: Int
     ): Single<Response<List<NoticeListModel>>>
 
+    @GET("/notice/{notice_id}")
+    fun getNoticeDetail(
+        @Header("Authorization") accessToken: String,
+        @Path("notice_id")id:Int
+    ):Single<Response<NoticeDetailModel>>
+
     @GET("/notice/news")
     fun getHomeNotice(
         @Header("Authorization") accessToken: String,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Single<Response<List<NoticeListModel>>>
+
+
 
     @GET("gallery")
     fun getGallery(

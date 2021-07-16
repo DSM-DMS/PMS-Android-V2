@@ -43,7 +43,7 @@ class NotifyViewModel(
     }
 
     fun getNoticeList(next:Int) {
-        val accessToken = sharedPreferenceStorage.getInfo("access-token")
+        val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeList(accessToken,(noticePage.value!!+next)-1,6).subscribe{response->
             if(response.isSuccessful){
                 if(response.body()!!.isNotEmpty()){

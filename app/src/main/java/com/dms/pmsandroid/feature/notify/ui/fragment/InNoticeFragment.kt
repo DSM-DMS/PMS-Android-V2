@@ -9,6 +9,7 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentInNoticeBinding
 import com.dms.pmsandroid.feature.notify.adapter.NoticeAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
+import com.dms.pmsandroid.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment_in_notice) {
@@ -31,6 +32,9 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
     override fun observeEvent() {
         vm.noticeList.observe(viewLifecycleOwner,{
             noticeAdapter.setItems(it)
+        })
+        vm.clickedNoticeId.observe(viewLifecycleOwner,{
+            (activity as MainActivity).startNoticeDetail(it)
         })
     }
 }
