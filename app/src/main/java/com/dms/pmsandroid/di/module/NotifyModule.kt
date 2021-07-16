@@ -10,5 +10,5 @@ val notifyModule = module {
     single { NotifyApiImpl() }
 
     viewModel { GalleryDetailViewModel(get()) }
-    viewModel { NotifyViewModel(get()) }
+    viewModel { NotifyViewModel(get(),get()) }
 }

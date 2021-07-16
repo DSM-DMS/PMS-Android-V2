@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:text="@{vm.galleryPage.toString()}"
+                android:text="@{vm.noticePage.toString()}"
                 android:textColor="@color/gray_300"
                 android:textSize="18sp"
                 tools:text="1" />
@@ -53,6 +53,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notice_rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@+id/notice_search_cv"
@@ -85,8 +86,8 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_baseline_search_24"
                     android:ems="10"
-                    android:hint="검색할 공지 제목을 입력하세요"
-                    android:imeOptions="actionSearch"
+                    android:hint="@string/please_search_notice"
+                    android:imeOptions="actionDone"
                     android:inputType="textPersonName" />
             </FrameLayout>
         </androidx.cardview.widget.CardView>
