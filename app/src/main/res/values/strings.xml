@@ -24,4 +24,6 @@
     <string name="save_login_info">로그인정보 저장</string>
     <string name="intro_detail_club">동아리 소개</string>
     <string name="intro_detail_member">동아리 멤버</string>
+    <string name="point_content">상/벌점 내역</string>
+
 </resources>
