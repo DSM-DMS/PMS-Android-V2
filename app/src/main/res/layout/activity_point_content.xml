@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+<layout>
     <data>
-
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.PointContentViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".feature.introduce.ui.fragment.IntroduceDeveloperFragment">
+
 
         <TextView
             android:id="@+id/title_tv"
@@ -20,7 +20,7 @@
             android:layout_height="97dp"
             android:background="@color/title_bar"
             android:gravity="center"
-            android:text="@string/intro_developer"
+            android:text="@string/point_content"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
@@ -28,17 +28,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/intro_developer_rc"
-            android:layout_width="407dp"
-            android:layout_height="700dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/point_rc"
+            android:layout_width="409dp"
+            android:layout_height="632dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:spanCount="2"
-            tools:listitem="@layout/item_developer">
+            app:layout_constraintTop_toBottomOf="@+id/title_tv"
+            tools:listitem="@layout/item_point" />
 
-        </androidx.recyclerview.widget.RecyclerView>
 
         <ImageView
             android:id="@+id/back_img"

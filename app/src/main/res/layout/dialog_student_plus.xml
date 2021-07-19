@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.AddStudentViewModel">
+
+        </variable>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/student_plus_dialog"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/radius_dialog_white"
+        android:paddingHorizontal="16dp">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="320dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="8dp"
+            android:background="#F6F6F6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkcode_et" />
+
+        <TextView
+            android:id="@+id/check_student_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/check_student_code"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/checkcode_et"
+            android:layout_width="263dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="40dp"
+            android:ems="6"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/check_student_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

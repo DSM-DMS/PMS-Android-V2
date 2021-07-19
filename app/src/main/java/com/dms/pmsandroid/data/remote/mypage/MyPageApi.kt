@@ -1,8 +1,15 @@
 package com.dms.pmsandroid.data.remote.mypage
 
+import com.dms.pmsandroid.feature.mypage.model.PointListResponse
+import io.reactivex.rxjava3.core.Single
+import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface MyPageApi {
     @GET("/user")
-    fun getUserStudents()
+    fun getStudents()
+
+    @GET("/user/student/{number}")
+    fun getStudentPoint(@Path("number") number: Int): Single<Response<PointListResponse>>
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
+    </data>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.introduce.ui.fragment.IntroduceDeveloperFragment">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/intro_developer"
+            android:textSize="20dp"
+            android:background="@drawable/topbar"
+            android:gravity="center"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/introducing_develope_rv"
+            android:layout_width="match_parent"
+            android:layout_height="630dp"
+            android:layout_marginTop="100dp"
+            app:spanCount="2"
+            tools:listitem="@layout/item_developer"/>
+
+        <ImageView
+            android:id="@+id/back_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
+
+    </FrameLayout>
+</layout>
