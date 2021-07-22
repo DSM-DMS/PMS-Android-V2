@@ -23,5 +23,4 @@ interface IntroduceClubApi {
     ): Single<Response<ClubDetailModel>>
 
 
-
 }

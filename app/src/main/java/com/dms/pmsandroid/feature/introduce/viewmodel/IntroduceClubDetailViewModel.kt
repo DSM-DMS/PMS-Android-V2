@@ -14,14 +14,14 @@ class IntroduceClubDetailViewModel(
 ) : ViewModel() {
 
     private val _clubDetails = MutableLiveData<ClubDetailModel>()
-    val clubDetail : LiveData<ClubDetailModel> get() = _clubDetails
+    val clubDetail: LiveData<ClubDetailModel> get() = _clubDetails
 
-    fun loadClubDetail() {
+    fun loadClubDetail(accessToken: String, clubname: String) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        introduceClubApiImpl.clubDetailApi(accessToken,"clubName").subscribe({
+        introduceClubApiImpl.clubDetailApi(accessToken, clubname).subscribe({
             if (it.isSuccessful) {
                 _clubDetails.value = it.body()
-                Log.e("오류", "오류")
+                Log.e("성공", "성공")
             }
         }, {
         })

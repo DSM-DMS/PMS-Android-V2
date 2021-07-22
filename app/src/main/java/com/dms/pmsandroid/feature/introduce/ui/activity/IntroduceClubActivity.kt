@@ -2,6 +2,8 @@ package com.dms.pmsandroid.feature.introduce.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
@@ -26,12 +28,8 @@ class IntroduceClubActivity :
         binding.introClubRc.layoutManager = gridLayoutManager
         binding.introClubRc.adapter = clubAdapter
         binding.backImg.setOnClickListener() {
-            finish()
+        finish()
         }
-    }
-
-    private fun checkClick() {
-
     }
 
     override fun observeEvent() {
@@ -41,7 +39,6 @@ class IntroduceClubActivity :
     }
 
     fun intent() {
-
         val intent = Intent(this, IntroduceClubDetailActivity::class.java)
         startActivity(intent)
     }

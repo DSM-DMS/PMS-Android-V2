@@ -17,7 +17,7 @@ class IntroduceClubApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun clubDetailApi(accessToken: String, clubname: String): @NonNull Single<Response<ClubDetailModel>> = providerIntroduceClubApi().clubDetail(accessToken, clubname)
+    fun clubDetailApi(accessToken: String,clubname: String): @NonNull Single<Response<ClubDetailModel>> = providerIntroduceClubApi().clubDetail(accessToken, clubname)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

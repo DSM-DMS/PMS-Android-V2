@@ -36,4 +36,6 @@
     <string name="cancel">취소</string>
     <string name="pass">확인</string>
     <string name="add_student">학생을 추가해주세요</string>
+    <string name="company_detail">취업처 소개</string>
+    <string name="wait_company">아직 준비중 입니다</string>
 </resources>

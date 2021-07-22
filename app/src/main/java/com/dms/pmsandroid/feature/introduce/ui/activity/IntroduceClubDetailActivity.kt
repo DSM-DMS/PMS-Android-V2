@@ -13,8 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club__detail)
-{
+class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club__detail) {
     override val vm: IntroduceClubDetailViewModel by viewModel()
     private var clubDetail = ArrayList<ClubDetailModel>()
 
@@ -22,8 +21,6 @@ class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.la
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm.loadClubDetail()
-
-
     }
 
     fun bind(position : Int){
@@ -32,11 +29,12 @@ class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.la
         binding.explanation = clubDetail[position].explanation
         binding.member = clubDetail[position].member.toString()
         binding.executePendingBindings()
-
     }
 
-
     override fun observeEvent() {
+        vm.clubDetail.observe(this,{
+
+        })
         binding.detailBackImg.setOnClickListener(){
             finish()
         }
