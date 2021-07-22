@@ -1,4 +1,14 @@
 package com.dms.pmsandroid.feature.mypage.viewmodel
 
-class AddStudentViewModel {
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+
+class AddStudentViewModel():ViewModel() {
+    val checkConfirm = MutableLiveData<Boolean>(false)
+    val checkCancel =  MutableLiveData<Boolean>(false)
+
+
+
+
+
 }

@@ -23,7 +23,6 @@
             name="member"
             type="String" />
 
-
     </data>
 
 
@@ -75,7 +74,7 @@
         android:layout_width="320dp"
         android:layout_height="2dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/border"
+        android:background="@color/border_gray"
         app:layout_constraintBottom_toTopOf="@+id/club_detail_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -86,7 +85,7 @@
             android:layout_width="320dp"
             android:layout_height="2dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/border"
+            android:background="@color/border_gray"
             app:layout_constraintBottom_toTopOf="@+id/club_detail_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"

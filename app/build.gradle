@@ -64,6 +64,7 @@ dependencies {
 
     //rxAndroid
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
     //rxjava
     implementation 'io.reactivex.rxjava3:rxjava:3.0.3'
     //rxjava adapter

@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.ui
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override val vm: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
@@ -54,7 +56,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val clubintent = Intent(this, IntroduceClubActivity::class.java)
         startActivity(clubintent)
     }
-
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
