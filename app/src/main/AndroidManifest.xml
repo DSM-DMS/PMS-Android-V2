@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.notify.ui.activity.NoticeDetailActivity"></activity>
+        <activity android:name=".feature.notify.ui.activity.NoticeDetailActivity"/>
         <activity android:name=".feature.notify.ui.activity.GalleryDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.CompanyDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.ClubDetailActivity" />

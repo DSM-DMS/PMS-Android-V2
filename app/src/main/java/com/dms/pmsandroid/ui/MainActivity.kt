@@ -65,9 +65,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(galleryIntent)
     }
 
-    fun startNoticeDetail(id:Int){
+    fun startNoticeDetail(id:Int,title:String){
         val noticeIntent = Intent(this,NoticeDetailActivity::class.java)
         noticeIntent.putExtra("id",id)
+        noticeIntent.putExtra("title",title)
         startActivity(noticeIntent)
     }
 

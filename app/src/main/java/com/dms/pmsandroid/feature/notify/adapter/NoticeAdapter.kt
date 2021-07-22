@@ -12,7 +12,7 @@ class NoticeAdapter(private val viewModel:NotifyViewModel): RecyclerView.Adapter
 
     inner class NoticeViewHolder(private val binding:ItemNoticeBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(position: Int){
-            binding.noticeTitleTv.text = notices[position].title
+            binding.title = notices[position].title
             binding.noticeDateTv.text = notices[position].uploadDate
             binding.id = notices[position].id
             binding.vm = viewModel

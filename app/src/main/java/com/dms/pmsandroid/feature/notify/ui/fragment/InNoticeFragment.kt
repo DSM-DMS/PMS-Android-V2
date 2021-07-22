@@ -34,7 +34,7 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
             noticeAdapter.setItems(it)
         })
         vm.clickedNoticeId.observe(viewLifecycleOwner,{
-            (activity as MainActivity).startNoticeDetail(it)
+            (activity as MainActivity).startNoticeDetail(it,vm.clickedNoticeTitle)
         })
     }
 }

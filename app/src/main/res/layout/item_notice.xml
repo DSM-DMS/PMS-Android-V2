@@ -9,6 +9,9 @@
         <variable
             name="id"
             type="Integer" />
+        <variable
+            name="title"
+            type="String" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +19,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->vm.onNoticeClicked(id)}">
+        android:onClick="@{()->vm.onNoticeClicked(id,title)}">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -57,6 +60,7 @@
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+                    android:text="@{title}"
                     app:layout_constraintBottom_toBottomOf="@+id/notice_line"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/notice_line"
