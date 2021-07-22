@@ -99,6 +99,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container,notifyFragment)
             .hide(notifyFragment).commit()
+        supportFragmentManager.beginTransaction()
             .add(R.id.main_container, mypageFragment)
             .hide(mypageFragment).commit()
     }
