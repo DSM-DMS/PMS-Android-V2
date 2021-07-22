@@ -14,6 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".feature.notify.ui.activity.NoticeDetailActivity"></activity>
+        <activity android:name=".feature.notify.ui.activity.GalleryDetailActivity" />
+        <activity android:name=".feature.introduce.ui.activity.CompanyDetailActivity" />
+        <activity android:name=".feature.introduce.ui.activity.ClubDetailActivity" />
+        <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity" />
+        <activity android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity" />
+        <activity android:name=".feature.login.ui.activity.LoginActivity" />
+        <activity android:name=".ui.MainActivity"
+            android:windowSoftInputMode="adjustNothing">
+
         <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity"></activity>
         <activity android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity" />
         <activity android:name=".feature.mypage.activity.PointContentActivity"></activity>
@@ -24,6 +35,7 @@
         <activity android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity" />
         <activity android:name=".feature.login.ui.activity.LoginActivity" />
         <activity android:name=".ui.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
