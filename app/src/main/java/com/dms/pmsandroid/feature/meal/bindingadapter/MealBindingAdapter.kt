@@ -43,21 +43,4 @@ object MealBindingAdapter {
             viewPager.adapter = adapter
         }
     }
-
-    @JvmStatic
-    @BindingAdapter("glide_meal_image_load")
-    fun glideMealImageLoad(imageView: ImageView, resource: String?) {
-        val circularProgressDrawable = CircularProgressDrawable(imageView.context)
-        circularProgressDrawable.strokeWidth = 10f
-        circularProgressDrawable.centerRadius = 40f
-        circularProgressDrawable.setColorFilter(ContextCompat.getColor(imageView.context, R.color.blue), PorterDuff.Mode.SRC_IN )
-        circularProgressDrawable.start()
-
-        Glide.with(imageView.context)
-            .load(resource)
-            .placeholder(circularProgressDrawable)
-            .error(R.drawable.img_no_picture)
-            .into(imageView)
-    }
-
 }

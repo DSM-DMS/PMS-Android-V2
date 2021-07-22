@@ -20,6 +20,7 @@ class PmsApplication : Application() {
                     introduceModule,
                     mealModule,
                     myPageModule,
+                    notifyModule,
                     pointModule
                 )
             )
