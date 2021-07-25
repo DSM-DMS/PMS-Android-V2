@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
+import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.databinding.ActivityClubDetailBinding
 import com.dms.pmsandroid.feature.introduce.model.ClubDetailModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubDetailViewModel
@@ -20,7 +21,7 @@ class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.la
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm.loadClubDetail()
+        vm.loadClubDetail(accessToken = String(),clubname = String())
     }
 
     fun bind(position : Int){
