@@ -10,7 +10,7 @@
             type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -29,8 +29,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/intro_developer_rc"
-            android:layout_width="407dp"
-            android:layout_height="700dp"
+            android:layout_width="418dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="97dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +45,8 @@
             android:id="@+id/back_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/title_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.087"
@@ -52,5 +55,5 @@
             app:layout_constraintVertical_bias="0.479"
             app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>
