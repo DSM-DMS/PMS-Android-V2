@@ -2,12 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.notify.viewmodel.NoticeDetailViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,6 +50,7 @@
             android:layout_marginEnd="10dp"
             android:padding="10dp"
             android:src="@drawable/ic_baseline_attach_file_24"
+            android:visibility="@{vm.noticeDetail.attach.size()>0?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/notice_ind_date_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/notice_ind_title_tv" />
@@ -69,8 +74,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:textColor="@color/black"
             android:text="@{vm.noticeDetail.body}"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_ind_line1"
