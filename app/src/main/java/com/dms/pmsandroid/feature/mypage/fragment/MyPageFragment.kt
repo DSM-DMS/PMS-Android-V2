@@ -20,7 +20,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
     override val vm: MyPageViewModel by viewModel()
 
-    private lateinit var add : DialogStudentPlusBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -30,6 +29,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
 
     override fun observeEvent() {
-        vm.startDialog.observe(this, Observer{})
+
     }
 }

@@ -16,6 +16,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="446dp"
             android:layout_height="200dp"
             android:background="@color/blue"
@@ -24,6 +25,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
+            <LinearLayout
+                android:layout_width="439dp"
+                android:layout_height="300dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="4dp">
+
+                <ImageView
+                    android:id="@+id/good_point_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="130dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/point_box"
+                    tools:layout_editor_absoluteY="139dp" />
+
+
+
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
@@ -35,6 +58,7 @@
             android:text="@string/add_student"
             android:textColor="@color/black"
             android:elevation="30dp"
+            android:onClick="@"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
