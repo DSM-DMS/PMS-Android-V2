@@ -3,13 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".feature.notify.ui.fragment.HomeNoticeFragment">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/home_page_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -24,6 +31,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->vm.homeBeforePage()}"
                 android:src="@drawable/ic_baseline_arrow_left_24" />
 
             <TextView
@@ -32,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
+                android:text="@{vm.homePage.toString()}"
                 android:textColor="@color/gray_300"
                 android:textSize="18sp"
                 tools:text="1" />
@@ -42,7 +51,17 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->vm.homeAfterPage()}"
                 android:src="@drawable/ic_baseline_arrow_right_24" />
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/home_page_ll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
