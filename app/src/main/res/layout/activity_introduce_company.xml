@@ -16,6 +16,7 @@
         android:id="@+id/title_tv"
         android:layout_width="416dp"
         android:layout_height="97dp"
+        android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
         android:text="@string/intro_work"
         android:background="@color/title_bar"
