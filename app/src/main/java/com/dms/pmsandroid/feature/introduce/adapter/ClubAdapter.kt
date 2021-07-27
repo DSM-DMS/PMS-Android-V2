@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.databinding.ItemClubBinding
 import com.dms.pmsandroid.feature.introduce.model.ClubModel
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubDetailActivity
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubDetailViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 import kotlinx.coroutines.MainScope
@@ -23,8 +24,8 @@ class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
             binding.name = clubList[position].clubName
             binding.picture = clubList[position].pictureUrl
             binding.vm = viewModel
-            binding.executePendingBindings()
-
+            //binding.executePendingBindings()
+            binding.notifyChange();
         }
     }
 
@@ -35,7 +36,6 @@ class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
             this.listener = listener
 
         }
-
     }
 
     override fun getItemCount(): Int {

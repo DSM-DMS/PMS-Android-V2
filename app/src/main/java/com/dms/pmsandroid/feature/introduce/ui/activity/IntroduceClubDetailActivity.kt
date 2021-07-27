@@ -14,14 +14,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club__detail) {
+class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club_detail) {
     override val vm: IntroduceClubDetailViewModel by viewModel()
     private var clubDetail = ArrayList<ClubDetailModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm.loadClubDetail(accessToken = String(),clubname = String())
+        vm.loadClubDetail(clubname = String())
     }
 
     fun bind(position : Int){

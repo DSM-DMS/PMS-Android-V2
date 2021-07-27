@@ -39,7 +39,7 @@ class IntroduceClubActivity :
     }
 
     fun intent() {
-        val intent = Intent(this, IntroduceClubDetailActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, IntroduceClubDetailActivity::class.java)
+//        startActivity(intent)
     }
 }
