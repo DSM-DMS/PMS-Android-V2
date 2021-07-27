@@ -1,7 +1,8 @@
-package com.dms.pmsandroid.data.remote
+package com.dms.pmsandroid.data.remote.Introduce
 
 
 import com.dms.pmsandroid.feature.introduce.model.ClubDetailModel
+import com.dms.pmsandroid.feature.introduce.model.ClubListModel
 import com.dms.pmsandroid.feature.introduce.model.ClubModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
@@ -12,7 +13,7 @@ interface IntroduceClubApi {
     @GET("/introduce/clubs")
     fun club(
             @Header("Authorization") accessToken: String
-    ): Single<Response<List<ClubModel>>>
+    ): Single<Response<ClubListModel>>
 
 
     @GET("/introduce/clubs/{clubname}")

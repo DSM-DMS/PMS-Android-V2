@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.ui
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,11 +18,13 @@ import com.dms.pmsandroid.feature.meal.fragment.MealFragment
 import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment
+import com.dms.pmsandroid.feature.mypage.fragment.MyPageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override val vm: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
@@ -72,7 +75,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(noticeIntent)
     }
 
-
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             vm.tabSelectedItem.value = item.itemId
@@ -82,6 +84,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val introduceFragment = IntroduceFragment()
     private val mealFragment = MealFragment()
     private val notifyFragment = NotifyFragment()
+    private val mypageFragment = MyPageFragment()
     private var activeFragment: Fragment = calendarFragment
 
     private fun initFragment() {
@@ -97,6 +100,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container,notifyFragment)
             .hide(notifyFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, mypageFragment)
+            .hide(mypageFragment).commit()
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -117,7 +123,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     changeFragment(mealFragment)
                 }
                 R.id.menu_mypage_it -> {
-
+                    changeFragment(mypageFragment)
                 }
                 R.id.menu_notify_it -> {
                     changeFragment(notifyFragment)
