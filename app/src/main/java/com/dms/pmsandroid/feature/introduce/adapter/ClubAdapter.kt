@@ -24,7 +24,7 @@ class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
             binding.name = clubList[position].clubName
             binding.picture = clubList[position].pictureUrl
             binding.vm = viewModel
-            //binding.executePendingBindings()
+            binding.executePendingBindings()
             binding.notifyChange();
         }
     }

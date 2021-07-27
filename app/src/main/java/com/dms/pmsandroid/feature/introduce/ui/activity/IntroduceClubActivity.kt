@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dms.pmsandroid.HorizontalItemDecorator
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.VerticalItemDecorator
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceClubBinding
 import com.dms.pmsandroid.feature.introduce.adapter.ClubAdapter
@@ -25,7 +27,8 @@ class IntroduceClubActivity :
         vm.loadClubs()
         intent()
         val gridLayoutManager = GridLayoutManager(this, 2)
-        binding.introClubRc.layoutManager = gridLayoutManager
+        binding.introClubRc.addItemDecoration(VerticalItemDecorator(30))
+        binding.introClubRc.addItemDecoration(HorizontalItemDecorator(20))
         binding.introClubRc.adapter = clubAdapter
         binding.backImg.setOnClickListener() {
         finish()
