@@ -51,6 +51,7 @@
             android:padding="10dp"
             android:src="@drawable/ic_baseline_attach_file_24"
             android:visibility="@{vm.noticeDetail.attach.size()>0?View.VISIBLE:View.GONE}"
+            android:onClick="@{()->vm.onAttachClicked()}"
             app:layout_constraintBottom_toBottomOf="@+id/notice_ind_date_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/notice_ind_title_tv" />
