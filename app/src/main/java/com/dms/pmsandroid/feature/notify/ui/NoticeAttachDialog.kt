@@ -18,13 +18,16 @@ class NoticeAttachDialog : BaseDialog<DialogNoticeAttachBinding>(R.layout.dialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
     }
 
     override fun observeEvent() {
-        vm.noticeDetail.observe(viewLifecycleOwner,{
-            if(it.attach.isNotEmpty()){
-                for(att in it.attach){
+        vm.noticeDetail.observe(viewLifecycleOwner, {
+            if (it.attach.isNotEmpty()) {
+                for (att in it.attach) {
                     val layout = NoticeAttachDetail(requireContext())
                     layout.findViewById<TextView>(R.id.notice_attach_tv).text = att.name
                     layout.findViewById<Button>(R.id.notice_attach_btn).setOnClickListener {
