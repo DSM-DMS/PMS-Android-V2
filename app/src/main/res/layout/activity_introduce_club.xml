@@ -63,21 +63,22 @@
             app:layout_constraintTop_toBottomOf="@+id/title_tv" />
 
         <View
-        android:id="@+id/view"
-        android:layout_width="320dp"
-        android:layout_height="6dp"
-        android:layout_marginBottom="28dp"
-        android:background="#F6F6F6"
-        app:layout_constraintBottom_toTopOf="@+id/intro_club_rc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/view"
+            android:layout_width="330dp"
+            android:layout_height="6dp"
+            android:layout_marginBottom="28dp"
+            android:background="#F6F6F6"
+            app:layout_constraintBottom_toTopOf="@+id/intro_club_rc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:id="@+id/intro_myclub"
+            android:layout_width="143dp"
+            android:layout_height="168dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/club_title_tv"

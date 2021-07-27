@@ -55,7 +55,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="@string/wait_company"
-            android:textSize="20dp"
+            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

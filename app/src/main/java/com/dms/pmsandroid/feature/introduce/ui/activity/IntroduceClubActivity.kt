@@ -27,8 +27,7 @@ class IntroduceClubActivity :
         vm.loadClubs()
         intent()
         val gridLayoutManager = GridLayoutManager(this, 2)
-        binding.introClubRc.addItemDecoration(VerticalItemDecorator(30))
-        binding.introClubRc.addItemDecoration(HorizontalItemDecorator(20))
+        binding.introClubRc.addItemDecoration(HorizontalItemDecorator(80))
         binding.introClubRc.adapter = clubAdapter
         binding.backImg.setOnClickListener() {
         finish()
