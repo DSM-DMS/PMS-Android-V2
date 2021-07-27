@@ -30,6 +30,8 @@ class NotifyViewModel(
     private val _clickedNoticeId = MutableLiveData<Int>()
     val clickedNoticeId: LiveData<Int> get() = _clickedNoticeId
 
+    lateinit var clickedNoticeTitle:String
+
     private var galleryTotalLength = 1
 
     fun getGalleryList() {
@@ -85,7 +87,8 @@ class NotifyViewModel(
         _clickedGalleryId.value = id
     }
 
-    fun onNoticeClicked(id: Int) {
+    fun onNoticeClicked(id: Int,title:String) {
+        clickedNoticeTitle = title
         _clickedNoticeId.value = id
     }
 }

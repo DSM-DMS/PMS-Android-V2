@@ -11,4 +11,4 @@ data class NoticeDetailModel(
     val attach: List<DetailAttach>
 )
 
-data class DetailAttach(val download:List<String>)
+data class DetailAttach(val download: String, val name: String)
