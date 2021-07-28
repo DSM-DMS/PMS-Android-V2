@@ -16,15 +16,21 @@ class IntroduceClubDetailViewModel(
     private val _clubDetails = MutableLiveData<ClubDetailModel>()
     val clubDetail: LiveData<ClubDetailModel> get() = _clubDetails
 
-    fun loadClubDetail(clubname:String) {
+    private val _close = MutableLiveData(false)
+    val close: LiveData<Boolean> get() = _close
+
+    fun close() {
+        _close.value = true
+    }
+
+    fun loadClubDetail(clubname: String) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        introduceClubApiImpl.clubDetailApi(accessToken,clubname).subscribe({
+        introduceClubApiImpl.clubDetailApi(accessToken, clubname).subscribe({
             if (it.isSuccessful) {
                 _clubDetails.value = it.body()
-                Log.e("성공", "성공")
+                Log.e("오류", "오류")
             }
         }, {
         })
-
     }
 }
