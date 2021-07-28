@@ -73,7 +73,7 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
 
     override fun getItemCount(): Int = comments.size + 1
 
-    fun setItems(comments:List<CommentModel>){
+    fun setItems(comments: List<CommentModel>) {
         this.comments = comments as ArrayList<CommentModel>
         notifyDataSetChanged()
     }

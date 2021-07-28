@@ -7,7 +7,6 @@ import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.CommentModel
 import com.dms.pmsandroid.feature.notify.model.NoticeDetailModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 class NoticeDetailViewModel(
     private val notifyApiImpl: NotifyApiImpl,
@@ -17,7 +16,7 @@ class NoticeDetailViewModel(
     private val _noticeDetail = MutableLiveData<NoticeDetailModel>()
     val noticeDetail: LiveData<NoticeDetailModel> get() = _noticeDetail
 
-    val reComments = MutableLiveData(HashMap<Int,List<CommentModel>?>())
+    val reComments = MutableLiveData(HashMap<Int, List<CommentModel>?>())
 
     val doneReComments = MutableLiveData(false)
 
@@ -27,18 +26,18 @@ class NoticeDetailViewModel(
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeDetail(accessToken, id).subscribe { response ->
             if (response.isSuccessful) {
-                    getReComments(accessToken,response.body()!!.comment)
+                getReComments(accessToken, response.body()!!.comment)
 
                 _noticeDetail.value = response.body()
             }
         }
     }
 
-    private fun getReComments(accessToken:String,comments:List<CommentModel>){
-        for(comment in comments){
+    private fun getReComments(accessToken: String, comments: List<CommentModel>) {
+        for (comment in comments) {
             val id = comment.id
-            notifyApiImpl.getReComments(accessToken,id).subscribe { response->
-                if(response.isSuccessful){
+            notifyApiImpl.getReComments(accessToken, id).subscribe { response ->
+                if (response.isSuccessful) {
                     reComments.value!![id] = response.body()
                     doneReComments.value = true
                 }
@@ -46,7 +45,7 @@ class NoticeDetailViewModel(
         }
     }
 
-    fun onAttachClicked(){
+    fun onAttachClicked() {
         attachClicked.value = true
     }
 }

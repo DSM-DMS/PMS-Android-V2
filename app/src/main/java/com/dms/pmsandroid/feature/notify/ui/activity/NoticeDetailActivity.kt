@@ -12,8 +12,9 @@ import com.dms.pmsandroid.feature.notify.ui.NoticeAttachDialog
 import com.dms.pmsandroid.feature.notify.viewmodel.NoticeDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(R.layout.activity_notice_detail) {
-    override val vm:NoticeDetailViewModel by viewModel()
+class NoticeDetailActivity :
+    BaseActivity<ActivityNoticeDetailBinding>(R.layout.activity_notice_detail) {
+    override val vm: NoticeDetailViewModel by viewModel()
 
     private val noticeAdapter by lazy {
         NoticeDetailAdapter(vm)
@@ -22,14 +23,14 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(R.layout.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val id = intent.getIntExtra("id",0)
+        val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title")
         vm.getNoticeDetail(id)
 
         val noticeLayoutManager = LinearLayoutManager(binding.noticeDetailRv.context)
         noticeLayoutManager.orientation = RecyclerView.VERTICAL
 
-        binding.noticeDetailRv.run{
+        binding.noticeDetailRv.run {
             adapter = noticeAdapter
             layoutManager = noticeLayoutManager
         }
@@ -42,17 +43,17 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(R.layout.
 
     private val dialog = NoticeAttachDialog()
     override fun observeEvent() {
-        vm.noticeDetail.observe(this,{
+        vm.noticeDetail.observe(this, {
             noticeAdapter.setItems(it.comment)
         })
-        vm.attachClicked.observe(this,{
-            if(it){
-                dialog.show(supportFragmentManager,"AttachDialogFragment")
+        vm.attachClicked.observe(this, {
+            if (it) {
+                dialog.show(supportFragmentManager, "AttachDialogFragment")
                 vm.attachClicked.value = false
             }
         })
-        vm.doneReComments.observe(this,{
-            if(it){
+        vm.doneReComments.observe(this, {
+            if (it) {
                 noticeAdapter.notifyDataSetChanged()
                 vm.doneReComments.value = false
             }
