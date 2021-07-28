@@ -39,8 +39,14 @@ interface NotifyApi {
         @Query("size") size: Int
     ): Single<Response<List<NoticeListModel>>>
 
+    @GET("/notice/news/search")
+    fun searchHome(
+        @Header("Authorization") accessToken: String,
+        @Query("q")keyWord:String,
+        @Query("page")page:Int
+    ): Single<Response<List<NoticeListModel>>>
 
-    @GET("gallery")
+    @GET("/gallery")
     fun getGallery(
         @Query("page") page: Int,
         @Query("size") size: Int

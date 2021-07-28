@@ -65,27 +65,37 @@ class NotifyViewModel(
             }
     }
 
-    fun searchNotice(keyword:String){
+    fun searchNotice(keyword: String) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.searchNotice(accessToken,keyword,0)
-            .subscribe { response->
-                if(response.isSuccessful){
+        notifyApiImpl.searchNotice(accessToken, keyword, 0)
+            .subscribe { response ->
+                if (response.isSuccessful) {
                     _noticeList.value = response.body()
                 }
             }
     }
 
-    fun getHomeNoticeList(next: Int){
+    fun getHomeNoticeList(next: Int) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.getHomeNoticeList(accessToken,(homePage.value!! + next) - 1, 6)
-            .subscribe{ response->
-                if(response.isSuccessful){
-                    if(response.body()!!.isNotEmpty()){
-                        if(next > 0){
+        notifyApiImpl.getHomeNoticeList(accessToken, (homePage.value!! + next) - 1, 6)
+            .subscribe { response ->
+                if (response.isSuccessful) {
+                    if (response.body()!!.isNotEmpty()) {
+                        if (next > 0) {
                             _homePage.value = _homePage.value!! + 1
                         }
                         _homeList.value = response.body()
                     }
+                }
+            }
+    }
+
+    fun searchHome(keyword: String) {
+        val accessToken = sharedPreferenceStorage.getInfo("access_token")
+        notifyApiImpl.searchHome(accessToken, keyword, 0)
+            .subscribe { response ->
+                if (response.isSuccessful) {
+                    _homeList.value = response.body()
                 }
             }
     }
@@ -104,7 +114,7 @@ class NotifyViewModel(
         }
     }
 
-    fun resetNoticePage(){
+    fun resetNoticePage() {
         _noticePage.value = 1
     }
 
@@ -127,8 +137,12 @@ class NotifyViewModel(
         }
     }
 
-    fun homeAfterPage(){
+    fun homeAfterPage() {
         getHomeNoticeList(1)
+    }
+
+    fun resetHomePage(){
+        _homePage.value = 1
     }
 
     fun onGalleryClicked(id: Int) {

@@ -9,7 +9,10 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentHomeNoticeBinding
 import com.dms.pmsandroid.feature.notify.adapter.HomeAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.concurrent.TimeUnit
 
 class HomeNoticeFragment : BaseFragment<FragmentHomeNoticeBinding>(R.layout.fragment_home_notice) {
     override val vm: NotifyViewModel by sharedViewModel()
@@ -32,5 +35,17 @@ class HomeNoticeFragment : BaseFragment<FragmentHomeNoticeBinding>(R.layout.frag
         vm.homeList.observe(viewLifecycleOwner,{
             homeAdapter.setItems(it)
         })
+        binding.homeEt.textChanges().debounce(500, TimeUnit.MILLISECONDS).map { it.toString() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isNotBlank()) {
+                    vm.searchHome(it)
+                    binding.homePageLl.visibility = View.GONE
+                } else {
+                    vm.resetHomePage()
+                    vm.getHomeNoticeList(0)
+                    binding.homePageLl.visibility = View.VISIBLE
+                }
+            }
     }
 }

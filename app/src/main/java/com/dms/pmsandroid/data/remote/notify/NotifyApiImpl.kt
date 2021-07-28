@@ -47,6 +47,13 @@ class NotifyApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+    fun searchHome(
+        accessToken: String, keyword: String, page: Int
+    ): @NonNull Single<Response<List<NoticeListModel>>> =
+        provideNotifyApi().searchNotice(accessToken, keyword, page)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
     fun getGalleryList(
         page: Int,
         size: Int

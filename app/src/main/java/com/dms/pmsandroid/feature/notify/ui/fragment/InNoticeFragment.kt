@@ -1,7 +1,6 @@
 package com.dms.pmsandroid.feature.notify.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,6 @@ import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.Disposable
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.concurrent.TimeUnit
 
@@ -47,8 +45,7 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isNotBlank()) {
-                    Log.d("etError", "no $it")
-                    vm.searchNotice(it.toString())
+                    vm.searchNotice(it)
                     binding.noticeLl.visibility = View.GONE
                 } else {
                     vm.resetNoticePage()
