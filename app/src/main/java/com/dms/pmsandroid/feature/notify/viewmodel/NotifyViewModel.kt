@@ -65,6 +65,16 @@ class NotifyViewModel(
             }
     }
 
+    fun searchNotice(keyword:String){
+        val accessToken = sharedPreferenceStorage.getInfo("access_token")
+        notifyApiImpl.searchNotice(accessToken,keyword,0)
+            .subscribe { response->
+                if(response.isSuccessful){
+                    _noticeList.value = response.body()
+                }
+            }
+    }
+
     fun getHomeNoticeList(next: Int){
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getHomeNoticeList(accessToken,(homePage.value!! + next) - 1, 6)
@@ -94,12 +104,17 @@ class NotifyViewModel(
         }
     }
 
+    fun resetNoticePage(){
+        _noticePage.value = 1
+    }
+
     fun noticeBeforePage() {
         if (noticePage.value!! > 1) {
             _noticePage.value = _noticePage.value!! - 1
             getNoticeList(0)
         }
     }
+
 
     fun noticeAfterPage() {
         getNoticeList(1)

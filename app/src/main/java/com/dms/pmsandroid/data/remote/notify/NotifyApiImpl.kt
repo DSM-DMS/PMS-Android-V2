@@ -31,6 +31,13 @@ class NotifyApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+    fun searchNotice(
+        accessToken: String, keyword: String, page: Int
+    ): @NonNull Single<Response<List<NoticeListModel>>> =
+        provideNotifyApi().searchNotice(accessToken, keyword, page)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
     fun getHomeNoticeList(
         accessToken: String,
         page: Int,

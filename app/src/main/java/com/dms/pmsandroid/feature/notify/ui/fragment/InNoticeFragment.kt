@@ -10,7 +10,9 @@ import com.dms.pmsandroid.databinding.FragmentInNoticeBinding
 import com.dms.pmsandroid.feature.notify.adapter.NoticeAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
 import com.dms.pmsandroid.ui.MainActivity
+import com.jakewharton.rxbinding4.widget.textChanges
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.concurrent.TimeUnit
 
 class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment_in_notice) {
     override val vm: NotifyViewModel by sharedViewModel()
@@ -36,6 +38,15 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
         vm.clickedNoticeId.observe(viewLifecycleOwner,{
             (activity as MainActivity).startNoticeDetail(it,vm.clickedNoticeTitle)
         })
-        binding.
+        binding.noticeEt.textChanges().debounce(500,TimeUnit.MILLISECONDS).subscribe{
+            if (it.isNotEmpty()){
+                binding.noticeLl.visibility = View.GONE
+                vm.searchNotice(it.toString())
+            }else{
+                binding.noticeLl.visibility = View.VISIBLE
+                vm.resetNoticePage()
+                vm.getNoticeList(0)
+            }
+        }
     }
 }
