@@ -72,6 +72,7 @@ class NoticeDetailActivity :
         })
         vm.clickedCommentId.observe(this,{
             if(it!=null){
+                binding.noticeDetailEt.requestFocus()
                 keyBoardManager.showSoftInput(binding.noticeDetailEt,0)
             }
         })
