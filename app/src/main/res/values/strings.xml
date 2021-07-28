@@ -31,4 +31,5 @@
     <string name="please_search_notice">검색할 공지 제목을 입력하세요</string>
     <string name="show_file">미리보기</string>
     <string name="search_home_notice">검색할 가정통신문 제목을 입력하세요</string>
+    <string name="please_comment">댓글을 남겨주세요</string>
 </resources>

@@ -3,10 +3,7 @@ package com.dms.pmsandroid.data.remote.notify
 import com.dms.pmsandroid.feature.notify.model.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface NotifyApi {
     @GET("/notice")
@@ -57,6 +54,12 @@ interface NotifyApi {
     @GET("/notice/{comment_id}/comment")
     fun getReComments(
         @Header("Authorization") accessToken: String,
-        @Path("comment_id")id:Int
-    ):Single<Response<List<CommentModel>>>
+        @Path("comment_id") id: Int
+    ): Single<Response<List<CommentModel>>>
+
+    @POST("/notice/{notice_id}/comment")
+    fun postComment(
+        @Header("Authorization") accessToken: String,
+        @Body body: HashMap<String, String>
+    ): Single<Response<Void>>
 }

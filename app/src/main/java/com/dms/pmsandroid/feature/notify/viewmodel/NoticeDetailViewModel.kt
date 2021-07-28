@@ -16,6 +16,8 @@ class NoticeDetailViewModel(
     private val _noticeDetail = MutableLiveData<NoticeDetailModel>()
     val noticeDetail: LiveData<NoticeDetailModel> get() = _noticeDetail
 
+    val comment = MutableLiveData<String>()
+
     val reComments = MutableLiveData(HashMap<Int, List<CommentModel>?>())
 
     val doneReComments = MutableLiveData(false)

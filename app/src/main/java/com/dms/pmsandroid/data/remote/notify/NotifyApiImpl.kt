@@ -67,8 +67,16 @@ class NotifyApiImpl {
 
     fun getReComments(
         accessToken: String,
-        id:Int
-    ): @NonNull Single<Response<List<CommentModel>>> = provideNotifyApi().getReComments(accessToken,id)
+        id: Int
+    ): @NonNull Single<Response<List<CommentModel>>> =
+        provideNotifyApi().getReComments(accessToken, id)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun postComment(
+        accessToken: String,
+        body: HashMap<String, String>
+    ): @NonNull Single<Response<Void>> = provideNotifyApi().postComment(accessToken, body)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 }
