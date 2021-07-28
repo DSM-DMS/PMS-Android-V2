@@ -43,7 +43,7 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(R.layout.
     private val dialog = NoticeAttachDialog()
     override fun observeEvent() {
         vm.noticeDetail.observe(this,{
-            noticeAdapter.notifyDataSetChanged()
+            noticeAdapter.setItems(it.comment)
         })
         vm.attachClicked.observe(this,{
             if(it){

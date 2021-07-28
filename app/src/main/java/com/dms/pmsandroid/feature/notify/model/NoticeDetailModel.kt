@@ -8,7 +8,8 @@ data class NoticeDetailModel(
     val title: String,
     val body: String,
     val writer: String,
-    val attach: List<DetailAttach>
+    val attach: List<DetailAttach>,
+    val comment:List<CommentModel>
 )
 
 data class DetailAttach(val download: String, val name: String)
