@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PmsAndroid</string>
+    <string name="app_name">PMS</string>
     <string name="login_title">Parents Management Service</string>
     <string name="login">로그인</string>
     <string name="signup">회원가입</string>
