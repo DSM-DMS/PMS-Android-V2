@@ -61,7 +61,7 @@
             android:id="@+id/notice_detail_rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/notice_detail_comment_cv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -73,8 +73,8 @@
             android:id="@+id/notice_detail_comment_cv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -82,13 +82,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
+                android:paddingBottom="15dp">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="5dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     app:cardCornerRadius="7dp"
                     app:cardElevation="0dp"
@@ -107,6 +108,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/please_comment"
+                            android:textSize="16sp"
                             android:text="@={vm.comment}" />
                     </FrameLayout>
                 </androidx.cardview.widget.CardView>
@@ -116,10 +118,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:visibility="@{vm.comment.length()>0?View.VISIBLE:View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:onClick="@{()->vm.postComment()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/cardView"
                     app:srcCompat="@drawable/ic_baseline_subdirectory_arrow_left_24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

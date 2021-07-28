@@ -75,8 +75,9 @@ class NotifyApiImpl {
 
     fun postComment(
         accessToken: String,
-        body: HashMap<String, String>
-    ): @NonNull Single<Response<Void>> = provideNotifyApi().postComment(accessToken, body)
+        noticeId:Int,
+        body: CommentRequestModel
+    ): @NonNull Single<Response<Void>> = provideNotifyApi().postComment(accessToken,noticeId, body)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 }

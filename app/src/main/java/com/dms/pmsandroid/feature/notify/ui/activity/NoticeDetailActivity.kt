@@ -62,5 +62,8 @@ class NoticeDetailActivity :
                 noticeAdapter.notifyDataSetChanged()
             }
         })
+        vm.resetComments.observe(this, {
+            doneInput = HashMap()
+        })
     }
 }

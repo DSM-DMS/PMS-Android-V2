@@ -60,6 +60,7 @@ interface NotifyApi {
     @POST("/notice/{notice_id}/comment")
     fun postComment(
         @Header("Authorization") accessToken: String,
-        @Body body: HashMap<String, String>
+        @Path("notice_id")noticeId:Int,
+        @Body body: CommentRequestModel
     ): Single<Response<Void>>
 }
