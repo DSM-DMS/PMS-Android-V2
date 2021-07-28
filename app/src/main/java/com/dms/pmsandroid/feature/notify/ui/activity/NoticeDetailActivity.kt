@@ -20,12 +20,15 @@ class NoticeDetailActivity :
         NoticeDetailAdapter(vm)
     }
 
+    companion object {
+        lateinit var doneInput: HashMap<Int, Boolean>
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        doneInput = HashMap()
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title")
-        vm.getNoticeDetail(id)
 
         val noticeLayoutManager = LinearLayoutManager(binding.noticeDetailRv.context)
         noticeLayoutManager.orientation = RecyclerView.VERTICAL
@@ -39,6 +42,7 @@ class NoticeDetailActivity :
         binding.noticeBackBtn.setOnClickListener {
             finish()
         }
+        vm.getNoticeDetail(id)
     }
 
     private val dialog = NoticeAttachDialog()
@@ -54,8 +58,8 @@ class NoticeDetailActivity :
         })
         vm.doneReComments.observe(this, {
             if (it) {
-                noticeAdapter.notifyDataSetChanged()
                 vm.doneReComments.value = false
+                noticeAdapter.notifyDataSetChanged()
             }
         })
     }

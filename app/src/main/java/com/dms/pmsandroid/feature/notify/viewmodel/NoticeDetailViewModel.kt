@@ -27,7 +27,6 @@ class NoticeDetailViewModel(
         notifyApiImpl.getNoticeDetail(accessToken, id).subscribe { response ->
             if (response.isSuccessful) {
                 getReComments(accessToken, response.body()!!.comment)
-
                 _noticeDetail.value = response.body()
             }
         }
@@ -39,8 +38,8 @@ class NoticeDetailViewModel(
             notifyApiImpl.getReComments(accessToken, id).subscribe { response ->
                 if (response.isSuccessful) {
                     reComments.value!![id] = response.body()
-                    doneReComments.value = true
                 }
+                doneReComments.value = true
             }
         }
     }

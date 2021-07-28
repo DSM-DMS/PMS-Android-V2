@@ -6,8 +6,10 @@ import androidx.databinding.BindingAdapter
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.feature.notify.model.CommentModel
 import com.dms.pmsandroid.feature.notify.ui.NoticeCommentLayout
+import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity.Companion.doneInput
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 object NotifyBindingAdapter {
 
@@ -18,12 +20,13 @@ object NotifyBindingAdapter {
         reComments: HashMap<Int, List<CommentModel>?>,
         id: Int
     ) {
-        if (!reComments[id].isNullOrEmpty()) {
+        if (!reComments[id].isNullOrEmpty()&& doneInput[id] != true) {
             for (reComment in reComments[id]!!) {
                 val layout = NoticeCommentLayout(linearLayout.context)
                 layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
                 layout.findViewById<TextView>(R.id.re_comment_writer_tv).text = reComment.user.name
                 linearLayout.addView(layout)
+                doneInput[id] = true
             }
         }
     }
