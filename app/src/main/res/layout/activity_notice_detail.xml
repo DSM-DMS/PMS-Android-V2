@@ -105,11 +105,12 @@
                         android:paddingHorizontal="4dp">
 
                         <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/notice_detail_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/please_comment"
-                            android:textSize="16sp"
-                            android:text="@={vm.comment}" />
+                            android:text="@={vm.comment}"
+                            android:textSize="16sp"/>
                     </FrameLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -119,8 +120,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:visibility="@{vm.comment.length()>0?View.VISIBLE:View.GONE}"
                     android:onClick="@{()->vm.postComment()}"
+                    android:visibility="@{vm.comment.length()>0?View.VISIBLE:View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/cardView"

@@ -88,10 +88,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:background="?android:attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_baseline_subdirectory_arrow_right_24"
             android:padding="5dp"
             android:text="답글달기"
+            android:onClick="@{()->vm.commentClick(id)}"
             android:textColor="@color/black" />
 
     </LinearLayout>

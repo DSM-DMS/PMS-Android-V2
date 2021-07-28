@@ -2,6 +2,7 @@ package com.dms.pmsandroid.feature.notify.ui.activity
 
 import android.os.Bundle
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
@@ -24,9 +25,13 @@ class NoticeDetailActivity :
         lateinit var doneInput: HashMap<Int, Boolean>
     }
 
+    private lateinit var keyBoardManager: InputMethodManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         doneInput = HashMap()
+        keyBoardManager = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken,0)
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title")
 
@@ -63,7 +68,13 @@ class NoticeDetailActivity :
             }
         })
         vm.resetComments.observe(this, {
+            keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken,0)
             doneInput = HashMap()
+        })
+        vm.clickedCommentId.observe(this,{
+            if(it!=null){
+                keyBoardManager.showSoftInput(binding.noticeDetailEt,0)
+            }
         })
     }
 }
