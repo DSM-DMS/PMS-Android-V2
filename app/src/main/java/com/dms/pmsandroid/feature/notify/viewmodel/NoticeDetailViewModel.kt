@@ -40,9 +40,9 @@ class NoticeDetailViewModel(
             notifyApiImpl.getReComments(accessToken,id).subscribe { response->
                 if(response.isSuccessful){
                     reComments.value!![id] = response.body()
+                    doneReComments.value = true
                 }
             }
-            doneReComments.value = true
         }
     }
 

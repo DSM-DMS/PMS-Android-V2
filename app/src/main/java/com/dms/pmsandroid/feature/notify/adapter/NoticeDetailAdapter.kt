@@ -2,19 +2,15 @@ package com.dms.pmsandroid.feature.notify.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.dms.pmsandroid.R
 import com.dms.pmsandroid.databinding.ItemCommentNoticeBinding
 import com.dms.pmsandroid.databinding.ItemNoticeDetailHeaderBinding
 import com.dms.pmsandroid.feature.notify.model.CommentModel
-import com.dms.pmsandroid.feature.notify.ui.NoticeCommentLayout
 import com.dms.pmsandroid.feature.notify.viewmodel.NoticeDetailViewModel
 
 class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var comments = ArrayList<CommentModel>()
-    private var reComments = HashMap<Int,List<CommentModel>?>()
     private val _HEADER = 0
     private val _COMMENT = 1
 
@@ -79,11 +75,6 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
 
     fun setItems(comments:List<CommentModel>){
         this.comments = comments as ArrayList<CommentModel>
-        notifyDataSetChanged()
-    }
-
-    fun setReComments(reComments:HashMap<Int,List<CommentModel>?>){
-        this.reComments = reComments
         notifyDataSetChanged()
     }
 }
