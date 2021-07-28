@@ -29,15 +29,6 @@ class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(v: View, position: Int,id : Long)
-        var listener: OnItemClickListener
-        fun setOnClickListener(listener: OnItemClickListener) {
-            this.listener = listener
-
-        }
-    }
-
     override fun getItemCount(): Int {
         return clubList.size
     }

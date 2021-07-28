@@ -16,6 +16,13 @@ class IntroduceClubViewModel(
     private val _clubs = MutableLiveData<ClubListModel>()
     val clubs: LiveData<ClubListModel> get() = _clubs
 
+    private val _ClickedClubId = MutableLiveData<String>()
+    val clickedClubId : LiveData<String> get() = _ClickedClubId
+
+    fun onClubClicked(clubname :String){
+        _ClickedClubId.value = clubname
+    }
+
     fun loadClubs() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         introduceClubApiImpl.clubApi(accessToken).subscribe({

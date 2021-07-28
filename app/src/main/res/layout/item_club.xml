@@ -25,7 +25,8 @@
         android:layout_height="148dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"
-        android:background="@drawable/back">
+        android:background="@drawable/back"
+        android:onClick="@{()->vm.onClubClicked(name)}">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/club_img"

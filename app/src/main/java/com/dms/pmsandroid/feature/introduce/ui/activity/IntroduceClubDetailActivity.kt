@@ -21,7 +21,10 @@ class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.la
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm.loadClubDetail(clubname = String())
+        val clubname = intent.getStringExtra("clubname")
+        if (clubname != null) {
+            vm.loadClubDetail(clubname)
+        }
     }
 
     fun bind(position : Int){
@@ -36,9 +39,6 @@ class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.la
         vm.clubDetail.observe(this,{
 
         })
-        binding.detailBackImg.setOnClickListener(){
-            finish()
-        }
     }
 
 }

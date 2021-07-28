@@ -10,6 +10,7 @@ import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubDetailActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
@@ -73,6 +74,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         noticeIntent.putExtra("id",id)
         startActivity(noticeIntent)
     }
+
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
