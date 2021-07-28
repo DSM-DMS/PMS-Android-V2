@@ -31,7 +31,6 @@ class NoticeDetailActivity :
         super.onCreate(savedInstanceState)
         doneInput = HashMap()
         keyBoardManager = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken,0)
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title")
 
