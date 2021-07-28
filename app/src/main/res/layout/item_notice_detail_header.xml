@@ -49,7 +49,6 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:gravity="end"
             android:text="@{vm.noticeDetail.writer}"
             android:textColor="@color/gray"
             app:layout_constraintEnd_toStartOf="@id/notice_ind_file_iv"
@@ -99,8 +98,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="10dp"
             android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
