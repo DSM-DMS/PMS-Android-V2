@@ -14,6 +14,7 @@ import com.dms.pmsandroid.feature.notify.viewmodel.NoticeDetailViewModel
 class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var comments = ArrayList<CommentModel>()
+    private var reComments = HashMap<Int,List<CommentModel>?>()
     private val _HEADER = 0
     private val _COMMENT = 1
 
@@ -31,8 +32,8 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
                 binding.commentBodyTv.text = comment.body
                 binding.commentWriterTv.text = comment.user.name
                 binding.date = comment.uploadDate
-                if(!viewModel.reComments[comment.id].isNullOrEmpty()){
-                    for(reComment in viewModel.reComments[comment.id]!!){
+                if(!reComments[comment.id].isNullOrEmpty()){
+                    for(reComment in reComments[comment.id]!!){
                         val layout = NoticeCommentLayout(binding.commentLl.context)
                         layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
                         layout.findViewById<TextView>(R.id.re_comment_writer_tv).text = reComment.user.name
@@ -84,6 +85,11 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
 
     fun setItems(comments:List<CommentModel>){
         this.comments = comments as ArrayList<CommentModel>
+        notifyDataSetChanged()
+    }
+
+    fun setReComments(reComments:HashMap<Int,List<CommentModel>?>){
+        this.reComments = reComments
         notifyDataSetChanged()
     }
 }

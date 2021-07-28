@@ -7,6 +7,7 @@ import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.CommentModel
 import com.dms.pmsandroid.feature.notify.model.NoticeDetailModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 class NoticeDetailViewModel(
     private val notifyApiImpl: NotifyApiImpl,
@@ -16,7 +17,7 @@ class NoticeDetailViewModel(
     private val _noticeDetail = MutableLiveData<NoticeDetailModel>()
     val noticeDetail: LiveData<NoticeDetailModel> get() = _noticeDetail
 
-    val reComments = HashMap<Int,List<CommentModel>?>()
+    val reComments = MutableLiveData(HashMap<Int,List<CommentModel>?>())
 
     val attachClicked = MutableLiveData(false)
 
@@ -35,9 +36,8 @@ class NoticeDetailViewModel(
     private fun getReComments(accessToken:String,id:Int){
         notifyApiImpl.getReComments(accessToken,id).subscribe { response->
             if(response.isSuccessful){
-                reComments[id] = response.body()
+                reComments.value!![id] = response.body()
             }
-
         }
     }
 

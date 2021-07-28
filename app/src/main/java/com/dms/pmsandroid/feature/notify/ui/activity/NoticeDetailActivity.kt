@@ -51,5 +51,8 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(R.layout.
                 vm.attachClicked.value = false
             }
         })
+        vm.reComments.observe(this,{
+            noticeAdapter.setReComments(it)
+        })
     }
 }
