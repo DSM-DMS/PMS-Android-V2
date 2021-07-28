@@ -1,11 +1,29 @@
 package com.dms.pmsandroid.feature.notify
 
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.dms.pmsandroid.R
+import com.dms.pmsandroid.feature.notify.model.CommentModel
+import com.dms.pmsandroid.feature.notify.ui.NoticeCommentLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
 object NotifyBindingAdapter {
+
+    @JvmStatic
+    @BindingAdapter("showReComments","commentId")
+    fun showReComments(linearLayout: LinearLayout,reComments:HashMap<Int,List<CommentModel>?>,id:Int){
+        if(!reComments[id].isNullOrEmpty()){
+            for(reComment in reComments[id]!!){
+                val layout = NoticeCommentLayout(linearLayout.context)
+                layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
+                layout.findViewById<TextView>(R.id.re_comment_writer_tv).text = reComment.user.name
+                linearLayout.addView(layout)
+            }
+        }
+    }
+
     @JvmStatic
     @BindingAdapter("showTimeAdapter")
     fun timeAdapter(textView: TextView, time:Date?){

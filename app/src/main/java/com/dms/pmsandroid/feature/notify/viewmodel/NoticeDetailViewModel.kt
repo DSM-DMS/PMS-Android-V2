@@ -19,25 +19,30 @@ class NoticeDetailViewModel(
 
     val reComments = MutableLiveData(HashMap<Int,List<CommentModel>?>())
 
+    val doneReComments = MutableLiveData(false)
+
     val attachClicked = MutableLiveData(false)
 
     fun getNoticeDetail(id: Int) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeDetail(accessToken, id).subscribe { response ->
             if (response.isSuccessful) {
-                for(comments in response.body()!!.comment){
-                    getReComments(accessToken,comments.id)
-                }
+                    getReComments(accessToken,response.body()!!.comment)
+
                 _noticeDetail.value = response.body()
             }
         }
     }
 
-    private fun getReComments(accessToken:String,id:Int){
-        notifyApiImpl.getReComments(accessToken,id).subscribe { response->
-            if(response.isSuccessful){
-                reComments.value!![id] = response.body()
+    private fun getReComments(accessToken:String,comments:List<CommentModel>){
+        for(comment in comments){
+            val id = comment.id
+            notifyApiImpl.getReComments(accessToken,id).subscribe { response->
+                if(response.isSuccessful){
+                    reComments.value!![id] = response.body()
+                }
             }
+            doneReComments.value = true
         }
     }
 

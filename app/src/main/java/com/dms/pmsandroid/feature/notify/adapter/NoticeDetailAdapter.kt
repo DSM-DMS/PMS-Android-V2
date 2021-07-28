@@ -28,18 +28,12 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
     inner class NoticeDetailCommentViewHolder(private val binding: ItemCommentNoticeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
+            binding.vm = viewModel
             comments[position].let { comment ->
+                binding.id = comment.id
                 binding.commentBodyTv.text = comment.body
                 binding.commentWriterTv.text = comment.user.name
                 binding.date = comment.uploadDate
-                if(!reComments[comment.id].isNullOrEmpty()){
-                    for(reComment in reComments[comment.id]!!){
-                        val layout = NoticeCommentLayout(binding.commentLl.context)
-                        layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
-                        layout.findViewById<TextView>(R.id.re_comment_writer_tv).text = reComment.user.name
-                        binding.commentLl.addView(layout)
-                    }
-                }
             }
         }
     }
