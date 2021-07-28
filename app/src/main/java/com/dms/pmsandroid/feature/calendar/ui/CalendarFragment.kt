@@ -23,6 +23,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override val vm: CalendarViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
 
+    private lateinit var selectedCurrentDay:String
+    private lateinit var currentDay: CalendarDay
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +36,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         mainVm.doneToken.observe(viewLifecycleOwner, {
             if (it) {
                 vm.loadSchedules()
+            }
+        })
+        vm.doneEventsSetting.observe(viewLifecycleOwner,{
+            if(it){
+                setEventTv(selectedCurrentDay,currentDay)
             }
         })
 
@@ -54,6 +62,8 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         selected: Boolean
     ) {
         val selectedDate = formatDate(date)
+        this.selectedCurrentDay = selectedDate
+        this.currentDay = date
         setEventTv(selectedDate,date)
     }
 

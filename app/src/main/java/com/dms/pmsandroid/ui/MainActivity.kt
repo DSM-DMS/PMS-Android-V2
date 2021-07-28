@@ -2,6 +2,7 @@ package com.dms.pmsandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
@@ -13,6 +14,9 @@ import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivi
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
+import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
+import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
+import com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,6 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setFragment()
     }
 
@@ -54,6 +59,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(clubintent)
     }
 
+    fun startGalleryDetail(id:Int){
+        val galleryIntent = Intent(this,GalleryDetailActivity::class.java)
+        galleryIntent.putExtra("id",id)
+        startActivity(galleryIntent)
+    }
+
+    fun startNoticeDetail(id:Int,title:String){
+        val noticeIntent = Intent(this,NoticeDetailActivity::class.java)
+        noticeIntent.putExtra("id",id)
+        noticeIntent.putExtra("title",title)
+        startActivity(noticeIntent)
+    }
+
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -63,6 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val calendarFragment = CalendarFragment()
     private val introduceFragment = IntroduceFragment()
     private val mealFragment = MealFragment()
+    private val notifyFragment = NotifyFragment()
     private var activeFragment: Fragment = calendarFragment
 
     private fun initFragment() {
@@ -75,6 +94,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container, mealFragment)
             .hide(mealFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container,notifyFragment)
+            .hide(notifyFragment).commit()
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -98,7 +120,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
                 }
                 R.id.menu_notify_it -> {
-
+                    changeFragment(notifyFragment)
                 }
             }
         })
