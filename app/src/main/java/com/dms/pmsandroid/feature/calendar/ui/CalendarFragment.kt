@@ -1,7 +1,6 @@
 package com.dms.pmsandroid.feature.calendar.ui
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -23,15 +22,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override val vm: CalendarViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
 
-    private lateinit var selectedCurrentDay:String
-    private lateinit var currentDay: CalendarDay
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.calendarEventTv.text = "일정을 읽어오는중입니다..."
         setCalendarView()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
         mainVm.doneToken.observe(viewLifecycleOwner, {
             if (it) {
@@ -40,18 +38,22 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         })
         vm.doneEventsSetting.observe(viewLifecycleOwner,{
             if(it){
-                setEventTv(selectedCurrentDay,currentDay)
+                initEventTv()
             }
         })
 
+    }
+
+    private fun initEventTv(){
+        val currentDate = CalendarDay.today()
+        val formatDate = formatDate(currentDate)
+        setEventTv(formatDate,currentDate)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCalendarView() {
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
-        val formatDate = formatDate(currentDate)
-        setEventTv(formatDate,currentDate)
         calendarView.setDateSelected(currentDate, true)
         calendarView.setOnDateChangedListener(this)
     }
@@ -62,8 +64,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         selected: Boolean
     ) {
         val selectedDate = formatDate(date)
-        this.selectedCurrentDay = selectedDate
-        this.currentDay = date
         setEventTv(selectedDate,date)
     }
 
