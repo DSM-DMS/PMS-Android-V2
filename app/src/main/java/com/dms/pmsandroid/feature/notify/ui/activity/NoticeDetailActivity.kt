@@ -1,7 +1,6 @@
 package com.dms.pmsandroid.feature.notify.ui.activity
 
 import android.os.Bundle
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,30 +50,36 @@ class NoticeDetailActivity :
 
     private val dialog = NoticeAttachDialog()
     override fun observeEvent() {
-        vm.noticeDetail.observe(this, {
-            noticeAdapter.setItems(it.comment)
-        })
-        vm.attachClicked.observe(this, {
-            if (it) {
-                dialog.show(supportFragmentManager, "AttachDialogFragment")
-                vm.attachClicked.value = false
-            }
-        })
-        vm.doneReComments.observe(this, {
-            if (it) {
-                vm.doneReComments.value = false
-                noticeAdapter.notifyDataSetChanged()
-            }
-        })
-        vm.resetComments.observe(this, {
-            keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken,0)
-            doneInput = HashMap()
-        })
-        vm.clickedCommentId.observe(this,{
-            if(it!=null){
-                binding.noticeDetailEt.requestFocus()
-                keyBoardManager.showSoftInput(binding.noticeDetailEt,0)
-            }
-        })
+        vm.run {
+            noticeDetail.observe(this@NoticeDetailActivity, {
+                noticeAdapter.setItems(it.comment)
+            })
+
+            attachClicked.observe(this@NoticeDetailActivity, {
+                if (it) {
+                    dialog.show(supportFragmentManager, "AttachDialogFragment")
+                    vm.attachClicked.value = false
+                }
+            })
+
+            doneReComments.observe(this@NoticeDetailActivity, {
+                if (it) {
+                    vm.doneReComments.value = false
+                    noticeAdapter.notifyDataSetChanged()
+                }
+            })
+
+            resetComments.observe(this@NoticeDetailActivity, {
+                keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken, 0)
+                doneInput = HashMap()
+            })
+
+            clickedCommentId.observe(this@NoticeDetailActivity, {
+                if (it != null) {
+                    binding.noticeDetailEt.requestFocus()
+                    keyBoardManager.showSoftInput(binding.noticeDetailEt, 0)
+                }
+            })
+        }
     }
 }
