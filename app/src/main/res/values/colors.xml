@@ -15,4 +15,8 @@
     <color name="gray_100">#F7F7F7</color>
     <color name="gray_50">#FCFCFC</color>
     <color name="title_bar">#F6F6F6</color>
+    <color name="colorRed">#ff5454</color>
+    <color name="colorBlue">#4C75B2</color>
+    <color name="border_gray">#B5B5B5</color>
+    <color name="button_background">#F7F7F7</color>
 </resources>

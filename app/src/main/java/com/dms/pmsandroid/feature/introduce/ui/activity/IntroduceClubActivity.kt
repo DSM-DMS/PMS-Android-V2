@@ -1,8 +1,13 @@
 package com.dms.pmsandroid.feature.introduce.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dms.pmsandroid.HorizontalItemDecorator
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.VerticalItemDecorator
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceClubBinding
 import com.dms.pmsandroid.feature.introduce.adapter.ClubAdapter
@@ -13,24 +18,33 @@ class IntroduceClubActivity :
     BaseActivity<ActivityIntroduceClubBinding>(R.layout.activity_introduce_club) {
 
     override val vm: IntroduceClubViewModel by viewModel()
-    private val clubAdapter = ClubAdapter(vm)
+    private val clubAdapter by lazy { ClubAdapter(vm) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm.loadClubs()
         val gridLayoutManager = GridLayoutManager(this, 2)
-        binding.IntroClubRc.layoutManager = gridLayoutManager
-
-    }
-
-    override fun observeEvent() {
-        vm.clubs.observe(this, {
-            clubAdapter.setItem(it)
-        })
+        binding.introClubRc.addItemDecoration(HorizontalItemDecorator(80))
+        binding.introClubRc.adapter = clubAdapter
         binding.backImg.setOnClickListener() {
-            finish()
+        finish()
         }
     }
 
+    override fun observeEvent() {
+        vm.run {
+            vm.clubs.observe(this@IntroduceClubActivity, {
+                clubAdapter.setItem(it.clubs)
+            })
+            vm.clickedClubId.observe(this@IntroduceClubActivity, {
+                    startClubDetail(it)
+            })
+        }
+    }
 
+    fun startClubDetail(clubname:String){
+        val clubIntent = Intent(this,IntroduceClubDetailActivity::class.java)
+        clubIntent.putExtra("clubname",clubname)
+        startActivity(clubIntent)
+    }
 }
