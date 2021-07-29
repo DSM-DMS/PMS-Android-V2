@@ -1,8 +1,9 @@
 package com.dms.pmsandroid.feature.calendar.ui
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
@@ -16,15 +17,18 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar),OnDateSelectedListener {
+class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar),
+    OnDateSelectedListener {
 
     override val vm: CalendarViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
 
+    private lateinit var selectedCurrentDay:String
+    private lateinit var currentDay: CalendarDay
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setCalendarView()
     }
 
@@ -34,13 +38,21 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 vm.loadSchedules()
             }
         })
+        vm.doneEventsSetting.observe(viewLifecycleOwner,{
+            if(it){
+                setEventTv(selectedCurrentDay,currentDay)
+            }
+        })
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun setCalendarView(){
+    private fun setCalendarView() {
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
-        calendarView.setDateSelected(currentDate,true)
+        val formatDate = formatDate(currentDate)
+        setEventTv(formatDate,currentDate)
+        calendarView.setDateSelected(currentDate, true)
         calendarView.setOnDateChangedListener(this)
     }
 
@@ -49,6 +61,34 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         date: CalendarDay,
         selected: Boolean
     ) {
+        val selectedDate = formatDate(date)
+        this.selectedCurrentDay = selectedDate
+        this.currentDay = date
+        setEventTv(selectedDate,date)
+    }
+
+    private fun formatDate(date: CalendarDay): String {
+        val month = if (date.month < 10) {
+            "0${date.month}"
+        } else {
+            date.month
+        }
+
+        val day = if (date.day < 10) {
+            "0${date.day}"
+        } else {
+            date.day
+        }
+        return "${date.year}-$month-$day"
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setEventTv(date: String, calendarDay: CalendarDay) {
+        val event = vm.events.value?.get(date) ?: "일정이 없습니다"
+        with(binding){
+            calendarEventTv.text = event
+            calendarDateTv.text = "${calendarDay.month}월${calendarDay.day}일"
+        }
     }
 
 }

@@ -4,10 +4,5 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class IntroduceDeveloperViewModel: ViewModel() {
-    val backPressed = MutableLiveData<Boolean>(false)
-
-    fun backIntent(){
-        backPressed.value = true
-    }
 
 }

@@ -11,6 +11,7 @@ import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
+import com.dms.pmsandroid.ui.MainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
@@ -21,6 +22,7 @@ import java.util.*
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     override val vm: MealViewModel by inject()
+    private val mainVm :MainViewModel by inject()
 
     private val adapter by lazy {
         MealAdapter(vm)
@@ -88,6 +90,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         }.attach()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
         vm.run {
             showPicture.observe(viewLifecycleOwner, {
@@ -100,6 +103,11 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                 adapter.setItems(it)
             })
         }
+        mainVm.doneToken.observe(viewLifecycleOwner,{
+            if(it){
+                vm.getMeal()
+            }
+        })
     }
 
 }
