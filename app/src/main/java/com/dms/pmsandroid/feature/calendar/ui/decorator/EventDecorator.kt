@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.calendar.ui
+package com.dms.pmsandroid.feature.calendar.ui.decorator
 
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
@@ -11,6 +11,6 @@ class EventDecorator(private val color: Int, private val date: String) : DayView
     }
 
     override fun decorate(view: DayViewFacade) {
-        view.addSpan(DotSpan(5F, color))
+        view.addSpan(DotSpan(8F, color))
     }
 }
