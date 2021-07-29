@@ -43,4 +43,5 @@
     <string name="introduce_company_detail">대마고 학생들이 취업한 회사를 소개합니다</string>
     <string name="introduce_club_detail">대마고의 동아리를 소개합니다</string>
     <string name="introduce_developer_detail">PMS 개발자를 소개합니다</string>
+    <string name="please_comment">댓글을 입력해주세요</string>
 </resources>
