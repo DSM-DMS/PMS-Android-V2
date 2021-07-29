@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.notify.ui.fragment.PhotoFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photo_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/photo_before_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->vm.galleryBeforePage()}"
+                android:src="@drawable/ic_baseline_arrow_left_24" />
+
+            <TextView
+                android:id="@+id/photo_page_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@{vm.galleryPage.toString()}"
+                android:textColor="@color/gray_300"
+                android:textSize="18sp"
+                tools:text="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/photo_next_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->vm.galleryAfterPage()}"
+                android:src="@drawable/ic_baseline_arrow_right_24" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

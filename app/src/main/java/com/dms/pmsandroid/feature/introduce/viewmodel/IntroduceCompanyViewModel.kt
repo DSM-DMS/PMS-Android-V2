@@ -7,6 +7,4 @@ import com.dms.pmsandroid.ui.MainActivity
 
 class IntroduceCompanyViewModel(private val introduceClubApiImpl: IntroduceClubApiImpl) : ViewModel() {
 
- val backPressd = MutableLiveData<Boolean>(false)
-
 }

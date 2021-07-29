@@ -16,8 +16,10 @@
         android:id="@+id/title_tv"
         android:layout_width="416dp"
         android:layout_height="97dp"
+        android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
         android:text="@string/intro_work"
+        android:background="@color/title_bar"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,17 +37,30 @@
         app:layout_constraintVertical_bias="0.479"
         app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/introduce_club_rv"
-        android:layout_width="411dp"
-        android:layout_height="633dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_tv"
-        tools:listitem="@layout/item_company"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:layout_editor_absoluteX="0dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/wait_img"
+            android:layout_width="269dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="134dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_tv"
+            app:srcCompat="@drawable/wait" />
+
+        <TextView
+            android:id="@+id/wait_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="@string/wait_company"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wait_img" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

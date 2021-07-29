@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+        <variable
+            name="title"
+            type="String" />
+        <variable
+            name="date"
+            type="String" />
+        <variable
+            name="photo"
+            type="String" />
+        <variable
+            name="id"
+            type="Integer" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{()->vm.onGalleryClicked(id)}">
+
+        <ImageView
+            android:id="@+id/gallery_iv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            app:glide_image_load="@{photo}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/gallery_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:text="@{title}"
+            app:layout_constraintBottom_toTopOf="@+id/gallery_date_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gallery_iv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="제목제목제목제목제목제목메고wwww" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/gallery_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="20dp"
+            android:text="@{date}"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gallery_iv"
+            tools:text="2021-07-06" />
+
+        <View
+            android:id="@+id/gallery_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

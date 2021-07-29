@@ -18,17 +18,11 @@ class IntroduceCompanyActivity : BaseActivity<ActivityIntroduceCompanyBinding>(R
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observeEvent()
-        backPressd()
     }
 
     override fun observeEvent() {
-        TODO("Not yet implemented")
-    }
-
-    private fun backPressd(){
-        if(vm.backPressd.value == true){
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-        }
+       binding.backImg.setOnClickListener(){
+           finish()
+       }
     }
 }

@@ -1,11 +1,18 @@
 package com.dms.pmsandroid.feature.introduce.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.databinding.ItemClubBinding
 import com.dms.pmsandroid.feature.introduce.model.ClubModel
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubDetailActivity
+import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubDetailViewModel
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
+import kotlinx.coroutines.MainScope
+import org.koin.core.context.startKoin
 
 class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
     RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
@@ -18,10 +25,13 @@ class ClubAdapter(private val viewModel: IntroduceClubViewModel) :
             binding.picture = clubList[position].pictureUrl
             binding.vm = viewModel
             binding.executePendingBindings()
+            binding.notifyChange();
         }
     }
 
-    override fun getItemCount(): Int = clubList.size
+    override fun getItemCount(): Int {
+        return clubList.size
+    }
 
     fun setItem(clubs: List<ClubModel>) {
         this.clubList = clubs as ArrayList<ClubModel>
