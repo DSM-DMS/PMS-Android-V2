@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.notify.viewmodel.NoticeDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notice_ind_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@{vm.noticeDetail.title}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/notice_ind_file_iv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="testtesteetestest" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notice_ind_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:text="@{vm.noticeDetail.uploadDate}"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notice_ind_title_tv"
+            tools:text="2020-12-12" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notice_ind_writer_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="@{vm.noticeDetail.writer}"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toStartOf="@id/notice_ind_file_iv"
+            app:layout_constraintStart_toEndOf="@+id/notice_ind_date_tv"
+            app:layout_constraintTop_toBottomOf="@id/notice_ind_title_tv"
+            tools:text="김**" />
+
+        <ImageView
+            android:id="@+id/notice_ind_file_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{()->vm.onAttachClicked()}"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_attach_file_24"
+            android:visibility="@{vm.noticeDetail.attach.size()>0?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/notice_ind_date_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/notice_ind_title_tv" />
+
+        <View
+            android:id="@+id/notice_ind_line1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notice_ind_date_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notice_ind_body_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="@{vm.noticeDetail.body}"
+            android:textColor="@color/black"
+            android:linksClickable="true"
+            android:autoLink="web"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notice_ind_line1"
+            tools:text="여기에 들어갈 내용이 공지사항의 body 이구요 이겨에 여러개 넣으면 줄바꿈이 자동으로 됩니다" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notice_ind_body_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

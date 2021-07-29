@@ -15,6 +15,8 @@ class CalendarViewModel(
     private val _events = MutableLiveData<MutableMap<String, String>>(HashMap())
     val events: LiveData<MutableMap<String, String>> get() = _events
 
+    val doneEventsSetting = MutableLiveData(false)
+
     fun loadSchedules() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         calendarApiImpl.scheduleApi(accessToken).subscribe({ response ->
@@ -42,6 +44,7 @@ class CalendarViewModel(
             }
 
         }
+        doneEventsSetting.value = true
     }
 
 }

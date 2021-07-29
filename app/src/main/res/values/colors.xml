@@ -13,6 +13,7 @@
     <color name="gray_300">#525252</color>
     <color name="gray">#999999</color>
     <color name="gray_100">#F7F7F7</color>
+    <color name="gray_50">#FCFCFC</color>
     <color name="title_bar">#F6F6F6</color>
     <color name="colorRed">#ff5454</color>
     <color name="colorBlue">#4C75B2</color>

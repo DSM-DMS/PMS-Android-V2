@@ -10,7 +10,10 @@ import com.dms.pmsandroid.databinding.FragmentInNoticeBinding
 import com.dms.pmsandroid.feature.notify.adapter.NoticeAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
 import com.dms.pmsandroid.ui.MainActivity
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.concurrent.TimeUnit
 
 class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment_in_notice) {
     override val vm: NotifyViewModel by sharedViewModel()
@@ -23,18 +26,32 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
         val noticeLayoutManager = LinearLayoutManager(binding.noticeRv.context)
         noticeLayoutManager.orientation = RecyclerView.VERTICAL
-        binding.noticeRv.run{
+        binding.noticeRv.run {
             adapter = noticeAdapter
             layoutManager = noticeLayoutManager
         }
+
         vm.getNoticeList(0)
     }
+
     override fun observeEvent() {
-        vm.noticeList.observe(viewLifecycleOwner,{
+        vm.noticeList.observe(viewLifecycleOwner, {
             noticeAdapter.setItems(it)
         })
-        vm.clickedNoticeId.observe(viewLifecycleOwner,{
-            (activity as MainActivity).startNoticeDetail(it)
+        vm.clickedNoticeId.observe(viewLifecycleOwner, {
+            (activity as MainActivity).startNoticeDetail(it, vm.clickedNoticeTitle)
         })
+        binding.noticeEt.textChanges().debounce(500, TimeUnit.MILLISECONDS).map { it.toString() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isNotBlank()) {
+                    vm.searchNotice(it)
+                    binding.noticeLl.visibility = View.GONE
+                } else {
+                    vm.resetNoticePage()
+                    vm.getNoticeList(0)
+                    binding.noticeLl.visibility = View.VISIBLE
+                }
+            }
     }
 }

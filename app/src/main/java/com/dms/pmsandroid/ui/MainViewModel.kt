@@ -33,17 +33,16 @@ class MainViewModel(
 
     private fun doLogin(email: String, password: String) {
         val request = LoginRequest(email, password)
-        loginApiImpl.loginApi(request).subscribe { response ->
-            when (response.code()) {
-                200 -> {
-                    sharedPreferenceStorage.saveInfo(response.body()!!.accessToken, "access_token")
-                }
-                else -> {
-                    needToLogin.value = true
-                }
+        loginApiImpl.loginApi(request).subscribe ({ response ->
+            if (response.isSuccessful) {
+                sharedPreferenceStorage.saveInfo(response.body()!!.accessToken, "access_token")
+            } else {
+                needToLogin.value = true
             }
             doneToken.value = true
-        }
+        },{
+            needToLogin.value = true
+        })
     }
 
 }
