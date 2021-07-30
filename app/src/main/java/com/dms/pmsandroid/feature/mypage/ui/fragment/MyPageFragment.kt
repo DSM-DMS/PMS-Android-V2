@@ -27,6 +27,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
     }
 
+    private  val dialog = MyPageAddStudentDialog()
 
     override fun observeEvent() {
 
