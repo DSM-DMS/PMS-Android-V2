@@ -47,7 +47,7 @@
             android:layout_height="32dp"
             android:layout_marginTop="24dp"
             android:ems="6"
-            android:text="{vm.certification}"
+            android:text="@={vm.certification}"
             android:hint="6자리 인증코드 입력"
             android:fontFamily="@font/nanumsquareregular"
             android:textSize="10dp"
