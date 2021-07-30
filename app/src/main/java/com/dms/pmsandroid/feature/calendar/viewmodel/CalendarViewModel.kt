@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.google.gson.JsonObject
-import com.prolificinteractive.materialcalendarview.CalendarDay
 
 class CalendarViewModel(
     private val calendarApiImpl: CalendarApiImpl,
@@ -38,15 +37,13 @@ class CalendarViewModel(
                 if (events.size() > 1) {
                     for (pos in 1 until events.size()) {
                         eventName += "\n\n🔵  ${
-                            events[pos].toString().substring(1, events[0].toString().length - 2)
+                            events[pos].toString().substring(1, events[0].toString().length - 1)
                         }"
                     }
                 }
                 _events.value!![date] = eventName
             }
-            if(CalendarDay.today().month == month){
-                doneEventsSetting.value = true
-            }
+            doneEventsSetting.value = true
         }
     }
 

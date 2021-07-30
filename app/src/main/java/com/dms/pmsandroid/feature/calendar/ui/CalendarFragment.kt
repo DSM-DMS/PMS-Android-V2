@@ -1,16 +1,17 @@
 package com.dms.pmsandroid.feature.calendar.ui
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentCalendarBinding
-import com.dms.pmsandroid.feature.calendar.ui.decorator.EventDecorator
 import com.dms.pmsandroid.feature.calendar.ui.decorator.SaturdayDecorator
+import com.dms.pmsandroid.feature.calendar.ui.decorator.SelectedDayDecorator
+import com.dms.pmsandroid.feature.calendar.ui.decorator.SundayDecorator
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import com.dms.pmsandroid.ui.MainViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -50,8 +51,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     private fun initEventTv(){
         val currentDate = CalendarDay.today()
-        val formatDate = formatDate(currentDate)
-        setEventTv(formatDate,currentDate)
+        val setDate = CalendarDay.from(currentDate.year,currentDate.month+1,currentDate.day)
+        val formatDate = formatDate(setDate)
+        setEventTv(formatDate,setDate)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -59,7 +61,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
         calendarView.run{
-            addDecorators(SaturdayDecorator())
+            addDecorators(SaturdayDecorator(), SundayDecorator(),SelectedDayDecorator(requireContext()))
             setWeekDayTextAppearance(R.style.saturdayColor)
             setDateSelected(currentDate, true)
             setOnDateChangedListener(this@CalendarFragment)
@@ -72,8 +74,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         date: CalendarDay,
         selected: Boolean
     ) {
-        val selectedDate = formatDate(date)
-        setEventTv(selectedDate,date)
+        val setDate = CalendarDay.from(date.year,date.month+1,date.day)
+        val selectedDate = formatDate(setDate)
+        setEventTv(selectedDate,setDate)
     }
 
     private fun formatDate(date: CalendarDay): String {
@@ -101,7 +104,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
-
+        Log.d("month","$date")
     }
 
 }
