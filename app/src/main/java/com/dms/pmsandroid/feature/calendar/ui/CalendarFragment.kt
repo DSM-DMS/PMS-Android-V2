@@ -1,7 +1,6 @@
 package com.dms.pmsandroid.feature.calendar.ui
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -9,22 +8,27 @@ import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentCalendarBinding
+import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
+import com.dms.pmsandroid.feature.calendar.ui.decorator.EventDecorator
+import com.dms.pmsandroid.feature.calendar.ui.decorator.SaturdayDecorator
+import com.dms.pmsandroid.feature.calendar.ui.decorator.SelectedDayDecorator
+import com.dms.pmsandroid.feature.calendar.ui.decorator.SundayDecorator
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import com.dms.pmsandroid.ui.MainViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar),
-    OnDateSelectedListener {
+    OnDateSelectedListener, OnMonthChangedListener {
 
     override val vm: CalendarViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
 
-    private lateinit var selectedCurrentDay:String
-    private lateinit var currentDay: CalendarDay
+    private val setMonth = arrayListOf(false,false,false,false,false,false,false,false,false,false,false,false)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,28 +36,56 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         setCalendarView()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
         mainVm.doneToken.observe(viewLifecycleOwner, {
             if (it) {
                 vm.loadSchedules()
             }
         })
-        vm.doneEventsSetting.observe(viewLifecycleOwner,{
-            if(it){
-                setEventTv(selectedCurrentDay,currentDay)
+        vm.doneEventsSetting.observe(viewLifecycleOwner, {
+            if (it) {
+                initEventTv()
             }
         })
 
     }
 
+    private fun initEventTv() {
+        val currentDate = CalendarDay.today()
+        setMonth[currentDate.month] = true
+        val setDate = CalendarDay.from(currentDate.year, currentDate.month + 1, currentDate.day)
+        val formatDate = formatDate(setDate)
+        val eventKeys = vm.events.value!!.keys
+        val decorators = ArrayList<EventDecorator>()
+        for (key in eventKeys) {
+            if (key.month == setDate.month) {
+                decorators.add(EventDecorator(key.day, vm.events.value!![key]!!.eventSize))
+            } else if (key.month > setDate.month) {
+                break
+            }
+        }
+        binding.calendarView.addDecorators(decorators)
+
+        setEventTv(formatDate, setDate)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCalendarView() {
+        binding.calendarEventTv.text = "일정을 읽어오는중입니다..."
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
-        val formatDate = formatDate(currentDate)
-        setEventTv(formatDate,currentDate)
-        calendarView.setDateSelected(currentDate, true)
-        calendarView.setOnDateChangedListener(this)
+        calendarView.run {
+            addDecorators(
+                SaturdayDecorator(),
+                SundayDecorator(),
+                SelectedDayDecorator(requireContext())
+            )
+            setWeekDayTextAppearance(R.style.saturdayColor)
+            setDateSelected(currentDate, true)
+            setOnDateChangedListener(this@CalendarFragment)
+            setOnMonthChangedListener(this@CalendarFragment)
+        }
     }
 
     override fun onDateSelected(
@@ -61,10 +93,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         date: CalendarDay,
         selected: Boolean
     ) {
-        val selectedDate = formatDate(date)
-        this.selectedCurrentDay = selectedDate
-        this.currentDay = date
-        setEventTv(selectedDate,date)
+        val setDate = CalendarDay.from(date.year, date.month + 1, date.day)
+        val selectedDate = formatDate(setDate)
+        setEventTv(selectedDate, setDate)
     }
 
     private fun formatDate(date: CalendarDay): String {
@@ -84,11 +115,29 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     @SuppressLint("SetTextI18n")
     private fun setEventTv(date: String, calendarDay: CalendarDay) {
-        val event = vm.events.value?.get(date) ?: "일정이 없습니다"
-        with(binding){
+        val key = EventKeyModel(calendarDay.month, date)
+        val event = vm.events.value?.get(key)?.eventName ?: "일정이 없습니다"
+        with(binding) {
             calendarEventTv.text = event
             calendarDateTv.text = "${calendarDay.month}월${calendarDay.day}일"
         }
+    }
+
+    override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
+        if(!setMonth[date?.month?:0]){
+            val month = (date?.month ?: 0) + 1
+            val eventKeys = vm.events.value!!.keys
+
+            val decorators = ArrayList<EventDecorator>()
+            for (key in eventKeys) {
+                if (key.month == month) {
+                    decorators.add(EventDecorator(key.day, vm.events.value!![key]!!.eventSize))
+                }
+            }
+            binding.calendarView.addDecorators(decorators)
+            setMonth[date?.month?:0] = true
+        }
+
     }
 
 }
