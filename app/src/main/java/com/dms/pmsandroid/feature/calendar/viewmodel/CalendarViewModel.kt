@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
+import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
+import com.dms.pmsandroid.feature.calendar.model.EventModel
 import com.google.gson.JsonObject
 
 class CalendarViewModel(
@@ -12,8 +14,8 @@ class CalendarViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
-    private val _events = MutableLiveData<MutableMap<String, String>>(HashMap())
-    val events: LiveData<MutableMap<String, String>> get() = _events
+    private val _events = MutableLiveData<MutableMap<EventKeyModel, EventModel>>(HashMap())
+    val events: LiveData<MutableMap<EventKeyModel, EventModel>> get() = _events
 
     val doneEventsSetting = MutableLiveData(false)
 
@@ -46,7 +48,8 @@ class CalendarViewModel(
                         dotsIndex+=1
                     }
                 }
-                _events.value!![date] = eventName
+                val key = EventKeyModel(month,date)
+                _events.value!![key] = EventModel(eventName,dotsIndex)
             }
             doneEventsSetting.value = true
         }

@@ -5,9 +5,9 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.text.style.LineBackgroundSpan
 
-class CustomMultipleDotSpan : LineBackgroundSpan {
+class CustomMultipleDotSpan(private val dots:Int) : LineBackgroundSpan {
 
-    private val radius = 8F
+    private val radius = 7F
     private val dotColor = arrayListOf(
         Color.BLUE,
         Color.RED,
@@ -27,7 +27,7 @@ class CustomMultipleDotSpan : LineBackgroundSpan {
         end: Int,
         lineNumber: Int
     ) {
-        val total = 3
+        val total = if(dots>3) 3 else dots
         var leftMost = (total - 1) * -12
 
         for(i in 0 until total){
