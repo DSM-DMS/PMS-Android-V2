@@ -14,6 +14,7 @@ import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubDetailViewMod
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.max
 
 class IntroduceClubDetailActivity :
     BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club_detail) {
@@ -39,12 +40,12 @@ class IntroduceClubDetailActivity :
             var getMember = ""
             if (it.member != null) {
                 val size = it.member.size - 1
-                getMember += "부장 - ${it.member[0]}\n" + "\n"+"부원 - "
-                for (posision in 1..size) {
-                    getMember += it.member[posision] +", "
+                getMember += "부장 - ${it.member[0]}\n" + "\n" + "부원 - "
+                for (posistion in 1..size-1) {
+                    getMember += it.member[posistion] + ", "
                 }
+                getMember += "${it.member.last()}"
             }
-
             binding.run {
                 member = getMember
                 title = it.title
@@ -53,7 +54,7 @@ class IntroduceClubDetailActivity :
             }
         })
         binding.detailBackImg.setOnClickListener {
-           finish()
+            finish()
         }
     }
 }

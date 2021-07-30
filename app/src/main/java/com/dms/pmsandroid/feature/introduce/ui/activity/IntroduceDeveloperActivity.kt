@@ -31,7 +31,7 @@ class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBindin
         )
         intro_developer_rc.adapter = DeveloperAdapter(developers)
         intro_developer_rc.adapter!!.notifyDataSetChanged()
-        binding.introDeveloperRc.addItemDecoration(VerticalItemDecorator(30))
+        binding.introDeveloperRc.addItemDecoration(VerticalItemDecorator(10))
 
     }
 
