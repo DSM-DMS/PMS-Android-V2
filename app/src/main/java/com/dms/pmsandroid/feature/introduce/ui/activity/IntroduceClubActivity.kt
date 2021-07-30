@@ -2,12 +2,9 @@ package com.dms.pmsandroid.feature.introduce.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dms.pmsandroid.HorizontalItemDecorator
+import com.dms.pmsandroid.feature.introduce.ui.HorizontalItemDecorator
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.VerticalItemDecorator
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceClubBinding
 import com.dms.pmsandroid.feature.introduce.adapter.ClubAdapter
