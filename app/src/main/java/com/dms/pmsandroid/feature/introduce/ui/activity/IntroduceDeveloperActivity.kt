@@ -2,9 +2,7 @@ package com.dms.pmsandroid.feature.introduce.ui.activity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
-import com.dms.pmsandroid.HorizontalItemDecorator
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.VerticalItemDecorator
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceDeveloperBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
