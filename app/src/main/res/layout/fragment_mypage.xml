@@ -7,13 +7,18 @@
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+        <variable
+            name="pluspoint"
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+        <variable
+            name="minuspoint"
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
 
     </data>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_back"
-        tools:context=".feature.mypage.fragment.MyPageFragment">
+        android:background="@drawable/main_back">
 
 
         <androidx.cardview.widget.CardView
@@ -26,7 +31,28 @@
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="123dp" />
+            tools:layout_editor_absoluteY="123dp" >
+
+            <TextView
+                android:id="@+id/student_pluspoint_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/point_size"
+                android:fontFamily="@font/nanumsquarebold"
+                android:layout_marginLeft="60dp"
+                android:text="@string/plus_point" />
+
+            <TextView
+                android:id="@+id/student_pluspoint_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="20dp"
+                android:text="00"
+                android:textSize="@dimen/point_int" />
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/student_minusspoint_img"
@@ -38,9 +64,28 @@
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="123dp" />
+            tools:layout_editor_absoluteY="123dp" >
 
+            <TextView
+                android:id="@+id/student_minuspoint_title_tv"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="62dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:textColor="@color/red"
+                android:textSize="@dimen/point_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minus_point"/>
 
+            <TextView
+                android:id="@+id/student_minuspoint_tv"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:textSize="@dimen/point_int"/>
+        </androidx.cardview.widget.CardView>
 
 
         <TextView
@@ -74,9 +119,9 @@
             android:layout_marginLeft="55dp"
             android:backgroundTint="@color/button_background"
             android:text="@string/add_student"
+            android:fontFamily="@font/nanumsquareregular"
             android:textColor="@color/black"
             android:elevation="30dp"
-            android:onClick="@"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

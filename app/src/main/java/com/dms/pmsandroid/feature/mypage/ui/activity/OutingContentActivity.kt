@@ -1,7 +1,5 @@
-package com.dms.pmsandroid.feature.mypage.activity
+package com.dms.pmsandroid.feature.mypage.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityOutingContentBinding

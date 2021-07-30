@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.mypage.activity
+package com.dms.pmsandroid.feature.mypage.ui.activity
 
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity

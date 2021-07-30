@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.mypage.activity.OutingContentActivity"></activity>
+        <activity android:name="com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity"></activity>
         <activity android:name=".feature.notify.ui.activity.NoticeDetailActivity" />
         <activity android:name=".feature.notify.ui.activity.GalleryDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity" />
@@ -31,7 +31,7 @@
         </activity>
         <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity" />
-        <activity android:name=".feature.mypage.activity.PointContentActivity" />
+        <activity android:name="com.dms.pmsandroid.feature.mypage.ui.activity.PointContentActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceClubActivity" />
     </application>
 

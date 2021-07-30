@@ -1,4 +1,3 @@
 package com.dms.pmsandroid.feature.mypage.model
 
-class StudentCertificationResponse {
-}
+data class StudentCertificationResponse(val number : String)

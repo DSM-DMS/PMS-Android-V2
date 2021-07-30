@@ -38,4 +38,6 @@
     <string name="pass">확인</string>
     <string name="add_student">학생을 추가해주세요</string>
     <string name="outing_content">외출내역</string>
+    <string name="plus_point">상점</string>
+    <string name="minus_point">벌점</string>
 </resources>

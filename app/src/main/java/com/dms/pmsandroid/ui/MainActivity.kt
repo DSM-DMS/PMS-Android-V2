@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.ui
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
@@ -18,7 +17,7 @@ import com.dms.pmsandroid.feature.meal.fragment.MealFragment
 import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment
-import com.dms.pmsandroid.feature.mypage.fragment.MyPageFragment
+import com.dms.pmsandroid.feature.mypage.ui.fragment.MyPageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -73,6 +72,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         noticeIntent.putExtra("id",id)
         noticeIntent.putExtra("title",title)
         startActivity(noticeIntent)
+    }
+
+    fun startDialog(){
+
     }
 
     private val itemSelectedListener =
