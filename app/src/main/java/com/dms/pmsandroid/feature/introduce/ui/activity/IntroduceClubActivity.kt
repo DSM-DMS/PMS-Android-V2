@@ -36,6 +36,9 @@ class IntroduceClubActivity :
             vm.clickedClubId.observe(this@IntroduceClubActivity, {
                     startClubDetail(it)
             })
+            binding.backImg.setOnClickListener {
+                finish()
+            }
         }
     }
 

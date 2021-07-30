@@ -7,6 +7,8 @@ import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceDeveloperBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
 import com.dms.pmsandroid.feature.introduce.model.DevelopModel
+import com.dms.pmsandroid.feature.introduce.ui.HorizontalItemDecorator
+import com.dms.pmsandroid.feature.introduce.ui.VerticalItemDecorator
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,6 +31,7 @@ class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBindin
         )
         intro_developer_rc.adapter = DeveloperAdapter(developers)
         intro_developer_rc.adapter!!.notifyDataSetChanged()
+        binding.introDeveloperRc.addItemDecoration(VerticalItemDecorator(30))
 
     }
 
