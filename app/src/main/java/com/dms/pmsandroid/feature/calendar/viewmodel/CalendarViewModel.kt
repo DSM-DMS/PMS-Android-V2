@@ -26,19 +26,24 @@ class CalendarViewModel(
         }
     }
 
+    private val dots = arrayListOf("🔵","🔴","🟢","🟡","🟣","🟠")
+
     private fun parseEvents(body: JsonObject) {
         for (month in 1..12) {
             val monthEvents = body.getAsJsonObject("$month")
             val dates = monthEvents.keySet()
             for (date in dates) {
-                var eventName = "🔵  "
+                var dotsIndex = 0
+                var eventName = "${dots[dotsIndex]}  "
+                dotsIndex+=1
                 val events = monthEvents.getAsJsonArray(date)
                 eventName += events[0].toString().substring(1, events[0].toString().length - 1)
                 if (events.size() > 1) {
                     for (pos in 1 until events.size()) {
-                        eventName += "\n\n🔵  ${
+                        eventName += "\n\n${dots[dotsIndex]}  ${
                             events[pos].toString().substring(1, events[0].toString().length - 1)
                         }"
+                        dotsIndex+=1
                     }
                 }
                 _events.value!![date] = eventName
