@@ -2,13 +2,13 @@ package com.dms.pmsandroid.feature.introduce.ui.activity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
-import com.dms.pmsandroid.HorizontalItemDecorator
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.VerticalItemDecorator
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceDeveloperBinding
 import com.dms.pmsandroid.feature.introduce.adapter.DeveloperAdapter
 import com.dms.pmsandroid.feature.introduce.model.DevelopModel
+import com.dms.pmsandroid.feature.introduce.ui.HorizontalItemDecorator
+import com.dms.pmsandroid.feature.introduce.ui.VerticalItemDecorator
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,6 +31,7 @@ class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBindin
         )
         intro_developer_rc.adapter = DeveloperAdapter(developers)
         intro_developer_rc.adapter!!.notifyDataSetChanged()
+        binding.introDeveloperRc.addItemDecoration(VerticalItemDecorator(10))
 
     }
 

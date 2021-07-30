@@ -30,26 +30,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_meal_banner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:scrollIndicators="none"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/club_detail_img"
-            app:tabBackground="@drawable/selector_tab_blue"
-            app:tabGravity="center"
-            app:tabIndicator="@null"
-            app:tabPaddingEnd="@dimen/dot_padding"
-            app:tabPaddingStart="@dimen/dot_padding" />
-
         <TextView
             android:id="@+id/title_tv"
             android:layout_width="416dp"
             android:layout_height="97dp"
             android:gravity="center"
+            android:fontFamily="@font/nanumsquarebold"
+            android:background="@color/title_bar"
             android:text="@{title}"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +50,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/title_tv"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{()->vm.close()}"
             app:layout_constraintHorizontal_bias="0.087"
             app:layout_constraintStart_toStartOf="@+id/title_tv"
             app:layout_constraintTop_toTopOf="@+id/title_tv"
@@ -74,7 +60,7 @@
             android:id="@+id/view"
             android:layout_width="320dp"
             android:layout_height="2dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="30dp"
             android:background="@color/border_gray"
             app:layout_constraintBottom_toTopOf="@+id/club_detail_img"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,34 +71,35 @@
             android:id="@+id/view2"
             android:layout_width="320dp"
             android:layout_height="2dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="30dp"
             android:background="@color/border_gray"
-            app:layout_constraintBottom_toTopOf="@+id/club_detail_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/club_detail_img" />
 
         <TextView
             android:id="@+id/club_detail_tv"
             android:layout_width="wrap_content"
             android:layout_height="53dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nanumsquarebold"
             android:text="@{title}"
             android:textSize="40dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/intro_club_detail_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <ImageView
             android:id="@+id/club_detail_img"
-            android:layout_width="236dp"
-            android:layout_height="126dp"
             glide_image_load="@{url}"
-            android:layout_marginTop="38dp"
+            android:layout_width="wrap_content"
+            android:layout_height="126dp"
+            android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_tv"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -121,30 +108,31 @@
             android:id="@+id/intro_club_detail_img"
             android:layout_width="303dp"
             android:layout_height="113dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="12dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/intro_developer_img"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/club_detail_tv">
 
             <TextView
                 android:id="@+id/textView"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:layout_marginTop="19dp"
-                android:layout_marginLeft="27dp"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="@string/intro_detail_club" />
+                android:layout_marginLeft="27dp"
+                android:layout_marginTop="19dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/intro_detail_club"
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/view3"
+                android:layout_width="3dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_width="3dp"
-                android:background="@color/blue"
-                android:layout_height="20dp" />
+                android:background="@color/blue" />
 
             <TextView
                 android:id="@+id/input_content_tv"
@@ -152,42 +140,45 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
+                android:fontFamily="@font/nanumsquareregular"
                 android:text="@{explanation}" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/intro_developer_img"
-            android:layout_width="303dp"
-            android:layout_height="175dp"
-            android:layout_marginBottom="32dp"
+            android:layout_width="301dp"
+            android:layout_height="199dp"
+            android:layout_marginTop="12dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intro_club_detail_img">
 
             <TextView
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:layout_marginTop="19dp"
-                android:layout_marginLeft="27dp"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="@string/intro_detail_member" />
+                android:layout_marginLeft="27dp"
+                android:layout_marginTop="19dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/intro_detail_member"
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
             <View
+                android:layout_width="3dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_width="3dp"
-                android:background="@color/blue"
-                android:layout_height="20dp" />
+                android:background="@color/blue" />
 
             <TextView
                 android:id="@+id/input_member_tv"
-                android:layout_width="240dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="239dp"
+                android:layout_height="132dp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/nanumsquareregular"
                 android:text="@{member}" />
         </androidx.cardview.widget.CardView>
 
