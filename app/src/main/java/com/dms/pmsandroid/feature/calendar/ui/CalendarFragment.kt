@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentCalendarBinding
+import com.dms.pmsandroid.feature.calendar.ui.decorator.EventDecorator
 import com.dms.pmsandroid.feature.calendar.ui.decorator.SaturdayDecorator
 import com.dms.pmsandroid.feature.calendar.ui.decorator.SelectedDayDecorator
 import com.dms.pmsandroid.feature.calendar.ui.decorator.SundayDecorator
@@ -61,7 +62,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
         calendarView.run{
-            addDecorators(SaturdayDecorator(), SundayDecorator(),SelectedDayDecorator(requireContext()))
+            addDecorators(SaturdayDecorator(), SundayDecorator(),SelectedDayDecorator(requireContext()),EventDecorator("2021-07-30"))
             setWeekDayTextAppearance(R.style.saturdayColor)
             setDateSelected(currentDate, true)
             setOnDateChangedListener(this@CalendarFragment)

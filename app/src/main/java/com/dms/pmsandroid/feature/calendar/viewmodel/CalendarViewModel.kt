@@ -41,7 +41,7 @@ class CalendarViewModel(
                 if (events.size() > 1) {
                     for (pos in 1 until events.size()) {
                         eventName += "\n\n${dots[dotsIndex]}  ${
-                            events[pos].toString().substring(1, events[0].toString().length - 1)
+                            events[pos].toString().substring(1, events[pos].toString().length - 1)
                         }"
                         dotsIndex+=1
                     }
