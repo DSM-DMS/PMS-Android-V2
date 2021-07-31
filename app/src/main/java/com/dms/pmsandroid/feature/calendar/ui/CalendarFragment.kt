@@ -61,8 +61,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         for (key in eventKeys) {
             if (key.month == setDate.month) {
                 decorators.add(EventDecorator(key.day, vm.events.value!![key]!!.eventSize))
-            } else if (key.month > setDate.month) {
-                break
             }
         }
         binding.calendarView.addDecorators(decorators)
