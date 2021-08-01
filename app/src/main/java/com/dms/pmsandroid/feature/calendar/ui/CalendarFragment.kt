@@ -28,20 +28,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override val vm: CalendarViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
 
-    private val setMonth = arrayListOf(
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-    )
+    private val setMonth = HashMap<Int,Boolean>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,6 +52,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     private fun initEventTv() {
+        binding.calendarPb.visibility = View.VISIBLE
         val currentDate = CalendarDay.today()
 
         setMonth[currentDate.month] = true
@@ -85,6 +73,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         binding.calendarView.addDecorators(decorators)
 
         setEventTv(formatDate, setCurrentDate)
+        binding.calendarPb.visibility = View.INVISIBLE
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -142,7 +131,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
         val monthIndex = date?.month ?: 0
-        if (!setMonth[monthIndex]) {
+        if (setMonth[monthIndex]!=true) {
             setMonth[monthIndex] = true
             setMonth[monthIndex + 1] = true
             val month = monthIndex + 1
