@@ -52,7 +52,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     private fun initEventTv() {
-        binding.calendarPb.visibility = View.VISIBLE
         val currentDate = CalendarDay.today()
 
         setMonth[currentDate.month] = true
@@ -73,11 +72,12 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         binding.calendarView.addDecorators(decorators)
 
         setEventTv(formatDate, setCurrentDate)
-        binding.calendarPb.visibility = View.INVISIBLE
+        binding.calendarShimmerContainer.hideShimmer()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCalendarView() {
+        binding.calendarShimmerContainer.startShimmer()
         binding.calendarEventTv.text = "일정을 읽어오는중입니다..."
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
@@ -131,13 +131,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
         val monthIndex = date?.month ?: 0
-        if (setMonth[monthIndex]!=true) {
+        if (setMonth[monthIndex]!=true||setMonth[monthIndex+1]!=true) {
             setMonth[monthIndex] = true
             setMonth[monthIndex + 1] = true
             val month = monthIndex + 1
             val eventKeys = vm.events.value!!.keys
 
             val decorators = ArrayList<EventDecorator>()
+
             for (key in eventKeys) {
                 if (key.month == month || key.month == month + 1) {
                     decorators.add(EventDecorator(key.day, vm.events.value!![key]!!.eventSize))
