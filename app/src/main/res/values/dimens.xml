@@ -4,4 +4,6 @@
     <dimen name="dot_padding">8dp</dimen>
     <dimen name="intro_main">17dp</dimen>
     <dimen name="intro_second">12dp</dimen>
+    <dimen name="point_size">15dp</dimen>
+    <dimen name="point_int">30dp</dimen>
 </resources>

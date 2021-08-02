@@ -1,6 +1,8 @@
 package com.dms.pmsandroid.feature.notify.viewmodel
 
 import android.util.Log
+
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,11 +36,14 @@ class NoticeDetailViewModel(
 
     var noticeId = -1
 
+    val attachClicked = MutableLiveData(false)
+
     fun getNoticeDetail(id: Int) {
         noticeId = id
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeDetail(accessToken, id).subscribe { response ->
             if (response.isSuccessful) {
+
                 getReComments(accessToken, response.body()!!.comment)
                 _noticeDetail.value = response.body()
             }
@@ -74,6 +79,12 @@ class NoticeDetailViewModel(
     }
 
     fun onAttachClicked() {
+                _noticeDetail.value = response.body()
+            }
+        }
+    }
+
+    fun onAttachClicked(){
         attachClicked.value = true
     }
 }
