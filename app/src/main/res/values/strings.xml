@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">PmsAndroid</string>
+    <string name="app_name">PMS</string>
     <string name="login_title">Parents Management Service</string>
     <string name="login">로그인</string>
     <string name="signup">회원가입</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="loading">로딩중</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="please_email">이메일을 입력해주세요</string>
     <string name="please_password">비밀번호를 입력해주세요</string>
     <string name="please_password_again">비밀번호를 한번 더 입력해주세요</string>
     <string name="title_calendar">일정</string>
     <string name="title_meal">급식</string>
-    <string name="title_notify">공지</string>
+    <string name="title_notify">소식</string>
     <string name="title_info">소개</string>
     <string name="title_mypage">마이페이지</string>
     <string name="please_name">이름을 입력해주세요</string>
@@ -21,4 +21,27 @@
     <string name="intro_club">동아리 소개</string>
     <string name="children_club">자녀의 동아리</string>
     <string name="intro_main_dms">대마고의 자랑거리를 소개합니다</string>
+    <string name="save_login_info">로그인정보 저장</string>
+    <string name="school_notify">학교소식</string>
+    <string name="pms">PMS</string>
+    <string name="notify_subtitle">는 학교생활의 전반적인 정보를 제공합니다</string>
+    <string name="photo_album">포토앨법</string>
+    <string name="notice">공지사항</string>
+    <string name="home_notice">가정통신문</string>
+    <string name="please_search_notice">검색할 공지 제목을 입력하세요</string>
+    <string name="show_file">미리보기</string>
+    <string name="search_home_notice">검색할 가정통신문 제목을 입력하세요</string>
+    <string name="intro_detail_club">동아리 소개</string>
+    <string name="intro_detail_member">동아리 멤버</string>
+    <string name="point_content">상/벌점 내역</string>
+    <string name="check_student_code">자녀확인 코드를 입력해주세요</string>
+    <string name="cancel">취소</string>
+    <string name="pass">확인</string>
+    <string name="add_student">학생을 추가해주세요</string>
+    <string name="company_detail">취업처 소개</string>
+    <string name="wait_company">아직 준비중 입니다</string>
+    <string name="introduce_company_detail">대마고 학생들이 취업한 회사를 소개합니다</string>
+    <string name="introduce_club_detail">대마고의 동아리를 소개합니다</string>
+    <string name="introduce_developer_detail">PMS 개발자를 소개합니다</string>
+    <string name="please_comment">댓글을 입력해주세요</string>
 </resources>

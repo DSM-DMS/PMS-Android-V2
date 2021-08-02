@@ -13,21 +13,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override val vm: LoginViewModel by sharedViewModel()
 
     override fun observeEvent() {
-        vm.toastMessage.observe(viewLifecycleOwner, {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-        })
-        vm.userEmail.observe(viewLifecycleOwner, {
-            vm.emailDone.value = !it.isNullOrBlank()
-            checkDone()
-        })
-        vm.userPassword.observe(viewLifecycleOwner,{
-            vm.passwordDone.value = !it.isNullOrBlank()
-            checkDone()
-        })
+        vm.run {
+            toastMessage.observe(viewLifecycleOwner, {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+            userEmail.observe(viewLifecycleOwner, {
+                vm.emailDone.value = !it.isNullOrBlank()
+                checkDone()
+            })
+            userPassword.observe(viewLifecycleOwner, {
+                vm.passwordDone.value = !it.isNullOrBlank()
+                checkDone()
+            })
+        }
     }
 
-    private fun checkDone(){
-        vm.doneInput.value = vm.emailDone.value!!&&vm.passwordDone.value!!
+    private fun checkDone() {
+        vm.doneInput.value = vm.emailDone.value!! && vm.passwordDone.value!!
     }
 
 }

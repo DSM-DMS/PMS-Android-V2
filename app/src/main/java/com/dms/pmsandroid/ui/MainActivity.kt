@@ -2,29 +2,33 @@ package com.dms.pmsandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroClubActivity
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
+import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
+import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
+import com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment
+import com.dms.pmsandroid.feature.mypage.fragment.MyPageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override val vm: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_PmsAndroid)
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
         setFragment()
-        observeEvent()
     }
 
     override fun onResume() {
@@ -53,8 +57,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun startClub() {
-        val clubintent = Intent(this, IntroClubActivity::class.java)
+        val clubintent = Intent(this, IntroduceClubActivity::class.java)
         startActivity(clubintent)
+    }
+
+    fun startGalleryDetail(id:Int){
+        val galleryIntent = Intent(this,GalleryDetailActivity::class.java)
+        galleryIntent.putExtra("id",id)
+        startActivity(galleryIntent)
+    }
+
+    fun startNoticeDetail(id:Int,title:String){
+        val noticeIntent = Intent(this,NoticeDetailActivity::class.java)
+        noticeIntent.putExtra("id",id)
+        noticeIntent.putExtra("title",title)
+        startActivity(noticeIntent)
     }
 
 
@@ -66,6 +83,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val calendarFragment = CalendarFragment()
     private val introduceFragment = IntroduceFragment()
     private val mealFragment = MealFragment()
+    private val notifyFragment = NotifyFragment()
+    private val mypageFragment = MyPageFragment()
     private var activeFragment: Fragment = calendarFragment
 
     private fun initFragment() {
@@ -78,6 +97,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container, mealFragment)
             .hide(mealFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container,notifyFragment)
+            .hide(notifyFragment).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_container, mypageFragment)
+            .hide(mypageFragment).commit()
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -98,10 +123,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     changeFragment(mealFragment)
                 }
                 R.id.menu_mypage_it -> {
-
+                    changeFragment(mypageFragment)
                 }
                 R.id.menu_notify_it -> {
-
+                    changeFragment(notifyFragment)
                 }
             }
         })

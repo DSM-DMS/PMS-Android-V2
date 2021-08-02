@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
@@ -18,15 +17,18 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="개발자 소개"
+            android:text="@string/intro_developer"
             android:textSize="20dp"
+            android:background="@drawable/topbar"
             android:gravity="center"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/introducing_develope_rv"
             android:layout_width="match_parent"
-            android:layout_height="630dp"
-            android:layout_marginTop="100dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            app:spanCount="2"
+            tools:listitem="@layout/item_developer"/>
 
         <ImageView
             android:id="@+id/back_ic"

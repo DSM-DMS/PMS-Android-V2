@@ -3,26 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="205dp"
-        android:layout_height="272dp">
+        android:layout_width="186dp"
+        android:layout_height="250dp">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="185dp"
             android:layout_height="244dp"
+            android:layout_marginStart="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/developer_item" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/dev_img"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="101dp"
+            android:layout_height="105dp"
             android:layout_marginTop="44dp"
             app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp"
+            app:civ_border_width="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />

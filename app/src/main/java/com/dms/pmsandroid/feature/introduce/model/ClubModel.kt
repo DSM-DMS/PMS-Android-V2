@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.introduce.model
 
-import java.net.URL
+import com.google.gson.annotations.SerializedName
 
-data class ClubModel(val clubName: String, val pictureUrl: String)
+
+data class ClubModel(@SerializedName("club-name")val clubName: String?, @SerializedName("picture-uri")val pictureUrl: String?)

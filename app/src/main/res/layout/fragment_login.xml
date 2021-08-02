@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel" />
@@ -38,8 +41,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            app:boxBackgroundColor="@android:color/transparent"
             android:background="@android:color/transparent"
+            app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
             app:layout_constraintTop_toBottomOf="@+id/login_title_tv">
@@ -51,8 +54,8 @@
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_email"
-                android:text="@={vm.userEmail}"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:text="@={vm.userEmail}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -62,8 +65,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:boxBackgroundColor="@android:color/transparent"
             android:background="@android:color/transparent"
+            app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
             app:layout_constraintTop_toBottomOf="@+id/login_email_layout"
@@ -76,9 +79,9 @@
                 android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="16dp"
                 android:hint="@string/please_password"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword"
-                android:text="@={vm.userPassword}"
-                android:imeOptions="actionDone"/>
+                android:text="@={vm.userPassword}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -98,7 +101,8 @@
             android:layout_marginTop="40dp"
             android:background="@{vm.doneInput?@drawable/shape_border_blue:@drawable/shape_border_gray}"
             android:onClick="@{()->vm.login()}"
-            android:text="@string/login"
+            android:padding="5dp"
+            android:text="@{vm.inProgress?@string/loading:@string/login}"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -110,15 +114,23 @@
             android:id="@+id/login_register_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:onClick="@{()->vm.needRegister()}"
+            android:padding="10dp"
             android:text="@string/ask_need_register"
             android:textColor="@color/blue"
-            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_button" />
+            app:layout_constraintTop_toBottomOf="@+id/login_auto_cb" />
 
+        <CheckBox
+            android:id="@+id/login_auto_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_login_info"
+            android:checked="@={vm.autoLogin}"
+            app:buttonTint="@color/blue"
+            app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
+            app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
