@@ -35,17 +35,15 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
     }
 
     override fun observeEvent() {
-        vm.noticeList.observe(viewLifecycleOwner, {
-            noticeAdapter.setItems(it)
-        })
+        vm.run {
+            noticeList.observe(viewLifecycleOwner, {
+                noticeAdapter.setItems(it)
+            })
+            clickedNoticeId.observe(viewLifecycleOwner, {
+                (activity as MainActivity).startNoticeDetail(it, vm.clickedNoticeTitle)
+            })
+        }
 
-        vm.clickedNoticeId.observe(viewLifecycleOwner, {
-            (activity as MainActivity).startNoticeDetail(it, vm.clickedNoticeTitle)
-
-        vm.clickedNoticeId.observe(viewLifecycleOwner,{
-            (activity as MainActivity).startNoticeDetail(it,vm.clickedNoticeTitle)
-
-        })
         binding.noticeEt.textChanges().debounce(500, TimeUnit.MILLISECONDS).map { it.toString() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

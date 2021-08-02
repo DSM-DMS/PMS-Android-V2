@@ -1,7 +1,6 @@
 package com.dms.pmsandroid.feature.notify.ui.activity
 
 import android.os.Bundle
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,13 +12,9 @@ import com.dms.pmsandroid.feature.notify.ui.NoticeAttachDialog
 import com.dms.pmsandroid.feature.notify.viewmodel.NoticeDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class NoticeDetailActivity :
     BaseActivity<ActivityNoticeDetailBinding>(R.layout.activity_notice_detail) {
     override val vm: NoticeDetailViewModel by viewModel()
-
-class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(R.layout.activity_notice_detail) {
-    override val vm:NoticeDetailViewModel by viewModel()
 
     private val noticeAdapter by lazy {
         NoticeDetailAdapter(vm)
@@ -50,66 +45,41 @@ class NoticeDetailActivity : BaseActivity<ActivityNoticeDetailBinding>(R.layout.
         binding.noticeBackBtn.setOnClickListener {
             finish()
         }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val id = intent.getIntExtra("id",0)
-        val title = intent.getStringExtra("title")
-
         vm.getNoticeDetail(id)
-
-        val noticeLayoutManager = LinearLayoutManager(binding.noticeDetailRv.context)
-        noticeLayoutManager.orientation = RecyclerView.VERTICAL
-
-        binding.noticeDetailRv.run{
-            adapter = noticeAdapter
-            layoutManager = noticeLayoutManager
-        }
-
-        binding.noticeDetailTitleTv.text = title
-        binding.noticeBackBtn.setOnClickListener {
-            finish()
-        }
     }
 
     private val dialog = NoticeAttachDialog()
     override fun observeEvent() {
+        vm.run {
+            noticeDetail.observe(this@NoticeDetailActivity, {
+                noticeAdapter.setItems(it.comment)
+            })
 
-        vm.noticeDetail.observe(this, {
-            noticeAdapter.setItems(it.comment)
-        })
-        vm.attachClicked.observe(this, {
-            if (it) {
-                dialog.show(supportFragmentManager, "AttachDialogFragment")
-                vm.attachClicked.value = false
-            }
-        })
-        vm.doneReComments.observe(this, {
-            if (it) {
-                vm.doneReComments.value = false
-                noticeAdapter.notifyDataSetChanged()
-            }
-        })
-        vm.resetComments.observe(this, {
-            keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken,0)
-            doneInput = HashMap()
-        })
-        vm.clickedCommentId.observe(this,{
-            if(it!=null){
-                binding.noticeDetailEt.requestFocus()
-                keyBoardManager.showSoftInput(binding.noticeDetailEt,0)
-            }
-        })
+            attachClicked.observe(this@NoticeDetailActivity, {
+                if (it) {
+                    dialog.show(supportFragmentManager, "AttachDialogFragment")
+                    vm.attachClicked.value = false
+                }
+            })
 
-        vm.noticeDetail.observe(this,{
-            noticeAdapter.notifyDataSetChanged()
-        })
-        vm.attachClicked.observe(this,{
-            if(it){
-                dialog.show(supportFragmentManager,"AttachDialogFragment")
-                vm.attachClicked.value = false
-            }
-        })
+            doneReComments.observe(this@NoticeDetailActivity, {
+                if (it) {
+                    vm.doneReComments.value = false
+                    noticeAdapter.notifyDataSetChanged()
+                }
+            })
+
+            resetComments.observe(this@NoticeDetailActivity, {
+                keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken, 0)
+                doneInput = HashMap()
+            })
+
+            clickedCommentId.observe(this@NoticeDetailActivity, {
+                if (it != null) {
+                    binding.noticeDetailEt.requestFocus()
+                    keyBoardManager.showSoftInput(binding.noticeDetailEt, 0)
+                }
+            })
+        }
     }
 }

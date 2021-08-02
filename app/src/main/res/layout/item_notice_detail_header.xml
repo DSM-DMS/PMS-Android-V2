@@ -32,7 +32,6 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/notice_ind_date_tv"
-            android:layout_width="wrap_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -63,10 +62,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:onClick="@{()->vm.onAttachClicked()}"
-            android:padding="10dp"
-            android:src="@drawable/ic_baseline_attach_file_24"
-            android:visibility="@{vm.noticeDetail.attach.size()>0?View.VISIBLE:View.GONE}"
             android:padding="10dp"
             android:src="@drawable/ic_baseline_attach_file_24"
             android:visibility="@{vm.noticeDetail.attach.size()>0?View.VISIBLE:View.GONE}"
@@ -107,7 +102,6 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="15dp"
             android:background="@color/black"
