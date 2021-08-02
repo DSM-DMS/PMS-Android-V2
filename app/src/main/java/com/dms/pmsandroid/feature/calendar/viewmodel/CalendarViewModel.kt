@@ -51,8 +51,8 @@ class CalendarViewModel(
                 val key = EventKeyModel(month,date)
                 _events.value!![key] = EventModel(eventName,dotsIndex)
             }
-            doneEventsSetting.value = true
         }
+        doneEventsSetting.value = true
     }
 
 }

@@ -1,6 +1,7 @@
 package com.dms.pmsandroid.feature.calendar.ui
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -19,6 +20,9 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,7 +32,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override val vm: CalendarViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
 
-    private val setMonth = HashMap<Int,Boolean>()
+    private val setMonth = HashMap<Int, Boolean>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,32 +56,40 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     private fun initEventTv() {
-        binding.calendarPb.visibility = View.VISIBLE
         val currentDate = CalendarDay.today()
-
-        setMonth[currentDate.month] = true
-        setMonth[currentDate.month + 1] = true
-
         val setCurrentDate =
             CalendarDay.from(currentDate.year, currentDate.month + 1, currentDate.day)
         val formatDate = formatDate(setCurrentDate)
-        val eventKeys = vm.events.value!!.keys
-        val decorators = ArrayList<EventDecorator>()
-        for (key in eventKeys) {
-            if (key.month == setCurrentDate.month || key.month == setCurrentDate.month + 1) {
-                decorators.add(EventDecorator(key.day, vm.events.value!![key]!!.eventSize))
-            } else if (key.month > setCurrentDate.month) {
-                break
-            }
-        }
-        binding.calendarView.addDecorators(decorators)
+
+        loadEvents(setCurrentDate.month)
 
         setEventTv(formatDate, setCurrentDate)
-        binding.calendarPb.visibility = View.INVISIBLE
+    }
+
+    private fun loadEvents(month: Int) {
+        val events = vm.events.value!!
+        val key = events.keys
+        val decorators = ArrayList<EventDecorator>()
+
+        setMonth[month] = true
+        setMonth[month + 1] = true
+
+        Observable.fromIterable(key).filter { k -> k.month == month || k.month == month + 1 }
+            .observeOn(AndroidSchedulers.mainThread()).subscribeOn(
+                Schedulers.io()
+            ).subscribe({ k ->
+                decorators.add(EventDecorator(k.day, events[k]!!.eventSize))
+            }, {
+
+            }, {
+                binding.calendarView.addDecorators(decorators)
+                binding.calendarShimmerContainer.hideShimmer()
+            })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCalendarView() {
+        binding.calendarShimmerContainer.startShimmer()
         binding.calendarEventTv.text = "일정을 읽어오는중입니다..."
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
@@ -130,23 +142,13 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
-        val monthIndex = date?.month ?: 0
-        if (setMonth[monthIndex]!=true) {
-            setMonth[monthIndex] = true
-            setMonth[monthIndex + 1] = true
-            val month = monthIndex + 1
-            val eventKeys = vm.events.value!!.keys
-
-            val decorators = ArrayList<EventDecorator>()
-            for (key in eventKeys) {
-                if (key.month == month || key.month == month + 1) {
-                    decorators.add(EventDecorator(key.day, vm.events.value!![key]!!.eventSize))
-                }
-            }
-            binding.calendarView.addDecorators(decorators)
-
+        val month = (date?.month ?: 0)+1
+        if (setMonth[month] != true) {
+            loadEvents(month)
         }
-
+        if(setMonth[month+1]!=true){
+            loadEvents(month+1)
+        }
     }
 
 }
