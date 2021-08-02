@@ -29,8 +29,7 @@
                     android:id="@+id/calendar_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    app:mcv_selectionColor="@color/blue" />
+                    app:mcv_selectionColor="@color/blue_100" />
             </com.facebook.shimmer.ShimmerFrameLayout>
 
 
