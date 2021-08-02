@@ -3,13 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".feature.notify.ui.fragment.HomeNoticeFragment">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/home_page_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -24,6 +31,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->vm.homeBeforePage()}"
                 android:src="@drawable/ic_baseline_arrow_left_24" />
 
             <TextView
@@ -32,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
+                android:text="@{vm.homePage.toString()}"
                 android:textColor="@color/gray_300"
                 android:textSize="18sp"
                 tools:text="1" />
@@ -42,7 +51,55 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->vm.homeAfterPage()}"
                 android:src="@drawable/ic_baseline_arrow_right_24" />
         </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/home_search_cv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:id="@+id/home_et_fl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/gray_100"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/home_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_search_24"
+                    android:ems="10"
+                    android:hint="@string/search_home_notice"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPersonName" />
+
+
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/home_page_ll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_search_cv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

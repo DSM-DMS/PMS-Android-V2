@@ -25,7 +25,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/introducing_develope_rv"
             android:layout_width="match_parent"
-            android:layout_height="630dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             app:spanCount="2"
             tools:listitem="@layout/item_developer"/>

@@ -10,16 +10,18 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
 class IntroduceClubApiImpl {
-    private fun providerIntroduceClubApi(): IntroduceClubApi = ApiProvider.jiWooRetrofitBuilder.create(
-        IntroduceClubApi::class.java)
+    private fun providerIntroduceClubApi(): IntroduceClubApi =
+        ApiProvider.jiWooRetrofitBuilder.create(
+            IntroduceClubApi::class.java
+        )
 
-    fun clubApi(accessToken: String): @NonNull Single<Response<ClubListModel>> = providerIntroduceClubApi().club(accessToken)
+    fun clubApi(accessToken: String): @NonNull Single<Response<ClubListModel>> =
+        providerIntroduceClubApi().club(accessToken)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun clubDetailApi(accessToken: String, clubname: String): @NonNull Single<Response<ClubDetailModel>> = providerIntroduceClubApi().clubDetail(accessToken, clubname)
+    fun clubDetailApi(accessToken: String,clubname: String): @NonNull Single<Response<ClubDetailModel>> =
+        providerIntroduceClubApi().clubDetail(accessToken,clubname)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-
-
 }

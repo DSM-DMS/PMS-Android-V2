@@ -3,12 +3,12 @@ package com.dms.pmsandroid.feature.introduce.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dms.pmsandroid.feature.introduce.ui.HorizontalItemDecorator
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceClubBinding
 import com.dms.pmsandroid.feature.introduce.adapter.ClubAdapter
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
-import com.dms.pmsandroid.generated.callback.OnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IntroduceClubActivity :
@@ -17,32 +17,34 @@ class IntroduceClubActivity :
     override val vm: IntroduceClubViewModel by viewModel()
     private val clubAdapter by lazy { ClubAdapter(vm) }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm.loadClubs()
-        intent()
         val gridLayoutManager = GridLayoutManager(this, 2)
-        binding.introClubRc.layoutManager = gridLayoutManager
+        binding.introClubRc.addItemDecoration(HorizontalItemDecorator(80))
         binding.introClubRc.adapter = clubAdapter
         binding.backImg.setOnClickListener() {
-            finish()
+        finish()
         }
     }
 
-    private fun checkClick() {
-
-    }
-
     override fun observeEvent() {
-        vm.clubs.observe(this, {
-            clubAdapter.setItem(it.clubs)
-        })
+        vm.run {
+            vm.clubs.observe(this@IntroduceClubActivity, {
+                clubAdapter.setItem(it.clubs)
+            })
+            vm.clickedClubId.observe(this@IntroduceClubActivity, {
+                    startClubDetail(it)
+            })
+            binding.backImg.setOnClickListener {
+                finish()
+            }
+        }
     }
 
-    fun intent() {
-
-        val intent = Intent(this, IntroduceClubDetailActivity::class.java)
-        startActivity(intent)
+    fun startClubDetail(clubname:String){
+        val clubIntent = Intent(this,IntroduceClubDetailActivity::class.java)
+        clubIntent.putExtra("clubname",clubname)
+        startActivity(clubIntent)
     }
 }

@@ -9,7 +9,7 @@ import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubDetailViewMod
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceCompanyViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IntroduceCompanyDetailActivity : BaseActivity<ActivityCompanyDetailBinding>(R.layout.activity_club__detail)
+class IntroduceCompanyDetailActivity : BaseActivity<ActivityCompanyDetailBinding>(R.layout.activity_club_detail)
 {
     override val vm : IntroduceCompanyViewModel by viewModel()
 

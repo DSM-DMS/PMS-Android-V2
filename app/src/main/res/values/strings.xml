@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PmsAndroid</string>
+    <string name="app_name">PMS</string>
     <string name="login_title">Parents Management Service</string>
     <string name="login">로그인</string>
     <string name="signup">회원가입</string>
@@ -30,6 +30,7 @@
     <string name="home_notice">가정통신문</string>
     <string name="please_search_notice">검색할 공지 제목을 입력하세요</string>
     <string name="show_file">미리보기</string>
+    <string name="search_home_notice">검색할 가정통신문 제목을 입력하세요</string>
     <string name="intro_detail_club">동아리 소개</string>
     <string name="intro_detail_member">동아리 멤버</string>
     <string name="point_content">상/벌점 내역</string>
@@ -37,7 +38,10 @@
     <string name="cancel">취소</string>
     <string name="pass">확인</string>
     <string name="add_student">학생을 추가해주세요</string>
-    <string name="outing_content">외출내역</string>
-    <string name="plus_point">상점</string>
-    <string name="minus_point">벌점</string>
+    <string name="company_detail">취업처 소개</string>
+    <string name="wait_company">아직 준비중 입니다</string>
+    <string name="introduce_company_detail">대마고 학생들이 취업한 회사를 소개합니다</string>
+    <string name="introduce_club_detail">대마고의 동아리를 소개합니다</string>
+    <string name="introduce_developer_detail">PMS 개발자를 소개합니다</string>
+    <string name="please_comment">댓글을 입력해주세요</string>
 </resources>

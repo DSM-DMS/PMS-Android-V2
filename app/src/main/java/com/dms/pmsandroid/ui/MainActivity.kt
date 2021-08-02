@@ -25,9 +25,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override val vm: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_PmsAndroid)
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setFragment()
     }
 
@@ -74,9 +74,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(noticeIntent)
     }
 
-    fun startDialog(){
-
-    }
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
