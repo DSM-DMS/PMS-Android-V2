@@ -22,6 +22,7 @@
         <activity android:name=".feature.login.ui.activity.LoginActivity" />
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/SplashTheme"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,9 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity" />
-        <activity android:name="com.dms.pmsandroid.feature.mypage.ui.activity.PointContentActivity" />
+        <activity android:name=".feature.mypage.activity.PointContentActivity" />
         <activity android:name=".feature.introduce.ui.activity.IntroduceClubActivity" />
     </application>
 

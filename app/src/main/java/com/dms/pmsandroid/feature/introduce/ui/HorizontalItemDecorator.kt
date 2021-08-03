@@ -1,4 +1,4 @@
-package com.dms.pmsandroid
+package com.dms.pmsandroid.feature.introduce.ui
 
 import android.graphics.Rect
 import android.view.View

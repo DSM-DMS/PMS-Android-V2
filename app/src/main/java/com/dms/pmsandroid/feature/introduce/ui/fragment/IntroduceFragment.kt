@@ -17,13 +17,13 @@ class IntroduceFragment : BaseFragment<FragmentIntroduceBinding >(R.layout.fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.introWorkBtn.setOnClickListener {
+        binding.introduceWorkCv.setOnClickListener {
             (activity as MainActivity).startCompany()
         }
-        binding.introDevBtn.setOnClickListener {
+        binding.introduceDevCv.setOnClickListener {
             (activity as MainActivity).startDeveloper()
         }
-        binding.introClubBtn.setOnClickListener {
+        binding.introduceClubCv.setOnClickListener {
             (activity as MainActivity).startClub()
         }
     }

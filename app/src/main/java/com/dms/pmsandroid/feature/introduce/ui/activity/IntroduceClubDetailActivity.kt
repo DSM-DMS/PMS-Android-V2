@@ -1,6 +1,7 @@
 package com.dms.pmsandroid.feature.introduce.ui.activity
 
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -13,8 +14,10 @@ import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubDetailViewMod
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.max
 
-class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club_detail) {
+class IntroduceClubDetailActivity :
+    BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club_detail) {
     override val vm: IntroduceClubDetailViewModel by viewModel()
     private var clubDetail = ArrayList<ClubDetailModel>()
 
@@ -27,18 +30,31 @@ class IntroduceClubDetailActivity : BaseActivity<ActivityClubDetailBinding>(R.la
         }
     }
 
-    fun bind(position : Int){
-        binding.title = clubDetail[position].title
-        binding.url = clubDetail[position].url
-        binding.explanation = clubDetail[position].explanation
-        binding.member = clubDetail[position].member.toString()
-        binding.executePendingBindings()
+    override fun onBackPressed() {
+        super.onBackPressed()
+        observeEvent()
     }
 
     override fun observeEvent() {
-        vm.clubDetail.observe(this,{
-
+        vm.clubDetail.observe(this, {
+            var getMember = ""
+            if (it.member != null) {
+                val size = it.member.size - 1
+                getMember += "부장 - ${it.member[0]}\n" + "\n" + "부원 - "
+                for (posistion in 1..size-1) {
+                    getMember += it.member[posistion] + ", "
+                }
+                getMember += "${it.member.last()}"
+            }
+            binding.run {
+                member = getMember
+                title = it.title
+                url = it.url
+                explanation = it.explanation
+            }
         })
+        binding.detailBackImg.setOnClickListener {
+            finish()
+        }
     }
-
 }
