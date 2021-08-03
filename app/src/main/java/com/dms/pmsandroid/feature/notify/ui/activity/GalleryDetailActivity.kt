@@ -15,7 +15,7 @@ class GalleryDetailActivity :
 
     override val vm: GalleryDetailViewModel by viewModel()
 
-    private val detailAdapter : GalleryDetailAdapter by lazy {
+    private val detailAdapter: GalleryDetailAdapter by lazy {
         GalleryDetailAdapter(vm)
     }
 
@@ -24,24 +24,27 @@ class GalleryDetailActivity :
         val id = intent.getIntExtra("id", 0)
         vm.loadGalleryDetail(id)
         val detailLayoutManager = LinearLayoutManager(binding.galleryDetailRv.context)
-        detailLayoutManager.orientation=RecyclerView.VERTICAL
-        binding.galleryDetailRv.run{
+        detailLayoutManager.orientation = RecyclerView.VERTICAL
+        binding.galleryDetailRv.run {
             adapter = detailAdapter
             layoutManager = detailLayoutManager
         }
     }
 
     override fun observeEvent() {
-        vm.galleryDetail.observe(this,{
-            val title = it.title
-            val body = it.body
-            val attach = it.attach
-            detailAdapter.setGalleryDetail(attach,title, body)
-        })
-        vm.close.observe(this,{
-            if(it){
-                finish()
-            }
-        })
+        vm.run {
+            galleryDetail.observe(this@GalleryDetailActivity, {
+                val title = it.title
+                val body = it.body
+                val attach = it.attach
+                detailAdapter.setGalleryDetail(attach, title, body)
+            })
+
+            close.observe(this@GalleryDetailActivity, {
+                if (it) {
+                    finish()
+                }
+            })
+        }
     }
 }

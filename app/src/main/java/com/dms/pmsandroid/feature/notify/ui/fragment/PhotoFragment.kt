@@ -36,11 +36,13 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
     }
 
     override fun observeEvent() {
-        vm.galleryList.observe(viewLifecycleOwner, {
-            photoAdapter.setItems(it)
-        })
-        vm.clickedGalleryId.observe(viewLifecycleOwner,{
-            (activity as MainActivity).startGalleryDetail(it)
-        })
+        vm.run {
+            galleryList.observe(viewLifecycleOwner, {
+                photoAdapter.setItems(it)
+            })
+            clickedGalleryId.observe(viewLifecycleOwner, {
+                (activity as MainActivity).startGalleryDetail(it)
+            })
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.ui
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,7 +9,6 @@ import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubDetailActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
@@ -27,9 +25,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override val vm: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_PmsAndroid)
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setFragment()
     }
 

@@ -21,8 +21,10 @@ class NotifyFragment : BaseFragment<FragmentNotifyBinding>(R.layout.fragment_not
     }
 
     private fun initViewpager() {
-        binding.notifyVp.adapter = NotifyAdapter(requireActivity())
-        binding.notifyVp.isUserInputEnabled = false
+        binding.notifyVp.run {
+            adapter = NotifyAdapter(requireActivity())
+            isUserInputEnabled = false
+        }
         TabLayoutMediator(binding.notifyMainTl, binding.notifyVp) { tab, position ->
             binding.notifyVp.currentItem = binding.notifyMainTl.selectedTabPosition
             tab.text = titleList[position]
