@@ -2,6 +2,6 @@
 <resources>
     <dimen name="dot_size">3dp</dimen>
     <dimen name="dot_padding">8dp</dimen>
-    <dimen name="intro_main">17dp</dimen>
-    <dimen name="intro_second">12dp</dimen>
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="body_size">14sp</dimen>
 </resources>
