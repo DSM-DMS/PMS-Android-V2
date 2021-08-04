@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/title_tv"
-            android:layout_width="416dp"
+            android:layout_width="0dp"
             android:layout_height="@dimen/title_bar_size"
             android:gravity="center"
             android:text="@string/company_detail"
