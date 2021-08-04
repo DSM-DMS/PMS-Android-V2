@@ -21,9 +21,12 @@ class HomeNoticeFragment : BaseFragment<FragmentHomeNoticeBinding>(R.layout.frag
         HomeAdapter(vm)
     }
 
+    private val homeLayoutManager:LinearLayoutManager by lazy {
+        LinearLayoutManager(binding.homeRv.context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val homeLayoutManager = LinearLayoutManager(binding.homeRv.context)
         homeLayoutManager.orientation = RecyclerView.VERTICAL
         binding.homeRv.run {
             adapter = homeAdapter
@@ -32,9 +35,14 @@ class HomeNoticeFragment : BaseFragment<FragmentHomeNoticeBinding>(R.layout.frag
         vm.getHomeNoticeList(0)
     }
     override fun observeEvent() {
-        vm.homeList.observe(viewLifecycleOwner,{
-            homeAdapter.setItems(it)
-        })
+        vm.run {
+            homeList.observe(viewLifecycleOwner,{
+                homeAdapter.setItems(it)
+            })
+            homePage.observe(viewLifecycleOwner,{
+                homeLayoutManager.scrollToPositionWithOffset(0,0)
+            })
+        }
         binding.homeEt.textChanges().debounce(500, TimeUnit.MILLISECONDS).map { it.toString() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
