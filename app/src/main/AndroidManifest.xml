@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dms.pmsandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,16 +15,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.notify.ui.activity.NoticeDetailActivity"/>
-        <activity android:name="com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity"/>
-        <activity android:name=".feature.notify.ui.activity.GalleryDetailActivity" />
-        <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity" />
-        <activity android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity" />
-        <activity android:name=".feature.login.ui.activity.LoginActivity" />
+        <activity android:name=".feature.notify.ui.activity.NoticeDetailActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name="com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".feature.notify.ui.activity.GalleryDetailActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".feature.login.ui.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="adjustNothing">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,10 +46,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity" />
-        <activity android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity" />
-        <activity android:name=".feature.mypage.activity.PointContentActivity" />
-        <activity android:name=".feature.introduce.ui.activity.IntroduceClubActivity" />
+        <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".feature.mypage.ui.activity.PointContentActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".feature.introduce.ui.activity.IntroduceClubActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
     </application>
 
 </manifest>
