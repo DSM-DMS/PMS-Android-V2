@@ -20,31 +20,27 @@ class IntroduceClubActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm.loadClubs()
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        binding.introClubRc.addItemDecoration(HorizontalItemDecorator(80))
+        binding.introClubRc.addItemDecoration(HorizontalItemDecorator(25))
         binding.introClubRc.adapter = clubAdapter
-        binding.backImg.setOnClickListener() {
-        finish()
+        binding.backBtn.setOnClickListener() {
+            finish()
         }
     }
 
     override fun observeEvent() {
         vm.run {
-            vm.clubs.observe(this@IntroduceClubActivity, {
+            clubs.observe(this@IntroduceClubActivity, {
                 clubAdapter.setItem(it.clubs)
             })
-            vm.clickedClubId.observe(this@IntroduceClubActivity, {
-                    startClubDetail(it)
+            clickedClubId.observe(this@IntroduceClubActivity, {
+                startClubDetail(it)
             })
-            binding.backImg.setOnClickListener {
-                finish()
-            }
         }
     }
 
-    fun startClubDetail(clubname:String){
-        val clubIntent = Intent(this,IntroduceClubDetailActivity::class.java)
-        clubIntent.putExtra("clubname",clubname)
+    fun startClubDetail(clubname: String) {
+        val clubIntent = Intent(this, IntroduceClubDetailActivity::class.java)
+        clubIntent.putExtra("clubname", clubname)
         startActivity(clubIntent)
     }
 }
