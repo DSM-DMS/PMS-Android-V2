@@ -42,13 +42,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun startLogin() {
         val loginIntent = Intent(this, LoginActivity::class.java)
+        loginIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(loginIntent)
     }
 
 
     fun startDeveloper() {
-        val devintent = Intent(this, IntroduceDeveloperActivity::class.java)
-        startActivity(devintent)
+        val devIntent = Intent(this, IntroduceDeveloperActivity::class.java)
+        devIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(devIntent)
     }
 
     fun startCompany() {
@@ -59,20 +61,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun startClub() {
-        val clubintent = Intent(this, IntroduceClubActivity::class.java)
-        startActivity(clubintent)
+        val clubIntent = Intent(this, IntroduceClubActivity::class.java)
+        clubIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(clubIntent)
     }
 
     fun startGalleryDetail(id: Int) {
         val galleryIntent = Intent(this, GalleryDetailActivity::class.java)
-        galleryIntent.putExtra("id", id)
+        galleryIntent.run {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("id", id)
+        }
         startActivity(galleryIntent)
     }
 
     fun startNoticeDetail(id: Int, title: String) {
         val noticeIntent = Intent(this, NoticeDetailActivity::class.java)
-        noticeIntent.putExtra("id", id)
-        noticeIntent.putExtra("title", title)
+        noticeIntent.run{
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("id", id)
+            putExtra("title", title)
+        }
         startActivity(noticeIntent)
     }
 
