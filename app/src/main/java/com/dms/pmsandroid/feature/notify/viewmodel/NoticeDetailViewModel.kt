@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.feature.notify.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -63,6 +62,8 @@ class NoticeDetailViewModel(
         notifyApiImpl.postComment(accessToken,noticeId, body).subscribe { response ->
             if (response.isSuccessful) {
                 _resetComments.value = true
+                _noticeDetail.value = null
+                reComments.value = null
                 comment.value = null
                 getNoticeDetail(noticeId)
             }

@@ -19,6 +19,10 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
         GalleryAdapter(vm)
     }
 
+    private val photoLayoutManager:LinearLayoutManager by lazy {
+        LinearLayoutManager(binding.photoRv.context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.getGalleryList()
@@ -26,7 +30,6 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
     }
 
     private fun initRecyclerView() {
-        val photoLayoutManager = LinearLayoutManager(binding.photoRv.context)
         photoLayoutManager.orientation = RecyclerView.VERTICAL
         binding.photoRv.run {
             layoutManager = photoLayoutManager
@@ -42,6 +45,9 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
             })
             clickedGalleryId.observe(viewLifecycleOwner, {
                 (activity as MainActivity).startGalleryDetail(it)
+            })
+            galleryPage.observe(viewLifecycleOwner,{
+                photoLayoutManager.scrollToPositionWithOffset(0,0)
             })
         }
     }

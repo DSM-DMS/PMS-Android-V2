@@ -1,35 +1,32 @@
-package com.dms.pmsandroid.feature.mypage.fragment
+package com.dms.pmsandroid.feature.mypage.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
-import com.dms.pmsandroid.databinding.DialogStudentPlusBinding
 import com.dms.pmsandroid.databinding.FragmentMypageBinding
+import com.dms.pmsandroid.feature.mypage.ui.MyPageAddStudentDialog
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
-import okhttp3.internal.platform.android.BouncyCastleSocketAdapter.Companion.factory
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.dms.pmsandroid.ui.MainActivity as MainActivity1
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
-
     override val vm: MyPageViewModel by viewModel()
-
-    private lateinit var add : DialogStudentPlusBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
-
+        observeEvent()
 
     }
 
-
     override fun observeEvent() {
-        vm.startDialog.observe(this, Observer{})
+        binding.startAddStudentBtn.setOnClickListener {
+            activity.let {
+                val dialog = MyPageAddStudentDialog()
+                dialog.showsDialog
+            }
+        }
     }
 }

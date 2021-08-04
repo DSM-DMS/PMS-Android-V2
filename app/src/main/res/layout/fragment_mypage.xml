@@ -7,37 +7,124 @@
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+        <variable
+            name="pluspoint"
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+        <variable
+            name="minuspoint"
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
 
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.mypage.fragment.MyPageFragment">
+        android:background="@drawable/main_back">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="446dp"
-            android:layout_height="200dp"
-            android:background="@color/blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.514"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/student_pluspoint_img"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/point_box"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            tools:layout_editor_absoluteY="123dp" >
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/student_pluspoint_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/point_size"
+                android:fontFamily="@font/nanumsquarebold"
+                android:layout_marginLeft="60dp"
+                android:text="@string/plus_point" />
+
+            <TextView
+                android:id="@+id/student_pluspoint_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="20dp"
+                android:text="00"
+                android:textSize="@dimen/point_int" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/student_minusspoint_img"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="215dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/point_box"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="123dp" >
+
+            <TextView
+                android:id="@+id/student_minuspoint_title_tv"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="62dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:textColor="@color/red"
+                android:textSize="@dimen/point_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minus_point"/>
+
+            <TextView
+                android:id="@+id/student_minuspoint_tv"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:textSize="@dimen/point_int"/>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+                android:id="@+id/student_parent_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_marginTop="65dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="40dp"
+                android:textSize="30dp"
+                tools:layout_editor_absoluteX="63dp"
+                tools:layout_editor_absoluteY="54dp" />
+
+        <ImageView
+            android:id="@+id/tudent_parent_edit_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="75dp"
+            app:srcCompat="@drawable/ic_baseline_create_24"
+            tools:layout_editor_absoluteX="107dp" />
+
 
         <Button
             android:id="@+id/start_add_student_btn"
             android:layout_width="289dp"
             android:layout_height="52dp"
             android:layout_marginBottom="300dp"
+            android:layout_marginTop="350dp"
+            android:layout_marginLeft="55dp"
             android:backgroundTint="@color/button_background"
             android:text="@string/add_student"
+            android:fontFamily="@font/nanumsquareregular"
             android:textColor="@color/black"
             android:elevation="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

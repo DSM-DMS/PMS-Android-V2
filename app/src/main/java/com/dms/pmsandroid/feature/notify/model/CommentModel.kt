@@ -7,6 +7,6 @@ data class CommentModel(
     val id: Int,
     @SerializedName("upload-date") val uploadDate: Date,
     val body: String,
-    val user: CommentUserModel,
+    val user: CommentUserModel?,
     var doneInput:Boolean
 )
