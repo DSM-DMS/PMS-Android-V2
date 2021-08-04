@@ -24,7 +24,7 @@ object NotifyBindingAdapter {
             for (reComment in reComments[id]!!) {
                 val layout = NoticeCommentLayout(linearLayout.context)
                 layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
-                layout.findViewById<TextView>(R.id.re_comment_writer_tv).text = reComment.user.name
+                layout.findViewById<TextView>(R.id.re_comment_writer_tv).text = reComment.user?.name?:"익명의 사용자"
                 linearLayout.addView(layout)
                 doneInput[id] = true
             }

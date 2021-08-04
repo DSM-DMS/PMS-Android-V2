@@ -28,7 +28,7 @@ class CalendarViewModel(
         }
     }
 
-    private val dots = arrayListOf("🔵","🔴","🟢","🟡","🟣","🟠")
+    private val dots = arrayListOf("🟢","🔴","🔵","🟡","🟣","🟠")
 
     private fun parseEvents(body: JsonObject) {
         for (month in 1..12) {

@@ -43,7 +43,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCurrentTime() {
-        val currentTime = LocalDate.now().minus(Period.ofDays(1))
+        val currentTime = LocalDate.now()
         val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
         val weekDay = currentTime.dayOfWeek
         vm.run {
