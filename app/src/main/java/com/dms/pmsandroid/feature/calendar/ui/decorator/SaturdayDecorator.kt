@@ -1,15 +1,20 @@
 package com.dms.pmsandroid.feature.calendar.ui.decorator
 
+import android.content.Context
 import android.graphics.Color
 import android.text.style.ForegroundColorSpan
+import com.dms.pmsandroid.R
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import java.util.*
 
-class SaturdayDecorator:DayViewDecorator {
+class SaturdayDecorator(context: Context):DayViewDecorator {
 
     private val calendar = Calendar.getInstance()
+
+    private val color = context.resources.getColor(R.color.blue_200)
+
     override fun shouldDecorate(day: CalendarDay?): Boolean {
         day?.copyTo(calendar)
         val weekDay = calendar.get(Calendar.DAY_OF_WEEK)
@@ -17,6 +22,6 @@ class SaturdayDecorator:DayViewDecorator {
     }
 
     override fun decorate(view: DayViewFacade?) {
-        view?.addSpan(object : ForegroundColorSpan(Color.BLUE){})
+        view?.addSpan(ForegroundColorSpan(color))
     }
 }

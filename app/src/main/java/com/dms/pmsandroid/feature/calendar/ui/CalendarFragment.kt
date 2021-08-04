@@ -1,7 +1,6 @@
 package com.dms.pmsandroid.feature.calendar.ui
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -10,10 +9,7 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentCalendarBinding
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
-import com.dms.pmsandroid.feature.calendar.ui.decorator.EventDecorator
-import com.dms.pmsandroid.feature.calendar.ui.decorator.SaturdayDecorator
-import com.dms.pmsandroid.feature.calendar.ui.decorator.SelectedDayDecorator
-import com.dms.pmsandroid.feature.calendar.ui.decorator.SundayDecorator
+import com.dms.pmsandroid.feature.calendar.ui.decorator.*
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import com.dms.pmsandroid.ui.MainViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -78,7 +74,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(
                 Schedulers.io()
             ).subscribe({ k ->
-                decorators.add(EventDecorator(k.day, events[k]!!.eventSize))
+                decorators.add(EventDecorator(k.day, events[k]!!.eventSize,requireContext()))
             }, {
 
             }, {
@@ -95,8 +91,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         val currentDate = CalendarDay.today()
         calendarView.run {
             addDecorators(
-                SaturdayDecorator(),
-                SundayDecorator(),
+                DayDecorator(requireContext()),
+                SaturdayDecorator(requireContext()),
+                SundayDecorator(requireContext()),
                 SelectedDayDecorator(requireContext())
             )
             setWeekDayTextAppearance(R.style.saturdayColor)

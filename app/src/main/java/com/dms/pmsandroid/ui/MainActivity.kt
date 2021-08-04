@@ -27,6 +27,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setTheme(R.style.Theme_PmsAndroid)
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
+    }
+
+    override fun onStart() {
+        super.onStart()
         initFragment()
     }
 
