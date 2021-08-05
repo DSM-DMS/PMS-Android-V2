@@ -2,6 +2,7 @@ package com.dms.pmsandroid.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
@@ -41,35 +42,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun startLogin() {
         val loginIntent = Intent(this, LoginActivity::class.java)
+        loginIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(loginIntent)
     }
 
 
     fun startDeveloper() {
-        val devintent = Intent(this, IntroduceDeveloperActivity::class.java)
-        startActivity(devintent)
+        val devIntent = Intent(this, IntroduceDeveloperActivity::class.java)
+        devIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(devIntent)
     }
 
     fun startCompany() {
-        val workintent = Intent(this, IntroduceCompanyActivity::class.java)
-        startActivity(workintent)
+        Toast.makeText(this,"아직 준비중 입니다",Toast.LENGTH_SHORT).show()
+        //todo 취업처 api 나오면 startActivity로 넘어가기
+        //val workintent = Intent(this, IntroduceCompanyActivity::class.java)
+        //startActivity(workintent)
     }
 
     fun startClub() {
-        val clubintent = Intent(this, IntroduceClubActivity::class.java)
-        startActivity(clubintent)
+        val clubIntent = Intent(this, IntroduceClubActivity::class.java)
+        clubIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(clubIntent)
     }
 
     fun startGalleryDetail(id: Int) {
         val galleryIntent = Intent(this, GalleryDetailActivity::class.java)
-        galleryIntent.putExtra("id", id)
+        galleryIntent.run {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("id", id)
+        }
         startActivity(galleryIntent)
     }
 
     fun startNoticeDetail(id: Int, title: String) {
         val noticeIntent = Intent(this, NoticeDetailActivity::class.java)
-        noticeIntent.putExtra("id", id)
-        noticeIntent.putExtra("title", title)
+        noticeIntent.run{
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("id", id)
+            putExtra("title", title)
+        }
         startActivity(noticeIntent)
     }
 

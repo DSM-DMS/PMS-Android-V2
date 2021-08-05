@@ -31,12 +31,12 @@ class IntroduceDeveloperActivity : BaseActivity<ActivityIntroduceDeveloperBindin
         )
         intro_developer_rc.adapter = DeveloperAdapter(developers)
         intro_developer_rc.adapter!!.notifyDataSetChanged()
-        binding.introDeveloperRc.addItemDecoration(VerticalItemDecorator(10))
+        binding.introDeveloperRc.addItemDecoration(VerticalItemDecorator(20))
 
     }
 
     override fun observeEvent() {
-        binding.backImg.setOnClickListener(){
+        binding.backBtn.setOnClickListener(){
             finish()
         }
     }
