@@ -101,7 +101,7 @@
                 tools:layout_editor_absoluteY="54dp" />
 
         <ImageView
-            android:id="@+id/tudent_parent_edit_img"
+            android:id="@+id/student_parent_edit_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="180dp"
@@ -112,16 +112,16 @@
 
         <Button
             android:id="@+id/start_add_student_btn"
-            android:layout_width="289dp"
-            android:layout_height="52dp"
-            android:layout_marginBottom="300dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="60dp"
             android:layout_marginTop="350dp"
-            android:layout_marginLeft="55dp"
             android:backgroundTint="@color/button_background"
-            android:text="@string/add_student"
-            android:fontFamily="@font/nanumsquareregular"
-            android:textColor="@color/black"
             android:elevation="30dp"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="@string/add_student"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

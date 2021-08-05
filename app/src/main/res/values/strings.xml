@@ -45,4 +45,6 @@
     <string name="introduce_developer_detail">PMS 개발자를 소개합니다</string>
     <string name="please_comment">댓글을 입력해주세요</string>
     <string name="outing_content">외출내역</string>
+    <string name="plus_point">상점</string>
+    <string name="minus_point">벌점</string>
 </resources>

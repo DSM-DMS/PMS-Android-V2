@@ -33,7 +33,7 @@ class AddStudentViewModel(private val myPageApiImpl: MyPageApiImpl):ViewModel(){
                 when(request.code()){
                     201 -> {
                         _toastMessage.value = "학생 등록에 성공하셨습니다"
-
+                        
                     }
                     400 -> {
                         _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"

@@ -21,7 +21,6 @@ class MyPageAddStudentDialog : BaseDialog<DialogStudentPlusBinding>(R.layout.dia
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.addstudentConfirmTv.setOnClickListener {
-
             dismiss()
         }
         binding.addstudentCancleTv.setOnClickListener {
@@ -30,7 +29,6 @@ class MyPageAddStudentDialog : BaseDialog<DialogStudentPlusBinding>(R.layout.dia
     }
 
     override fun observeEvent() {
-
     }
 
 
