@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="date"
             type="java.util.Date" />
@@ -24,9 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        app:commentId="@{id}"
-        app:showReComments="@{vm.reComments}">
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -94,6 +94,13 @@
             android:text="답글달기"
             android:onClick="@{()->vm.commentClick(id)}"
             android:textColor="@color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{vm.reComments[id].size()>0?View.VISIBLE:View.GONE}"
+            app:commentId="@{id}"
+            app:showReComments="@{vm.reComments}"/>
 
     </LinearLayout>
 </layout>
