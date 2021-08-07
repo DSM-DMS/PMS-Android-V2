@@ -3,6 +3,7 @@ package com.dms.pmsandroid.feature.mypage.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.mypage.MyPageApiImpl
 import com.dms.pmsandroid.feature.mypage.model.StudentCertificationResponse
 
@@ -33,7 +34,7 @@ class AddStudentViewModel(private val myPageApiImpl: MyPageApiImpl):ViewModel(){
                 when(request.code()){
                     201 -> {
                         _toastMessage.value = "학생 등록에 성공하셨습니다"
-                        
+
                     }
                     400 -> {
                         _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"

@@ -75,6 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
 
+
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             vm.tabSelectedItem.value = item.itemId

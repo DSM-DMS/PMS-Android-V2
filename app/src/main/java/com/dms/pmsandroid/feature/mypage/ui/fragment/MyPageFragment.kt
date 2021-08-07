@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
-import com.dms.pmsandroid.databinding.DialogStudentPlusBinding
 import com.dms.pmsandroid.databinding.FragmentMypageBinding
 import com.dms.pmsandroid.feature.mypage.ui.MyPageAddStudentDialog
 import com.dms.pmsandroid.feature.mypage.viewmodel.AddStudentViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.dms.pmsandroid.ui.MainActivity as MainActivity1
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
@@ -31,10 +29,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             }
         }
         dialogvm.run {
-            if(dialogvm.checkConfirm.value!!){
+            if (dialogvm.checkConfirm.value!!) {
 
-            }
-            else if(dialogvm.checkCancel.value!!){
+            } else if (dialogvm.checkCancel.value!!) {
 
             }
         }
