@@ -40,6 +40,7 @@ class NoticeDetailActivity :
 
         binding.run {
             noticeDetailRv.run {
+                recycledViewPool.setMaxRecycledViews(1,0)
                 adapter = noticeAdapter
                 layoutManager = noticeLayoutManager
             }

@@ -21,7 +21,7 @@ object NotifyBindingAdapter {
         commentId: Int
     ) {
         if (!showReComments.isNullOrEmpty()) {
-            if (!showReComments[commentId].isNullOrEmpty() && doneInput[commentId] != true) {
+            if (!showReComments[commentId].isNullOrEmpty()) {
                 for (reComment in showReComments[commentId]!!) {
                     val layout = NoticeCommentLayout(linearLayout.context)
                     layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
