@@ -12,7 +12,6 @@ import com.dms.pmsandroid.databinding.FragmentMealBinding
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.dms.pmsandroid.ui.MainViewModel
-import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
 import java.time.Period
@@ -25,20 +24,46 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     private val mainVm: MainViewModel by inject()
 
     private val adapter by lazy {
-        MealAdapter(vm,requireContext())
+        MealAdapter(vm, requireContext())
     }
 
 
-    @SuppressLint("SimpleDateFormat")
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.mealViewVp.adapter = adapter
+        setViewPager()
         setCurrentTime()
         vm.getMeal()
         changeTime()
         setIndicator()
+    }
+    
+    private var selectedPosition = Int.MAX_VALUE/2
+
+    private fun setViewPager(){
+        binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.mealViewVp.adapter = adapter
+        binding.mealViewVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onPageSelected(position: Int) {
+                when (position % 3) {
+                    0 -> {
+                        if (selectedPosition<position) {
+                            calculateTime(true)
+                        }
+                    }
+                    2 -> {
+                        if (selectedPosition>position) {
+                            calculateTime(false)
+                        }
+                    }
+                }
+                selectedPosition = position
+                super.onPageSelected(position)
+            }
+        })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
