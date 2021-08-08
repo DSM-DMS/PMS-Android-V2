@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.feature.meal.fragment
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -27,9 +26,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         MealAdapter(vm, requireContext())
     }
 
-
-
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +35,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         changeTime()
         setIndicator()
     }
-    
+
     private var selectedPosition = Int.MAX_VALUE/2
 
     private fun setViewPager(){
