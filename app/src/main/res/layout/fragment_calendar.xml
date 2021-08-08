@@ -55,7 +55,7 @@
                     android:id="@+id/calendar_event_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:padding="15dp"
+                    android:paddingHorizontal="15dp"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
