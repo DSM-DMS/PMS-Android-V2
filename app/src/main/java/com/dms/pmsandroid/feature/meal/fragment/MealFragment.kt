@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.meal.fragment
 
+import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
+import com.dms.pmsandroid.feature.meal.MealDatePickerDialog
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.dms.pmsandroid.ui.MainViewModel
@@ -29,7 +31,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setViewPager()
+        initView()
         setCurrentTime()
         vm.getMeal()
         changeTime()
@@ -38,7 +40,9 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private var selectedPosition = Int.MAX_VALUE/2
 
-    private fun setViewPager(){
+    private val dateDialog = MealDatePickerDialog()
+    private fun initView(){
+
         binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.mealViewVp.adapter = adapter
         binding.mealViewVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -60,6 +64,10 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                 super.onPageSelected(position)
             }
         })
+
+        binding.mealDateCl.setOnClickListener {
+            dateDialog.show(requireActivity().supportFragmentManager,"MealDatePickerDialog")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
