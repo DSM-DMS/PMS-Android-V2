@@ -1,17 +1,19 @@
 package com.dms.pmsandroid.feature.calendar.ui.decorator
 
+import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.text.style.LineBackgroundSpan
+import com.dms.pmsandroid.R
 
-class CustomMultipleDotSpan(private val dots:Int) : LineBackgroundSpan {
+class CustomMultipleDotSpan(private val dots:Int,context: Context) : LineBackgroundSpan {
 
     private val radius = 7F
     private val dotColor = arrayListOf(
-        Color.BLUE,
-        Color.RED,
-        Color.GREEN
+        context.resources.getColor(R.color.green),
+        context.resources.getColor(R.color.red),
+        Color.BLUE
     )
 
     override fun drawBackground(

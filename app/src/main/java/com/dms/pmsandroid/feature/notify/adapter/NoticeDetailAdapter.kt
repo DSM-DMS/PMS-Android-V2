@@ -28,10 +28,14 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
             comments[position].let { comment ->
                 binding.id = comment.id
                 binding.commentBodyTv.text = comment.body
-                binding.commentWriterTv.text = comment.user.name
+                binding.commentWriterTv.text = comment.user?.name?:"익명의 사용자"
                 binding.date = comment.uploadDate
             }
         }
+    }
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewAttachedToWindow(holder)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

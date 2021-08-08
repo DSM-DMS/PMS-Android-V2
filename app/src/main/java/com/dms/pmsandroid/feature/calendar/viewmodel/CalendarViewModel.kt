@@ -8,6 +8,7 @@ import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.model.EventModel
 import com.google.gson.JsonObject
+import io.reactivex.rxjava3.core.Observable
 
 class CalendarViewModel(
     private val calendarApiImpl: CalendarApiImpl,
@@ -28,29 +29,36 @@ class CalendarViewModel(
         }
     }
 
-    private val dots = arrayListOf("🔵","🔴","🟢","🟡","🟣","🟠")
+    private val dots = arrayListOf("🟢", "🔴", "🔵", "🟡", "🟣", "🟠")
 
     private fun parseEvents(body: JsonObject) {
         for (month in 1..12) {
             val monthEvents = body.getAsJsonObject("$month")
             val dates = monthEvents.keySet()
-            for (date in dates) {
-                var dotsIndex = 0
-                var eventName = "${dots[dotsIndex]}  "
-                dotsIndex+=1
-                val events = monthEvents.getAsJsonArray(date)
-                eventName += events[0].toString().substring(1, events[0].toString().length - 1)
-                if (events.size() > 1) {
-                    for (pos in 1 until events.size()) {
-                        eventName += "\n\n${dots[dotsIndex]}  ${
-                            events[pos].toString().substring(1, events[pos].toString().length - 1)
-                        }"
-                        dotsIndex+=1
-                    }
-                }
-                val key = EventKeyModel(month,date)
-                _events.value!![key] = EventModel(eventName,dotsIndex)
+            var date = ""
+            var dotsIndex = 0
+            Observable.fromIterable(dates).map { event ->
+                date = event
+                dotsIndex = 0
+                monthEvents.getAsJsonArray(event)
             }
+                .filter { event -> event.size() > 0 }
+                .switchMap {
+                    return@switchMap Observable.fromArray(it)
+                }
+                .map {
+                    var eventName = ""
+                    for (pos in 0 until it.size()) {
+                        eventName += "\n${dots[dotsIndex]}  ${
+                            it[pos].toString().substring(1, it[pos].toString().length - 1)
+                        }\n"
+                        dotsIndex += 1
+                    }
+                    return@map eventName
+                }.subscribe({ eventName ->
+                    val key = EventKeyModel(month, date)
+                    _events.value!![key] = EventModel(eventName, dotsIndex)
+                }, {}, {})
         }
         doneEventsSetting.value = true
     }

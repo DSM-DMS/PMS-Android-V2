@@ -1,10 +1,12 @@
 package com.dms.pmsandroid.feature.calendar.ui.decorator
 
+import android.content.Context
+import androidx.core.content.contentValuesOf
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 
-class EventDecorator(private val date: String,private val dots:Int) : DayViewDecorator {
+class EventDecorator(private val date: String,private val dots:Int,private val context: Context) : DayViewDecorator {
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
         val setDay = CalendarDay.from(day?.year?:0,(day?.month?:-1)+1,day?.day?:0)
@@ -12,6 +14,6 @@ class EventDecorator(private val date: String,private val dots:Int) : DayViewDec
     }
 
     override fun decorate(view: DayViewFacade) {
-        view.addSpan(CustomMultipleDotSpan(dots))
+        view.addSpan(CustomMultipleDotSpan(dots, context))
     }
 }
