@@ -62,8 +62,7 @@
             app:layout_constraintBottom_toBottomOf="@id/meal_next_btn"
             app:layout_constraintEnd_toStartOf="@id/meal_next_btn"
             app:layout_constraintStart_toEndOf="@+id/meal_before_btn"
-            app:layout_constraintTop_toTopOf="@id/meal_next_btn"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="@id/meal_next_btn">
 
             <TextView
                 android:id="@+id/meal_date_tv"
