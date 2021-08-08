@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.feature.meal.fragment
 
-import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -31,8 +30,8 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         setCurrentTime()
+        initView()
         vm.getMeal()
         changeTime()
         setIndicator()
