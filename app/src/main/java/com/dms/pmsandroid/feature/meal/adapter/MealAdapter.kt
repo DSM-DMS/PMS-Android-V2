@@ -2,6 +2,7 @@ package com.dms.pmsandroid.feature.meal.adapter
 
 import android.animation.AnimatorInflater
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,9 +12,13 @@ import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.model.MealResponse
 import kotlin.collections.ArrayList
 
-class MealAdapter(private val viewModel: MealViewModel) :
+class MealAdapter(private val viewModel: MealViewModel,context:Context) :
     RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
     private var meals = MealResponse(null, null, null)
+
+    private val blue = context.resources.getColor(R.color.blue)
+    private val green = context.resources.getColor(R.color.green)
+    private val red = context.resources.getColor(R.color.red)
 
     inner class MealViewHolder(private val binding: ItemMealBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,14 +27,17 @@ class MealAdapter(private val viewModel: MealViewModel) :
                 0 -> {
                     binding.mealTimeTv.text = "아침"
                     binding.picture = viewModel.mealPicture.value?.breakfast ?: ""
+                    binding.mealTimeFl.setBackgroundColor(blue)
                 }
                 1 -> {
                     binding.mealTimeTv.text = "점심"
                     binding.picture = viewModel.mealPicture.value?.lunch ?: ""
+                    binding.mealTimeFl.setBackgroundColor(green)
                 }
                 2 -> {
                     binding.mealTimeTv.text = "저녁"
                     binding.picture = viewModel.mealPicture.value?.dinner ?: ""
+                    binding.mealTimeFl.setBackgroundColor(red)
                 }
             }
             binding.vm = viewModel
@@ -66,14 +74,14 @@ class MealAdapter(private val viewModel: MealViewModel) :
     }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
-        when (position) {
+        when (position%3) {
             0 -> holder.bind(meals.breakfast, 0)
             1 -> holder.bind(meals.lunch, 1)
             2 -> holder.bind(meals.dinner, 2)
         }
     }
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int = Int.MAX_VALUE
 
     fun setItems(meals: MealResponse) {
         this.meals = meals

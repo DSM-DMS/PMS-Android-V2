@@ -22,10 +22,10 @@ import java.util.*
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     override val vm: MealViewModel by inject()
-    private val mainVm :MainViewModel by inject()
+    private val mainVm: MainViewModel by inject()
 
     private val adapter by lazy {
-        MealAdapter(vm)
+        MealAdapter(vm,requireContext())
     }
 
 
@@ -85,9 +85,10 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     }
 
     private fun setIndicator() {
-        TabLayoutMediator(binding.tabMealBanner, binding.mealViewVp) { _, _ ->
-            binding.mealViewVp.currentItem = binding.tabMealBanner.selectedTabPosition
-        }.attach()
+        binding.mealViewVp.post { binding.mealViewVp.setCurrentItem(Int.MAX_VALUE / 2, false) }
+        //TabLayoutMediator(binding.tabMealBanner, binding.mealViewVp) { tap, position ->
+
+        //}.attach()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -103,8 +104,8 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                 adapter.setItems(it)
             })
         }
-        mainVm.doneToken.observe(viewLifecycleOwner,{
-            if(it){
+        mainVm.doneToken.observe(viewLifecycleOwner, {
+            if (it) {
                 vm.getMeal()
             }
         })
