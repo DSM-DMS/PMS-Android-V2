@@ -19,9 +19,6 @@ class IntroduceClubDetailViewModel(
     private val _close = MutableLiveData(false)
     val close: LiveData<Boolean> get() = _close
 
-    fun close() {
-        _close.value = true
-    }
 
     fun loadClubDetail(clubname: String) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")

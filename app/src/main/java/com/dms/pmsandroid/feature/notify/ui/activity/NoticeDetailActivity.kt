@@ -33,19 +33,23 @@ class NoticeDetailActivity :
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title")
 
+        vm.noticeId = id
+
         val noticeLayoutManager = LinearLayoutManager(binding.noticeDetailRv.context)
         noticeLayoutManager.orientation = RecyclerView.VERTICAL
 
-        binding.noticeDetailRv.run {
-            adapter = noticeAdapter
-            layoutManager = noticeLayoutManager
+        binding.run {
+            noticeDetailRv.run {
+                recycledViewPool.setMaxRecycledViews(1,0)
+                adapter = noticeAdapter
+                layoutManager = noticeLayoutManager
+            }
+            noticeDetailTitleTv.text = title
+            noticeBackBtn.setOnClickListener {
+                finish()
+            }
         }
-
-        binding.noticeDetailTitleTv.text = title
-        binding.noticeBackBtn.setOnClickListener {
-            finish()
-        }
-        vm.getNoticeDetail(id)
+        vm.getNoticeDetail()
     }
 
     private val dialog = NoticeAttachDialog()
@@ -71,6 +75,7 @@ class NoticeDetailActivity :
 
             resetComments.observe(this@NoticeDetailActivity, {
                 keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken, 0)
+                binding.noticeDetailEt.text = null
                 doneInput = HashMap()
             })
 

@@ -2,25 +2,30 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.notify.viewmodel.GalleryDetailViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/gray_100">
 
         <TextView
             android:id="@+id/gallery_header_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/nanumsquarebold"
             android:text="@{vm.galleryDetail.title}"
-            android:textColor="@color/blue"
-            android:textSize="22sp"
+            android:textColor="@color/blue_2"
+            android:textSize="@dimen/title_bar_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gallery_cancel_btn"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,10 +36,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
             android:text="@{vm.galleryDetail.body}"
             android:textColor="@color/black"
+            android:fontFamily="@font/nanumsquareregular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gallery_header_tv"
@@ -56,22 +62,25 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/gray"
             android:text="@{vm.galleryDetail.uploadDate}"
-            tools:text="2021-07-05"
+            android:textColor="@color/gray_300"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gallery_detail_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/gallery_detail_tv"
+            tools:text="2021-07-05" />
 
-        <androidx.appcompat.widget.AppCompatButton
+
+        <ImageView
             android:id="@+id/gallery_cancel_btn"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:background="@drawable/ic_baseline_cancel_24"
+            android:background="?android:attr/selectableItemBackground"
             android:onClick="@{()->vm.close()}"
-            app:layout_constraintBottom_toBottomOf="@+id/gallery_header_tv"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/gallery_header_tv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/gallery_header_tv" />
+            app:layout_constraintTop_toTopOf="@id/gallery_header_tv"
+            app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

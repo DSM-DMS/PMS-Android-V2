@@ -22,9 +22,12 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
         NoticeAdapter(vm)
     }
 
+    private val noticeLayoutManager: LinearLayoutManager by lazy {
+        LinearLayoutManager(binding.noticeRv.context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val noticeLayoutManager = LinearLayoutManager(binding.noticeRv.context)
         noticeLayoutManager.orientation = RecyclerView.VERTICAL
         binding.noticeRv.run {
             adapter = noticeAdapter
@@ -41,6 +44,9 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
             })
             clickedNoticeId.observe(viewLifecycleOwner, {
                 (activity as MainActivity).startNoticeDetail(it, vm.clickedNoticeTitle)
+            })
+            noticePage.observe(viewLifecycleOwner,{
+                noticeLayoutManager.scrollToPositionWithOffset(0,0)
             })
         }
 
