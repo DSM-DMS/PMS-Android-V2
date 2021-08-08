@@ -17,16 +17,19 @@ object NotifyBindingAdapter {
     @BindingAdapter("showReComments", "commentId")
     fun showReComments(
         linearLayout: LinearLayout,
-        reComments: HashMap<Int, List<CommentModel>?>,
-        id: Int
+        showReComments: HashMap<Int, List<CommentModel>?>,
+        commentId: Int
     ) {
-        if (!reComments[id].isNullOrEmpty()&& doneInput[id] != true) {
-            for (reComment in reComments[id]!!) {
-                val layout = NoticeCommentLayout(linearLayout.context)
-                layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
-                layout.findViewById<TextView>(R.id.re_comment_writer_tv).text = reComment.user?.name?:"익명의 사용자"
-                linearLayout.addView(layout)
-                doneInput[id] = true
+        if (!showReComments.isNullOrEmpty()) {
+            if (!showReComments[commentId].isNullOrEmpty()) {
+                for (reComment in showReComments[commentId]!!) {
+                    val layout = NoticeCommentLayout(linearLayout.context)
+                    layout.findViewById<TextView>(R.id.re_comment_body_tv).text = reComment.body
+                    layout.findViewById<TextView>(R.id.re_comment_writer_tv).text =
+                        reComment.user?.name ?: "익명의 사용자"
+                    linearLayout.addView(layout)
+                    doneInput[commentId] = true
+                }
             }
         }
     }
@@ -36,12 +39,15 @@ object NotifyBindingAdapter {
     fun timeAdapter(textView: TextView, time: Date?) {
         if (time != null) {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz", Locale.KOREA)
+
             val currentDateTime = System.currentTimeMillis()
-            val date = Date(currentDateTime)
-            val currentTime = dateFormat.format(date)
+            val currentTime = dateFormat.format(Date(currentDateTime))
+
             val getTime = dateFormat.format(time)
+
             val longCurrentTime = dateFormat.parse(currentTime).time
             val longGetTime = dateFormat.parse(getTime).time
+
             val diff = (longCurrentTime - longGetTime) / 1000
             val dayDiff = (diff / 86400)
             if (dayDiff < 0 || dayDiff >= 31) {

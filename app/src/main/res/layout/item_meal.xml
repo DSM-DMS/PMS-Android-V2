@@ -18,6 +18,10 @@
         <variable
             name="picture"
             type="String" />
+
+        <variable
+            name="color"
+            type="android.graphics.Color" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,16 +86,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/meal_time_fl"
                     tools:text="급식\n급식밥\n급식국\n급식김치" />
 
-                <ImageView
+                <TextView
                     android:id="@+id/meal_turning_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:padding="5dp"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp"
+                    android:text="@{vm.showPicture?`터치하여 급식표보기`:`터치하여 급식사진보기`}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_360_24" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
                     android:id="@+id/meal_image_iv"

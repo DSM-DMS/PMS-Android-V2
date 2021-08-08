@@ -29,14 +29,13 @@ class NoticeDetailViewModel(
     val resetComments: LiveData<Boolean> get() = _resetComments
 
     private val _clickedCommentId = MutableLiveData<Int>()
-    val clickedCommentId:LiveData<Int> get() = _clickedCommentId
+    val clickedCommentId: LiveData<Int> get() = _clickedCommentId
 
     var noticeId = -1
 
-    fun getNoticeDetail(id: Int) {
-        noticeId = id
+    fun getNoticeDetail() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.getNoticeDetail(accessToken, id).subscribe { response ->
+        notifyApiImpl.getNoticeDetail(accessToken, noticeId).subscribe { response ->
             if (response.isSuccessful) {
                 getReComments(accessToken, response.body()!!.comment)
                 _noticeDetail.value = response.body()
@@ -58,19 +57,18 @@ class NoticeDetailViewModel(
 
     fun postComment() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        val body = CommentRequestModel(comment.value!!,clickedCommentId.value)
-        notifyApiImpl.postComment(accessToken,noticeId, body).subscribe { response ->
-            if (response.isSuccessful) {
-                _resetComments.value = true
-                _noticeDetail.value = null
-                reComments.value = null
-                comment.value = null
-                getNoticeDetail(noticeId)
+        val body = CommentRequestModel(comment.value!!, clickedCommentId.value)
+        if (!comment.value.isNullOrEmpty()) {
+            notifyApiImpl.postComment(accessToken, noticeId, body).subscribe { response ->
+                if (response.isSuccessful) {
+                    _resetComments.value = true
+                    getNoticeDetail()
+                }
             }
         }
     }
 
-    fun commentClick(id:Int){
+    fun commentClick(id: Int) {
         _clickedCommentId.value = id
     }
 
