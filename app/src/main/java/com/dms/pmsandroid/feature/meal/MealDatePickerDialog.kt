@@ -14,15 +14,45 @@ class MealDatePickerDialog : BaseDialog<DialogDatePickerBinding>(R.layout.dialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val date = vm.date.value
+        val year = date!!.substring(0, 4).toInt()
+        val month = date.substring(4, 6).toInt()
+        val day = date.substring(6, 8).toInt()
+
         binding.run {
-            dpYearNp.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-            dpMonthNp.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-            dpDayNp.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+            dpYearNp.run {
+                descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+                wrapSelectorWheel = false
+                value = year
+                maxValue = year + 1
+                minValue = year - 1
+            }
+            dpMonthNp.run {
+                descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+                wrapSelectorWheel = false
+                value = month
+                maxValue = 12
+                minValue = 1
+            }
+            dpDayNp.run {
+                descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+                wrapSelectorWheel = false
+                value = day
+                maxValue = 31
+                minValue = 1
+            }
+
+
+
+
+
+            dpYearNp.minValue
             dpCancelTv.setOnClickListener {
                 dismiss()
             }
         }
     }
+
     override fun observeEvent() {
 
     }

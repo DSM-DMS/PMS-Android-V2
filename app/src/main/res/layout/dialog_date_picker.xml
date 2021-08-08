@@ -23,25 +23,55 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareregular"
+                android:text="@string/year"
+                android:textColor="@color/gray_300"
+                app:layout_constraintBottom_toBottomOf="@id/dp_month_np"
+                app:layout_constraintStart_toEndOf="@id/dp_year_np"
+                app:layout_constraintTop_toTopOf="@id/dp_year_np" />
+
             <NumberPicker
                 android:id="@+id/dp_month_np"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="23dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="20dp"
                 app:layout_constraintEnd_toStartOf="@id/dp_day_np"
                 app:layout_constraintStart_toEndOf="@id/dp_year_np"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareregular"
+                android:text="@string/month"
+                android:textColor="@color/gray_300"
+                app:layout_constraintBottom_toBottomOf="@+id/dp_month_np"
+                app:layout_constraintStart_toEndOf="@+id/dp_month_np"
+                app:layout_constraintTop_toTopOf="@+id/dp_month_np" />
 
             <NumberPicker
                 android:id="@+id/dp_day_np"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="25dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/dp_month_np"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareregular"
+                android:text="일"
+                android:textColor="@color/gray_300"
+                app:layout_constraintBottom_toBottomOf="@id/dp_day_np"
+                app:layout_constraintStart_toEndOf="@+id/dp_day_np"
+                app:layout_constraintTop_toTopOf="@id/dp_day_np" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dp_complete_tv"
