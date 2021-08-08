@@ -148,4 +148,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        setMonth.clear()
+    }
+
 }
