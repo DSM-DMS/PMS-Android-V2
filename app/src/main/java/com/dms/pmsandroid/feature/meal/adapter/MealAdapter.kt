@@ -68,14 +68,6 @@ class MealAdapter(
 
 
             binding.mealItem.setOnClickListener {
-                val animator: ObjectAnimator = (AnimatorInflater.loadAnimator(
-                    it.context,
-                    R.animator.anim_flip_180
-                ) as ObjectAnimator).apply {
-                    target = it
-                    duration = 500
-                }
-                animator.start()
                 viewModel.showPicture()
             }
         }
