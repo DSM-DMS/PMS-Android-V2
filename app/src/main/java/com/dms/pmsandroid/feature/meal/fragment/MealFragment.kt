@@ -47,6 +47,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         binding.mealViewVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
                 when (position % 3) {
                     0 -> {
                         if (selectedPosition<position) {
@@ -60,7 +61,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                     }
                 }
                 selectedPosition = position
-                super.onPageSelected(position)
             }
         })
 
@@ -114,9 +114,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private fun setIndicator() {
         binding.mealViewVp.post { binding.mealViewVp.setCurrentItem(Int.MAX_VALUE / 2, false) }
-        //TabLayoutMediator(binding.tabMealBanner, binding.mealViewVp) { tap, position ->
 
-        //}.attach()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

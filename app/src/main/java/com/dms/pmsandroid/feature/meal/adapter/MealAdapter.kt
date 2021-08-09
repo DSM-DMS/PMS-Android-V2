@@ -30,23 +30,28 @@ class MealAdapter(
         fun bind(meal: ArrayList<String>?, position: Int) {
             when (position) {
                 0 -> {
-                    binding.mealTimeTv.text = "아침"
-                    binding.picture = viewModel.mealPicture.value?.breakfast ?: ""
-                    binding.mealTimeFl.setBackgroundColor(blue)
+                    binding.run {
+                        mealTimeTv.text = "아침"
+                        picture = viewModel.mealPicture.value?.breakfast ?: ""
+                        mealTimeFl.setBackgroundColor(blue)
+                    }
                 }
                 1 -> {
-                    binding.mealTimeTv.text = "점심"
-                    binding.picture = viewModel.mealPicture.value?.lunch ?: ""
-                    binding.mealTimeFl.setBackgroundColor(green)
+                    binding.run {
+                        mealTimeTv.text = "점심"
+                        picture = viewModel.mealPicture.value?.lunch ?: ""
+                        mealTimeFl.setBackgroundColor(green)
+                    }
                 }
                 2 -> {
-                    binding.mealTimeTv.text = "저녁"
-                    binding.picture = viewModel.mealPicture.value?.dinner ?: ""
-                    binding.mealTimeFl.setBackgroundColor(red)
+                    binding.run {
+                        mealTimeTv.text = "저녁"
+                        picture = viewModel.mealPicture.value?.dinner ?: ""
+                        mealTimeFl.setBackgroundColor(red)
+                    }
                 }
             }
             binding.vm = viewModel
-            binding.executePendingBindings()
             if (meal != null) {
                 var mealList = ""
                 for (m in meal) {
@@ -62,12 +67,12 @@ class MealAdapter(
             }
 
 
-            binding.mealContainer.setOnClickListener {
+            binding.mealItem.setOnClickListener {
                 val animator: ObjectAnimator = (AnimatorInflater.loadAnimator(
                     it.context,
                     R.animator.anim_flip_180
                 ) as ObjectAnimator).apply {
-                    target = binding.mealItem
+                    target = it
                     duration = 500
                 }
                 animator.start()
