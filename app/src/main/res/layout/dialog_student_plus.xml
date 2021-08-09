@@ -47,6 +47,8 @@
             android:layout_height="52dp"
             android:layout_marginTop="14dp"
             android:ems="6"
+            android:maxLength="6"
+            android:singleLine="true"
             android:fontFamily="@font/nanumsquareregular"
             android:gravity="center"
             android:hint="6자리 인증코드 입력"
