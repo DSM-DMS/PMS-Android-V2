@@ -83,10 +83,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             })
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCalendarView() {
         binding.calendarShimmerContainer.startShimmer()
-        binding.calendarEventTv.text = "일정을 읽어오는중입니다..."
+        binding.calendarEventTv.text = "\n일정을 읽어오는중입니다...\n"
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
         calendarView.run {
@@ -131,7 +132,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     @SuppressLint("SetTextI18n")
     private fun setEventTv(date: String, calendarDay: CalendarDay) {
         val key = EventKeyModel(calendarDay.month, date)
-        val event = vm.events.value?.get(key)?.eventName ?: "일정이 없습니다"
+        val event = vm.events.value?.get(key)?.eventName ?: "\n일정이 없습니다\n"
         with(binding) {
             calendarEventTv.text = event
             calendarDateTv.text = "${calendarDay.month}월${calendarDay.day}일"

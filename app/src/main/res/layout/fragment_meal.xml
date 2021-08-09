@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel" />
@@ -41,60 +42,65 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/meal_date_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/meal_week_tv"
-            app:layout_constraintEnd_toStartOf="@+id/meal_next_btn"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/meal_before_btn"
-            app:layout_constraintTop_toTopOf="@+id/meal_next_btn"
-            app:meal_time="@{vm.date}"
-            tools:text="2021/06/18" />
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/meal_view_vp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/tab_meal_banner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_next_btn"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/meal_week_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            tools:text="금요일"
-            app:week_time="@{vm.weekDate}"
-            android:textColor="@color/blue"
-            app:layout_constraintBottom_toTopOf="@+id/meal_view_vp"
-            app:layout_constraintEnd_toStartOf="@+id/meal_next_btn"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/meal_before_btn"
-            app:layout_constraintTop_toBottomOf="@+id/meal_date_tv" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_meal_banner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:scrollIndicators="none"
+            android:layout_marginBottom="30dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:tabBackground="@drawable/selector_tab_blue"
-            app:tabGravity="center"
-            app:tabIndicator="@null"
-            app:tabPaddingEnd="@dimen/dot_padding"
-            app:tabPaddingStart="@dimen/dot_padding" />
+            app:layout_constraintTop_toBottomOf="@+id/meal_next_btn" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/meal_date_cl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="@id/meal_next_btn"
+            app:layout_constraintEnd_toStartOf="@id/meal_next_btn"
+            app:layout_constraintStart_toEndOf="@+id/meal_before_btn"
+            app:layout_constraintTop_toTopOf="@id/meal_next_btn">
+
+            <TextView
+                android:id="@+id/meal_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/meal_week_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:meal_time="@{vm.date}"
+                tools:text="2021/06/18" />
+
+            <TextView
+                android:id="@+id/meal_week_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:week_time="@{vm.weekDate}"
+                tools:text="금요일" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/meal_date_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
