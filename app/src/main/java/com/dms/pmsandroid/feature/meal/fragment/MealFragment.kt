@@ -1,9 +1,11 @@
 package com.dms.pmsandroid.feature.meal.fragment
 
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
@@ -37,25 +39,40 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         setIndicator()
     }
 
-    private var selectedPosition = Int.MAX_VALUE/2
+    private var selectedPosition = Int.MAX_VALUE / 2
 
     private val dateDialog = MealDatePickerDialog()
-    private fun initView(){
+
+
+    private fun initView() {
 
         binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.mealViewVp.adapter = adapter
+        binding.mealViewVp.offscreenPageLimit = 1
+
+        binding.mealViewVp.addItemDecoration(object: RecyclerView.ItemDecoration(){
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                outRect.right = 20
+                outRect.left = 20
+            }
+        })
         binding.mealViewVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 when (position % 3) {
                     0 -> {
-                        if (selectedPosition<position) {
+                        if (selectedPosition < position) {
                             calculateTime(true)
                         }
                     }
                     2 -> {
-                        if (selectedPosition>position) {
+                        if (selectedPosition > position) {
                             calculateTime(false)
                         }
                     }
@@ -64,8 +81,16 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             }
         })
 
+        val screenWidth = resources.displayMetrics.widthPixels
+        val pageMargin = resources.getDimension(R.dimen.pageMargin)
+        val pageWidth = screenWidth - (pageMargin*2) - 50
+        val offsetPx = screenWidth - pageWidth - pageMargin
+        binding.mealViewVp.setPageTransformer { page, position ->
+            page.translationX = -offsetPx * position
+        }
+
         binding.mealDateCl.setOnClickListener {
-            dateDialog.show(requireActivity().supportFragmentManager,"MealDatePickerDialog")
+            dateDialog.show(requireActivity().supportFragmentManager, "MealDatePickerDialog")
         }
     }
 
