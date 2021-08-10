@@ -8,24 +8,15 @@ import com.dms.pmsandroid.data.remote.mypage.MyPageApiImpl
 import com.dms.pmsandroid.feature.mypage.model.StudentCertificationResponse
 
 class AddStudentViewModel(private val myPageApiImpl: MyPageApiImpl):ViewModel(){
-    val checkConfirm = MutableLiveData(false)
-    val checkCancel =  MutableLiveData(false)
 
     private val _toastMessage = MutableLiveData<String>()
 
     val doneInput = MutableLiveData(false)
     val certification = MutableLiveData<String>()
 
+    private val _successCertifitcation = MutableLiveData(false)
+    val successCertifitcation : LiveData<Boolean> get() = _successCertifitcation
 
-    fun onClicked(){
-        checkConfirm.value = true
-        doneInput.value != null
-        studentCertification()
-    }
-
-    fun checkBack(){
-        checkCancel.value = true
-    }
 
     fun studentCertification(){
         if(doneInput.value!!){
@@ -34,10 +25,11 @@ class AddStudentViewModel(private val myPageApiImpl: MyPageApiImpl):ViewModel(){
                 when(request.code()){
                     201 -> {
                         _toastMessage.value = "학생 등록에 성공하셨습니다"
-
+                        _successCertifitcation.value = true
                     }
                     400 -> {
                         _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"
+
                     }
                     401 -> {
                         _toastMessage.value = "인증정보가 유효하지 않습니다"

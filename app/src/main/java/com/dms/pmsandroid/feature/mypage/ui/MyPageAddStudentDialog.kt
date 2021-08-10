@@ -22,8 +22,13 @@ class MyPageAddStudentDialog : BaseDialog<DialogStudentPlusBinding>(R.layout.dia
 
         binding.addstudentConfirmTv.setOnClickListener {
             dismiss()
+            vm.studentCertification()
         }
         binding.addstudentCancleTv.setOnClickListener {
+            activity?.supportFragmentManager
+                ?.beginTransaction()
+                ?.remove(this)
+                ?.commit()
             dismiss()
         }
     }

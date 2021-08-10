@@ -1,10 +1,7 @@
 package com.dms.pmsandroid.data.remote.mypage
 
 import com.dms.pmsandroid.data.remote.ApiProvider
-import com.dms.pmsandroid.feature.mypage.model.BasicInformationResponse
-import com.dms.pmsandroid.feature.mypage.model.OutingListResponse
-import com.dms.pmsandroid.feature.mypage.model.PointListResponse
-import com.dms.pmsandroid.feature.mypage.model.StudentCertificationResponse
+import com.dms.pmsandroid.feature.mypage.model.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
@@ -15,6 +12,10 @@ class MyPageApiImpl {
     private fun providerMyPageApi(): MyPageApi =
         ApiProvider.jungBinRetroFitBuilder.create(MyPageApi::class.java)
 
+    fun getBasicInfo(accessToken: String): @NonNull Single<Response<UserListResponse>> =
+        providerMyPageApi().getStudents(accessToken)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
 
     fun getUserApi(number: Int): @NonNull Single<Response<BasicInformationResponse>> =
         providerMyPageApi().getStudentInformation(number)
