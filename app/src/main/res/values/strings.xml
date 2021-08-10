@@ -58,4 +58,8 @@
     <string name="rest_day">휴일</string>
     <string name="selected_date">선택된날짜</string>
     <string name="today">오늘</string>
+    <string name="announce">안내</string>
+    <string name="no">아니요</string>
+    <string name="download">다운로드</string>
+    <string name="ask_download">공지사항,가정통신문에 탑재되어있는 첨부파일중 한글파일을 보기 위해서는 한글파일뷰어가 필요합니다.한글파일뷰어를 다운로드 하시겠습니까?</string>
 </resources>

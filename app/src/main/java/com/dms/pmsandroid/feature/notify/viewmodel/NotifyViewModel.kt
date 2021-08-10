@@ -40,6 +40,8 @@ class NotifyViewModel(
 
     private var galleryTotalLength = 1
 
+    val needDownLoad = MutableLiveData(false)
+
     fun getGalleryList() {
         notifyApiImpl.getGalleryList(galleryPage.value!! - 1, 6).subscribe({
             if (it.isSuccessful) {
