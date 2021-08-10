@@ -3,7 +3,6 @@ package com.dms.pmsandroid.feature.calendar
 import com.dms.pmsandroid.base.DatePickerDialog
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 
 class CalendarDatePickerDialog(
     override val vm: CalendarViewModel

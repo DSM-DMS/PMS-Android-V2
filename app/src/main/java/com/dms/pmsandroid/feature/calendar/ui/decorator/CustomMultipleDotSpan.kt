@@ -9,7 +9,7 @@ import com.dms.pmsandroid.R
 
 class CustomMultipleDotSpan(private val dots: List<Int>, context: Context) : LineBackgroundSpan {
 
-    private val radius = 7F
+    private val radius = 10F
 
     private val green = context.resources.getColor(R.color.green)
     private val red = context.resources.getColor(R.color.red)
