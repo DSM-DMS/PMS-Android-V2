@@ -44,7 +44,7 @@
             android:padding="5dp"
             android:text="@string/help"
             android:textColor="@color/gray_300"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_baseline_help_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/calendar_shimmer_container" />
