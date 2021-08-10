@@ -60,12 +60,16 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             selectedDate.observe(viewLifecycleOwner,{
                 setMonthTv(it)
                 val plusMonth = CalendarDay.from(it.year,it.month+1,it.day)
-                binding.calendarView.run {
-                    currentDate = plusMonth
-                    selectedDate = plusMonth
-                }
                 val formedDate = formatDate(plusMonth)
                 setEventTv(formedDate,it)
+            })
+            updateCurrentDate.observe(viewLifecycleOwner,{
+                if(it){
+                    val date = vm.selectedDate.value
+                    binding.calendarView.currentDate = date
+                    binding.calendarView.selectedDate = date
+                    vm.updateCurrentDate.value = false
+                }
             })
         }
 

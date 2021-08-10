@@ -24,16 +24,20 @@ class CalendarViewModel(
 
     val doneEventsSetting = MutableLiveData(false)
 
+    val updateCurrentDate = MutableLiveData(false)
+
     fun nextMonth() {
         val setDate = selectedDate.value
-        selectedDate.value = if (setDate!!.month > 11) CalendarDay.from(setDate.year + 1, 0, 1)
+        selectedDate.value = if (setDate!!.month > 10) CalendarDay.from(setDate.year + 1, 0, 1)
         else CalendarDay.from(setDate.year, setDate.month + 1, 1)
+        updateCurrentDate.value = true
     }
 
     fun beforeMonth(){
         val setDate = selectedDate.value
         selectedDate.value = if (setDate!!.month<1) CalendarDay.from(setDate.year-1,11,1)
         else CalendarDay.from(setDate.year,setDate.month-1,1)
+        updateCurrentDate.value = true
     }
 
     fun loadSchedules() {
