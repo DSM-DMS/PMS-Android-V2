@@ -1,6 +1,8 @@
 package com.dms.pmsandroid.ui
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -83,6 +85,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             putExtra("title", title)
         }
         startActivity(noticeIntent)
+    }
+
+    fun startDownloadFileViewer(){
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.tf.thinkdroid.viewer")))
+        } catch (e: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.tf.thinkdroid.viewer")))
+        }
     }
 
     private val itemSelectedListener =
