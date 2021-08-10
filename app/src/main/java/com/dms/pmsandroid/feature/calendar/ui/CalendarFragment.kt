@@ -98,6 +98,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         binding.calendarEventTv.text = "\n일정을 읽어오는중입니다...\n"
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
+        setMonthTv(currentDate)
         calendarView.run {
             addDecorators(
                 DayDecorator(requireContext()),
@@ -105,11 +106,13 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 SundayDecorator(requireContext()),
                 SelectedDayDecorator(requireContext())
             )
+            topbarVisible = false
             setWeekDayTextAppearance(R.style.saturdayColor)
             setDateSelected(currentDate, true)
             setOnDateChangedListener(this@CalendarFragment)
             setOnMonthChangedListener(this@CalendarFragment)
         }
+        binding.calendarMonthTv
     }
 
     override fun onDateSelected(
@@ -148,6 +151,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
+        setMonthTv(date)
         val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)
@@ -155,6 +159,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         if (setMonth[month + 1] != true) {
             loadEvents(month + 1)
         }
+    }
+
+    private fun setMonthTv(date:CalendarDay?){
+        binding.calendarMonthTv.text = "${date?.year}년 ${(date?.month)}월"
     }
 
     override fun onDestroyView() {

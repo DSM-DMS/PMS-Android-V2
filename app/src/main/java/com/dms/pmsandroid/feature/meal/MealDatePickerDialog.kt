@@ -9,19 +9,31 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseDialog
 import com.dms.pmsandroid.databinding.DialogDatePickerBinding
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
+import com.dms.pmsandroid.ui.DatePickerDialog
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class MealDatePickerDialog : BaseDialog<DialogDatePickerBinding>(R.layout.dialog_date_picker) {
+class MealDatePickerDialog : DatePickerDialog() {
     override val vm: MealViewModel by inject()
+
+    private val date by lazy {
+        vm.date.value!!
+    }
+
+    override val year: Int
+            by lazy {
+                date.substring(0, 4).toInt()
+            }
+
+    override val month: Int
+        get() = TODO("Not yet implemented")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val date = vm.date.value
-        val year = date!!.substring(0, 4).toInt()
+        val year = date!!
         val month = date.substring(4, 6).toInt()
         val day = date.substring(6, 8).toInt()
 
