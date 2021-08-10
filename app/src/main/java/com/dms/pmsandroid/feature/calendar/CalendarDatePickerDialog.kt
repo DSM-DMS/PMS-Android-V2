@@ -3,11 +3,9 @@ package com.dms.pmsandroid.feature.calendar
 import com.dms.pmsandroid.base.DatePickerDialog
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 
 class CalendarDatePickerDialog(
-    override val vm: CalendarViewModel,
-    private val calendarView:MaterialCalendarView
+    override val vm: CalendarViewModel
 ) : DatePickerDialog() {
 
     private var date = vm.selectedDate.value
@@ -19,8 +17,6 @@ class CalendarDatePickerDialog(
     override fun onCompleteClicked() {
         val result =
             CalendarDay.from(binding.dpYearNp.value, binding.dpMonthNp.value-1, binding.dpDayNp.value)
-        calendarView.currentDate = result
-        calendarView.selectedDate = result
         vm.selectedDate.value = result
         dismiss()
     }

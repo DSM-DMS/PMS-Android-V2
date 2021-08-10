@@ -60,6 +60,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             selectedDate.observe(viewLifecycleOwner,{
                 setMonthTv(it)
                 val plusMonth = CalendarDay.from(it.year,it.month+1,it.day)
+                binding.calendarView.run {
+                    currentDate = plusMonth
+                    selectedDate = plusMonth
+                }
                 val formedDate = formatDate(plusMonth)
                 setEventTv(formedDate,it)
             })
@@ -101,7 +105,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
 
     private val calendarDatePickerDialog by lazy {
-        CalendarDatePickerDialog(vm,binding.calendarView)
+        CalendarDatePickerDialog(vm)
     }
 
     @SuppressLint("SetTextI18n")
