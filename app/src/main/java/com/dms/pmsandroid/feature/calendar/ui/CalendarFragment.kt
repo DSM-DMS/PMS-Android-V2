@@ -30,10 +30,17 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     private val setMonth = HashMap<Int, Boolean>()
 
+    private val helperDialog by lazy {
+        CalendarHelperDialog(vm)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCalendarView()
+        binding.calendarHelperTv.setOnClickListener {
+            helperDialog.show(requireActivity().supportFragmentManager,"HelperDialog")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
