@@ -13,6 +13,7 @@ import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.ui.decorator.*
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import com.dms.pmsandroid.ui.MainViewModel
+import com.jakewharton.rxbinding4.view.clicks
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
@@ -22,6 +23,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.TimeUnit
 
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar),
     OnDateSelectedListener, OnMonthChangedListener {
@@ -39,7 +41,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCalendarView()
-        binding.calendarHelperTv.setOnClickListener {
+        binding.calendarHelperTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
             helperDialog.show(requireActivity().supportFragmentManager,"HelperDialog")
         }
     }
@@ -133,7 +135,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             setOnDateChangedListener(this@CalendarFragment)
             setOnMonthChangedListener(this@CalendarFragment)
         }
-        binding.calendarMonthTv.setOnClickListener {
+        binding.calendarMonthTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
             calendarDatePickerDialog.show(requireActivity().supportFragmentManager,"CalendarDatePickerDialog")
         }
     }

@@ -23,8 +23,6 @@ class NoticeDetailViewModel(
 
     val doneReComments = MutableLiveData(false)
 
-    val attachClicked = MutableLiveData(false)
-
     private val _resetComments = MutableLiveData(false)
     val resetComments: LiveData<Boolean> get() = _resetComments
 
@@ -70,9 +68,5 @@ class NoticeDetailViewModel(
 
     fun commentClick(id: Int) {
         _clickedCommentId.value = id
-    }
-
-    fun onAttachClicked() {
-        attachClicked.value = true
     }
 }
