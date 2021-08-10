@@ -63,7 +63,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     private fun loadEvents(month: Int) {
-        val events = vm.events.value!!
+        val events = vm.events.value ?: return
         val key = events.keys
         val decorators = ArrayList<EventDecorator>()
 
@@ -71,10 +71,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         setMonth[month + 1] = true
 
         Observable.fromIterable(key).filter { k -> k.month == month || k.month == month + 1 }
+            .filter { v -> events[v] != null }
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(
                 Schedulers.io()
             ).subscribe({ k ->
-                decorators.add(EventDecorator(k.day, events[k]!!.eventSize,requireContext()))
+                decorators.add(EventDecorator(k.day, events[k]!!.dotTypes, binding.calendarView.context))
             }, {
 
             }, {
@@ -140,12 +141,12 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
-        val month = (date?.month ?: 0)+1
+        val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)
         }
-        if(setMonth[month+1]!=true){
-            loadEvents(month+1)
+        if (setMonth[month + 1] != true) {
+            loadEvents(month + 1)
         }
     }
 
