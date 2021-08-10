@@ -173,7 +173,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     private fun setMonthTv(date:CalendarDay?){
-        binding.calendarMonthTv.text = "${date?.year}년 ${(date?.month)?:0+1}월"
+        binding.calendarMonthTv.text = "${date?.year}년 ${((date?.month)?:0)+1}월"
     }
 
     override fun onDestroyView() {
