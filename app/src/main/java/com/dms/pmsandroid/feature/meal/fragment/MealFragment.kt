@@ -41,7 +41,9 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private var selectedPosition = Int.MAX_VALUE / 2
 
-    private val dateDialog = MealDatePickerDialog()
+    private val dateDialog: MealDatePickerDialog by lazy {
+        MealDatePickerDialog()
+    }
 
 
     private fun initView() {
@@ -50,7 +52,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         binding.mealViewVp.adapter = adapter
         binding.mealViewVp.offscreenPageLimit = 1
 
-        binding.mealViewVp.addItemDecoration(object: RecyclerView.ItemDecoration(){
+        binding.mealViewVp.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
@@ -83,7 +85,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
         val screenWidth = resources.displayMetrics.widthPixels
         val pageMargin = resources.getDimension(R.dimen.pageMargin)
-        val pageWidth = screenWidth - (pageMargin*2) - 50
+        val pageWidth = screenWidth - (pageMargin * 2) - 50
         val offsetPx = screenWidth - pageWidth - pageMargin
         binding.mealViewVp.setPageTransformer { page, position ->
             page.translationX = -offsetPx * position
@@ -161,5 +163,4 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             }
         })
     }
-
 }

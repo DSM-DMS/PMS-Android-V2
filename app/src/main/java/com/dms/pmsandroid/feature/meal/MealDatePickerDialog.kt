@@ -16,20 +16,16 @@ class MealDatePickerDialog : DatePickerDialog() {
         vm.date.value!!
     }
 
-    override val year: Int
-            by lazy {
-                date.substring(0, 4).toInt()
-            }
+    override var year =
+        date.substring(0, 4).toInt()
 
-    override val month: Int
-            by lazy {
-                date.substring(4, 6).toInt()
-            }
 
-    override val day: Int
-            by lazy {
-                date.substring(6, 8).toInt()
-            }
+    override var month: Int =
+        date.substring(4, 6).toInt()
+
+
+    override var day: Int =
+        date.substring(6, 8).toInt()
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -44,5 +40,13 @@ class MealDatePickerDialog : DatePickerDialog() {
         vm.weekDate.value = calculateDate.dayOfWeek.value
         vm.getMeal()
         dismiss()
+    }
+
+    override fun observeEvent() {
+        vm.date.observe(viewLifecycleOwner,{
+            day = it.substring(6, 8).toInt()
+            month = it.substring(4, 6).toInt()
+            year = it.substring(0,4).toInt()
+        })
     }
 }

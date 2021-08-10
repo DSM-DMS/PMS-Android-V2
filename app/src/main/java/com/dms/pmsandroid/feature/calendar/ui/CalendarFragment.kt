@@ -51,23 +51,29 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 vm.loadSchedules()
             }
         })
-        vm.doneEventsSetting.observe(viewLifecycleOwner, {
-            if (it) {
-                initEventTv()
-            }
-        })
+        vm.run {
+            doneEventsSetting.observe(viewLifecycleOwner, {
+                if (it) {
+                    initEventTv()
+                }
+            })
+            selectedDate.observe(viewLifecycleOwner,{
+                setMonthTv(it)
+                val plusMonth = CalendarDay.from(it.year,it.month+1,it.day)
+                val formedDate = formatDate(plusMonth)
+                setEventTv(formedDate,it)
+            })
+        }
 
     }
 
     private fun initEventTv() {
         val currentDate = CalendarDay.today()
-        val setCurrentDate =
-            CalendarDay.from(currentDate.year, currentDate.month + 1, currentDate.day)
-        val formatDate = formatDate(setCurrentDate)
+        val formatDate = formatDate(currentDate)
 
-        loadEvents(setCurrentDate.month)
+        loadEvents(currentDate.month+1)
 
-        setEventTv(formatDate, setCurrentDate)
+        setEventTv(formatDate, currentDate)
     }
 
     private fun loadEvents(month: Int) {
@@ -95,7 +101,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
 
     private val calendarDatePickerDialog by lazy {
-        CalendarDatePickerDialog(vm.date.value!!,vm,binding.calendarView)
+        CalendarDatePickerDialog(vm,binding.calendarView)
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,7 +111,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         binding.calendarEventTv.text = "\n일정을 읽어오는중입니다...\n"
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
-        vm.date.value = currentDate
+        vm.selectedDate.value = currentDate
         setMonthTv(currentDate)
         calendarView.run {
             addDecorators(
@@ -130,9 +136,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         date: CalendarDay,
         selected: Boolean
     ) {
-        val setDate = CalendarDay.from(date.year, date.month + 1, date.day)
-        val selectedDate = formatDate(setDate)
-        setEventTv(selectedDate, setDate)
+        vm.selectedDate.value = date
     }
 
     private fun formatDate(date: CalendarDay): String {
@@ -152,17 +156,17 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     @SuppressLint("SetTextI18n")
     private fun setEventTv(date: String, calendarDay: CalendarDay) {
-        val key = EventKeyModel(calendarDay.month, date)
+        val key = EventKeyModel(calendarDay.month+1, date)
         val event = vm.events.value?.get(key)?.eventName ?: "\n일정이 없습니다\n"
         with(binding) {
             calendarEventTv.text = event
-            calendarDateTv.text = "${calendarDay.month}월${calendarDay.day}일"
+            calendarDateTv.text = "${calendarDay.month+1}월${calendarDay.day}일"
         }
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
         setMonthTv(date)
-        vm.date.value = CalendarDay.from(date?.year?:2021,date?.month?:0+1,date?.day?:1)
+        vm.selectedDate.value = CalendarDay.from(date?.year?:2021,date?.month?:1,date?.day?:1)
         val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)

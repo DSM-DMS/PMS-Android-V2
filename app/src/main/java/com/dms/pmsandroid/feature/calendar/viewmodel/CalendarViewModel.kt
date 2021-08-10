@@ -20,7 +20,7 @@ class CalendarViewModel(
     private val _events = MutableLiveData<MutableMap<EventKeyModel, EventModel>>(HashMap())
     val events: LiveData<MutableMap<EventKeyModel, EventModel>> get() = _events
 
-    val date = MutableLiveData<CalendarDay>()
+    val selectedDate = MutableLiveData<CalendarDay>()
 
     val doneEventsSetting = MutableLiveData(false)
 
