@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentCalendarBinding
+import com.dms.pmsandroid.feature.calendar.CalendarDatePickerDialog
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.ui.decorator.*
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
@@ -30,10 +31,17 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     private val setMonth = HashMap<Int, Boolean>()
 
+    private val helperDialog by lazy {
+        CalendarHelperDialog(vm)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCalendarView()
+        binding.calendarHelperTv.setOnClickListener {
+            helperDialog.show(requireActivity().supportFragmentManager,"HelperDialog")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -43,27 +51,40 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 vm.loadSchedules()
             }
         })
-        vm.doneEventsSetting.observe(viewLifecycleOwner, {
-            if (it) {
-                initEventTv()
-            }
-        })
+        vm.run {
+            doneEventsSetting.observe(viewLifecycleOwner, {
+                if (it) {
+                    initEventTv()
+                }
+            })
+            selectedDate.observe(viewLifecycleOwner,{
+                setMonthTv(it)
+                val plusMonth = CalendarDay.from(it.year,it.month+1,it.day)
+                val formedDate = formatDate(plusMonth)
+                setEventTv(formedDate,it)
+            })
+            updateCurrentDate.observe(viewLifecycleOwner,{
+                if(it){
+                    val date = vm.selectedDate.value
+                    binding.calendarView.currentDate = date
+                    binding.calendarView.selectedDate = date
+                    vm.updateCurrentDate.value = false
+                }
+            })
+        }
 
     }
 
     private fun initEventTv() {
         val currentDate = CalendarDay.today()
-        val setCurrentDate =
-            CalendarDay.from(currentDate.year, currentDate.month + 1, currentDate.day)
-        val formatDate = formatDate(setCurrentDate)
 
-        loadEvents(setCurrentDate.month)
+        loadEvents(currentDate.month+1)
 
-        setEventTv(formatDate, setCurrentDate)
+        vm.selectedDate.value = currentDate
     }
 
     private fun loadEvents(month: Int) {
-        val events = vm.events.value!!
+        val events = vm.events.value ?: return
         val key = events.keys
         val decorators = ArrayList<EventDecorator>()
 
@@ -71,10 +92,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         setMonth[month + 1] = true
 
         Observable.fromIterable(key).filter { k -> k.month == month || k.month == month + 1 }
+            .filter { v -> events[v] != null }
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(
                 Schedulers.io()
             ).subscribe({ k ->
-                decorators.add(EventDecorator(k.day, events[k]!!.eventSize,requireContext()))
+                decorators.add(EventDecorator(k.day, events[k]!!.dotTypes, binding.calendarView.context))
             }, {
 
             }, {
@@ -83,12 +105,21 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             })
     }
 
+
+
+    private val calendarDatePickerDialog by lazy {
+        CalendarDatePickerDialog(vm)
+    }
+
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCalendarView() {
         binding.calendarShimmerContainer.startShimmer()
-        binding.calendarEventTv.text = "일정을 읽어오는중입니다..."
+        binding.calendarEventTv.text = "\n일정을 읽어오는중입니다...\n"
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
+        vm.selectedDate.value = currentDate
+        setMonthTv(currentDate)
         calendarView.run {
             addDecorators(
                 DayDecorator(requireContext()),
@@ -96,10 +127,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 SundayDecorator(requireContext()),
                 SelectedDayDecorator(requireContext())
             )
+            topbarVisible = false
             setWeekDayTextAppearance(R.style.saturdayColor)
             setDateSelected(currentDate, true)
             setOnDateChangedListener(this@CalendarFragment)
             setOnMonthChangedListener(this@CalendarFragment)
+        }
+        binding.calendarMonthTv.setOnClickListener {
+            calendarDatePickerDialog.show(requireActivity().supportFragmentManager,"CalendarDatePickerDialog")
         }
     }
 
@@ -108,9 +143,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         date: CalendarDay,
         selected: Boolean
     ) {
-        val setDate = CalendarDay.from(date.year, date.month + 1, date.day)
-        val selectedDate = formatDate(setDate)
-        setEventTv(selectedDate, setDate)
+        vm.selectedDate.value = date
     }
 
     private fun formatDate(date: CalendarDay): String {
@@ -130,22 +163,33 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     @SuppressLint("SetTextI18n")
     private fun setEventTv(date: String, calendarDay: CalendarDay) {
-        val key = EventKeyModel(calendarDay.month, date)
-        val event = vm.events.value?.get(key)?.eventName ?: "일정이 없습니다"
+        val key = EventKeyModel(calendarDay.month+1, date)
+        val event = vm.events.value?.get(key)?.eventName ?: "\n일정이 없습니다\n"
         with(binding) {
             calendarEventTv.text = event
-            calendarDateTv.text = "${calendarDay.month}월${calendarDay.day}일"
+            calendarDateTv.text = "${calendarDay.month+1}월${calendarDay.day}일"
         }
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
-        val month = (date?.month ?: 0)+1
+        setMonthTv(date)
+        vm.selectedDate.value = CalendarDay.from(date?.year?:2021,date?.month?:1,date?.day?:1)
+        val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)
         }
-        if(setMonth[month+1]!=true){
-            loadEvents(month+1)
+        if (setMonth[month + 1] != true) {
+            loadEvents(month + 1)
         }
+    }
+
+    private fun setMonthTv(date:CalendarDay?){
+        binding.calendarMonthTv.text = "${date?.year}년 ${((date?.month)?:0)+1}월"
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        setMonth.clear()
     }
 
 }

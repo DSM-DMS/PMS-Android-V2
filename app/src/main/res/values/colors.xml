@@ -20,6 +20,10 @@
 
     <color name="green">#56AD77</color>
 
+    <color name="yellow">#faed00</color>
+
+    <color name="purple">#a646f0</color>
+
     <color name="gray_300">#525252</color>
     <color name="gray">#999999</color>
     <color name="gray_100">#F7F7F7</color>
