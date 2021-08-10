@@ -77,11 +77,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     private fun initEventTv() {
         val currentDate = CalendarDay.today()
-        val formatDate = formatDate(currentDate)
 
         loadEvents(currentDate.month+1)
 
-        setEventTv(formatDate, currentDate)
+        vm.selectedDate.value = currentDate
     }
 
     private fun loadEvents(month: Int) {
