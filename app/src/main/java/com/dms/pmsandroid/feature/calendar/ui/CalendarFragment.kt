@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentCalendarBinding
+import com.dms.pmsandroid.feature.calendar.CalendarDatePickerDialog
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.ui.decorator.*
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
@@ -91,6 +92,12 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             })
     }
 
+
+
+    private val calendarDatePickerDialog by lazy {
+        CalendarDatePickerDialog(vm.date.value!!,vm,binding.calendarView)
+    }
+
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCalendarView() {
@@ -98,6 +105,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         binding.calendarEventTv.text = "\n일정을 읽어오는중입니다...\n"
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
+        vm.date.value = currentDate
         setMonthTv(currentDate)
         calendarView.run {
             addDecorators(
@@ -112,7 +120,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             setOnDateChangedListener(this@CalendarFragment)
             setOnMonthChangedListener(this@CalendarFragment)
         }
-        binding.calendarMonthTv
+        binding.calendarMonthTv.setOnClickListener {
+            calendarDatePickerDialog.show(requireActivity().supportFragmentManager,"CalendarDatePickerDialog")
+        }
     }
 
     override fun onDateSelected(
@@ -152,6 +162,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
         setMonthTv(date)
+        vm.date.value = CalendarDay.from(date?.year?:2021,date?.month?:0+1,date?.day?:1)
         val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)
@@ -162,7 +173,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     private fun setMonthTv(date:CalendarDay?){
-        binding.calendarMonthTv.text = "${date?.year}년 ${(date?.month)}월"
+        binding.calendarMonthTv.text = "${date?.year}년 ${(date?.month)?:0+1}월"
     }
 
     override fun onDestroyView() {

@@ -9,6 +9,7 @@ import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.model.EventModel
 import com.google.gson.JsonObject
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import io.reactivex.rxjava3.core.Observable
 
 class CalendarViewModel(
@@ -18,6 +19,8 @@ class CalendarViewModel(
 
     private val _events = MutableLiveData<MutableMap<EventKeyModel, EventModel>>(HashMap())
     val events: LiveData<MutableMap<EventKeyModel, EventModel>> get() = _events
+
+    val date = MutableLiveData<CalendarDay>()
 
     val doneEventsSetting = MutableLiveData(false)
 
