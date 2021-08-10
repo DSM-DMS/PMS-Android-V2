@@ -42,6 +42,9 @@ class CustomMultipleDotSpan(private val dots: List<Int>, context: Context) : Lin
                 Color.RED->{
                     paint.color = red
                 }
+                Color.GRAY->{
+                    paint.color = red
+                }
                 Color.BLUE->{
                     paint.color = blue
                 }

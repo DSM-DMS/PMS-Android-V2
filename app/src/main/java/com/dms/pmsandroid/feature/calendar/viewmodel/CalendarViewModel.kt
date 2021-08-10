@@ -111,7 +111,7 @@ class CalendarViewModel(
                                 eventName += addRedDot("대체공휴일")
                             }
                             "재량휴업" -> {
-                                dotTypes.add(Color.RED)
+                                dotTypes.add(Color.GRAY)
                                 eventName += addRedDot("재량휴업")
                             }
                             "추석연휴" -> {
