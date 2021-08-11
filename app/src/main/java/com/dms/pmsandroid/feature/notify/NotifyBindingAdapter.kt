@@ -40,24 +40,23 @@ object NotifyBindingAdapter {
         if (time != null) {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz", Locale.KOREA)
 
-            val currentDateTime = System.currentTimeMillis()
-            val currentTime = dateFormat.format(Date(currentDateTime))
+            val longCurrentTime = System.currentTimeMillis()
 
             val getTime = dateFormat.format(time)
-
-            val longCurrentTime = dateFormat.parse(currentTime).time
             val longGetTime = dateFormat.parse(getTime).time
 
             val diff = (longCurrentTime - longGetTime) / 1000
             val dayDiff = (diff / 86400)
+
             if (dayDiff < 0 || dayDiff >= 31) {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
                 textView.text = dateFormat.format(time)
             } else {
                 if (dayDiff <= 0) {
                     when (diff) {
-                        in 0..60 ->
-                            textView.text = "방금"
+
+                        in -50000..60 ->
+                            textView.text = "방금전"
                         in 61..120 -> textView.text = "1분전"
                         in 121..3600 ->
                             textView.text = "${diff / 60}분 전"

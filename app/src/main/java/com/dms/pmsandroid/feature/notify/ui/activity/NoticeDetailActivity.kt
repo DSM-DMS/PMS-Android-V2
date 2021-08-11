@@ -17,7 +17,7 @@ class NoticeDetailActivity :
     override val vm: NoticeDetailViewModel by viewModel()
 
     private val noticeAdapter by lazy {
-        NoticeDetailAdapter(vm)
+        NoticeDetailAdapter(vm,this)
     }
 
     companion object {
@@ -53,17 +53,15 @@ class NoticeDetailActivity :
     }
 
     private val dialog = NoticeAttachDialog()
+
+    fun showContent(){
+        dialog.show(supportFragmentManager, "AttachDialogFragment")
+    }
+
     override fun observeEvent() {
         vm.run {
             noticeDetail.observe(this@NoticeDetailActivity, {
                 noticeAdapter.setItems(it.comment)
-            })
-
-            attachClicked.observe(this@NoticeDetailActivity, {
-                if (it) {
-                    dialog.show(supportFragmentManager, "AttachDialogFragment")
-                    vm.attachClicked.value = false
-                }
             })
 
             doneReComments.observe(this@NoticeDetailActivity, {

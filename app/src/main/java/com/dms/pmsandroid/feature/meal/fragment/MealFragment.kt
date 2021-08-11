@@ -14,11 +14,13 @@ import com.dms.pmsandroid.feature.meal.MealDatePickerDialog
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.dms.pmsandroid.ui.MainViewModel
+import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
@@ -91,9 +93,10 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             page.translationX = -offsetPx * position
         }
 
-        binding.mealDateCl.setOnClickListener {
+        binding.mealDateCl.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
             dateDialog.show(requireActivity().supportFragmentManager, "MealDatePickerDialog")
         }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
