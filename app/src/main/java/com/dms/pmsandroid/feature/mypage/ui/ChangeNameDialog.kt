@@ -7,7 +7,6 @@ import android.view.View
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseDialog
 import com.dms.pmsandroid.databinding.DialogChangeNameBinding
-import com.dms.pmsandroid.databinding.DialogStudentPlusBinding
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +19,7 @@ class ChangeNameDialog : BaseDialog<DialogChangeNameBinding>(R.layout.dialog_cha
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.confirmTv.setOnClickListener {
+            vm.changeName()
             dismiss()
 
         }

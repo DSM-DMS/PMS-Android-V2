@@ -52,5 +52,6 @@
     <string name="check_outing">외출내역 보기</string>
     <string name="this_week_condition">이번주 잔류 상태</string>
     <string name="week_meal">주말급식 신청 여부</string>
+    <string name="new_nick">새로운 닉네임을 입력해주세요</string>
 
 </resources>

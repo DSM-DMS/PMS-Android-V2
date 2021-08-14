@@ -3,17 +3,16 @@ package com.dms.pmsandroid.feature.mypage.ui
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseDialog
 import com.dms.pmsandroid.databinding.DialogStudentPlusBinding
-import com.dms.pmsandroid.feature.mypage.viewmodel.AddStudentViewModel
+import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageAddStudentDialog : BaseDialog<DialogStudentPlusBinding>(R.layout.dialog_student_plus){
-    override val vm : AddStudentViewModel by sharedViewModel()
+    override val vm : MyPageViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

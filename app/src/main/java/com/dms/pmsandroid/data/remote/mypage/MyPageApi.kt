@@ -21,5 +21,8 @@ interface MyPageApi {
     @GET("/user/student/point/{number}")
     fun getStudentPoint(@Path("number")number: Int): Single<Response<PointListResponse>>
 
+    @PUT("/user/name")
+    fun changeUserName(@Body changeNameRequest: ChangeNameRequest) :Single<Response<Unit>>
+
 
 }

@@ -38,5 +38,9 @@ class MyPageApiImpl {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
+    fun changeUserNameApi(changeNameRequest: ChangeNameRequest):@NonNull Single<Response<Unit>> = providerMyPageApi().changeUserName(changeNameRequest)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+
 
 }

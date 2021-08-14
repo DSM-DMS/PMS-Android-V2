@@ -9,10 +9,10 @@
             type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
         <variable
             name="pluspoint"
-            type="int" />
+            type= "String" />
         <variable
             name="minuspoint"
-            type="int" />
+            type="String" />
         <variable
             name="studentName"
             type="String" />
@@ -24,6 +24,15 @@
         <variable
             name="nickName"
             type="String" />
+
+        <variable
+            name="stay"
+            type="String" />
+        
+        <variable
+            name="mealApplied"
+            type="boolean" />
+
 
     </data>
     <FrameLayout
@@ -62,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:text="00"
+                android:text="@{pluspoint}"
                 android:textSize="@dimen/point_int" />
         </androidx.cardview.widget.CardView>
 
@@ -96,7 +105,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00"
+                android:text="@{minuspoint}"
                 android:textSize="@dimen/point_int"/>
         </androidx.cardview.widget.CardView>
 
@@ -186,6 +195,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/week_meal" />
+
+            <TextView
+                android:id="@+id/stay_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="25dp"
+                android:visibility="invisible"
+                android:text="@{stay}" />
+
+            <ImageView
+                android:id="@+id/meal_applied_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="25dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
 
         </androidx.cardview.widget.CardView>
 

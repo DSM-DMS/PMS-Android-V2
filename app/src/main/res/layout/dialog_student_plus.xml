@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.AddStudentViewModel">
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel">
         </variable>
     </data>
 
