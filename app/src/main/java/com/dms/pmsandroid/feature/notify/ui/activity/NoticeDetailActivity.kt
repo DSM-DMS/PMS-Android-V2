@@ -49,7 +49,7 @@ class NoticeDetailActivity :
                 finish()
             }
         }
-        vm.getNoticeDetail()
+        vm.loadNoticeDetail()
     }
 
     private val dialog = NoticeAttachDialog()

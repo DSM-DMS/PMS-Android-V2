@@ -31,7 +31,7 @@ class NoticeDetailViewModel(
 
     var noticeId = -1
 
-    fun getNoticeDetail() {
+    fun loadNoticeDetail() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeDetail(accessToken, noticeId).subscribe { response ->
             if (response.isSuccessful) {
@@ -60,7 +60,7 @@ class NoticeDetailViewModel(
             notifyApiImpl.postComment(accessToken, noticeId, body).subscribe { response ->
                 if (response.isSuccessful) {
                     _resetComments.value = true
-                    getNoticeDetail()
+                    loadNoticeDetail()
                 }
             }
         }
