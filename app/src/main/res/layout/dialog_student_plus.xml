@@ -69,7 +69,6 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/nanumsquareregular"
             android:gravity="center"
-            android:onClick="@{()->vm.studentCertification()}"
             android:text="@string/pass"
             android:textColor="@color/blue"
             android:textSize="@dimen/dialog_text"
