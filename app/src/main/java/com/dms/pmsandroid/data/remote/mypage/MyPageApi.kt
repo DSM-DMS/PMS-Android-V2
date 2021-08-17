@@ -10,19 +10,19 @@ interface MyPageApi {
     fun getStudents( @Header("Authorization") accessToken: String):Single<Response<UserListResponse>>
 
     @POST("/user/student")
-    fun StudentCertification(@Body request : StudentCertificationResponse):Single<Response<Void>>
+    fun StudentCertification(@Header("Authorization") accessToken: String ,@Body request : StudentCertificationResponse):Single<Response<Void>>
 
     @GET("/user/student/{number}")
     fun getStudentInformation(@Path("number") number: Int): Single<Response<BasicInformationResponse>>
 
     @GET("/user/student/outing/{number}")
-    fun getStudentOuting(@Path("number") number: Int):Single<Response<OutingListResponse>>
+    fun getStudentOuting(@Path("number") accessToken: String,number: Int):Single<Response<OutingListResponse>>
 
     @GET("/user/student/point/{number}")
     fun getStudentPoint(@Path("number")number: Int): Single<Response<PointListResponse>>
 
     @PUT("/user/name")
-    fun changeUserName(@Body changeNameRequest: ChangeNameRequest) :Single<Response<Unit>>
+    fun changeUserName(@Header("Authorization")token:String,@Body changeNameRequest: ChangeNameRequest) :Single<Response<Unit>>
 
 
 }

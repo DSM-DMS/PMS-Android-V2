@@ -29,16 +29,16 @@ class MyPageApiImpl {
             .subscribeOn(Schedulers.io())
 
 
-    fun getOutingApi(number: Int): @NonNull Single<Response<OutingListResponse>> =
-        providerMyPageApi().getStudentOuting(number)
+    fun getOutingApi(accessToken: String,number: Int): @NonNull Single<Response<OutingListResponse>> =
+        providerMyPageApi().getStudentOuting(accessToken,number)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun certificationStudentApi(request :StudentCertificationResponse):@NonNull Single<Response<Void>> = providerMyPageApi().StudentCertification(request)
+    fun certificationStudentApi(accesstoken:String,request :StudentCertificationResponse):@NonNull Single<Response<Void>> = providerMyPageApi().StudentCertification(accesstoken,request)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
-    fun changeUserNameApi(changeNameRequest: ChangeNameRequest):@NonNull Single<Response<Unit>> = providerMyPageApi().changeUserName(changeNameRequest)
+    fun changeUserNameApi(token:String,changeNameRequest: ChangeNameRequest):@NonNull Single<Response<Unit>> = providerMyPageApi().changeUserName(token,changeNameRequest)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
