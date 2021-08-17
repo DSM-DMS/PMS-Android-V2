@@ -14,26 +14,19 @@ import com.dms.pmsandroid.feature.mypage.model.ChangeNameRequest
 import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
 import com.dms.pmsandroid.feature.mypage.ui.MyPageAddStudentDialog
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
+import com.dms.pmsandroid.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.inputBasicInfo()
-        vm.changeName()
-    }
+        observeEvent()
 
+    }
 
     //vm.basicInfo() 들어와야함
     //Student Number를 어떻게 가져 오느냐
@@ -56,7 +49,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 binding.introCommentCv.visibility
             }
 
-
             BasicInfo.observe(viewLifecycleOwner, {
                 binding.run {
                     pluspoint = it.bonusPoint
@@ -72,17 +64,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 }
             })
 
-            //다시 실행 ?
-            changeName().run {
-                info.observe(viewLifecycleOwner, {
-                    binding.run {
-                        nickName = it.name
-                    }
-                })
-            }
             binding.startAddStudentBtn.setOnClickListener {
                 activity.let {
-                    val dialog = MyPageAddStudentDialog()
+                    val dialog = MyPageAddStudentDialog(vm)
                     activity?.supportFragmentManager?.let { it1 ->
                         dialog.show(
                             it1,
@@ -93,7 +77,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             }
             binding.studentParentEditImg.setOnClickListener {
                 activity.let {
-                    val dialog = ChangeNameDialog()
+                    val dialog = ChangeNameDialog(vm)
                     activity?.supportFragmentManager?.let { it ->
                         dialog.show(
                             it, "ChangeName"
