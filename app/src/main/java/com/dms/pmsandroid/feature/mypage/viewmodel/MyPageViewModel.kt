@@ -1,11 +1,13 @@
 package com.dms.pmsandroid.feature.mypage.viewmodel
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.mypage.MyPageApiImpl
 import com.dms.pmsandroid.feature.introduce.model.ClubListModel
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubDetailActivity
 import com.dms.pmsandroid.feature.login.viewmodel.RegisterViewModel
 import com.dms.pmsandroid.feature.mypage.model.*
 
@@ -31,27 +33,28 @@ class MyPageViewModel(
     val newName = MutableLiveData<String>()
 
     fun changeName(){
-        val nameRequest = ChangeNameRequest(newName.value!!)
-        myPageApiImpl.changeUserNameApi(nameRequest).subscribe { nameRequest ->
-            when (nameRequest.code()) {
-                201 -> {
-                    _toastMessage.value = "변경에 성공했습니다"
-                }
-                else -> {
-
-                }
+        val accessToken = sharedPreferenceStorage.getInfo("access_token")
+        val nameRequest = ChangeNameRequest(newName.value!!.toString())
+        myPageApiImpl.changeUserNameApi(accessToken,nameRequest).subscribe { nameResponse ->
+            if(nameResponse.isSuccessful){
+                _toastMessage.value = "변경에 성공했습니다"
+                inputBasicInfo()
             }
+
         }
     }
 
+
     fun studentCertification(){
         if(doneInput.value!!){
+            val accessToken = sharedPreferenceStorage.getInfo("access_token")
             val request = StudentCertificationResponse(certification.value!!)
-            myPageApiImpl.certificationStudentApi(request).subscribe{request->
+            myPageApiImpl.certificationStudentApi(accessToken,request).subscribe{request->
                 when(request.code()){
                     201 -> {
                         _toastMessage.value = "학생 등록에 성공하셨습니다"
                         _successCertifitcation.value = true
+
                     }
                     400 -> {
                         _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"
@@ -68,6 +71,7 @@ class MyPageViewModel(
             }
         }
     }
+
 
     private val _BasicInfo = MutableLiveData<BasicInformationResponse>()
     val BasicInfo : LiveData<BasicInformationResponse> get() = _BasicInfo
