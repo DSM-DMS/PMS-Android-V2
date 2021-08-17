@@ -8,10 +8,10 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseDialog
 import com.dms.pmsandroid.databinding.DialogChangeNameBinding
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChangeNameDialog : BaseDialog<DialogChangeNameBinding>(R.layout.dialog_change_name) {
-    override val vm: MyPageViewModel by viewModel()
+class ChangeNameDialog(override val vm:MyPageViewModel) : BaseDialog<DialogChangeNameBinding>(R.layout.dialog_change_name) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,6 +23,7 @@ class ChangeNameDialog : BaseDialog<DialogChangeNameBinding>(R.layout.dialog_cha
             dismiss()
 
         }
+
         binding.cancleTv.setOnClickListener {
             activity?.supportFragmentManager
                 ?.beginTransaction()
