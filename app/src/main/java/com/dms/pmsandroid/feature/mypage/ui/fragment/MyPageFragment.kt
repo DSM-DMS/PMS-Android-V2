@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.base.BaseDialog
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMypageBinding
 import com.dms.pmsandroid.feature.mypage.model.ChangeNameRequest
@@ -15,11 +16,11 @@ import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
 import com.dms.pmsandroid.feature.mypage.ui.MyPageAddStudentDialog
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.ui.MainActivity
+import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,10 +28,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         observeEvent()
 
     }
-
-    //vm.basicInfo() 들어와야함
-    //Student Number를 어떻게 가져 오느냐
-
 
     override fun observeEvent() {
         vm.run {
@@ -42,12 +39,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                     nickName = it.name
                 }
             })
-
-            inputBasicInfo().run {
-                binding.introCondidtionCv.visibility
-                binding.introOutingCv.visibility
-                binding.introCommentCv.visibility
-            }
 
             BasicInfo.observe(viewLifecycleOwner, {
                 binding.run {
