@@ -68,4 +68,8 @@
     <string name="check_outing">외출내역 보기</string>
     <string name="change_pw">비밀번호 변경</string>
     <string name="log_out">로그아웃</string>
+    <string name="meal_picture">급식사진</string>
+    <string name="pre_password">현재 비밀번호</string>
+    <string name="please_pre_password">현재 비밀번호를 입력해주세요</string>
+    <string name="new_password">새 비밀번호</string>
 </resources>

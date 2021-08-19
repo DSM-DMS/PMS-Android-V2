@@ -15,28 +15,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feature.notify.ui.activity.NoticeDetailActivity"
+        <activity
+            android:name=".feature.mypage.ui.activity.ChangePasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.notify.ui.activity.NoticeDetailActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name="com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.mypage.ui.activity.OutingContentActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.notify.ui.activity.GalleryDetailActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.notify.ui.activity.GalleryDetailActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.login.ui.activity.LoginActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.login.ui.activity.LoginActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
             android:windowSoftInputMode="adjustNothing"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -45,19 +55,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity"
+        <activity
+            android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.mypage.ui.activity.PointContentActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.mypage.ui.activity.PointContentActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.introduce.ui.activity.IntroduceClubActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".feature.introduce.ui.activity.IntroduceClubActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>
