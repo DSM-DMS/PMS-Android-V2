@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
@@ -143,6 +144,7 @@
             android:elevation="30dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="@string/add_student"
+            android:visibility="@{vm.successCertifitcation?View.INVISIBLE:View.VISIBLE}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,18 +154,27 @@
             android:id="@+id/intro_comment_cv"
             android:layout_width="330dp"
             android:layout_height="40dp"
-            android:visibility="invisible"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             android:backgroundTint="@color/blue"
             app:cardCornerRadius="60dp"
             app:cardElevation="10dp"
             android:layout_marginTop="240dp"
             android:layout_gravity="center_horizontal"
-            />
+            >
+
+            <TextView
+                android:id="@+id/intro_comment_tv"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+                android:text="@{vm.introComment}" />
+        </androidx.cardview.widget.CardView>
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/intro_condidtion_cv"
-            android:visibility="invisible"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             android:layout_width="330dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
@@ -222,7 +233,7 @@
             android:id="@+id/intro_outing_cv"
             android:layout_width="330dp"
             android:layout_height="60dp"
-            android:visibility="invisible"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             android:backgroundTint="@color/button_background"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
@@ -253,7 +264,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/change_pw_cv"
             android:layout_width="330dp"
-            android:visibility="invisible"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             android:layout_height="60dp"
             android:backgroundTint="@color/button_background"
             app:cardCornerRadius="10dp"
@@ -288,9 +299,9 @@
             android:layout_width="330dp"
             android:layout_height="60dp"
             android:backgroundTint="@color/button_background"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
-            android:visibility="invisible"
             android:layout_marginTop="600dp"
             android:layout_gravity="center_horizontal"
             >

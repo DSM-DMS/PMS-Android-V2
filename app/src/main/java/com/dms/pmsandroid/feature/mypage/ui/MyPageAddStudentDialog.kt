@@ -17,13 +17,17 @@ class MyPageAddStudentDialog(override val vm: MyPageViewModel) : BaseDialog<Dial
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.addstudentConfirmTv.setOnClickListener {
-            dismiss()
-            vm.studentCertification()
-
+            if(binding.checkcodeEt.text.length==6){
+                dismiss()
+                vm.studentCertification()
+            }
         }
+
         binding.addstudentCancleTv.setOnClickListener {
             activity?.supportFragmentManager
                 ?.beginTransaction()
