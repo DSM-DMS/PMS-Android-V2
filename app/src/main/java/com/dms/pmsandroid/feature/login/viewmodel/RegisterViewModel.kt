@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.RegisterRequest
 
-class RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
+class
+RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
 
     val userName = MutableLiveData<String>()
     val nEmptyName = MutableLiveData(false)

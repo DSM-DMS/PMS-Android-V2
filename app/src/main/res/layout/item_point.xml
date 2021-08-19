@@ -28,7 +28,7 @@
         android:layout_height="match_parent">
 
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:id="@+id/imageView"
             android:layout_width="380dp"
             android:layout_height="119dp"
@@ -36,8 +36,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/pointbox_img" />
+            app:cardElevation="20dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/content_tv"

@@ -62,4 +62,10 @@
     <string name="no">아니요</string>
     <string name="download">다운로드</string>
     <string name="ask_download">공지사항,가정통신문에 탑재되어있는 첨부파일중 한글파일을 보기 위해서는 한글파일뷰어가 필요합니다.한글파일뷰어를 다운로드 하시겠습니까?</string>
+    <string name="new_nick">새로운 닉네임을 입력해주세요</string>
+    <string name="week_meal">주말급식 신청 여부</string>
+    <string name="this_week_condition">이번주 잔류 상태</string>
+    <string name="check_outing">외출내역 보기</string>
+    <string name="change_pw">비밀번호 변경</string>
+    <string name="log_out">로그아웃</string>
 </resources>

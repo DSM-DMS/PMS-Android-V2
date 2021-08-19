@@ -4,15 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
         <variable
             name="pluspoint"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+            type= "String" />
         <variable
             name="minuspoint"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+            type="String" />
+        <variable
+            name="studentName"
+            type="String" />
+
+        <variable
+            name="studentNumber"
+            type="String" />
+
+        <variable
+            name="nickName"
+            type="String" />
+
+        <variable
+            name="stay"
+            type="String" />
+        
+        <variable
+            name="mealApplied"
+            type="boolean" />
+
 
     </data>
     <FrameLayout
@@ -25,8 +46,9 @@
             android:id="@+id/student_pluspoint_img"
             android:layout_width="150dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginEnd="90dp"
             android:layout_marginTop="120dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/point_box"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
@@ -48,9 +70,9 @@
                 android:id="@+id/student_pluspoint_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="57dp"
-                android:layout_marginTop="20dp"
-                android:text="00"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="@{pluspoint}"
                 android:textSize="@dimen/point_int" />
         </androidx.cardview.widget.CardView>
 
@@ -58,8 +80,9 @@
             android:id="@+id/student_minusspoint_img"
             android:layout_width="150dp"
             android:layout_height="100dp"
-            android:layout_marginStart="215dp"
             android:layout_marginTop="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="90dp"
             android:background="@drawable/point_box"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
@@ -79,29 +102,29 @@
 
             <TextView
                 android:id="@+id/student_minuspoint_tv"
-                android:layout_marginLeft="57dp"
-                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00"
+                android:text="@{minuspoint}"
                 android:textSize="@dimen/point_int"/>
         </androidx.cardview.widget.CardView>
 
 
         <TextView
-                android:id="@+id/student_parent_title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:layout_marginTop="65dp"
-                android:textColor="@color/white"
-                android:layout_marginLeft="40dp"
-                android:textSize="30dp"
-                tools:layout_editor_absoluteX="63dp"
-                tools:layout_editor_absoluteY="54dp" />
+            android:id="@+id/student_parent_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="65dp"
+            android:text="@{nickName}"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="54dp" />
 
         <ImageView
-            android:id="@+id/tudent_parent_edit_img"
+            android:id="@+id/student_parent_edit_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="180dp"
@@ -112,19 +135,215 @@
 
         <Button
             android:id="@+id/start_add_student_btn"
-            android:layout_width="289dp"
-            android:layout_height="52dp"
-            android:layout_marginBottom="300dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="60dp"
             android:layout_marginTop="350dp"
-            android:layout_marginLeft="55dp"
             android:backgroundTint="@color/button_background"
-            android:text="@string/add_student"
-            android:fontFamily="@font/nanumsquareregular"
-            android:textColor="@color/black"
             android:elevation="30dp"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="@string/add_student"
+            android:visibility="@{vm.successCertifitcation?View.INVISIBLE:View.VISIBLE}"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/intro_comment_cv"
+            android:layout_width="330dp"
+            android:layout_height="40dp"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+            android:backgroundTint="@color/blue"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="10dp"
+            android:layout_marginTop="240dp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/intro_comment_tv"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+                android:text="@{vm.introComment}" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/intro_condidtion_cv"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+            android:layout_width="330dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            android:backgroundTint="@color/button_background"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+
+            >
+
+            <TextView
+                android:id="@+id/this_week_condition_tv"
+                android:textSize="16sp"
+                android:layout_marginTop="28dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareregular"
+                android:textColor="@color/black"
+                android:text="@string/this_week_condition" />
+
+            <TextView
+                android:id="@+id/week_meal_tv"
+                android:textSize="16sp"
+                android:layout_marginTop="73dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/nanumsquareregular"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/week_meal" />
+
+            <TextView
+                android:id="@+id/stay_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="25dp"
+                android:visibility="invisible"
+                android:text="@{stay}" />
+
+            <ImageView
+                android:id="@+id/meal_applied_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="25dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/intro_outing_cv"
+            android:layout_width="330dp"
+            android:layout_height="60dp"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+            android:backgroundTint="@color/button_background"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginTop="440dp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/outing_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/check_outing"
+                android:textSize="16sp"
+                android:fontFamily="@font/nanumsquareregular"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"  />
+
+            <ImageView
+                android:id="@+id/outing_img"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/change_pw_cv"
+            android:layout_width="330dp"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/button_background"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginTop="520dp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/change_pw_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_pw"
+                android:textSize="16sp"
+                android:fontFamily="@font/nanumsquareregular"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/change_pw_img"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/logout_cv"
+            android:layout_width="330dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/button_background"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            android:layout_marginTop="600dp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/logout_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/log_out"
+                android:textSize="16sp"
+                android:fontFamily="@font/nanumsquareregular"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/logout_img"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/student_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:textColor="@color/white"
+            android:layout_marginStart="240dp"
+            android:text="@{studentNumber}" />
+
+        <TextView
+            android:id="@+id/student_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="290dp"
+            android:layout_marginTop="80dp"
+            android:text="@{studentName}"
+            android:textColor="@color/white" />
+
 
     </FrameLayout>
 </layout>
