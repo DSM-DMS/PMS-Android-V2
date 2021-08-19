@@ -15,6 +15,7 @@ class NotifyFragment : BaseFragment<FragmentNotifyBinding>(R.layout.fragment_not
 
     private val titleList = arrayListOf("포토앨범","공지사항","가정통신문")
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewpager()

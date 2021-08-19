@@ -19,7 +19,6 @@ import kotlin.math.max
 class IntroduceClubDetailActivity :
     BaseActivity<ActivityClubDetailBinding>(R.layout.activity_club_detail) {
     override val vm: IntroduceClubDetailViewModel by viewModel()
-    private var clubDetail = ArrayList<ClubDetailModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +27,6 @@ class IntroduceClubDetailActivity :
         if (clubname != null) {
             vm.loadClubDetail(clubname)
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        observeEvent()
     }
 
     override fun observeEvent() {
@@ -44,7 +38,7 @@ class IntroduceClubDetailActivity :
                 for (posistion in 1..size-1) {
                     getMember += it.member[posistion] + ", "
                 }
-                getMember += "${it.member.last()}"
+                getMember += it.member.last()
             }
             binding.run {
                 member = getMember
@@ -53,7 +47,7 @@ class IntroduceClubDetailActivity :
                 explanation = it.explanation
             }
         })
-        binding.detailBackImg.setOnClickListener {
+        binding.backBtn.setOnClickListener {
             finish()
         }
     }

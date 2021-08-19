@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
@@ -18,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@android:color/background_light"
             android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,15 +28,17 @@
             app:tabIndicatorColor="@color/blue"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/blue"
-            app:tabTextColor="@color/gray"/>
+            app:tabTextColor="@color/gray" />
 
         <TextView
             android:id="@+id/notify_sub_title_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/notify_subtitle"
             android:textColor="@color/gray"
+            android:textSize="@dimen/body_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/notify_sub_title_tv2"
             app:layout_constraintTop_toBottomOf="@+id/notify_title_tv" />
@@ -46,8 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/pms"
             android:textColor="@color/blue"
+            android:textSize="@dimen/body_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notify_title_tv" />
 
@@ -59,7 +64,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/school_notify"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="@dimen/title_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

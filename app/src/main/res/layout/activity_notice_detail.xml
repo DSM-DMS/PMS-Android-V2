@@ -13,7 +13,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".feature.notify.ui.activity.NoticeDetailActivity">
@@ -21,8 +20,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@color/title_bar"
+            android:layout_height="@dimen/title_bar_size"
+            android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +36,7 @@
                 android:gravity="center"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="23sp"
+                android:textSize="@dimen/title_bar_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -50,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:background="?android:attr/selectableItemBackground"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +108,7 @@
                             android:id="@+id/notice_detail_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint=""
+                            android:hint="@string/please_comment"
                             android:text="@={vm.comment}"
                             android:textSize="16sp"/>
                     </FrameLayout>

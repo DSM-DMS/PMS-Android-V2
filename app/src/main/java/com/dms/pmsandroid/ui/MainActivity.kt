@@ -1,8 +1,10 @@
 package com.dms.pmsandroid.ui
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
@@ -31,7 +33,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setTheme(R.style.Theme_PmsAndroid)
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
-        setFragment()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initFragment()
     }
 
     override fun onResume() {
@@ -39,12 +45,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         vm.checkLogin()
     }
 
-    private fun setFragment() {
-        initFragment()
-    }
-
     private fun startLogin() {
         val loginIntent = Intent(this, LoginActivity::class.java)
+        loginIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(loginIntent)
     }
 
@@ -59,34 +62,50 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun startDeveloper() {
-        val devintent = Intent(this, IntroduceDeveloperActivity::class.java)
-        startActivity(devintent)
+        val devIntent = Intent(this, IntroduceDeveloperActivity::class.java)
+        devIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(devIntent)
     }
 
     fun startCompany() {
-        val workintent = Intent(this, IntroduceCompanyActivity::class.java)
-        startActivity(workintent)
+        Toast.makeText(this,"아직 준비중 입니다",Toast.LENGTH_SHORT).show()
+        //todo 취업처 api 나오면 startActivity로 넘어가기
+        //val workintent = Intent(this, IntroduceCompanyActivity::class.java)
+        //startActivity(workintent)
     }
 
     fun startClub() {
-        val clubintent = Intent(this, IntroduceClubActivity::class.java)
-        startActivity(clubintent)
+        val clubIntent = Intent(this, IntroduceClubActivity::class.java)
+        clubIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(clubIntent)
     }
 
-    fun startGalleryDetail(id:Int){
-        val galleryIntent = Intent(this,GalleryDetailActivity::class.java)
-        galleryIntent.putExtra("id",id)
+    fun startGalleryDetail(id: Int) {
+        val galleryIntent = Intent(this, GalleryDetailActivity::class.java)
+        galleryIntent.run {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("id", id)
+        }
         startActivity(galleryIntent)
     }
 
-    fun startNoticeDetail(id:Int,title:String){
-        val noticeIntent = Intent(this,NoticeDetailActivity::class.java)
-        noticeIntent.putExtra("id",id)
-        noticeIntent.putExtra("title",title)
+    fun startNoticeDetail(id: Int, title: String) {
+        val noticeIntent = Intent(this, NoticeDetailActivity::class.java)
+        noticeIntent.run{
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("id", id)
+            putExtra("title", title)
+        }
         startActivity(noticeIntent)
     }
 
-
+    fun startDownloadFileViewer(){
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.tf.thinkdroid.viewer")))
+        } catch (e: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.tf.thinkdroid.viewer")))
+        }
+    }
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -98,57 +117,73 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mealFragment = MealFragment()
     private val notifyFragment = NotifyFragment()
     private val mypageFragment = MyPageFragment()
-    private var activeFragment: Fragment = calendarFragment
 
     private fun initFragment() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, calendarFragment)
-            .hide(calendarFragment).commit()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, introduceFragment)
-            .hide(introduceFragment).commit()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, mealFragment)
-            .hide(mealFragment).commit()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container,notifyFragment)
-            .hide(notifyFragment).commit()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, mypageFragment)
-            .hide(mypageFragment).commit()
+        supportFragmentManager.beginTransaction().run {
+            add(R.id.main_container, calendarFragment)
+            add(R.id.main_container, introduceFragment)
+            add(R.id.main_container, mealFragment)
+            add(R.id.main_container, notifyFragment)
+            add(R.id.main_container, mypageFragment)
+        }.commit()
+        resetFragment()
+    }
+
+    private fun resetFragment() {
+        supportFragmentManager.beginTransaction().run {
+            hide(calendarFragment)
+            hide(introduceFragment)
+            hide(mealFragment)
+            hide(notifyFragment)
+            hide(mypageFragment)
+        }.commit()
+        changeFragment(vm.activeFragment?:calendarFragment)
     }
 
     private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
-        activeFragment = fragment
+        supportFragmentManager.beginTransaction().hide(vm.activeFragment?:calendarFragment).show(fragment).commit()
+        vm.activeFragment = fragment
     }
 
     override fun observeEvent() {
-        vm.tabSelectedItem.observe(this, { id ->
-            when (id) {
-                R.id.menu_calendar_it -> {
-                    changeFragment(calendarFragment)
+        vm.run {
+            tabSelectedItem.observe(this@MainActivity, { id ->
+                when (id) {
+                    R.id.menu_calendar_it -> {
+                        changeFragment(calendarFragment)
+                    }
+                    R.id.menu_info_it -> {
+                        changeFragment(introduceFragment)
+                    }
+                    R.id.menu_meal_it -> {
+                        changeFragment(mealFragment)
+                    }
+                    R.id.menu_mypage_it -> {
+                        changeFragment(mypageFragment)
+                    }
+                    R.id.menu_notify_it -> {
+                        changeFragment(notifyFragment)
+                    }
                 }
-                R.id.menu_info_it -> {
-                    changeFragment(introduceFragment)
+            })
+            needToLogin.observe(this@MainActivity, {
+                if (it) {
+                    startLogin()
+                    vm.needToLogin.value = false
                 }
-                R.id.menu_meal_it -> {
-                    changeFragment(mealFragment)
-                }
-                R.id.menu_mypage_it -> {
-                    changeFragment(mypageFragment)
-                }
-                R.id.menu_notify_it -> {
-                    changeFragment(notifyFragment)
-                }
-            }
-        })
-        vm.needToLogin.observe(this, {
-            if (it) {
-                startLogin()
-                vm.needToLogin.value = false
-            }
-        })
+            })
+        }
+    }
+
+    override fun onStop() {
+        supportFragmentManager.beginTransaction().run {
+            remove(calendarFragment)
+            remove(introduceFragment)
+            remove(mealFragment)
+            remove(notifyFragment)
+            remove(mypageFragment)
+        }.commit()
+        super.onStop()
     }
 
 

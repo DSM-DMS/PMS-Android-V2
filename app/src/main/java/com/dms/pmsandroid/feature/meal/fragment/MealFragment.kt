@@ -1,49 +1,107 @@
 package com.dms.pmsandroid.feature.meal.fragment
 
-import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMealBinding
+import com.dms.pmsandroid.feature.meal.MealDatePickerDialog
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.dms.pmsandroid.ui.MainViewModel
-import com.google.android.material.tabs.TabLayoutMediator
+import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     override val vm: MealViewModel by inject()
-    private val mainVm :MainViewModel by inject()
+    private val mainVm: MainViewModel by inject()
 
     private val adapter by lazy {
-        MealAdapter(vm)
+        MealAdapter(vm, requireContext())
     }
 
-
-    @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.mealViewVp.adapter = adapter
         setCurrentTime()
+        initView()
         vm.getMeal()
         changeTime()
         setIndicator()
     }
 
+    private var selectedPosition = Int.MAX_VALUE / 2
+
+    private val dateDialog: MealDatePickerDialog by lazy {
+        MealDatePickerDialog()
+    }
+
+
+    private fun initView() {
+
+        binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.mealViewVp.adapter = adapter
+        binding.mealViewVp.offscreenPageLimit = 1
+
+        binding.mealViewVp.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                outRect.right = 20
+                outRect.left = 20
+            }
+        })
+        binding.mealViewVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when (position % 3) {
+                    0 -> {
+                        if (selectedPosition < position) {
+                            calculateTime(true)
+                        }
+                    }
+                    2 -> {
+                        if (selectedPosition > position) {
+                            calculateTime(false)
+                        }
+                    }
+                }
+                selectedPosition = position
+            }
+        })
+
+        val screenWidth = resources.displayMetrics.widthPixels
+        val pageMargin = resources.getDimension(R.dimen.pageMargin)
+        val pageWidth = screenWidth - (pageMargin * 2) - 50
+        val offsetPx = screenWidth - pageWidth - pageMargin
+        binding.mealViewVp.setPageTransformer { page, position ->
+            page.translationX = -offsetPx * position
+        }
+
+        binding.mealDateCl.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
+            dateDialog.show(requireActivity().supportFragmentManager, "MealDatePickerDialog")
+        }
+
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCurrentTime() {
-        val currentTime = LocalDate.now().minus(Period.ofDays(1))
+        val currentTime = LocalDate.now()
         val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
         val weekDay = currentTime.dayOfWeek
         vm.run {
@@ -85,9 +143,8 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     }
 
     private fun setIndicator() {
-        TabLayoutMediator(binding.tabMealBanner, binding.mealViewVp) { _, _ ->
-            binding.mealViewVp.currentItem = binding.tabMealBanner.selectedTabPosition
-        }.attach()
+        binding.mealViewVp.post { binding.mealViewVp.setCurrentItem(Int.MAX_VALUE / 2, false) }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -103,11 +160,10 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                 adapter.setItems(it)
             })
         }
-        mainVm.doneToken.observe(viewLifecycleOwner,{
-            if(it){
+        mainVm.doneToken.observe(viewLifecycleOwner, {
+            if (it) {
                 vm.getMeal()
             }
         })
     }
-
 }

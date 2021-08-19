@@ -2,23 +2,30 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+
         <variable
             name="title"
             type="String" />
+
         <variable
             name="date"
             type="String" />
+
         <variable
             name="photo"
             type="String" />
+
         <variable
             name="id"
             type="Integer" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,10 +54,11 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:ellipsize="end"
+            android:fontFamily="@font/nanumsquarebold"
             android:singleLine="true"
+            android:text="@{title}"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:text="@{title}"
             app:layout_constraintBottom_toTopOf="@+id/gallery_date_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/gallery_iv"

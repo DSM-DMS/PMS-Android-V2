@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.databinding.ItemCommentNoticeBinding
 import com.dms.pmsandroid.databinding.ItemNoticeDetailHeaderBinding
 import com.dms.pmsandroid.feature.notify.model.CommentModel
+import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
 import com.dms.pmsandroid.feature.notify.viewmodel.NoticeDetailViewModel
+import com.jakewharton.rxbinding4.view.clicks
+import java.util.concurrent.TimeUnit
 
-class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
+class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel,private val activity:NoticeDetailActivity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var comments = ArrayList<CommentModel>()
     private val _HEADER = 0
@@ -18,6 +21,9 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.vm = viewModel
+            binding.noticeIndFileIv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
+                activity.showContent()
+            }
         }
     }
 
@@ -28,7 +34,7 @@ class NoticeDetailAdapter(private val viewModel: NoticeDetailViewModel) :
             comments[position].let { comment ->
                 binding.id = comment.id
                 binding.commentBodyTv.text = comment.body
-                binding.commentWriterTv.text = comment.user.name
+                binding.commentWriterTv.text = comment.user?.name?:"익명의 사용자"
                 binding.date = comment.uploadDate
             }
         }

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/green_dot"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_dot_green"
+                app:layout_constraintEnd_toStartOf="@+id/green_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/green_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="9dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/go_home"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/green_dot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/green_dot"
+                app:layout_constraintTop_toTopOf="@id/green_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/yellow_dot"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_dot_yellow"
+                app:layout_constraintEnd_toStartOf="@+id/green_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/green_dot" />
+
+            <TextView
+                android:id="@+id/yellow_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/vacations"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/yellow_dot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/green_tv"
+                app:layout_constraintTop_toTopOf="@id/yellow_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/purple_dot"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_dot_purple"
+                app:layout_constraintEnd_toStartOf="@+id/green_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/yellow_dot" />
+
+            <TextView
+                android:id="@+id/purple_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/tests"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/purple_dot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/green_tv"
+                app:layout_constraintTop_toTopOf="@id/purple_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/blue_dot"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_dot_blue"
+                app:layout_constraintEnd_toStartOf="@+id/green_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/purple_dot" />
+
+            <TextView
+                android:id="@+id/blue_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="9dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/etc_event"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/blue_dot"
+                app:layout_constraintStart_toStartOf="@+id/green_tv"
+                app:layout_constraintTop_toTopOf="@id/blue_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/red_dot"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/ic_dot_red"
+                app:layout_constraintEnd_toStartOf="@+id/green_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/blue_dot" />
+
+            <TextView
+                android:id="@+id/red_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="9dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/rest_day"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/red_dot"
+                app:layout_constraintStart_toStartOf="@+id/green_tv"
+                app:layout_constraintTop_toTopOf="@id/red_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/blue_100_dot"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_dot_blue_100"
+                app:layout_constraintEnd_toEndOf="@id/red_dot"
+                app:layout_constraintStart_toStartOf="@id/red_dot"
+                app:layout_constraintTop_toBottomOf="@id/red_dot" />
+
+            <TextView
+                android:id="@+id/blue_100_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="9dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/selected_date"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/blue_100_dot"
+                app:layout_constraintStart_toStartOf="@+id/green_tv"
+                app:layout_constraintTop_toTopOf="@id/blue_100_dot" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/border_dot"
+                android:layout_width="28dp"
+                android:layout_height="30dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/shape_event"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/red_dot"
+                app:layout_constraintStart_toStartOf="@id/red_dot"
+                app:layout_constraintTop_toBottomOf="@id/blue_100_dot" />
+
+            <TextView
+                android:id="@+id/border_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="9dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="@string/today"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/border_dot"
+                app:layout_constraintStart_toStartOf="@+id/green_tv"
+                app:layout_constraintTop_toTopOf="@id/border_dot" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

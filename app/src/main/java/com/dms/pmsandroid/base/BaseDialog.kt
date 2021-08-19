@@ -36,5 +36,5 @@ abstract class BaseDialog<B : ViewDataBinding>(@LayoutRes private val layoutResI
         observeEvent()
     }
 
-    abstract fun observeEvent()
+    open fun observeEvent(){}
 }

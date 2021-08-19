@@ -17,7 +17,7 @@ class NoticeDetailActivity :
     override val vm: NoticeDetailViewModel by viewModel()
 
     private val noticeAdapter by lazy {
-        NoticeDetailAdapter(vm)
+        NoticeDetailAdapter(vm,this)
     }
 
     companion object {
@@ -33,33 +33,35 @@ class NoticeDetailActivity :
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title")
 
+        vm.noticeId = id
+
         val noticeLayoutManager = LinearLayoutManager(binding.noticeDetailRv.context)
         noticeLayoutManager.orientation = RecyclerView.VERTICAL
 
-        binding.noticeDetailRv.run {
-            adapter = noticeAdapter
-            layoutManager = noticeLayoutManager
+        binding.run {
+            noticeDetailRv.run {
+                recycledViewPool.setMaxRecycledViews(1,0)
+                adapter = noticeAdapter
+                layoutManager = noticeLayoutManager
+            }
+            noticeDetailTitleTv.text = title
+            noticeBackBtn.setOnClickListener {
+                finish()
+            }
         }
-
-        binding.noticeDetailTitleTv.text = title
-        binding.noticeBackBtn.setOnClickListener {
-            finish()
-        }
-        vm.getNoticeDetail(id)
+        vm.loadNoticeDetail()
     }
 
     private val dialog = NoticeAttachDialog()
+
+    fun showContent(){
+        dialog.show(supportFragmentManager, "AttachDialogFragment")
+    }
+
     override fun observeEvent() {
         vm.run {
             noticeDetail.observe(this@NoticeDetailActivity, {
                 noticeAdapter.setItems(it.comment)
-            })
-
-            attachClicked.observe(this@NoticeDetailActivity, {
-                if (it) {
-                    dialog.show(supportFragmentManager, "AttachDialogFragment")
-                    vm.attachClicked.value = false
-                }
             })
 
             doneReComments.observe(this@NoticeDetailActivity, {
@@ -71,6 +73,7 @@ class NoticeDetailActivity :
 
             resetComments.observe(this@NoticeDetailActivity, {
                 keyBoardManager.hideSoftInputFromWindow(binding.noticeDetailEt.windowToken, 0)
+                binding.noticeDetailEt.text = null
                 doneInput = HashMap()
             })
 

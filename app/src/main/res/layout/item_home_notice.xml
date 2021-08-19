@@ -6,9 +6,11 @@
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+
         <variable
             name="id"
             type="Integer" />
+
         <variable
             name="title"
             type="String" />
@@ -56,10 +58,11 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:ellipsize="end"
+                    android:fontFamily="@font/nanumsquarebold"
                     android:singleLine="true"
+                    android:text="@{title}"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:text="@{title}"
                     app:layout_constraintBottom_toBottomOf="@+id/noticeh_line"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/noticeh_line"

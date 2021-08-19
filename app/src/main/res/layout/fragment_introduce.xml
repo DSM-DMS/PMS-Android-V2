@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel"
-            />
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel" />
     </data>
 
 
@@ -19,149 +19,210 @@
 
 
         <TextView
-            android:id="@+id/main_title_tv"
+            android:id="@+id/introduce_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/nanumsquareextrabold"
             android:text="@string/title_info"
-            android:textSize="40dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/main_tilte2_tv"
+            android:id="@+id/introduce_tilte2_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="@string/intro_main_dms"
             android:textColor="#4C75B2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_title_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/introduce_title_tv" />
 
-        <ImageView
-            android:id="@+id/intro_club_btn"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/introduce_club_cv"
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/box3"
-            app:layout_constraintBottom_toTopOf="@+id/intro_work_btn"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_tilte2_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/introduce_tilte2_tv">
 
-        <ImageView
-            android:id="@+id/intro_work_btn"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/gray_50">
+
+                <View
+                    android:id="@+id/introduce_club_v"
+                    android:layout_width="3dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/introduce_club_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/introduce_club_title_tv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/introduce_club_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/intro_club"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_size"
+                    app:layout_constraintStart_toEndOf="@id/introduce_club_v"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/introduce_club_detail"
+                    android:textColor="@color/gray_300"
+                    android:textSize="@dimen/body_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/introduce_club_title_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/introduce_work_cv"
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/box3"
-            app:layout_constraintBottom_toTopOf="@+id/intro_dev_btn"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intro_club_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/introduce_club_cv">
 
-        <ImageView
-            android:id="@+id/intro_dev_btn"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/gray_50">
+
+                <View
+                    android:id="@+id/introduce_work_v"
+                    android:layout_width="3dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/introduce_work_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/introduce_work_title_tv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/introduce_work_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/intro_work"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_size"
+                    app:layout_constraintStart_toEndOf="@id/introduce_work_v"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/introduce_company_detail"
+                    android:textColor="@color/gray_300"
+                    android:textSize="@dimen/body_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/introduce_work_title_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/introduce_dev_cv"
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/box3"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/intro_work_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/introduce_work_cv">
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/introduce_developer_detail"
-            android:textColor="#6C6C6C"
-            android:fontFamily="@font/nanumsquareregular"
-            android:textSize="@dimen/intro_second"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.342"
-            app:layout_constraintStart_toStartOf="@+id/intro_club_btn"
-            app:layout_constraintTop_toBottomOf="@+id/choice_dev_tv" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/gray_50">
 
-        <TextView
-            android:id="@+id/choice_club_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/intro_club"
-            android:textSize="@dimen/intro_main"
-            android:fontFamily="@font/nanumsquarebold"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.29"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/intro_club_btn" />
+                <View
+                    android:id="@+id/introduce_dev_v"
+                    android:layout_width="3dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/introduce_dev_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/introduce_dev_title_tv" />
 
-        <TextView
-            android:id="@+id/choice_work_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/intro_work"
-            android:fontFamily="@font/nanumsquarebold"
-            android:textSize="@dimen/intro_main"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.291"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/intro_work_btn" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/introduce_dev_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/intro_developer"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_size"
+                    app:layout_constraintStart_toEndOf="@id/introduce_dev_v"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/choice_dev_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/intro_developer"
-            android:fontFamily="@font/nanumsquarebold"
-            android:textSize="@dimen/intro_main"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.291"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/intro_dev_btn" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/introduce_developer_detail"
+                    android:textColor="@color/gray_300"
+                    android:textSize="@dimen/body_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/introduce_dev_title_tv" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/introduce_club_detail"
-            android:textColor="#6C6C6C"
-            android:fontFamily="@font/nanumsquareregular"
-            android:textSize="@dimen/intro_second"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.367"
-            app:layout_constraintStart_toStartOf="@+id/intro_club_btn"
-            app:layout_constraintTop_toBottomOf="@+id/choice_club_tv" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/introduce_company_detail"
-            android:textColor="#6C6C6C"
-            android:fontFamily="@font/nanumsquareregular"
-            android:textSize="@dimen/intro_second"
-            app:layout_constraintEnd_toEndOf="@+id/intro_work_btn"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/choice_work_tv" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
