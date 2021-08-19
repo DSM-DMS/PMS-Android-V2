@@ -58,7 +58,6 @@
         <activity android:name=".feature.introduce.ui.activity.IntroduceClubActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".feature.mypage.ui.activity.OutingContentActivity"/>
     </application>
 
 </manifest>
