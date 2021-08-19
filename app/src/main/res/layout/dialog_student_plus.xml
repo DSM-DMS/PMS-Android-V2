@@ -51,6 +51,7 @@
             android:hint="6자리 인증코드 입력"
             android:inputType="number"
             android:singleLine="true"
+            android:maxLength="6"
             android:text="@={vm.certification}"
             android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="parent"

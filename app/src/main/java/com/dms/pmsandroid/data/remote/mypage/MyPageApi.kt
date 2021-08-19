@@ -13,13 +13,13 @@ interface MyPageApi {
     fun StudentCertification(@Header("Authorization") accessToken: String ,@Body request : StudentCertificationResponse):Single<Response<Void>>
 
     @GET("/user/student/{number}")
-    fun getStudentInformation(@Path("number") number: Int): Single<Response<BasicInformationResponse>>
+    fun getStudentInformation(@Header("Authorization") accessToken: String,@Path("number") number: Int): Single<Response<BasicInformationResponse>>
 
     @GET("/user/student/outing/{number}")
-    fun getStudentOuting(@Path("number") accessToken: String,number: Int):Single<Response<OutingListResponse>>
+    fun getStudentOuting(@Header("Authorization") accessToken: String,@Path("number") number: Int):Single<Response<OutingListResponse>>
 
     @GET("/user/student/point/{number}")
-    fun getStudentPoint(@Path("number")number: Int): Single<Response<PointListResponse>>
+    fun getStudentPoint(@Header("Authorization") accessToken: String,@Path("number")number: Int): Single<Response<PointListResponse>>
 
     @PUT("/user/name")
     fun changeUserName(@Header("Authorization")token:String,@Body changeNameRequest: ChangeNameRequest) :Single<Response<Unit>>

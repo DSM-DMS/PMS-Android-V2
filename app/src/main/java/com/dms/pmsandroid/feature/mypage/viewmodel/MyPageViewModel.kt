@@ -53,6 +53,7 @@ class MyPageViewModel(
                 201 -> {
                     _toastMessage.value = "학생 등록에 성공하셨습니다"
                     _successCertifitcation.value = true
+                    inputBasicInfo()
                 }
                 400 -> {
                     _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"
@@ -75,8 +76,9 @@ class MyPageViewModel(
     val BasicInfo: LiveData<BasicInformationResponse> get() = _BasicInfo
 
     fun getBasicInfo(number: Int) {
+        val accessToken = sharedPreferenceStorage.getInfo("access_token")
         if (successCertifitcation.value == true) {
-            myPageApiImpl.getUserApi(number).subscribe({
+            myPageApiImpl.getUserApi(accessToken,number).subscribe({
                 if (it.isSuccessful) {
                     _BasicInfo.value = it.body()
                 }
@@ -90,6 +92,9 @@ class MyPageViewModel(
         myPageApiImpl.getBasicInfo(accessToken).subscribe({
             if (it.isSuccessful) {
                 _info.value = it.body()
+                if(it.body()!!.students.isNotEmpty()){
+                    _successCertifitcation.value = true
+                }
             }
         }, {
         })

@@ -17,11 +17,6 @@ class OutingContentActivity : BaseActivity<ActivityOutingContentBinding>(R.layou
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val number =
-//        vm.loadOuting(number)
-        val gridLayoutManager = GridLayoutManager(this, 2)
-        binding.outingRc.addItemDecoration(HorizontalItemDecorator(80))
-        binding.outingRc.adapter = outingAdapter
 
     }
     override fun observeEvent() {

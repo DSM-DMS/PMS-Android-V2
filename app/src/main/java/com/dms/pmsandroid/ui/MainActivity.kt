@@ -16,6 +16,7 @@ import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
 import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
+import com.dms.pmsandroid.feature.mypage.ui.activity.PointContentActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment
@@ -47,10 +48,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    fun goOuting(number : Int){
-        val intent = Intent(this, OutingContentActivity::class.java)
-        intent.putExtra("number",number)
-        startActivity(intent)
+    fun startOuting(){
+        val gointent = Intent(this, OutingContentActivity::class.java)
+        startActivity(gointent)
+    }
+
+    fun startPoint(){
+        val gointent = Intent(this,PointContentActivity::class.java)
+        startActivity(gointent)
     }
 
     fun startDeveloper() {

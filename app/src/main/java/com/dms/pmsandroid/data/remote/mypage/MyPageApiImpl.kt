@@ -17,14 +17,14 @@ class MyPageApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun getUserApi(number: Int): @NonNull Single<Response<BasicInformationResponse>> =
-        providerMyPageApi().getStudentInformation(number)
+    fun getUserApi(accessToken: String,number: Int): @NonNull Single<Response<BasicInformationResponse>> =
+        providerMyPageApi().getStudentInformation(accessToken,number)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
 
-    fun getPointApi(number: Int): @NonNull Single<Response<PointListResponse>> =
-        providerMyPageApi().getStudentPoint(number)
+    fun getPointApi(accessToken: String,number: Int): @NonNull Single<Response<PointListResponse>> =
+        providerMyPageApi().getStudentPoint(accessToken,number)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
