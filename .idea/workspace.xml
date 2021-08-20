@@ -17,8 +17,8 @@
   <component name="ChangeListManager">
     <list default="true" id="24b6dcde-afc9-4f53-859b-f506caba165c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/ui/fragment/PhotoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/ui/fragment/PhotoFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/viewmodel/NotifyViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/viewmodel/NotifyViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/ui/activity/NoticeDetailActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/ui/activity/NoticeDetailActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/viewmodel/NoticeDetailViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/notify/viewmodel/NoticeDetailViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

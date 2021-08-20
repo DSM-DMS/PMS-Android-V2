@@ -3,6 +3,7 @@ package com.dms.pmsandroid.feature.notify.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.CommentModel
@@ -23,11 +24,11 @@ class NoticeDetailViewModel(
 
     val doneReComments = MutableLiveData(false)
 
-    private val _resetComments = MutableLiveData(false)
-    val resetComments: LiveData<Boolean> get() = _resetComments
+    private val _resetComments = MutableLiveData(Event(false))
+    val resetComments: LiveData<Event<Boolean>> get() = _resetComments
 
-    private val _clickedCommentId = MutableLiveData<Int>()
-    val clickedCommentId: LiveData<Int> get() = _clickedCommentId
+    private val _clickedCommentId = MutableLiveData<Event<Int>>()
+    val clickedCommentId: LiveData<Event<Int>> get() = _clickedCommentId
 
     var noticeId = -1
 
@@ -55,11 +56,11 @@ class NoticeDetailViewModel(
 
     fun postComment() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        val body = CommentRequestModel(comment.value!!, clickedCommentId.value)
+        val body = CommentRequestModel(comment.value!!, clickedCommentId.value?.peekContent())
         if (!comment.value.isNullOrEmpty()) {
             notifyApiImpl.postComment(accessToken, noticeId, body).subscribe { response ->
                 if (response.isSuccessful) {
-                    _resetComments.value = true
+                    _resetComments.value = Event(true)
                     loadNoticeDetail()
                 }
             }
@@ -67,6 +68,6 @@ class NoticeDetailViewModel(
     }
 
     fun commentClick(id: Int) {
-        _clickedCommentId.value = id
+        _clickedCommentId.value = Event(id)
     }
 }
