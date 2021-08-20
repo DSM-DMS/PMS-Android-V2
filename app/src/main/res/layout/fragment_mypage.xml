@@ -61,6 +61,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="15dp"
             android:background="@drawable/point_box"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
             app:layout_constraintEnd_toEndOf="@id/mypage_top_gl"
@@ -109,6 +110,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/point_box"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
             app:layout_constraintEnd_toEndOf="@+id/intro_comment_cv"
@@ -172,13 +174,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/start_add_student_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/shape_border_blue"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_border_gray_100"
             android:elevation="30dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="@string/add_student"
@@ -385,6 +386,7 @@
             android:fontFamily="@font/nanumsquarebold"
             android:text="@{studentName}"
             android:textColor="@color/white"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
