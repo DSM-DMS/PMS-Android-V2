@@ -3,6 +3,7 @@ package com.dms.pmsandroid.feature.notify.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.GalleryListContent
@@ -33,8 +34,8 @@ class NotifyViewModel(
     private val _clickedGalleryId = MutableLiveData<Int>()
     val clickedGalleryId: LiveData<Int> get() = _clickedGalleryId
 
-    private val _clickedNoticeId = MutableLiveData<Int>()
-    val clickedNoticeId: LiveData<Int> get() = _clickedNoticeId
+    private val _clickedNoticeId = MutableLiveData<Event<Int>>()
+    val clickedNoticeId: LiveData<Event<Int>> get() = _clickedNoticeId
 
     lateinit var clickedNoticeTitle: String
 
@@ -153,6 +154,6 @@ class NotifyViewModel(
 
     fun onNoticeClicked(id: Int, title: String) {
         clickedNoticeTitle = title
-        _clickedNoticeId.value = id
+        _clickedNoticeId.value = Event(id)
     }
 }
