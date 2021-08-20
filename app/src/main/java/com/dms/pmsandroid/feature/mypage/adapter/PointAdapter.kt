@@ -15,14 +15,12 @@ class PointAdapter(private val viewModel: PointContentViewModel) :
 
     inner class PointViewHolder(private val binding: ItemPointBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        //여기에 학생 코드를 한번 더 인증 받아야 하나
         fun bind(response: PointResponse) {
             if (response.type == true) {
                 binding.vm = viewModel
                 binding.reason = response.reason
                 binding.date = response.date
                 if (response.point > 0){
-                    //색상 바꾸기?
                     response.point
                 }
                 binding.executePendingBindings()
