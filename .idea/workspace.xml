@@ -5,20 +5,30 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24b6dcde-afc9-4f53-859b-f506caba165c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/di/module/MyPageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/di/module/MyPageModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/OutingAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/OutingAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/PointAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/PointAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/ui/activity/OutingContentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/ui/activity/OutingContentActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/ui/fragment/MyPageFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/ui/fragment/MyPageFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/viewmodel/PointContentViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/viewmodel/PointContentViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/ui/MainActivity.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/jaewonkim/.android/avd/Pixel_3a_API_31_arm64-v8a.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/Users/mac/.android/avd/Pixel_3_XL_API_27.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -111,5 +121,26 @@
       <updated>1629196938968</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom" timestamp="1629442859864">
+      <screen x="0" y="25" width="1792" height="1010" />
+    </state>
+    <state width="1750" height="230" key="GridCell.Tab.0.bottom/0.25.1792.1010@0.25.1792.1010" timestamp="1629442859864" />
+    <state width="1750" height="230" key="GridCell.Tab.0.center" timestamp="1629442859863">
+      <screen x="0" y="25" width="1792" height="1010" />
+    </state>
+    <state width="1750" height="230" key="GridCell.Tab.0.center/0.25.1792.1010@0.25.1792.1010" timestamp="1629442859863" />
+    <state width="1750" height="230" key="GridCell.Tab.0.left" timestamp="1629442859863">
+      <screen x="0" y="25" width="1792" height="1010" />
+    </state>
+    <state width="1750" height="230" key="GridCell.Tab.0.left/0.25.1792.1010@0.25.1792.1010" timestamp="1629442859863" />
+    <state width="1750" height="230" key="GridCell.Tab.0.right" timestamp="1629442859864">
+      <screen x="0" y="25" width="1792" height="1010" />
+    </state>
+    <state width="1750" height="230" key="GridCell.Tab.0.right/0.25.1792.1010@0.25.1792.1010" timestamp="1629442859864" />
   </component>
 </project>
