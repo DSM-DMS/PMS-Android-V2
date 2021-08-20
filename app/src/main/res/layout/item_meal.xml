@@ -34,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/pageMargin"
+            android:onClick="@{()->vm.showPicture(picture.length()>0)}"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,9 +60,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginVertical="25dp"
+                        android:fontFamily="@font/nanumsquarebold"
                         android:textColor="@color/white"
                         android:textSize="20sp"
-                        android:fontFamily="@font/nanumsquarebold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/meal_container"
@@ -74,12 +75,12 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginVertical="10dp"
+                    android:fontFamily="@font/nanumsquareregular"
                     android:gravity="center"
                     android:text="@{meal}"
                     android:textColor="@color/black"
                     android:textSize="17sp"
-                    android:visibility="@{vm.showPicture?View.INVISIBLE:View.VISIBLE}"
-                    android:fontFamily="@font/nanumsquareregular"
+                    android:visibility="@{picture.length()>0&amp;vm.showPicture?View.INVISIBLE:View.VISIBLE}"
                     app:layout_constraintBottom_toTopOf="@+id/meal_turning_img"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +96,7 @@
                     android:text="@{vm.showPicture?`터치하여 급식표보기`:`터치하여 급식사진보기`}"
                     android:textColor="@color/blue"
                     android:textSize="15sp"
+                    android:visibility="@{picture.length()>0?View.VISIBLE:View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -103,13 +105,13 @@
                     android:id="@+id/meal_image_iv"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:visibility="@{vm.showPicture?View.VISIBLE:View.INVISIBLE}"
+                    android:contentDescription="@string/meal_picture"
+                    android:visibility="@{picture.length()>0&amp;vm.showPicture?View.VISIBLE:View.GONE}"
                     app:glide_image_load="@{picture}"
                     app:layout_constraintBottom_toBottomOf="@+id/menu_tv"
                     app:layout_constraintEnd_toEndOf="@+id/menu_tv"
                     app:layout_constraintStart_toStartOf="@+id/menu_tv"
-                    app:layout_constraintTop_toTopOf="@+id/menu_tv"
-                    android:contentDescription="@string/meal_picture" />
+                    app:layout_constraintTop_toTopOf="@+id/menu_tv" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

@@ -1,7 +1,5 @@
 package com.dms.pmsandroid.feature.meal.adapter
 
-import android.animation.AnimatorInflater
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
@@ -64,11 +62,6 @@ class MealAdapter(
                 }
             } else {
                 binding.meal = "급식이 없습니다"
-            }
-
-
-            binding.mealItem.setOnClickListener {
-                viewModel.showPicture()
             }
         }
     }
