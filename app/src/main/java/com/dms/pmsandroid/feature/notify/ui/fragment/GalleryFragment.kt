@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
-import com.dms.pmsandroid.databinding.FragmentPhotoBinding
+import com.dms.pmsandroid.base.EventObserver
+import com.dms.pmsandroid.databinding.FragmentGalleryBinding
 import com.dms.pmsandroid.feature.notify.adapter.GalleryAdapter
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo) {
+class GalleryFragment : BaseFragment<FragmentGalleryBinding>(R.layout.fragment_gallery) {
     override val vm: NotifyViewModel by sharedViewModel()
 
     private val photoAdapter: GalleryAdapter by lazy {
@@ -43,7 +44,7 @@ class PhotoFragment : BaseFragment<FragmentPhotoBinding>(R.layout.fragment_photo
             galleryList.observe(viewLifecycleOwner, {
                 photoAdapter.setItems(it)
             })
-            clickedGalleryId.observe(viewLifecycleOwner, {
+            clickedGalleryId.observe(viewLifecycleOwner, EventObserver{
                 (activity as MainActivity).startGalleryDetail(it)
             })
             galleryPage.observe(viewLifecycleOwner,{

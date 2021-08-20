@@ -17,6 +17,7 @@ import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivi
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
+import com.dms.pmsandroid.feature.mypage.ui.activity.ChangePasswordActivity
 import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
 import com.dms.pmsandroid.feature.mypage.ui.activity.PointContentActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
@@ -54,6 +55,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     fun startPoint(number : Int){
         val gointent = Intent(this,PointContentActivity::class.java)
         startActivity(gointent)
+    }
+
+    fun startChangePassword(){
+        val changePWIntent = Intent(this,ChangePasswordActivity::class.java)
+        startActivity(changePWIntent)
     }
 
     fun startDeveloper() {

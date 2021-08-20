@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+
         <variable
             name="pluspoint"
-            type= "String" />
+            type="String" />
+
         <variable
             name="minuspoint"
             type="String" />
+
         <variable
             name="studentName"
             type="String" />
@@ -29,321 +34,396 @@
         <variable
             name="stay"
             type="String" />
-        
+
         <variable
             name="mealApplied"
             type="boolean" />
 
 
     </data>
-    <FrameLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/main_back">
+        android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mypage_top_gl"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/student_pluspoint_img"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="90dp"
-            android:layout_marginTop="120dp"
+            android:id="@+id/student_pluspoint_cv"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/point_box"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="123dp" >
+            app:layout_constraintEnd_toEndOf="@id/mypage_top_gl"
+            app:layout_constraintHorizontal_bias="0.56"
+            app:layout_constraintStart_toStartOf="@+id/intro_comment_cv"
+            app:layout_constraintTop_toBottomOf="@id/student_parent_edit_img">
 
-            <TextView
-                android:id="@+id/student_pluspoint_title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/point_size"
-                android:fontFamily="@font/nanumsquarebold"
-                android:layout_marginLeft="60dp"
-                android:text="@string/plus_point" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/student_pluspoint_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:text="@{pluspoint}"
-                android:textSize="@dimen/point_int" />
+                <TextView
+                    android:id="@+id/student_pluspoint_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/plus_point"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/point_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/student_pluspoint_tv" />
+
+                <TextView
+                    android:id="@+id/student_pluspoint_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{pluspoint}"
+                    android:textSize="@dimen/point_int"
+                    app:layout_constraintBottom_toTopOf="@+id/student_pluspoint_title_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/student_minusspoint_img"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="120dp"
+            android:id="@+id/student_minusspoint_cv"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="90dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/point_box"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
             app:cardCornerRadius="20dp"
             app:cardElevation="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="123dp" >
+            app:layout_constraintEnd_toEndOf="@+id/intro_comment_cv"
+            app:layout_constraintStart_toEndOf="@id/mypage_top_gl"
+            app:layout_constraintTop_toBottomOf="@id/student_parent_edit_img">
 
-            <TextView
-                android:id="@+id/student_minuspoint_title_tv"
-                android:layout_marginTop="60dp"
-                android:layout_marginLeft="62dp"
-                android:fontFamily="@font/nanumsquarebold"
-                android:textColor="@color/red"
-                android:textSize="@dimen/point_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/minus_point"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/student_minuspoint_tv"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{minuspoint}"
-                android:textSize="@dimen/point_int"/>
+                <TextView
+                    android:id="@+id/student_minuspoint_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/minus_point"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/point_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/student_minuspoint_tv" />
+
+                <TextView
+                    android:id="@+id/student_minuspoint_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{minuspoint}"
+                    android:textSize="@dimen/point_int"
+                    app:layout_constraintBottom_toTopOf="@+id/student_minuspoint_title_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.cardview.widget.CardView>
 
+        <View
+            android:id="@+id/mypage_v"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@color/blue"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/student_parent_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="65dp"
-            android:text="@{nickName}"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            tools:layout_editor_absoluteX="63dp"
-            tools:layout_editor_absoluteY="54dp" />
-
-        <ImageView
             android:id="@+id/student_parent_edit_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="75dp"
-            app:srcCompat="@drawable/ic_baseline_create_24"
-            tools:layout_editor_absoluteX="107dp" />
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:drawableEnd="@drawable/ic_baseline_create_24"
+            android:fontFamily="@font/nanumsquareextrabold"
+            android:text="@{nickName}"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/start_add_student_btn"
             android:layout_width="match_parent"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="350dp"
-            android:backgroundTint="@color/button_background"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_border_gray_100"
             android:elevation="30dp"
             android:fontFamily="@font/nanumsquareregular"
             android:text="@string/add_student"
-            android:visibility="@{vm.successCertifitcation?View.INVISIBLE:View.VISIBLE}"
             android:textColor="@color/black"
+            android:visibility="@{vm.successCertifitcation?View.INVISIBLE:View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/intro_comment_cv"
-            android:layout_width="330dp"
-            android:layout_height="40dp"
-            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
-            android:backgroundTint="@color/blue"
-            app:cardCornerRadius="60dp"
-            app:cardElevation="10dp"
-            android:layout_marginTop="240dp"
-            android:layout_gravity="center_horizontal"
-            >
-
-            <TextView
-                android:id="@+id/intro_comment_tv"
-                android:layout_width="wrap_content"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
-                android:text="@{vm.introComment}" />
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logout_cv" />
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/intro_condidtion_cv"
-            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
-            android:layout_width="330dp"
-            android:layout_height="120dp"
+            android:id="@+id/intro_condition_cv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="300dp"
-            android:backgroundTint="@color/button_background"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="17dp"
+            android:backgroundTint="@color/gray_100"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intro_comment_cv">
 
-            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/this_week_condition_tv"
-                android:textSize="16sp"
-                android:layout_marginTop="28dp"
-                android:layout_marginStart="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanumsquareregular"
-                android:textColor="@color/black"
-                android:text="@string/this_week_condition" />
+                <TextView
+                    android:id="@+id/this_week_condition_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/this_week_condition"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/week_meal_tv"
-                android:textSize="16sp"
-                android:layout_marginTop="73dp"
-                android:layout_marginStart="30dp"
-                android:fontFamily="@font/nanumsquareregular"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/week_meal" />
+                <TextView
+                    android:id="@+id/week_meal_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/week_meal"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/this_week_condition_tv" />
 
-            <TextView
-                android:id="@+id/stay_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="25dp"
-                android:visibility="invisible"
-                android:text="@{stay}" />
+                <TextView
+                    android:id="@+id/stay_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:text="@{stay}"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/this_week_condition_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/this_week_condition_tv" />
 
-            <ImageView
-                android:id="@+id/meal_applied_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginEnd="40dp"
-                android:layout_marginTop="25dp"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
+                <ImageView
+                    android:id="@+id/meal_applied_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/week_meal_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/week_meal_tv"
+                    app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/intro_outing_cv"
-            android:layout_width="330dp"
-            android:layout_height="60dp"
-            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
-            android:backgroundTint="@color/button_background"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="17dp"
+            android:backgroundTint="@color/gray_100"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
-            android:layout_marginTop="440dp"
-            android:layout_gravity="center_horizontal"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/intro_condition_cv">
 
             <TextView
                 android:id="@+id/outing_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/check_outing"
-                android:textSize="16sp"
-                android:fontFamily="@font/nanumsquareregular"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="40dp"
-                android:textColor="@color/black"  />
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/nanumsquareregular"
+                android:text="@string/check_outing"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/outing_img"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginEnd="8dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
+                android:layout_marginVertical="10dp"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/change_pw_cv"
-            android:layout_width="330dp"
-            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/button_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
-            android:layout_marginTop="520dp"
+            android:id="@+id/intro_comment_cv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            >
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="17dp"
+            android:backgroundTint="@color/blue"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/student_pluspoint_cv">
 
             <TextView
-                android:id="@+id/change_pw_tv"
-                android:layout_width="wrap_content"
+                android:id="@+id/intro_comment_tv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/change_pw"
-                android:textSize="16sp"
-                android:fontFamily="@font/nanumsquareregular"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="40dp"
-                android:textColor="@color/black" />
-
-            <ImageView
-                android:id="@+id/change_pw_img"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginEnd="8dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
+                android:layout_margin="5dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:gravity="center"
+                android:text="@{vm.introComment}"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"
+                tools:text="조금만 더받으면 봉사에요" />
         </androidx.cardview.widget.CardView>
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/logout_cv"
-            android:layout_width="330dp"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/button_background"
-            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.INVISIBLE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="17dp"
+            android:backgroundTint="@color/gray_100"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
-            android:layout_marginTop="600dp"
-            android:layout_gravity="center_horizontal"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_pw_cv">
 
             <TextView
                 android:id="@+id/logout_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/log_out"
-                android:textSize="16sp"
-                android:fontFamily="@font/nanumsquareregular"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="40dp"
-                android:textColor="@color/black"/>
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/nanumsquareregular"
+                android:text="@string/log_out"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/logout_img"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginEnd="8dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
+                android:layout_marginVertical="10dp"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/student_number_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="@{studentNumber}"
             android:textColor="@color/white"
-            android:layout_marginStart="240dp"
-            android:text="@{studentNumber}" />
+            app:layout_constraintEnd_toStartOf="@id/student_name_tv"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/student_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="290dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_white"
+            android:fontFamily="@font/nanumsquarebold"
             android:text="@{studentName}"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/change_pw_cv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="17dp"
+            android:backgroundTint="@color/gray_100"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/intro_outing_cv">
+
+            <TextView
+                android:id="@+id/change_pw_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/nanumsquareregular"
+                android:text="@string/change_pw"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/change_pw_img"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginVertical="10dp"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+        </androidx.cardview.widget.CardView>
 
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

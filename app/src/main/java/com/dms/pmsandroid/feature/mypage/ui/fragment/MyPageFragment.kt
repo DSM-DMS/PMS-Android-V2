@@ -31,6 +31,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             }
         }
 
+        binding.changePwCv.setOnClickListener {
+            (activity as MainActivity).startChangePassword()
+        }
+
     }
 
     override fun observeEvent() {

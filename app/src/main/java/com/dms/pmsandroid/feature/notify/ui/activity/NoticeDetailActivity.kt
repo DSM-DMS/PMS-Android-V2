@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
+import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.ActivityNoticeDetailBinding
 import com.dms.pmsandroid.feature.notify.adapter.NoticeDetailAdapter
 import com.dms.pmsandroid.feature.notify.ui.NoticeAttachDialog
@@ -77,11 +78,9 @@ class NoticeDetailActivity :
                 doneInput = HashMap()
             })
 
-            clickedCommentId.observe(this@NoticeDetailActivity, {
-                if (it != null) {
-                    binding.noticeDetailEt.requestFocus()
-                    keyBoardManager.showSoftInput(binding.noticeDetailEt, 0)
-                }
+            clickedCommentId.observe(this@NoticeDetailActivity, EventObserver{
+                binding.noticeDetailEt.requestFocus()
+                keyBoardManager.showSoftInput(binding.noticeDetailEt, 0)
             })
         }
     }
