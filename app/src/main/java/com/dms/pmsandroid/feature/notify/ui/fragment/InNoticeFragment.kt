@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
+import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.databinding.FragmentInNoticeBinding
 import com.dms.pmsandroid.feature.notify.adapter.NoticeAdapter
@@ -56,7 +57,7 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
             noticeList.observe(viewLifecycleOwner, {
                 noticeAdapter.setItems(it)
             })
-            clickedNoticeId.observe(viewLifecycleOwner, {
+            clickedNoticeId.observe(viewLifecycleOwner, EventObserver{
                 (activity as MainActivity).startNoticeDetail(it, vm.clickedNoticeTitle)
             })
             noticePage.observe(viewLifecycleOwner,{

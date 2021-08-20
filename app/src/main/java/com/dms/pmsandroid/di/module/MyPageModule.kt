@@ -3,6 +3,7 @@ package com.dms.pmsandroid.di.module
 import android.app.Dialog
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
+import com.dms.pmsandroid.feature.mypage.viewmodel.ChangePasswordViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -13,6 +14,6 @@ val myPageModule = module{
 
     viewModel {OutingContentViewModel(get(),get()) }
 
-
+    viewModel { ChangePasswordViewModel(get(),get()) }
 
 }

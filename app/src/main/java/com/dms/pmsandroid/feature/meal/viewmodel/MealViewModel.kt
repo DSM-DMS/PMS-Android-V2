@@ -59,8 +59,10 @@ class MealViewModel(
         })
     }
 
-    fun showPicture(){
-        _showPicture.value = !_showPicture.value!!
+    fun showPicture(hasPicture:Boolean){
+        if(hasPicture){
+            _showPicture.value = !_showPicture.value!!
+        }
     }
 
 

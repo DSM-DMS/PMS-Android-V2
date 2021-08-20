@@ -54,6 +54,7 @@
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_email"
+                android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:text="@={vm.userEmail}" />
 
@@ -98,8 +99,8 @@
             android:id="@+id/login_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:background="@{vm.doneInput?@drawable/shape_border_blue:@drawable/shape_border_gray}"
+            android:layout_marginTop="10dp"
+            android:background="@{vm.doneInput&amp;!vm.inProgress?@drawable/shape_border_blue:@drawable/shape_border_gray}"
             android:onClick="@{()->vm.login()}"
             android:padding="5dp"
             android:text="@{vm.inProgress?@string/loading:@string/login}"
@@ -108,12 +109,13 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.63"
             app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
-            app:layout_constraintTop_toBottomOf="@+id/login_password_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/login_auto_cb" />
 
         <TextView
             android:id="@+id/login_register_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:onClick="@{()->vm.needRegister()}"
             android:padding="15dp"
@@ -121,7 +123,7 @@
             android:textColor="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_auto_cb" />
+            app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
         <CheckBox
             android:id="@+id/login_auto_cb"
@@ -131,7 +133,7 @@
             android:text="@string/save_login_info"
             app:buttonTint="@color/blue"
             app:layout_constraintStart_toStartOf="@+id/signup_top_gl"
-            app:layout_constraintTop_toBottomOf="@+id/login_button" />
+            app:layout_constraintTop_toBottomOf="@+id/login_password_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
