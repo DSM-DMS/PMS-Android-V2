@@ -13,9 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24b6dcde-afc9-4f53-859b-f506caba165c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/di/module/MyPageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/di/module/MyPageModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/OutingAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/OutingAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/PointAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/adapter/PointAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/ui/activity/OutingContentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dms/pmsandroid/feature/mypage/ui/activity/OutingContentActivity.kt" afterDir="false" />
