@@ -52,12 +52,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    fun startOuting(){
-        val gointent = Intent(this, OutingContentActivity::class.java)
-        startActivity(gointent)
-    }
-
-    fun startPoint(){
+    fun startPoint(number : Int){
         val gointent = Intent(this,PointContentActivity::class.java)
         startActivity(gointent)
     }

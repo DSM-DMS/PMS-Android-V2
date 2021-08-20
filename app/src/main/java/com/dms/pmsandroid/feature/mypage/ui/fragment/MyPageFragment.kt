@@ -2,17 +2,15 @@ package com.dms.pmsandroid.feature.mypage.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.base.BaseDialog
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMypageBinding
 import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
 import com.dms.pmsandroid.feature.mypage.ui.MyPageAddStudentDialog
+import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,9 +23,12 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         vm.inputBasicInfo()
         observeEvent()
 
-
         binding.introOutingCv.setOnClickListener {
-            (activity as MainActivity).startOuting()
+            fun startOuting(number:Int){
+                val gointent = Intent(activity, OutingContentActivity::class.java)
+                gointent.putExtra("number",number)
+                startActivity(gointent)
+            }
         }
 
         binding.changePwCv.setOnClickListener {
