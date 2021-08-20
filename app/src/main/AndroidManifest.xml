@@ -41,8 +41,7 @@
         <activity
             android:name=".feature.login.ui.activity.LoginActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:windowSoftInputMode="adjustNothing"/>
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait"

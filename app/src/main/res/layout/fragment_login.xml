@@ -54,6 +54,7 @@
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_email"
+                android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:text="@={vm.userEmail}" />
 
@@ -114,6 +115,7 @@
             android:id="@+id/login_register_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:onClick="@{()->vm.needRegister()}"
             android:padding="15dp"
@@ -121,7 +123,7 @@
             android:textColor="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_auto_cb" />
+            app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
         <CheckBox
             android:id="@+id/login_auto_cb"
