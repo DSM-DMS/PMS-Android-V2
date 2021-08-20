@@ -18,7 +18,7 @@ class OutingAdapter(private val viewModel: OutingContentViewModel) :
             binding.date = "날짜" + outingList[position].date.toString()
             binding.reason =  "이유" +outingList[position].reason
             binding.place =  "장소" +outingList[position].place
-            binding.vm
+            binding.vm = viewModel
             binding.executePendingBindings()
             binding.notifyChange();
         }
@@ -28,8 +28,8 @@ class OutingAdapter(private val viewModel: OutingContentViewModel) :
         return outingList.size
     }
 
-    fun setItem(clubs: List<OutingResponse>) {
-        this.outingList = clubs as ArrayList<OutingResponse>
+    fun setItem(outing: List<OutingResponse>) {
+        this.outingList = outing as ArrayList<OutingResponse>
         notifyDataSetChanged()
     }
 
