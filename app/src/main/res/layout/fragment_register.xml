@@ -149,7 +149,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:background="@{vm.doneInput?@drawable/shape_border_blue:@drawable/shape_border_gray}"
+            android:background="@{vm.doneInput&amp;!vm.inProgress?@drawable/shape_border_blue:@drawable/shape_border_gray}"
             android:onClick="@{()->vm.doRegister()}"
             android:text="@{vm.inProgress?@string/loading:@string/signup}"
             android:textColor="@color/white"

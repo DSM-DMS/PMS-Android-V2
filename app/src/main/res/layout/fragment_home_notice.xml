@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:onClick="@{()->vm.homeAfterPage()}"
-                android:src="@drawable/ic_baseline_arrow_right_24" />
+                android:src="@drawable/ic_baseline_arrow_right_blue" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
