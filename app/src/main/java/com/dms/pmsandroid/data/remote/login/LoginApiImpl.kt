@@ -22,7 +22,7 @@ class LoginApiImpl{
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
-    fun changePassword(request: ChangePasswordRequest): @NonNull Single<Response<Void>> = provideLoginApi().changePassword(request)
+    fun changePassword(token:String,request: ChangePasswordRequest): @NonNull Single<Response<Void>> = provideLoginApi().changePassword(token,request)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 }

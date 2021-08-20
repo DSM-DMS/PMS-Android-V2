@@ -7,6 +7,7 @@ import com.dms.pmsandroid.feature.mypage.model.ChangePasswordRequest
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
 
@@ -18,5 +19,5 @@ interface LoginApi {
     fun login(@Body request: LoginRequest): Single<Response<LoginResponse>>
 
     @PUT("/auth/password")
-    fun changePassword(@Body request: ChangePasswordRequest): Single<Response<Void>>
+    fun changePassword(@Header("Authorization")token:String,@Body request: ChangePasswordRequest): Single<Response<Void>>
 }
