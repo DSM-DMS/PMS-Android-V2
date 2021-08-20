@@ -31,8 +31,8 @@ class NotifyViewModel(
     private val _homeList = MutableLiveData<List<NoticeListModel>>()
     val homeList: LiveData<List<NoticeListModel>> get() = _homeList
 
-    private val _clickedGalleryId = MutableLiveData<Int>()
-    val clickedGalleryId: LiveData<Int> get() = _clickedGalleryId
+    private val _clickedGalleryId = MutableLiveData<Event<Int>>()
+    val clickedGalleryId: LiveData<Event<Int>> get() = _clickedGalleryId
 
     private val _clickedNoticeId = MutableLiveData<Event<Int>>()
     val clickedNoticeId: LiveData<Event<Int>> get() = _clickedNoticeId
@@ -149,7 +149,7 @@ class NotifyViewModel(
     }
 
     fun onGalleryClicked(id: Int) {
-        _clickedGalleryId.value = id
+        _clickedGalleryId.value = Event(id)
     }
 
     fun onNoticeClicked(id: Int, title: String) {
