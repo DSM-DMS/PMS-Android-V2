@@ -57,7 +57,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         }
 
         binding.startAddStudentBtn.setOnClickListener {
-            showStudentBottomDialog()
+            showAddStudentDialog()
         }
 
     }
