@@ -12,7 +12,7 @@
     <string name="title_notify">소식</string>
     <string name="title_info">소개</string>
     <string name="title_mypage">마이페이지</string>
-    <string name="please_name">이름을 입력해주세요</string>
+    <string name="please_name">닉네임을 입력해주세요</string>
     <string name="ask_need_register">아직 계정이 없으신가요?</string>
     <string name="meal_picture">급식사진</string>
     <string name="intro_work">취업처 소개</string>
@@ -74,4 +74,5 @@
     <string name="check_password">비밀번호 확인</string>
     <string name="please_check_password">변경한 비밀번호를 확인해주세요</string>
     <string name="change_password">비밀번호 변경</string>
+    <string name="check_logout">정말로 로그아웃 하시겠습니까?</string>
 </resources>

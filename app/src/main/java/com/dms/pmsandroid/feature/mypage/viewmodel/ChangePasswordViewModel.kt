@@ -24,8 +24,8 @@ class ChangePasswordViewModel(
     val toast: LiveData<String> get() = _toast
 
     fun changePassword() {
-        _inProgress.value = true
         if (doneInput.value!!) {
+            _inProgress.value = true
             val token = sharedPreferenceStorage.getInfo("access_token")
             val changePasswordRequest =
                 ChangePasswordRequest(newPassword.value!!, prePassword.value!!)

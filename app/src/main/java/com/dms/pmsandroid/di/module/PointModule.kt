@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val pointModule = module{
     single { MyPageApiImpl() }
 
-    viewModel {PointContentViewModel(get())}
+    viewModel {PointContentViewModel(get(),get())}
 
 }

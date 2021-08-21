@@ -42,5 +42,7 @@ class MyPageApiImpl {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
-
+    fun deleteStudent(token: String,request:DeleteStudentRequest):@NonNull Single<Response<Unit>> = providerMyPageApi().deleteStudent(token,request)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
 }
