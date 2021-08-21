@@ -24,3 +24,5 @@ local.properties
 .idea/misc.xml
 
 gradle/wrapper/gradle-wrapper.properties
+
+.idea/workspace.xml
