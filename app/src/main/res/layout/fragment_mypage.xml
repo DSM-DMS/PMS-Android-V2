@@ -178,7 +178,7 @@
             android:id="@+id/start_add_student_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="30dp"
             android:background="@drawable/shape_border_gray_100"
             android:elevation="30dp"
             android:fontFamily="@font/nanumsquareregular"
@@ -188,8 +188,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logout_cv" />
-
+            app:layout_constraintTop_toBottomOf="@+id/logout_cv"
+            app:layout_constraintVertical_bias="0.509" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/intro_condition_cv"
@@ -366,29 +366,20 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/student_number_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/nanumsquarebold"
-            android:text="@{studentNumber}"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@id/student_name_tv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/student_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
             android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_white"
+            android:gravity="center"
             android:fontFamily="@font/nanumsquarebold"
-            android:text="@{studentName}"
+            android:padding="10dp"
+            android:text="@{studentName.length()>0?studentNumber+studentName:`학생추가하기`}"
             android:textColor="@color/white"
-            android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/student_parent_edit_img"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/student_parent_edit_img"
+            tools:text="name"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/change_pw_cv"
