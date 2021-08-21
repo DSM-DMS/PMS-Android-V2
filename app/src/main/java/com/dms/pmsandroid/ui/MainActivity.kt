@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
+import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
@@ -172,10 +173,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     }
                 }
             })
-            needToLogin.observe(this@MainActivity, {
+            needToLogin.observe(this@MainActivity, EventObserver{
                 if (it) {
                     startLogin()
-                    vm.needToLogin.value = false
                 }
             })
         }

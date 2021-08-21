@@ -100,4 +100,8 @@ class MyPageViewModel(
         })
     }
 
+    fun logout(){
+        sharedPreferenceStorage.clearAll()
+    }
+
 }
