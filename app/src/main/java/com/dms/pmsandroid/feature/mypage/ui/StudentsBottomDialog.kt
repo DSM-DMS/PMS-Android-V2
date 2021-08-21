@@ -38,6 +38,10 @@ class StudentsBottomDialog(private val fragment:MyPageFragment,private val vm:My
             for(student in students){
                 val inflater = StudentInflater(requireContext())
                 inflater.findViewById<TextView>(R.id.student_name).text = student.studentName
+                inflater.findViewById<View>(R.id.student_delete_btn).setOnClickListener {
+                    vm.deleteStudent(student.studentNumber)
+                    dismiss()
+                }
                 binding.studentLl.addView(inflater)
             }
         }

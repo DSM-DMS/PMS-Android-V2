@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
+import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.FragmentMypageBinding
 import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
 import com.dms.pmsandroid.feature.mypage.ui.LogoutDialog
@@ -75,8 +76,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             }
         })
         vm.run {
-            toastMessage.observe(viewLifecycleOwner, {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            toastMessage.observe(viewLifecycleOwner, EventObserver{
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })
             info.observe(viewLifecycleOwner, {
                 binding.run {
@@ -85,6 +86,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                         studentNumber = it.students[0].studentNumber
                         studentName = it.students[0].studentName
                     } else {
+                        successCertifitcation.value = false
                         studentNumber = null
                         studentName = null
                     }
