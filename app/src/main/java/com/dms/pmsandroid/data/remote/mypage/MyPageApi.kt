@@ -24,5 +24,7 @@ interface MyPageApi {
     @PUT("/user/name")
     fun changeUserName(@Header("Authorization")token:String,@Body changeNameRequest: ChangeNameRequest) :Single<Response<Unit>>
 
+    @DELETE("/user/student")
+    fun deleteStudent(@Header("Authorization")tokne:String,@Body request:DeleteStudentRequest):Single<Response<Unit>>
 
 }

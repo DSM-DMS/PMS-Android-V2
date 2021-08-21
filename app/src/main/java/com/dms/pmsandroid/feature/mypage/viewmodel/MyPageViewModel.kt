@@ -102,6 +102,7 @@ class MyPageViewModel(
 
     fun logout(){
         sharedPreferenceStorage.clearAll()
+        _successCertifitcation.value = false
     }
 
 }
