@@ -60,8 +60,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/gray_50">
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@color/gray_50">
 
                 <View
                     android:id="@+id/introduce_club_v"
@@ -119,8 +119,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/gray_50">
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@color/gray_50">
 
                 <View
                     android:id="@+id/introduce_work_v"
@@ -179,8 +179,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/gray_50">
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@color/gray_50">
 
                 <View
                     android:id="@+id/introduce_dev_v"
