@@ -9,6 +9,7 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentMypageBinding
 import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
+import com.dms.pmsandroid.feature.mypage.ui.LogoutDialog
 import com.dms.pmsandroid.feature.mypage.ui.MyPageAddStudentDialog
 import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
@@ -18,6 +19,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
 
+    private val logoutDialog by lazy {
+        LogoutDialog(vm)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.inputBasicInfo()
@@ -33,6 +37,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
         binding.changePwCv.setOnClickListener {
             (activity as MainActivity).startChangePassword()
+        }
+        binding.logoutCv.setOnClickListener {
+            logoutDialog.show(requireActivity().supportFragmentManager,"logoutDialog")
         }
 
     }

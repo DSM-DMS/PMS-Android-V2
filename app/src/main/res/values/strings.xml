@@ -74,4 +74,5 @@
     <string name="check_password">비밀번호 확인</string>
     <string name="please_check_password">변경한 비밀번호를 확인해주세요</string>
     <string name="change_password">비밀번호 변경</string>
+    <string name="check_logout">정말로 로그아웃 하시겠습니까?</string>
 </resources>
