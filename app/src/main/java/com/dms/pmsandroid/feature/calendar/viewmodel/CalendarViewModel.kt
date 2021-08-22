@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
@@ -24,20 +25,20 @@ class CalendarViewModel(
 
     val doneEventsSetting = MutableLiveData(false)
 
-    val updateCurrentDate = MutableLiveData(false)
+    val updateCurrentDate = MutableLiveData(Event(false))
 
     fun nextMonth() {
         val setDate = selectedDate.value
         selectedDate.value = if (setDate!!.month > 10) CalendarDay.from(setDate.year + 1, 0, 1)
         else CalendarDay.from(setDate.year, setDate.month + 1, 1)
-        updateCurrentDate.value = true
+        updateCurrentDate.value = Event(true)
     }
 
     fun beforeMonth(){
         val setDate = selectedDate.value
         selectedDate.value = if (setDate!!.month<1) CalendarDay.from(setDate.year-1,11,1)
         else CalendarDay.from(setDate.year,setDate.month-1,1)
-        updateCurrentDate.value = true
+        updateCurrentDate.value = Event(true)
     }
 
     fun loadSchedules() {

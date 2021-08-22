@@ -7,6 +7,8 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
+import com.dms.pmsandroid.base.Event
+import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.FragmentCalendarBinding
 import com.dms.pmsandroid.feature.calendar.CalendarDatePickerDialog
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
@@ -41,8 +43,8 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCalendarView()
-        binding.calendarHelperTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            helperDialog.show(requireActivity().supportFragmentManager,"HelperDialog")
+        binding.calendarHelperTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+            helperDialog.show(requireActivity().supportFragmentManager, "HelperDialog")
         }
     }
 
@@ -59,19 +61,16 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                     initEventTv()
                 }
             })
-            selectedDate.observe(viewLifecycleOwner,{
+            selectedDate.observe(viewLifecycleOwner, {
                 setMonthTv(it)
-                val plusMonth = CalendarDay.from(it.year,it.month+1,it.day)
+                val plusMonth = CalendarDay.from(it.year, it.month + 1, it.day)
                 val formedDate = formatDate(plusMonth)
-                setEventTv(formedDate,it)
+                setEventTv(formedDate, it)
             })
-            updateCurrentDate.observe(viewLifecycleOwner,{
-                if(it){
-                    val date = vm.selectedDate.value
-                    binding.calendarView.currentDate = date
-                    binding.calendarView.selectedDate = date
-                    vm.updateCurrentDate.value = false
-                }
+            updateCurrentDate.observe(viewLifecycleOwner, EventObserver {
+                val date = vm.selectedDate.value
+                binding.calendarView.currentDate = date
+                binding.calendarView.selectedDate = date
             })
         }
 
@@ -80,7 +79,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     private fun initEventTv() {
         val currentDate = CalendarDay.today()
 
-        loadEvents(currentDate.month+1)
+        loadEvents(currentDate.month + 1)
 
         vm.selectedDate.value = currentDate
     }
@@ -98,7 +97,13 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(
                 Schedulers.io()
             ).subscribe({ k ->
-                decorators.add(EventDecorator(k.day, events[k]!!.dotTypes, binding.calendarView.context))
+                decorators.add(
+                    EventDecorator(
+                        k.day,
+                        events[k]!!.dotTypes,
+                        binding.calendarView.context
+                    )
+                )
             }, {
 
             }, {
@@ -106,7 +111,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 binding.calendarShimmerContainer.hideShimmer()
             })
     }
-
 
 
     private val calendarDatePickerDialog by lazy {
@@ -121,6 +125,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         val calendarView = binding.calendarView
         val currentDate = CalendarDay.today()
         vm.selectedDate.value = currentDate
+        vm.updateCurrentDate.value = Event(true)
         setMonthTv(currentDate)
         calendarView.run {
             addDecorators(
@@ -135,8 +140,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             setOnDateChangedListener(this@CalendarFragment)
             setOnMonthChangedListener(this@CalendarFragment)
         }
-        binding.calendarMonthTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            calendarDatePickerDialog.show(requireActivity().supportFragmentManager,"CalendarDatePickerDialog")
+        binding.calendarMonthTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+            calendarDatePickerDialog.show(
+                requireActivity().supportFragmentManager,
+                "CalendarDatePickerDialog"
+            )
         }
     }
 
@@ -165,17 +173,18 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     @SuppressLint("SetTextI18n")
     private fun setEventTv(date: String, calendarDay: CalendarDay) {
-        val key = EventKeyModel(calendarDay.month+1, date)
+        val key = EventKeyModel(calendarDay.month + 1, date)
         val event = vm.events.value?.get(key)?.eventName ?: "\n일정이 없습니다\n"
         with(binding) {
             calendarEventTv.text = event
-            calendarDateTv.text = "${calendarDay.month+1}월${calendarDay.day}일"
+            calendarDateTv.text = "${calendarDay.month + 1}월${calendarDay.day}일"
         }
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
         setMonthTv(date)
-        vm.selectedDate.value = CalendarDay.from(date?.year?:2021,date?.month?:1,date?.day?:1)
+        vm.selectedDate.value =
+            CalendarDay.from(date?.year ?: 2021, date?.month ?: 1, date?.day ?: 1)
         val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)
@@ -185,8 +194,8 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         }
     }
 
-    private fun setMonthTv(date:CalendarDay?){
-        binding.calendarMonthTv.text = "${date?.year}년 ${((date?.month)?:0)+1}월"
+    private fun setMonthTv(date: CalendarDay?) {
+        binding.calendarMonthTv.text = "${date?.year}년 ${((date?.month) ?: 0) + 1}월"
     }
 
     override fun onDestroyView() {
