@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/check_body_tv"
-                android:layout_width="270dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="5dp"
