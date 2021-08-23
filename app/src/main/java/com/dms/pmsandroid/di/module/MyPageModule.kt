@@ -17,4 +17,6 @@ val myPageModule = module{
 
     viewModel { ChangePasswordViewModel(get(),get()) }
 
+    viewModel { PointContentViewModel(get(),get()) }
+
 }
