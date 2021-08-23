@@ -12,15 +12,12 @@ import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubDetailActivity
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
 import com.dms.pmsandroid.feature.mypage.ui.activity.ChangePasswordActivity
 import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
-import com.dms.pmsandroid.feature.mypage.ui.activity.PointContentActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment
@@ -53,9 +50,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    fun startPoint(number : Int){
-        val gointent = Intent(this,PointContentActivity::class.java)
-        startActivity(gointent)
+    fun startOuting(number: Int){
+        val outingIntent = Intent(this,OutingContentActivity::class.java)
+        outingIntent.putExtra("number",number)
+        startActivity(outingIntent)
     }
 
     fun startChangePassword(){
