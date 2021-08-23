@@ -14,25 +14,40 @@
 
     <TextView
         android:id="@+id/title_tv"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/title_bar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/title_bar_size"
+        android:background="@color/gray_100"
+        android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
         android:text="@string/outing_content"
-        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_bar_text_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/title_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="@+id/title_tv"
+        app:layout_constraintTop_toTopOf="@+id/title_tv"
+        app:layout_constraintVertical_bias="0.479"
+        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/outing_rc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/title_tv"
+        tools:listitem="@layout/item_outing"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
