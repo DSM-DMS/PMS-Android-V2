@@ -21,7 +21,7 @@ class OutingContentActivity : BaseActivity<ActivityOutingContentBinding>(R.layou
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val number = intent.getIntExtra("number",0)
-        if(number!=null){
+        if(number!=0){
             vm.loadOuting(number)
         }
         binding.outingRc.adapter = outingAdapter

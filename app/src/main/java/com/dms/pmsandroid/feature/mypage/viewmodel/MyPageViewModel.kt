@@ -30,7 +30,6 @@ class MyPageViewModel(
     val info: LiveData<UserListResponse> get() = _info
 
     val newName = MutableLiveData<String>()
-    val introComment = MutableLiveData<String>()
 
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
@@ -40,7 +39,6 @@ class MyPageViewModel(
                 _toastMessage.value = Event("변경에 성공했습니다")
                 inputBasicInfo()
             }
-
         }
     }
 
@@ -72,19 +70,18 @@ class MyPageViewModel(
     }
 
 
-    private val _BasicInfo = MutableLiveData<BasicInformationResponse>()
-    val BasicInfo: LiveData<BasicInformationResponse> get() = _BasicInfo
+    private val _basicInfo = MutableLiveData<BasicInformationResponse>()
+    val basicInfo: LiveData<BasicInformationResponse> get() = _basicInfo
 
-    fun loadStudentInfo(number: Int) {
+    fun loadStudentInfo() {
+        val number = _info.value!!.students[0].studentNumber
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        if (successCertifitcation.value == true) {
-            myPageApiImpl.getUserApi(accessToken,number).subscribe({
+            myPageApiImpl.getUserApi(accessToken,number.toInt()).subscribe({
                 if (it.isSuccessful) {
-                    _BasicInfo.value = it.body()
+                    _basicInfo.value = it.body()
                 }
             }, {
             })
-        }
     }
 
     fun inputBasicInfo() {
@@ -94,6 +91,7 @@ class MyPageViewModel(
                 _info.value = it.body()
                 if(it.body()!!.students.isNotEmpty()){
                     successCertifitcation.value = true
+                    loadStudentInfo()
                 }
             }
         }, {
@@ -105,7 +103,7 @@ class MyPageViewModel(
         successCertifitcation.value = false
     }
 
-    fun deleteStudent(number:String){
+    fun deleteStudent(number:Int){
         val request = DeleteStudentRequest(number)
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.deleteStudent(accessToken,request).subscribe{response->
