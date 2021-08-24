@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.mypage.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -64,6 +65,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         )
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun observeEvent() {
         mainVm.doneToken.observe(viewLifecycleOwner, {
             if (it) {
@@ -97,7 +99,17 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 binding.run {
                     pluspoint = it.bonusPoint
                     minuspoint = it.minusPoint
-                    stay = it.stayStatus
+                    if (it.stayStatus.toString() == "4") {
+                        binding.stayTv.setText("잔류")
+                    } else if (it.stayStatus.toString() == "1")
+                        binding.stayTv.setText("금요귀가")
+                    else if (it.stayStatus.toString() == "2") {
+                        binding.stayTv.setText("토요귀가")
+                    } else if (it.stayStatus.toString() == "3") {
+                        binding.stayTv.setText("토요귀사")
+                    } else
+                        binding.stayTv.setText("미선택")
+
                     if (it.mealApplied) {
                         binding.mealAppliedImg.setImageDrawable(context?.let { it1 ->
                             ContextCompat.getDrawable(

@@ -25,6 +25,10 @@ class OutingContentActivity : BaseActivity<ActivityOutingContentBinding>(R.layou
             vm.loadOuting(number)
         }
         binding.outingRc.adapter = outingAdapter
+        binding.outingRc.addItemDecoration(HorizontalItemDecorator(25))
+        binding.backImg.setOnClickListener{
+            finish()
+        }
 
     }
     override fun observeEvent() {
