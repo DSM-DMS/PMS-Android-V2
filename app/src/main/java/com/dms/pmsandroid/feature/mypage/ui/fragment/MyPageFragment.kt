@@ -2,6 +2,7 @@ package com.dms.pmsandroid.feature.mypage.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -18,6 +19,9 @@ import com.dms.pmsandroid.ui.MainActivity
 import com.dms.pmsandroid.ui.MainViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.concurrent.timer
+import kotlin.concurrent.timerTask
+import kotlin.random.Random
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
@@ -35,6 +39,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         super.onViewCreated(view, savedInstanceState)
         vm.inputBasicInfo()
         observeEvent()
+        changeComment()
 
         binding.run {
 
@@ -52,10 +57,13 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
            startAddStudentBtn.setOnClickListener {
                 showAddStudentDialog()
             }
-
-
         }
+    }
 
+    var changecomment = arrayOf<String>("즐거운 DSM 생활중 입니다","코로나에 유의하세요!","다음주는 집 가는 날")
+    private fun changeComment(){
+        val randomIndex = Random.nextInt(3)
+        binding.introCommentTv.text = changecomment[randomIndex]
     }
 
     private fun showStudentBottomDialog() {
@@ -148,3 +156,4 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         }
     }
 }
+
