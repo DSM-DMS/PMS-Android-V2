@@ -16,7 +16,7 @@ val myPageModule = module{
 
     single { MyPageApiImpl() }
 
-    viewModel {OutingContentViewModel(get(),get()) }
+    viewModel { OutingContentViewModel(get(),get()) }
 
     viewModel { ChangePasswordViewModel(get(),get()) }
 
