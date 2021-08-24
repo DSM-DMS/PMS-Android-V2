@@ -1,11 +1,9 @@
 package com.dms.pmsandroid.feature.mypage.adapter
 
-import android.graphics.Point
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.databinding.ItemPointBinding
-import com.dms.pmsandroid.feature.mypage.model.PointListResponse
 import com.dms.pmsandroid.feature.mypage.model.PointResponse
 import com.dms.pmsandroid.feature.mypage.viewmodel.PointContentViewModel
 
@@ -15,16 +13,13 @@ class PointAdapter(private val viewModel: PointContentViewModel) :
 
     inner class PointViewHolder(private val binding: ItemPointBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(response: PointResponse) {
-            if (response.type == true) {
-                binding.vm = viewModel
-                binding.reason = response.reason
-                binding.date = response.date
-                if (response.point > 0){
-                    response.point
-                }
-                binding.executePendingBindings()
-            }
+        fun bind(position: Int) {
+            binding.vm = viewModel
+            binding.reason = pointList[position].reason
+            binding.date = pointList[position].date
+            binding.point = pointList[position].point.toString()
+            binding.executePendingBindings()
+            binding.notifyChange()
         }
     }
 
@@ -32,15 +27,20 @@ class PointAdapter(private val viewModel: PointContentViewModel) :
         return pointList.size
     }
 
-    fun setItem(points: List<PointListResponse>) {
-        this.pointList = points as ArrayList<PointResponse>
+    fun setItem(clubs: List<PointResponse>) {
+        this.pointList = clubs as ArrayList<PointResponse>
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PointViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): PointAdapter.PointViewHolder {
         val binding = ItemPointBinding.inflate(LayoutInflater.from(parent.context))
         return PointViewHolder(binding)
     }
 
-    override fun onBindViewHolder(p0: PointViewHolder, p1: Int) = p0.bind(pointList[p1])
+    override fun onBindViewHolder(holder: PointAdapter.PointViewHolder, position: Int) {
+        holder.bind(position)
+    }
 }
