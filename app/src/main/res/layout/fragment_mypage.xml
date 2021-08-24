@@ -370,16 +370,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:background="?android:attr/selectableItemBackground"
             android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_white"
-            android:gravity="center"
             android:fontFamily="@font/nanumsquarebold"
+            android:gravity="center"
             android:padding="10dp"
             android:text="@{studentName.length()>0?studentNumber+studentName:`학생추가하기`}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/student_parent_edit_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/student_parent_edit_img"
-            tools:text="name"/>
+            tools:text="name" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/change_pw_cv"

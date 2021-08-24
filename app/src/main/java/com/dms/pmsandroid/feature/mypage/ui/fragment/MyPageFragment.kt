@@ -17,8 +17,10 @@ import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import com.dms.pmsandroid.ui.MainViewModel
+import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.TimeUnit
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
@@ -48,15 +50,15 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         binding.changePwCv.setOnClickListener {
             (activity as MainActivity).startChangePassword()
         }
-        binding.logoutCv.setOnClickListener {
+        binding.logoutCv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
             logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
         }
 
-        binding.studentNameTv.setOnClickListener {
+        binding.studentNameTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
             showStudentBottomDialog()
         }
 
-        binding.startAddStudentBtn.setOnClickListener {
+        binding.startAddStudentBtn.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
             showAddStudentDialog()
         }
 
