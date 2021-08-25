@@ -43,11 +43,12 @@
         android:id="@+id/outing_rc"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_tv"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_outing" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
