@@ -21,7 +21,7 @@ class OutingContentActivity :
     BaseActivity<ActivityOutingContentBinding>(R.layout.activity_outing_content) {
 
     override val vm: OutingContentViewModel by viewModel()
-    private val outingAdapter by lazy { OutingAdapter(vm, this) }
+    private val outingAdapter by lazy { OutingAdapter(vm, binding.outingRc.context) }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {

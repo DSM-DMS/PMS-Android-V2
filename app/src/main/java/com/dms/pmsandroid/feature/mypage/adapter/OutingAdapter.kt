@@ -20,8 +20,8 @@ class OutingAdapter(private val viewModel: OutingContentViewModel, context: Cont
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.date = outingList[position].date
-            binding.reason = "사유" + outingList[position].reason
-            binding.place = "장소" + outingList[position].place
+            binding.reason = "사유 - " + outingList[position].reason
+            binding.place = "장소 - " + outingList[position].place
             if (outingList[position].type == "DISEASE") {
                 binding.checkV.setBackgroundColor(red)
             } else
@@ -40,7 +40,7 @@ class OutingAdapter(private val viewModel: OutingContentViewModel, context: Cont
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OutingViewHolder {
-        val binding = ItemOutingBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemOutingBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return OutingViewHolder(binding)
     }
 
