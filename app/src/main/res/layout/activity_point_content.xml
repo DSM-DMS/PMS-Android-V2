@@ -20,7 +20,7 @@
             android:background="@color/gray_100"
             android:fontFamily="@font/nanumsquarebold"
             android:gravity="center"
-            android:text="@string/outing_content"
+            android:text="@string/point_content"
             android:textColor="@color/black"
             android:textSize="@dimen/title_bar_text_size"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,15 +1,20 @@
 package com.dms.pmsandroid.feature.mypage.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dms.pmsandroid.R
 import com.dms.pmsandroid.databinding.ItemPointBinding
 import com.dms.pmsandroid.feature.mypage.model.PointResponse
 import com.dms.pmsandroid.feature.mypage.viewmodel.PointContentViewModel
 
-class PointAdapter(private val viewModel: PointContentViewModel) :
+class PointAdapter(private val viewModel: PointContentViewModel, context: Context) :
     RecyclerView.Adapter<PointAdapter.PointViewHolder>() {
     private var pointList = ArrayList<PointResponse>()
+
+    private val blue = context.resources.getColor(R.color.blue)
+    private val red = context.resources.getColor(R.color.red)
 
     inner class PointViewHolder(private val binding: ItemPointBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -17,9 +22,12 @@ class PointAdapter(private val viewModel: PointContentViewModel) :
             binding.vm = viewModel
             binding.reason = pointList[position].reason
             binding.date = pointList[position].date
-            binding.point = pointList[position].point.toString()
-            binding.executePendingBindings()
-            binding.notifyChange()
+            if (pointList[position].type) {
+                binding.point = pointList[position].point.toString()
+                binding.pointTv.setBackgroundColor(blue)
+            } else
+                binding.point = pointList[position].point.toString()
+                binding.pointTv.setBackgroundColor(red)
         }
     }
 

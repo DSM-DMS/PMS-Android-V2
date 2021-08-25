@@ -3,6 +3,8 @@ package com.dms.pmsandroid.feature.mypage.ui.activity
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityPointContentBinding
@@ -15,7 +17,7 @@ class PointContentActivity :
     BaseActivity<ActivityPointContentBinding>(R.layout.activity_point_content) {
 
     override val vm: PointContentViewModel by viewModel()
-    private val pointAdapter by lazy { PointAdapter(vm) }
+    private val pointAdapter by lazy { PointAdapter(vm,this) }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,9 @@ class PointContentActivity :
             vm.loadPoint(number)
         }
         binding.pointRc.adapter = pointAdapter
-        binding.pointRc.addItemDecoration(HorizontalItemDecorator(25))
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = RecyclerView.VERTICAL
+        binding.pointRc.layoutManager = layoutManager
         binding.backImg.setOnClickListener {
             finish()
         }
