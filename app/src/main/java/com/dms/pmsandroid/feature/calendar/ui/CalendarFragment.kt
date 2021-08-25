@@ -43,6 +43,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCalendarView()
+        vm.loadLocalEvents()
         binding.calendarHelperTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
             helperDialog.show(requireActivity().supportFragmentManager, "HelperDialog")
         }
@@ -53,6 +54,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         mainVm.doneToken.observe(viewLifecycleOwner, {
             if (it) {
                 vm.loadSchedules()
+            }
+        })
+        mainVm.connectedInternet.observe(viewLifecycleOwner,{
+            if(!it){
+                vm.loadLocalEvents()
             }
         })
         vm.run {

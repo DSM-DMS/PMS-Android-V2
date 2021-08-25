@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
+import com.dms.pmsandroid.data.local.room.EventDatabase
+import com.dms.pmsandroid.data.local.room.RoomDotTypes
+import com.dms.pmsandroid.data.local.room.RoomEvents
 import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.model.EventModel
@@ -15,7 +18,8 @@ import io.reactivex.rxjava3.core.Observable
 
 class CalendarViewModel(
     private val calendarApiImpl: CalendarApiImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+    private val sharedPreferenceStorage: SharedPreferenceStorage,
+    private val eventDatabase: EventDatabase
 ) : ViewModel() {
 
     private val _events = MutableLiveData<MutableMap<EventKeyModel, EventModel>>(HashMap())
@@ -50,12 +54,27 @@ class CalendarViewModel(
         }
     }
 
+    fun loadLocalEvents(){
+        eventDatabase.eventDao().getLocalEvent().switchMap {
+            return@switchMap Observable.fromIterable(it)
+        }.subscribe( { event->
+            val month = event.date.substring(4,6).toInt()
+            val eventKey = EventKeyModel(month,event.date)
+            val dotType = eventDatabase.eventDao().getLocalDotTypes(event.date) as ArrayList<Int>
+            val eventModel = EventModel(event.date,dotType)
+            _events.value!![eventKey] = eventModel
+        },{},{
+            doneEventsSetting.value = true
+        })
+    }
+
     private fun parseEvents(body: JsonObject) {
+        eventDatabase.eventDao().deleteEvents()
+        eventDatabase.eventDao().deleteTypes()
         for (month in 1..12) {
             val monthEvents = body.getAsJsonObject("$month")
             val dates = monthEvents.keySet()
             var date = ""
-
 
             Observable.fromIterable(dates).map { event ->
                 date = event
@@ -161,11 +180,18 @@ class CalendarViewModel(
                         }
                     }
                     return@map EventModel(eventName, dotTypes)
-                }.filter { event -> event.eventName.isNotEmpty() }.subscribe({ eventName ->
+                }.filter { event -> event.eventName.isNotEmpty() }.subscribe{ eventName ->
                     val key = EventKeyModel(month, date)
                     _events.value!![key] = eventName
 
-                }, {}, {})
+                    val event = RoomEvents(date,eventName.eventName)
+                    eventDatabase.eventDao().insertEvent(event)
+
+                    for(dotType in eventName.dotTypes){
+                        val roomDotType = RoomDotTypes(date,dotType)
+                        eventDatabase.eventDao().insertDotType(roomDotType)
+                    }
+                }
         }
         doneEventsSetting.value = true
     }
