@@ -17,6 +17,7 @@ import com.dms.pmsandroid.feature.mypage.ui.StudentsBottomDialog
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import com.dms.pmsandroid.ui.MainViewModel
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.concurrent.timer
@@ -26,6 +27,11 @@ import kotlin.random.Random
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
+
+    private val blue = context?.resources?.getColor(R.color.blue)
+    private val red = context?.resources?.getColor(R.color.red)
+    private val green = context?.resources?.getColor(R.color.green)
+    private val gray = context?.resources?.getColor(R.color.gray)
 
     private val logoutDialog by lazy {
         LogoutDialog(vm)
@@ -81,6 +87,17 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             }
         })
         vm.run {
+
+            binding.plusLayout.setOnClickListener {
+                val number = info.value!!.students[0].studentNumber
+                (activity as MainActivity).startPoint(number)
+            }
+
+            binding.minusLayout.setOnClickListener {
+                val number = info.value!!.students[0].studentNumber
+                (activity as MainActivity).startPoint(number)
+            }
+
             binding.introOutingCv.setOnClickListener {
                 val number = info.value!!.students[0].studentNumber
                 (activity as MainActivity).startOuting(number)

@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.mypage.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,18 +19,19 @@ class PointAdapter(private val viewModel: PointContentViewModel, context: Contex
 
     inner class PointViewHolder(private val binding: ItemPointBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("ResourceAsColor")
         fun bind(position: Int) {
             binding.vm = viewModel
             binding.reason = pointList[position].reason
             binding.date = pointList[position].date
-            if (pointList[position].type==true) {
-                binding.point = pointList[position].point.toString()
+            if (pointList[position].type == true) {
+                binding.point= "+" + pointList[position].point
                 binding.pointTv.setTextColor(blue)
                 binding.contentV.setBackgroundColor(blue)
             } else
-                binding.point = pointList[position].point.toString()
+                binding.point = "-"+pointList[position].point.toString()
                 binding.pointTv.setTextColor(red)
-            binding.contentV.setBackgroundColor(red)
+                binding.contentV.setBackgroundColor(red)
         }
     }
 
@@ -46,7 +48,7 @@ class PointAdapter(private val viewModel: PointContentViewModel, context: Contex
         parent: ViewGroup,
         viewType: Int
     ): PointAdapter.PointViewHolder {
-        val binding = ItemPointBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemPointBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PointViewHolder(binding)
     }
 
