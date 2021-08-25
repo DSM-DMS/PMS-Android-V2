@@ -1,7 +1,10 @@
 package com.dms.pmsandroid.ui
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -12,14 +15,11 @@ import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubDetailActivity
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceCompanyActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.meal.fragment.MealFragment
 import com.dms.pmsandroid.feature.mypage.ui.activity.ChangePasswordActivity
-import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
 import com.dms.pmsandroid.feature.mypage.ui.activity.PointContentActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.GalleryDetailActivity
 import com.dms.pmsandroid.feature.notify.ui.activity.NoticeDetailActivity
@@ -44,7 +44,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onResume() {
         super.onResume()
-        vm.checkLogin()
+        vm.checkLogin(isNetworkConnected())
+    }
+
+    private fun isNetworkConnected():Boolean{
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        return activeNetwork?.isConnectedOrConnecting == true
     }
 
     private fun startLogin() {

@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.dms.pmsandroid.feature.calendar.model.RoomDotTypes
-import com.dms.pmsandroid.feature.calendar.model.RoomEvents
 
 @Database(
     entities = [RoomEvents::class, RoomDotTypes::class],
@@ -23,7 +21,8 @@ abstract class EventDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     EventDatabase::class.java,
-                    "local_event_database").build()
+                    "local_event_database"
+                ).fallbackToDestructiveMigration().build()
                 Companion.instance = instance
                 instance
             }

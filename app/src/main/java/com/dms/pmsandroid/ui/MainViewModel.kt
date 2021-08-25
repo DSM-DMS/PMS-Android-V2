@@ -1,6 +1,7 @@
 package com.dms.pmsandroid.ui
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.R
@@ -22,13 +23,21 @@ class MainViewModel(
 
     var activeFragment: Fragment? = null
 
-    fun checkLogin() {
+    private val _connectedInternet = MutableLiveData<Boolean>()
+    val connectedInternet: LiveData<Boolean> get() = _connectedInternet
+
+    fun checkLogin(internetConnected: Boolean) {
         if (!doneToken.value!!) {
             val email = sharedPreferenceStorage.getInfo("user_email")
             val password = sharedPreferenceStorage.getInfo("user_password")
 
             if (email.isNotBlank() || password.isNotBlank()) {
-                doLogin(email, password)
+                if (internetConnected) {
+                    doLogin(email, password)
+                } else {
+                    _connectedInternet.value = internetConnected
+                }
+
             } else {
                 needToLogin.value = Event(true)
             }

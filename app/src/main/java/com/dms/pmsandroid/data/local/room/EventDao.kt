@@ -4,22 +4,26 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.dms.pmsandroid.feature.calendar.model.RoomDotTypes
-import com.dms.pmsandroid.feature.calendar.model.RoomEvents
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.Observable
 
 @Dao
 interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEvent(event: RoomEvents): Completable
 
+    @Query("SELECT * FROM events")
+    fun getLocalEvent(): Observable<List<RoomEvents>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDotType(dotType: RoomDotTypes): Completable
+    fun insertDotType(dotType:RoomDotTypes):Completable
 
-    @Query("Select event from events WHERE date = :key")
-    fun getLocalEvent(key: String): Single<List<RoomEvents>>
+    @Query("SELECT dot_type FROM dot_types WHERE date = :date")
+    fun getLocalDotTypes(date:String):List<Int>
 
-    @Query("Select dot_type from dot_types WHERE date = :key")
-    fun getDotType(key: String): Single<List<RoomDotTypes>>
+    @Query("DELETE FROM events")
+    fun deleteEvents(): Completable
+
+    @Query("DELETE FROM dot_types")
+    fun deleteTypes(): Completable
 }
