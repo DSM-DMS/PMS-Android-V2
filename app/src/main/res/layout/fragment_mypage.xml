@@ -369,6 +369,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:background="?android:attr/selectableItemBackground"
             android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_white"
             android:fontFamily="@font/nanumsquarebold"
             android:gravity="center"

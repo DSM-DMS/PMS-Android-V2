@@ -1,6 +1,7 @@
 package com.dms.pmsandroid.feature.calendar
 
 import com.dms.pmsandroid.base.DatePickerDialog
+import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
 
@@ -18,7 +19,7 @@ class CalendarDatePickerDialog(
         val result =
             CalendarDay.from(binding.dpYearNp.value, binding.dpMonthNp.value-1, binding.dpDayNp.value)
         vm.selectedDate.value = result
-        vm.updateCurrentDate.value = true
+        vm.updateCurrentDate.value = Event(true)
         dismiss()
     }
 

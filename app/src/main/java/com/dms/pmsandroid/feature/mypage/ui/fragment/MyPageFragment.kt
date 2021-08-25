@@ -23,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.concurrent.timer
 import kotlin.concurrent.timerTask
 import kotlin.random.Random
+import com.jakewharton.rxbinding4.view.clicks
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
@@ -63,6 +64,17 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
            startAddStudentBtn.setOnClickListener {
                 showAddStudentDialog()
             }
+     
+        binding.logoutCv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
+            logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
+        }
+
+        binding.studentNameTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
+            showStudentBottomDialog()
+        }
+
+        binding.startAddStudentBtn.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
+            showAddStudentDialog()
         }
     }
 
