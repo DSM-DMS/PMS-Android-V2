@@ -6,11 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.local.room.Database
+import com.dms.pmsandroid.data.local.room.EventDatabase
 import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.model.EventModel
-import com.dms.pmsandroid.feature.calendar.model.RoomEvents
 import com.google.gson.JsonObject
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import io.reactivex.rxjava3.core.Observable
@@ -18,7 +17,7 @@ import io.reactivex.rxjava3.core.Observable
 class CalendarViewModel(
     private val calendarApiImpl: CalendarApiImpl,
     private val sharedPreferenceStorage: SharedPreferenceStorage,
-    private val database: Database
+    private val eventDatabase: EventDatabase
 ) : ViewModel() {
 
     private val _events = MutableLiveData<MutableMap<EventKeyModel, EventModel>>(HashMap())
