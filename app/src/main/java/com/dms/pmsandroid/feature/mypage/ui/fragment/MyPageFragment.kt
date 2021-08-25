@@ -124,16 +124,21 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 binding.run {
                     pluspoint = it.bonusPoint
                     minuspoint = it.minusPoint
-                    if (it.stayStatus.toString() == "4") {
+                    if (it.stayStatus == "4") {
                         binding.stayTv.setText("잔류")
-                    } else if (it.stayStatus.toString() == "1")
+                        binding.stayTv.setTextColor(R.color.blue)
+                    } else if (it.stayStatus == "1") {
                         binding.stayTv.setText("금요귀가")
-                    else if (it.stayStatus.toString() == "2") {
+                        binding.stayTv.setTextColor(R.color.red)
+                    } else if (it.stayStatus == "2") {
                         binding.stayTv.setText("토요귀가")
-                    } else if (it.stayStatus.toString() == "3") {
+                        binding.stayTv.setTextColor(R.color.green)
+                    } else if (it.stayStatus == "3") {
                         binding.stayTv.setText("토요귀사")
-                    } else
+                        binding.stayTv.setTextColor(R.color.gray)
+                    } else {
                         binding.stayTv.setText("미선택")
+                    }
 
                     if (it.mealApplied) {
                         binding.mealAppliedImg.setImageDrawable(context?.let { it1 ->
@@ -141,9 +146,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                                 it1, R.drawable.ic_baseline_radio_button_unchecked_24
                             )
                         })
-                    }else
-                        binding.mealAppliedImg.setImageDrawable(context?.let { it1->
-                            ContextCompat.getDrawable(it1,R.drawable.ic_baseline_clear_24)
+                    } else
+                        binding.mealAppliedImg.setImageDrawable(context?.let { it1 ->
+                            ContextCompat.getDrawable(it1, R.drawable.ic_baseline_clear_24)
                         })
                 }
             })

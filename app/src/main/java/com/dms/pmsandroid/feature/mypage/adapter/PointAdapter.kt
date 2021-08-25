@@ -28,10 +28,11 @@ class PointAdapter(private val viewModel: PointContentViewModel, context: Contex
                 binding.point= "+" + pointList[position].point
                 binding.pointTv.setTextColor(blue)
                 binding.contentV.setBackgroundColor(blue)
-            } else
-                binding.point = "-"+pointList[position].point.toString()
+            } else {
+                binding.point = "-" + pointList[position].point.toString()
                 binding.pointTv.setTextColor(red)
                 binding.contentV.setBackgroundColor(red)
+            }
         }
     }
 
