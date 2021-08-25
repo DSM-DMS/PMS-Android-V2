@@ -8,5 +8,5 @@ import org.koin.dsl.module
 val calendarModule = module {
     single { CalendarApiImpl() }
 
-    viewModel { CalendarViewModel(get(),get()) }
+    viewModel { CalendarViewModel(get(),get(),get()) }
 }

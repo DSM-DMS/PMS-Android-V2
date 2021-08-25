@@ -6,16 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
+import com.dms.pmsandroid.data.local.room.Database
 import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.model.EventModel
+import com.dms.pmsandroid.feature.calendar.model.RoomEvents
 import com.google.gson.JsonObject
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import io.reactivex.rxjava3.core.Observable
 
 class CalendarViewModel(
     private val calendarApiImpl: CalendarApiImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+    private val sharedPreferenceStorage: SharedPreferenceStorage,
+    private val database: Database
 ) : ViewModel() {
 
     private val _events = MutableLiveData<MutableMap<EventKeyModel, EventModel>>(HashMap())
@@ -164,6 +167,8 @@ class CalendarViewModel(
                 }.filter { event -> event.eventName.isNotEmpty() }.subscribe({ eventName ->
                     val key = EventKeyModel(month, date)
                     _events.value!![key] = eventName
+                    //val event = RoomEvents(,month,date,eventName)
+                    //database.eventDao().insertEvent()
 
                 }, {}, {})
         }
@@ -189,5 +194,7 @@ class CalendarViewModel(
     private fun addBlueDot(eventName: String): String {
         return "\n🔵 $eventName\n"
     }
+
+    //private fun getCalendarDay(date:String): CalendarDay = CalendarDay.from(date.substring(0,))
 
 }
