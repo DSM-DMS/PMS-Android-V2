@@ -22,12 +22,14 @@ class PointAdapter(private val viewModel: PointContentViewModel, context: Contex
             binding.vm = viewModel
             binding.reason = pointList[position].reason
             binding.date = pointList[position].date
-            if (pointList[position].type) {
+            if (pointList[position].type==true) {
                 binding.point = pointList[position].point.toString()
-                binding.pointTv.setBackgroundColor(blue)
+                binding.pointTv.setTextColor(blue)
+                binding.contentV.setBackgroundColor(blue)
             } else
                 binding.point = pointList[position].point.toString()
-                binding.pointTv.setBackgroundColor(red)
+                binding.pointTv.setTextColor(red)
+            binding.contentV.setBackgroundColor(red)
         }
     }
 
@@ -44,7 +46,7 @@ class PointAdapter(private val viewModel: PointContentViewModel, context: Contex
         parent: ViewGroup,
         viewType: Int
     ): PointAdapter.PointViewHolder {
-        val binding = ItemPointBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemPointBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return PointViewHolder(binding)
     }
 

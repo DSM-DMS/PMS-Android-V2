@@ -17,7 +17,7 @@ class PointContentActivity :
     BaseActivity<ActivityPointContentBinding>(R.layout.activity_point_content) {
 
     override val vm: PointContentViewModel by viewModel()
-    private val pointAdapter by lazy { PointAdapter(vm,this) }
+    private val pointAdapter by lazy { PointAdapter(vm,binding.pointRc.context) }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
