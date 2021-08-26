@@ -17,8 +17,6 @@ class MyPageAddStudentDialog(override val vm: MyPageViewModel) : BaseDialog<Dial
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.addstudentConfirmTv.setOnClickListener {

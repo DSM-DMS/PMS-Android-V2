@@ -25,7 +25,7 @@ class StudentsBottomDialog(private val fragment:MyPageFragment,private val vm:My
         binding.lifecycleOwner = this
         binding.studentAddCl.setOnClickListener {
             dismiss()
-            fragment.showAddStudentDialog
+            fragment.showAddStudentDialog()
         }
         return binding.root
     }

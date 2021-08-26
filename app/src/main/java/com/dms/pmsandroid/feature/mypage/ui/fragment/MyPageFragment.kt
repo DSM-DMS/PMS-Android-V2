@@ -36,9 +36,26 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         StudentsBottomDialog(this, vm)
     }
 
-    val showAddStudentDialog by lazy {
+    private val addStudentDialog by lazy {
         MyPageAddStudentDialog(vm)
     }
+
+    fun showStudentBottomDialog() {
+        studentsBottomDialog.show(
+            requireActivity().supportFragmentManager,
+            "studentBottomDialog"
+        )
+    }
+
+    fun showAddStudentDialog() {
+        activity?.supportFragmentManager?.let { it1 ->
+            addStudentDialog.show(
+                it1,
+                "AddStudentDialog"
+            )
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,20 +65,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
         binding.run {
 
-            fun showStudentBottomDialog() {
-                studentsBottomDialog.show(
-                    requireActivity().supportFragmentManager,
-                    "studentBottomDialog"
-                )
-            }
-
-            fun showAddStudentDialog() {
-                showAddStudentDialog.show(
-                    requireActivity().supportFragmentManager,
-                    "studentAddDialog"
-
-                )
-            }
 
             changePwCv.setOnClickListener {
                 (activity as MainActivity).startChangePassword()
