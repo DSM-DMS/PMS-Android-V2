@@ -20,19 +20,13 @@ import com.dms.pmsandroid.ui.MainViewModel
 import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.concurrent.timer
-import kotlin.concurrent.timerTask
 import kotlin.random.Random
 import com.jakewharton.rxbinding4.view.clicks
+import java.util.concurrent.TimeUnit
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     override val vm: MyPageViewModel by viewModel()
     private val mainVm: MainViewModel by inject()
-
-    private val blue = context?.resources?.getColor(R.color.blue)
-    private val red = context?.resources?.getColor(R.color.red)
-    private val green = context?.resources?.getColor(R.color.green)
-    private val gray = context?.resources?.getColor(R.color.gray)
 
     private val logoutDialog by lazy {
         LogoutDialog(vm)
@@ -40,6 +34,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
     private val studentsBottomDialog by lazy {
         StudentsBottomDialog(this, vm)
+    }
+
+    val showAddStudentDialog by lazy {
+        MyPageAddStudentDialog(vm)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,46 +48,57 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
         binding.run {
 
-           changePwCv.setOnClickListener {
+            fun showStudentBottomDialog() {
+                studentsBottomDialog.show(
+                    requireActivity().supportFragmentManager,
+                    "studentBottomDialog"
+                )
+            }
+
+            fun showAddStudentDialog() {
+                showAddStudentDialog.show(
+                    requireActivity().supportFragmentManager,
+                    "studentAddDialog"
+
+                )
+            }
+
+            changePwCv.setOnClickListener {
                 (activity as MainActivity).startChangePassword()
             }
-           logoutCv.setOnClickListener {
+            logoutCv.setOnClickListener {
                 logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
             }
 
-           studentNameTv.setOnClickListener {
+            studentNameTv.setOnClickListener {
                 showStudentBottomDialog()
             }
 
-           startAddStudentBtn.setOnClickListener {
+            startAddStudentBtn.setOnClickListener {
                 showAddStudentDialog()
             }
-     
-        binding.logoutCv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
-        }
 
-        binding.studentNameTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            showStudentBottomDialog()
-        }
+            binding.logoutCv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+                logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
+            }
 
-        binding.startAddStudentBtn.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            showAddStudentDialog()
+            binding.studentNameTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+                showStudentBottomDialog()
+            }
+
+            binding.startAddStudentBtn.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+                showAddStudentDialog()
+            }
         }
     }
 
-    var changecomment = arrayOf<String>("즐거운 DSM 생활중 입니다","코로나에 유의하세요!","다음주는 집 가는 날")
-    private fun changeComment(){
+
+    var changecomment = arrayOf<String>("즐거운 DSM 생활중 입니다", "코로나에 유의하세요!", "다음주는 집 가는 날")
+    fun changeComment() {
         val randomIndex = Random.nextInt(3)
         binding.introCommentTv.text = changecomment[randomIndex]
     }
 
-    private fun showStudentBottomDialog() {
-        studentsBottomDialog.show(
-            requireActivity().supportFragmentManager,
-            "studentBottomDialog"
-        )
-    }
 
     @SuppressLint("ResourceAsColor")
     override fun observeEvent() {
@@ -115,7 +124,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 (activity as MainActivity).startOuting(number)
             }
 
-            toastMessage.observe(viewLifecycleOwner, EventObserver{
+            toastMessage.observe(viewLifecycleOwner, EventObserver {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })
             info.observe(viewLifecycleOwner, {
@@ -174,19 +183,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                     }
                 }
             }
-        }
-    }
-
-    private val addStudentDialog by lazy {
-        MyPageAddStudentDialog(vm)
-    }
-
-    fun showAddStudentDialog() {
-        activity?.supportFragmentManager?.let { it1 ->
-            addStudentDialog.show(
-                it1,
-                "AddStudentDialog"
-            )
         }
     }
 }
