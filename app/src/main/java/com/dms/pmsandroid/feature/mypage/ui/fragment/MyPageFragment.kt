@@ -1,7 +1,8 @@
 package com.dms.pmsandroid.feature.mypage.ui.fragment
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -13,13 +14,14 @@ import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
 import com.dms.pmsandroid.feature.mypage.ui.LogoutDialog
 import com.dms.pmsandroid.feature.mypage.ui.MyPageAddStudentDialog
 import com.dms.pmsandroid.feature.mypage.ui.StudentsBottomDialog
-import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import com.dms.pmsandroid.ui.MainViewModel
-import com.jakewharton.rxbinding4.view.clicks
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.random.Random
+import com.jakewharton.rxbinding4.view.clicks
 import java.util.concurrent.TimeUnit
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
@@ -34,43 +36,74 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         StudentsBottomDialog(this, vm)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        vm.inputBasicInfo()
-        observeEvent()
-
-        binding.introOutingCv.setOnClickListener {
-            fun startOuting(number: Int) {
-                val gointent = Intent(activity, OutingContentActivity::class.java)
-                gointent.putExtra("number", number)
-                startActivity(gointent)
-            }
-        }
-
-        binding.changePwCv.setOnClickListener {
-            (activity as MainActivity).startChangePassword()
-        }
-        binding.logoutCv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
-        }
-
-        binding.studentNameTv.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            showStudentBottomDialog()
-        }
-
-        binding.startAddStudentBtn.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
-            showAddStudentDialog()
-        }
-
+    private val addStudentDialog by lazy {
+        MyPageAddStudentDialog(vm)
     }
 
-    private fun showStudentBottomDialog() {
+    fun showStudentBottomDialog() {
         studentsBottomDialog.show(
             requireActivity().supportFragmentManager,
             "studentBottomDialog"
         )
     }
 
+    fun showAddStudentDialog() {
+        activity?.supportFragmentManager?.let { it1 ->
+            addStudentDialog.show(
+                it1,
+                "AddStudentDialog"
+            )
+        }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        vm.inputBasicInfo()
+        observeEvent()
+        changeComment()
+
+        binding.run {
+
+
+            changePwCv.setOnClickListener {
+                (activity as MainActivity).startChangePassword()
+            }
+            logoutCv.setOnClickListener {
+                logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
+            }
+
+            studentNameTv.setOnClickListener {
+                showStudentBottomDialog()
+            }
+
+            startAddStudentBtn.setOnClickListener {
+                showAddStudentDialog()
+            }
+
+            binding.logoutCv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+                logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
+            }
+
+            binding.studentNameTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+                showStudentBottomDialog()
+            }
+
+            binding.startAddStudentBtn.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+                showAddStudentDialog()
+            }
+        }
+    }
+
+
+    var changecomment = arrayOf<String>("즐거운 DSM 생활중 입니다", "코로나에 유의하세요!", "다음주는 집 가는 날")
+    fun changeComment() {
+        val randomIndex = Random.nextInt(3)
+        binding.introCommentTv.text = changecomment[randomIndex]
+    }
+
+
+    @SuppressLint("ResourceAsColor")
     override fun observeEvent() {
         mainVm.doneToken.observe(viewLifecycleOwner, {
             if (it) {
@@ -78,7 +111,23 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             }
         })
         vm.run {
-            toastMessage.observe(viewLifecycleOwner, EventObserver{
+
+            binding.plusLayout.setOnClickListener {
+                val number = info.value!!.students[0].studentNumber
+                (activity as MainActivity).startPoint(number)
+            }
+
+            binding.minusLayout.setOnClickListener {
+                val number = info.value!!.students[0].studentNumber
+                (activity as MainActivity).startPoint(number)
+            }
+
+            binding.introOutingCv.setOnClickListener {
+                val number = info.value!!.students[0].studentNumber
+                (activity as MainActivity).startOuting(number)
+            }
+
+            toastMessage.observe(viewLifecycleOwner, EventObserver {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })
             info.observe(viewLifecycleOwner, {
@@ -95,20 +144,36 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 }
             })
 
-
-
-            BasicInfo.observe(viewLifecycleOwner, {
+            basicInfo.observe(viewLifecycleOwner, {
                 binding.run {
                     pluspoint = it.bonusPoint
                     minuspoint = it.minusPoint
-                    stay = it.stayStaus
-                    if (it.mealApplied == false) {
-                        binding.mealAppliedTv.setImageDrawable(context?.let { it1 ->
+                    if (it.stayStatus == "4") {
+                        binding.stayTv.setText("잔류")
+                        binding.stayTv.setTextColor(R.color.blue)
+                    } else if (it.stayStatus == "1") {
+                        binding.stayTv.setText("금요귀가")
+                        binding.stayTv.setTextColor(R.color.red)
+                    } else if (it.stayStatus == "2") {
+                        binding.stayTv.setText("토요귀가")
+                        binding.stayTv.setTextColor(R.color.green)
+                    } else if (it.stayStatus == "3") {
+                        binding.stayTv.setText("토요귀사")
+                        binding.stayTv.setTextColor(R.color.gray)
+                    } else {
+                        binding.stayTv.setText("미선택")
+                    }
+
+                    if (it.mealApplied) {
+                        binding.mealAppliedImg.setImageDrawable(context?.let { it1 ->
                             ContextCompat.getDrawable(
                                 it1, R.drawable.ic_baseline_radio_button_unchecked_24
                             )
                         })
-                    }
+                    } else
+                        binding.mealAppliedImg.setImageDrawable(context?.let { it1 ->
+                            ContextCompat.getDrawable(it1, R.drawable.ic_baseline_clear_24)
+                        })
                 }
             })
             binding.studentParentEditImg.setOnClickListener {
@@ -122,20 +187,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 }
             }
         }
-
-
-    }
-
-    private val addStudentDialog by lazy {
-        MyPageAddStudentDialog(vm)
-    }
-
-    fun showAddStudentDialog() {
-        activity?.supportFragmentManager?.let { it1 ->
-            addStudentDialog.show(
-                it1,
-                "AddStudentDialog"
-            )
-        }
     }
 }
+

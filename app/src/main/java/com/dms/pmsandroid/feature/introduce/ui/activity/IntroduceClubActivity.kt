@@ -8,6 +8,7 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityIntroduceClubBinding
 import com.dms.pmsandroid.feature.introduce.adapter.ClubAdapter
+import com.dms.pmsandroid.feature.introduce.ui.VerticalItemDecorator
 import com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,6 +22,7 @@ class IntroduceClubActivity :
         super.onCreate(savedInstanceState)
         vm.loadClubs()
         binding.introClubRc.addItemDecoration(HorizontalItemDecorator(25))
+        binding.introClubRc.addItemDecoration(VerticalItemDecorator(20))
         binding.introClubRc.adapter = clubAdapter
         binding.backBtn.setOnClickListener() {
             finish()

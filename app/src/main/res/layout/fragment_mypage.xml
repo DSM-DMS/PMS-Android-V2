@@ -25,7 +25,7 @@
 
         <variable
             name="studentNumber"
-            type="String" />
+            type="Integer" />
 
         <variable
             name="nickName"
@@ -70,6 +70,7 @@
             app:layout_constraintTop_toBottomOf="@id/student_parent_edit_img">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/plus_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -118,6 +119,7 @@
             app:layout_constraintTop_toBottomOf="@id/student_parent_edit_img">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/minus_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -244,17 +246,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
                     android:text="@{stay}"
-                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@id/this_week_condition_tv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/this_week_condition_tv" />
 
                 <ImageView
-                    android:id="@+id/meal_applied_tv"
+                    android:id="@+id/meal_applied_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
-                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@id/week_meal_tv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/week_meal_tv"
@@ -323,7 +323,6 @@
                 android:layout_margin="5dp"
                 android:fontFamily="@font/nanumsquarebold"
                 android:gravity="center"
-                android:text="@{vm.introComment}"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:visibility="@{vm.successCertifitcation?View.VISIBLE:View.GONE}"

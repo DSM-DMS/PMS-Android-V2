@@ -59,10 +59,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    fun startPoint(number : Int){
-        val gointent = Intent(this,PointContentActivity::class.java)
-        startActivity(gointent)
+    fun startOuting(number: Int){
+        val outingIntent = Intent(this,OutingContentActivity::class.java)
+        outingIntent.putExtra("number",number)
+        startActivity(outingIntent)
     }
+
+    fun startPoint(number: Int){
+        val pointIntent = Intent(this,PointContentActivity::class.java)
+        pointIntent.putExtra("number",number)
+        startActivity(pointIntent)
+    }
+
 
     fun startChangePassword(){
         val changePWIntent = Intent(this,ChangePasswordActivity::class.java)
