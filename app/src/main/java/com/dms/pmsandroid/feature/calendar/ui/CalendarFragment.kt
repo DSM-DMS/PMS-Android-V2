@@ -189,8 +189,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
         setMonthTv(date)
-        vm.selectedDate.value =
-            CalendarDay.from(date?.year ?: 2021, date?.month ?: 1, date?.day ?: 1)
+
         val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)
