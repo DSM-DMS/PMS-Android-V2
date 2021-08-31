@@ -1,9 +1,6 @@
 package com.dms.pmsandroid.di.module
 
-import android.app.Dialog
-import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.remote.mypage.MyPageApiImpl
-import com.dms.pmsandroid.feature.mypage.ui.ChangeNameDialog
 import com.dms.pmsandroid.feature.mypage.viewmodel.ChangePasswordViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel

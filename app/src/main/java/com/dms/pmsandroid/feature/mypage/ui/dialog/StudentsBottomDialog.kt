@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.mypage.ui
+package com.dms.pmsandroid.feature.mypage.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.databinding.DialogStudentsBottomBinding
+import com.dms.pmsandroid.feature.mypage.ui.StudentInflater
 import com.dms.pmsandroid.feature.mypage.ui.fragment.MyPageFragment
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

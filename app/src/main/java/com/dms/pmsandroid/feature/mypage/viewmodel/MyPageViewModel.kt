@@ -26,6 +26,8 @@ class MyPageViewModel(
 
     val newName = MutableLiveData<String>()
 
+    val studentIndex = MutableLiveData(Event(0))
+
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val nameRequest = ChangeNameRequest(newName.value!!.toString())

@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.feature.mypage.ui
+package com.dms.pmsandroid.feature.mypage.ui.dialog
 
 import android.os.Bundle
 import android.view.View
