@@ -73,13 +73,14 @@ class CalendarViewModel(
                 for (event in events) {
                     val month = event.date.substring(4, 6).toInt()
                     val eventKey = EventKeyModel(month, event.date)
-                    val dotType =
-                        eventDatabase.dotDao().getLocalDotTypes(event.date) as ArrayList<Int>
-                    val eventModel = EventModel(event.event, dotType)
-                    _events.value!![eventKey] = eventModel
-
+                    eventDatabase.dotDao().getLocalDotTypes(event.date)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io()).subscribe { dotTypes ->
+                            val eventModel = EventModel(event.event, dotTypes as ArrayList<Int>)
+                            _events.value!![eventKey] = eventModel
+                        }
+                    doneEventsSetting.value = true
                 }
-                doneEventsSetting.value = true
             }
     }
 
@@ -128,10 +129,12 @@ class CalendarViewModel(
                                 dotTypes.add(Color.RED)
                                 eventName += addRedDot(event)
                             }
+
                             "재량휴업" -> {
                                 dotTypes.add(Color.GRAY)
                                 eventName += addRedDot(event)
                             }
+
                             else -> {
                                 dotTypes.add(Color.BLUE)
                                 eventName += addBlueDot(event)
