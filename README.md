@@ -43,3 +43,4 @@
 4. Koin
 5. OkHttp
 6. Retrofit2
+7. Room
