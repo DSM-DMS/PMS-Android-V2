@@ -123,6 +123,14 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 val number = info.value!!.students[studentIndex.value!!.peekContent()].studentNumber
                 (activity as MainActivity).startOuting(number)
             }
+            studentIndex.observe(viewLifecycleOwner, EventObserver {
+                if (info.value != null) {
+                    loadStudentInfo()
+                    val student = info.value!!.students[it]
+                    binding.studentName = student.studentName
+                    binding.studentNumber = student.studentNumber
+                }
+            })
             toastMessage.observe(viewLifecycleOwner, EventObserver {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })

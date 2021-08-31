@@ -71,9 +71,9 @@ class MyPageViewModel(
     val basicInfo: LiveData<BasicInformationResponse> get() = _basicInfo
 
     fun loadStudentInfo() {
-        val number = _info.value!!.students[0].studentNumber
+        val number = _info.value!!.students[studentIndex.value?.peekContent()?:0].studentNumber
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.getUserApi(accessToken, number.toInt()).subscribe({
+        myPageApiImpl.getUserApi(accessToken, number).subscribe({
             if (it.isSuccessful) {
                 _basicInfo.value = it.body()
             }
