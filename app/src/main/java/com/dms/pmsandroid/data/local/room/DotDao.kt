@@ -7,13 +7,13 @@ import androidx.room.Query
 import io.reactivex.rxjava3.core.Single
 
 @Dao
-interface EventDao {
+interface DotDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEvent(event: List<RoomEvents>): List<Long>
+    fun insertDotType(dotType: List<RoomDotTypes>): List<Long>
 
-    @Query("SELECT * FROM events")
-    fun getLocalEvent(): Single<List<RoomEvents>>
+    @Query("SELECT dot_type FROM dot_types WHERE date = :date")
+    fun getLocalDotTypes(date: String): Single<List<Int>>
 
-    @Query("DELETE FROM events")
-    fun deleteEvents()
+    @Query("DELETE FROM dot_types")
+    fun deleteTypes()
 }

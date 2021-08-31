@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
+import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.local.room.EventDatabase
 import com.dms.pmsandroid.data.local.room.RoomDotTypes
@@ -14,7 +15,12 @@ import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.model.EventModel
 import com.google.gson.JsonObject
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CalendarViewModel(
     private val calendarApiImpl: CalendarApiImpl,
@@ -27,7 +33,7 @@ class CalendarViewModel(
 
     val selectedDate = MutableLiveData<CalendarDay>()
 
-    val doneEventsSetting = MutableLiveData(false)
+    val doneEventsSetting = SingleLiveEvent<Boolean>()
 
     val updateCurrentDate = MutableLiveData(Event(false))
 
@@ -38,39 +44,50 @@ class CalendarViewModel(
         updateCurrentDate.value = Event(true)
     }
 
-    fun beforeMonth(){
+    fun beforeMonth() {
         val setDate = selectedDate.value
-        selectedDate.value = if (setDate!!.month<1) CalendarDay.from(setDate.year-1,11,1)
-        else CalendarDay.from(setDate.year,setDate.month-1,1)
+        selectedDate.value = if (setDate!!.month < 1) CalendarDay.from(setDate.year - 1, 11, 1)
+        else CalendarDay.from(setDate.year, setDate.month - 1, 1)
         updateCurrentDate.value = Event(true)
     }
 
     fun loadSchedules() {
+
+
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         calendarApiImpl.scheduleApi(accessToken).subscribe { response ->
             if (response.isSuccessful) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    eventDatabase.eventDao().deleteEvents()
+                    eventDatabase.dotDao().deleteTypes()
+                }
                 parseEvents(response.body()!!)
+
             }
         }
     }
 
-    fun loadLocalEvents(){
-        eventDatabase.eventDao().getLocalEvent().switchMap {
-            return@switchMap Observable.fromIterable(it)
-        }.subscribe( { event->
-            val month = event.date.substring(4,6).toInt()
-            val eventKey = EventKeyModel(month,event.date)
-            val dotType = eventDatabase.eventDao().getLocalDotTypes(event.date) as ArrayList<Int>
-            val eventModel = EventModel(event.date,dotType)
-            _events.value!![eventKey] = eventModel
-        },{},{
-            doneEventsSetting.value = true
-        })
+    fun loadLocalEvents() {
+        eventDatabase.eventDao().getLocalEvent().observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io()).subscribe { events ->
+                for (event in events) {
+                    val month = event.date.substring(4, 6).toInt()
+                    val eventKey = EventKeyModel(month, event.date)
+                    eventDatabase.dotDao().getLocalDotTypes(event.date)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io()).subscribe { dotTypes ->
+                            val eventModel = EventModel(event.event, dotTypes as ArrayList<Int>)
+                            _events.value!![eventKey] = eventModel
+                        }
+                    doneEventsSetting.value = true
+                }
+            }
     }
 
     private fun parseEvents(body: JsonObject) {
-        eventDatabase.eventDao().deleteEvents()
-        eventDatabase.eventDao().deleteTypes()
+
+        val eventsList = ArrayList<RoomEvents>()
+        val dotList = ArrayList<RoomDotTypes>()
         for (month in 1..12) {
             val monthEvents = body.getAsJsonObject("$month")
             val dates = monthEvents.keySet()
@@ -91,7 +108,6 @@ class CalendarViewModel(
                         val event = it[pos].toString().substring(1, it[pos].toString().length - 1)
                         when (event) {
                             "토요휴업일" -> {
-
                             }
 
                             "의무귀가" -> {
@@ -99,80 +115,26 @@ class CalendarViewModel(
                                 eventName += addHomeDot()
                             }
 
-                            "중간고사" -> {
+                            "중간고사", "기말고사" -> {
                                 dotTypes.add(Color.BLACK)
-                                eventName += addExamDot("중간고사")
-                            }
-                            "기말고사" -> {
-                                dotTypes.add(Color.BLACK)
-                                eventName += addExamDot("기말고사")
+                                eventName += addExamDot(event)
                             }
 
-                            "여름방학" -> {
+                            "여름방학", "겨울방학", "여름방학식", "겨울방학식" -> {
                                 dotTypes.add(Color.YELLOW)
-                                eventName += addYellowDot("여름방학")
-                            }
-                            "겨울방학" -> {
-                                dotTypes.add(Color.YELLOW)
-                                eventName += addYellowDot("겨울방학")
-                            }
-                            "여름방학식" -> {
-                                dotTypes.add(Color.YELLOW)
-                                eventName += addYellowDot("여름방학식")
-                            }
-                            "겨울방학식" -> {
-                                dotTypes.add(Color.YELLOW)
-                                eventName += addYellowDot("겨울방학식")
+                                eventName += addYellowDot(event)
                             }
 
-                            "신정" -> {
+                            "신정", "어린이날", "석가탄신일", "현충일", "광복절", "대체공휴일", "추석연휴", "추석", "개천절", "한글날", "기독탄신일(성탄절)" -> {
                                 dotTypes.add(Color.RED)
-                                eventName += addRedDot("신정")
+                                eventName += addRedDot(event)
                             }
-                            "어린이날" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("어린이날")
-                            }
-                            "석가탄신일" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("석가탄신일")
-                            }
-                            "현충일" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("현충일")
-                            }
-                            "광복절" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("광복절")
-                            }
-                            "대체공휴일" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("대체공휴일")
-                            }
+
                             "재량휴업" -> {
                                 dotTypes.add(Color.GRAY)
-                                eventName += addRedDot("재량휴업")
+                                eventName += addRedDot(event)
                             }
-                            "추석연휴" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("추석연휴")
-                            }
-                            "추석" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("추석")
-                            }
-                            "개천절" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("개천절")
-                            }
-                            "한글날" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("한글날")
-                            }
-                            "기독탄신일(성탄절)" -> {
-                                dotTypes.add(Color.RED)
-                                eventName += addRedDot("기독탄신일(성탄절)")
-                            }
+
                             else -> {
                                 dotTypes.add(Color.BLUE)
                                 eventName += addBlueDot(event)
@@ -180,18 +142,22 @@ class CalendarViewModel(
                         }
                     }
                     return@map EventModel(eventName, dotTypes)
-                }.filter { event -> event.eventName.isNotEmpty() }.subscribe{ eventName ->
+                }.filter { event -> event.eventName.isNotEmpty() }.subscribe { eventName ->
                     val key = EventKeyModel(month, date)
                     _events.value!![key] = eventName
 
-                    val event = RoomEvents(date,eventName.eventName)
-                    eventDatabase.eventDao().insertEvent(event)
+                    val event = RoomEvents(date, eventName.eventName)
+                    eventsList.add(event)
 
-                    for(dotType in eventName.dotTypes){
-                        val roomDotType = RoomDotTypes(date,dotType)
-                        eventDatabase.eventDao().insertDotType(roomDotType)
+                    for (dotType in eventName.dotTypes) {
+                        val roomDotType = RoomDotTypes(date, dotType)
+                        dotList.add(roomDotType)
                     }
                 }
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            eventDatabase.eventDao().insertEvent(eventsList)
+            eventDatabase.dotDao().insertDotType(dotList)
         }
         doneEventsSetting.value = true
     }

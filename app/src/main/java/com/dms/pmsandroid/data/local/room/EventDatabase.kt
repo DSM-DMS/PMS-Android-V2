@@ -12,17 +12,18 @@ import androidx.room.RoomDatabase
 )
 abstract class EventDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
+    abstract fun dotDao(): DotDao
 
     companion object {
         @Volatile
         private var instance: EventDatabase? = null
-        fun getInstance(context: Context): EventDatabase? {
+        fun getInstance(context: Context): EventDatabase {
             return instance ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     EventDatabase::class.java,
                     "local_event_database"
-                ).fallbackToDestructiveMigration().build()
+                ).build()
                 Companion.instance = instance
                 instance
             }

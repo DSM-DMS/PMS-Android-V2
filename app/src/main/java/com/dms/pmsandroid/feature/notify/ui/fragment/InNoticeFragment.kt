@@ -13,6 +13,7 @@ import com.dms.pmsandroid.feature.notify.adapter.NoticeAdapter
 import com.dms.pmsandroid.feature.notify.ui.CheckDialog
 import com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel
 import com.dms.pmsandroid.ui.MainActivity
+import com.dms.pmsandroid.ui.MainViewModel
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
@@ -21,6 +22,8 @@ import java.util.concurrent.TimeUnit
 
 class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment_in_notice) {
     override val vm: NotifyViewModel by sharedViewModel()
+
+    private val mainVm: MainViewModel by inject()
 
     private val sharedPreferenceStorage : SharedPreferenceStorage by inject()
 
@@ -49,10 +52,12 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
             sharedPreferenceStorage.saveInfo("true","checked_notify")
         }
 
-        vm.getNoticeList(0)
     }
 
     override fun observeEvent() {
+        mainVm.doneToken.observe(viewLifecycleOwner,{
+            vm.getNoticeList(0)
+        })
         vm.run {
             noticeList.observe(viewLifecycleOwner, {
                 noticeAdapter.setItems(it)
