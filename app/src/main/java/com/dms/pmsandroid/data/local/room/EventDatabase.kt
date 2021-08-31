@@ -22,7 +22,7 @@ abstract class EventDatabase : RoomDatabase() {
                     context.applicationContext,
                     EventDatabase::class.java,
                     "local_event_database"
-                ).fallbackToDestructiveMigration().build()
+                ).build()
                 Companion.instance = instance
                 instance
             }

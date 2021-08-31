@@ -43,7 +43,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCalendarView()
-        vm.loadLocalEvents()
+        vm.loadSchedules()
         binding.calendarHelperTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
             helperDialog.show(requireActivity().supportFragmentManager, "HelperDialog")
         }
@@ -111,7 +111,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                     )
                 )
             }, {
-
+                binding.calendarShimmerContainer.hideShimmer()
             }, {
                 binding.calendarView.addDecorators(decorators)
                 binding.calendarShimmerContainer.hideShimmer()
