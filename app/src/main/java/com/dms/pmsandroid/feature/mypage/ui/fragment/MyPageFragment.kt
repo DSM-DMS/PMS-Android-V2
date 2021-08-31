@@ -34,7 +34,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         StudentsBottomDialog(this, vm)
     }
 
-    fun showStudentBottomDialog() {
+    private fun showStudentBottomDialog() {
         studentsBottomDialog.show(
             requireActivity().supportFragmentManager,
             "studentBottomDialog"
@@ -148,16 +148,16 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                     changeComment((it.minusPoint ?: "0").toInt())
                     if (it.stayStatus == "4") {
                         binding.stayTv.setText("잔류")
-                        binding.stayTv.setTextColor(R.color.blue)
+                        binding.stayTv.setTextColor(requireContext().getColor(R.color.blue))
                     } else if (it.stayStatus == "1") {
                         binding.stayTv.setText("금요귀가")
-                        binding.stayTv.setTextColor(R.color.red)
+                        binding.stayTv.setTextColor(requireContext().getColor(R.color.red))
                     } else if (it.stayStatus == "2") {
                         binding.stayTv.setText("토요귀가")
-                        binding.stayTv.setTextColor(R.color.green)
+                        binding.stayTv.setTextColor(requireContext().getColor(R.color.green))
                     } else if (it.stayStatus == "3") {
                         binding.stayTv.setText("토요귀사")
-                        binding.stayTv.setTextColor(R.color.gray)
+                        binding.stayTv.setTextColor(requireContext().getColor(R.color.gray))
                     } else {
                         binding.stayTv.setText("미선택")
                     }
