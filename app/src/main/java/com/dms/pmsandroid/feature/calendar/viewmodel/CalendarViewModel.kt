@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
+import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.local.room.EventDatabase
 import com.dms.pmsandroid.data.local.room.RoomDotTypes
@@ -32,7 +33,7 @@ class CalendarViewModel(
 
     val selectedDate = MutableLiveData<CalendarDay>()
 
-    val doneEventsSetting = MutableLiveData(false)
+    val doneEventsSetting = SingleLiveEvent<Boolean>()
 
     val updateCurrentDate = MutableLiveData(Event(false))
 
@@ -51,15 +52,17 @@ class CalendarViewModel(
     }
 
     fun loadSchedules() {
-        CoroutineScope(Dispatchers.IO).launch {
-            eventDatabase.eventDao().deleteEvents()
-            eventDatabase.eventDao().deleteTypes()
-        }
+
 
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         calendarApiImpl.scheduleApi(accessToken).subscribe { response ->
             if (response.isSuccessful) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    eventDatabase.eventDao().deleteEvents()
+                    eventDatabase.dotDao().deleteTypes()
+                }
                 parseEvents(response.body()!!)
+
             }
         }
     }
@@ -70,12 +73,11 @@ class CalendarViewModel(
                 for (event in events) {
                     val month = event.date.substring(4, 6).toInt()
                     val eventKey = EventKeyModel(month, event.date)
-                    CoroutineScope(Dispatchers.IO).launch {
-                        val dotType =
-                            eventDatabase.eventDao().getLocalDotTypes(event.date) as ArrayList<Int>
-                        val eventModel = EventModel(event.event, dotType)
-                        _events.value!![eventKey] = eventModel
-                    }
+                    val dotType =
+                        eventDatabase.dotDao().getLocalDotTypes(event.date) as ArrayList<Int>
+                    val eventModel = EventModel(event.event, dotType)
+                    _events.value!![eventKey] = eventModel
+
                 }
                 doneEventsSetting.value = true
             }
@@ -105,7 +107,6 @@ class CalendarViewModel(
                         val event = it[pos].toString().substring(1, it[pos].toString().length - 1)
                         when (event) {
                             "토요휴업일" -> {
-
                             }
 
                             "의무귀가" -> {
@@ -115,21 +116,21 @@ class CalendarViewModel(
 
                             "중간고사", "기말고사" -> {
                                 dotTypes.add(Color.BLACK)
-                                eventName += addExamDot("중간고사")
+                                eventName += addExamDot(event)
                             }
 
                             "여름방학", "겨울방학", "여름방학식", "겨울방학식" -> {
                                 dotTypes.add(Color.YELLOW)
-                                eventName += addYellowDot("여름방학")
+                                eventName += addYellowDot(event)
                             }
 
                             "신정", "어린이날", "석가탄신일", "현충일", "광복절", "대체공휴일", "추석연휴", "추석", "개천절", "한글날", "기독탄신일(성탄절)" -> {
                                 dotTypes.add(Color.RED)
-                                eventName += addRedDot("신정")
+                                eventName += addRedDot(event)
                             }
                             "재량휴업" -> {
                                 dotTypes.add(Color.GRAY)
-                                eventName += addRedDot("재량휴업")
+                                eventName += addRedDot(event)
                             }
                             else -> {
                                 dotTypes.add(Color.BLUE)
@@ -153,7 +154,7 @@ class CalendarViewModel(
         }
         CoroutineScope(Dispatchers.IO).launch {
             eventDatabase.eventDao().insertEvent(eventsList)
-            eventDatabase.eventDao().insertDotType(dotList)
+            eventDatabase.dotDao().insertDotType(dotList)
         }
         doneEventsSetting.value = true
     }

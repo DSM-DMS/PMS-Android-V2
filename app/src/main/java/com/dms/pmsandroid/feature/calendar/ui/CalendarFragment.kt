@@ -56,16 +56,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 vm.loadSchedules()
             }
         })
-        mainVm.connectedInternet.observe(viewLifecycleOwner,{
-            if(!it){
+        mainVm.connectedInternet.observe(viewLifecycleOwner, {
+            if (!it) {
                 vm.loadLocalEvents()
             }
         })
         vm.run {
             doneEventsSetting.observe(viewLifecycleOwner, {
-                if (it) {
-                    initEventTv()
-                }
+                initEventTv()
             })
             selectedDate.observe(viewLifecycleOwner, {
                 setMonthTv(it)
