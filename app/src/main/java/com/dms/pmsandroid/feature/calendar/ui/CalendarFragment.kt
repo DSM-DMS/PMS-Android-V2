@@ -43,6 +43,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCalendarView()
+        vm.loadSchedules()
         binding.calendarHelperTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
             helperDialog.show(requireActivity().supportFragmentManager, "HelperDialog")
         }
@@ -55,11 +56,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 vm.loadSchedules()
             }
         })
+        mainVm.connectedInternet.observe(viewLifecycleOwner, {
+            if (!it) {
+                vm.loadLocalEvents()
+            }
+        })
         vm.run {
             doneEventsSetting.observe(viewLifecycleOwner, {
-                if (it) {
-                    initEventTv()
-                }
+                initEventTv()
             })
             selectedDate.observe(viewLifecycleOwner, {
                 setMonthTv(it)
@@ -105,7 +109,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                     )
                 )
             }, {
-
+                binding.calendarShimmerContainer.hideShimmer()
             }, {
                 binding.calendarView.addDecorators(decorators)
                 binding.calendarShimmerContainer.hideShimmer()
@@ -183,8 +187,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
         setMonthTv(date)
-        vm.selectedDate.value =
-            CalendarDay.from(date?.year ?: 2021, date?.month ?: 1, date?.day ?: 1)
+
         val month = (date?.month ?: 0) + 1
         if (setMonth[month] != true) {
             loadEvents(month)
