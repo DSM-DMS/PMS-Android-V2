@@ -28,6 +28,13 @@ class MyPageViewModel(
 
     val studentIndex = MutableLiveData(Event(0))
 
+    private val _basicInfo = MutableLiveData<BasicInformationResponse>()
+    val basicInfo: LiveData<BasicInformationResponse> get() = _basicInfo
+
+    init {
+        inputBasicInfo()
+    }
+
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val nameRequest = ChangeNameRequest(newName.value!!.toString())
@@ -67,8 +74,7 @@ class MyPageViewModel(
     }
 
 
-    private val _basicInfo = MutableLiveData<BasicInformationResponse>()
-    val basicInfo: LiveData<BasicInformationResponse> get() = _basicInfo
+
 
     fun loadStudentInfo() {
         val number = _info.value!!.students[studentIndex.value?.peekContent()?:0].studentNumber
@@ -88,7 +94,9 @@ class MyPageViewModel(
                 _info.value = it.body()
                 if (it.body()!!.students.isNotEmpty()) {
                     successCertifitcation.value = true
-                    loadStudentInfo()
+                    if(basicInfo.value==null){
+                        loadStudentInfo()
+                    }
                 }
             }
         }, {

@@ -53,9 +53,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm.inputBasicInfo()
-        observeEvent()
-
         binding.run {
 
             changePwCv.setOnClickListener {
