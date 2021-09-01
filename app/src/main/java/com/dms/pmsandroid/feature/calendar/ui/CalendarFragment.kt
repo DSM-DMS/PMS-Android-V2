@@ -96,11 +96,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
         setMonth[month] = true
         setMonth[month + 1] = true
 
-        Observable.fromIterable(key).filter { k -> k.month == month || k.month == month + 1 }
+        Observable.fromIterable(key).filter { key -> key.month == month || key.month == month + 1 }
             .filter { v -> events[v] != null }
-            .observeOn(AndroidSchedulers.mainThread()).subscribeOn(
-                Schedulers.io()
-            ).subscribe({ k ->
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({ k ->
                 decorators.add(
                     EventDecorator(
                         k.day,
@@ -114,11 +114,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 binding.calendarView.addDecorators(decorators)
                 binding.calendarShimmerContainer.hideShimmer()
             })
-    }
-
-
-    private val calendarDatePickerDialog by lazy {
-        CalendarDatePickerDialog(vm)
     }
 
     @SuppressLint("SetTextI18n")
@@ -145,7 +140,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
             setOnMonthChangedListener(this@CalendarFragment)
         }
         binding.calendarMonthTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
-            calendarDatePickerDialog.show(
+            CalendarDatePickerDialog(vm).show(
                 requireActivity().supportFragmentManager,
                 "CalendarDatePickerDialog"
             )

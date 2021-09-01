@@ -6,5 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "events")
 data class RoomEvents(
     @PrimaryKey val date: String,
-    val event: String
+    val event: String,
+    val dot:String
 )

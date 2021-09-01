@@ -8,7 +8,6 @@ import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.local.room.EventDatabase
-import com.dms.pmsandroid.data.local.room.RoomDotTypes
 import com.dms.pmsandroid.data.local.room.RoomEvents
 import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
@@ -52,17 +51,13 @@ class CalendarViewModel(
     }
 
     fun loadSchedules() {
-
-
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         calendarApiImpl.scheduleApi(accessToken).subscribe { response ->
             if (response.isSuccessful) {
                 CoroutineScope(Dispatchers.IO).launch {
                     eventDatabase.eventDao().deleteEvents()
-                    eventDatabase.dotDao().deleteTypes()
                 }
                 parseEvents(response.body()!!)
-
             }
         }
     }
@@ -71,23 +66,18 @@ class CalendarViewModel(
         eventDatabase.eventDao().getLocalEvent().observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io()).subscribe { events ->
                 for (event in events) {
-                    val month = event.date.substring(4, 6).toInt()
+                    val month = event.date.substring(5, 7).toInt()
                     val eventKey = EventKeyModel(month, event.date)
-                    eventDatabase.dotDao().getLocalDotTypes(event.date)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io()).subscribe { dotTypes ->
-                            val eventModel = EventModel(event.event, dotTypes as ArrayList<Int>)
-                            _events.value!![eventKey] = eventModel
-                        }
-                    doneEventsSetting.value = true
+                    val dotTypes = event.dot.split(",").map { it.trim().toInt() }
+                    val eventModel = EventModel(event.event, dotTypes as ArrayList<Int>)
+                    _events.value!![eventKey] = eventModel
                 }
+                doneEventsSetting.value = true
             }
     }
 
     private fun parseEvents(body: JsonObject) {
-
         val eventsList = ArrayList<RoomEvents>()
-        val dotList = ArrayList<RoomDotTypes>()
         for (month in 1..12) {
             val monthEvents = body.getAsJsonObject("$month")
             val dates = monthEvents.keySet()
@@ -145,19 +135,13 @@ class CalendarViewModel(
                 }.filter { event -> event.eventName.isNotEmpty() }.subscribe { eventName ->
                     val key = EventKeyModel(month, date)
                     _events.value!![key] = eventName
-
-                    val event = RoomEvents(date, eventName.eventName)
+                    val dotTypes = eventName.dotTypes.joinToString()
+                    val event = RoomEvents(date, eventName.eventName, dotTypes)
                     eventsList.add(event)
-
-                    for (dotType in eventName.dotTypes) {
-                        val roomDotType = RoomDotTypes(date, dotType)
-                        dotList.add(roomDotType)
-                    }
                 }
         }
         CoroutineScope(Dispatchers.IO).launch {
             eventDatabase.eventDao().insertEvent(eventsList)
-            eventDatabase.dotDao().insertDotType(dotList)
         }
         doneEventsSetting.value = true
     }

@@ -13,21 +13,25 @@ class CalendarDatePickerDialog(
 
     override var day = date!!.day
     override var year = date!!.year
-    override var month = date!!.month+1
+    override var month = date!!.month + 1
 
     override fun onCompleteClicked() {
         val result =
-            CalendarDay.from(binding.dpYearNp.value, binding.dpMonthNp.value-1, binding.dpDayNp.value)
+            CalendarDay.from(
+                binding.dpYearNp.value,
+                binding.dpMonthNp.value - 1,
+                binding.dpDayNp.value
+            )
         vm.selectedDate.value = result
         vm.updateCurrentDate.value = Event(true)
         dismiss()
     }
 
     override fun observeEvent() {
-        vm.selectedDate.observe(viewLifecycleOwner,{
+        vm.selectedDate.observe(viewLifecycleOwner, {
             day = it.day
             year = it.year
-            month = it.month+1
+            month = it.month + 1
         })
     }
 }

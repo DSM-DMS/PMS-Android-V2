@@ -11,7 +11,7 @@ interface NotifyApi {
         @Header("Authorization") accessToken: String,
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Single<Response<List<NoticeListModel>>>
+    ): Single<Response<NoticeResponseModel>>
 
     @GET("/notice/{notice_id}")
     fun getNoticeDetail(
@@ -24,21 +24,21 @@ interface NotifyApi {
         @Header("Authorization") accessToken: String,
         @Query("q") keyWord: String,
         @Query("page") page: Int
-    ): Single<Response<List<NoticeListModel>>>
+    ): Single<Response<NoticeResponseModel>>
 
     @GET("/notice/news")
     fun getHomeNotice(
         @Header("Authorization") accessToken: String,
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Single<Response<List<NoticeListModel>>>
+    ): Single<Response<NoticeResponseModel>>
 
     @GET("/notice/news/search")
     fun searchHome(
         @Header("Authorization") accessToken: String,
         @Query("q") keyWord: String,
         @Query("page") page: Int
-    ): Single<Response<List<NoticeListModel>>>
+    ): Single<Response<NoticeResponseModel>>
 
     @GET("/gallery")
     fun getGallery(

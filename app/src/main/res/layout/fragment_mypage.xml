@@ -28,14 +28,6 @@
             type="Integer" />
 
         <variable
-            name="nickName"
-            type="String" />
-
-        <variable
-            name="stay"
-            type="String" />
-
-        <variable
             name="mealApplied"
             type="boolean" />
 
@@ -92,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{pluspoint}"
+                    android:text="@{vm.studentInfo.bonusPoint}"
                     android:textSize="@dimen/point_int"
                     app:layout_constraintBottom_toTopOf="@+id/student_pluspoint_title_tv"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{minuspoint}"
+                    android:text="@{vm.studentInfo.minusPoint}"
                     android:textSize="@dimen/point_int"
                     app:layout_constraintBottom_toTopOf="@+id/student_minuspoint_title_tv"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +161,7 @@
             android:layout_marginTop="40dp"
             android:drawableEnd="@drawable/ic_baseline_create_24"
             android:fontFamily="@font/nanumsquareextrabold"
-            android:text="@{nickName}"
+            android:text="@{vm.info.name}"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -245,10 +237,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="40dp"
-                    android:text="@{stay}"
+                    android:fontFamily="@font/nanumsquarebold"
                     app:layout_constraintBottom_toBottomOf="@id/this_week_condition_tv"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/this_week_condition_tv" />
+                    app:layout_constraintTop_toTopOf="@id/this_week_condition_tv"
+                    tools:text="잔류" />
 
                 <ImageView
                     android:id="@+id/meal_applied_img"

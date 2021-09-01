@@ -52,7 +52,7 @@ class HomeNoticeFragment : BaseFragment<FragmentHomeNoticeBinding>(R.layout.frag
     override fun observeEvent() {
         vm.run {
             homeList.observe(viewLifecycleOwner,{
-                homeAdapter.setItems(it)
+                homeAdapter.setItems(it.notices)
             })
             homePage.observe(viewLifecycleOwner,{
                 homeLayoutManager.scrollToPositionWithOffset(0,0)
