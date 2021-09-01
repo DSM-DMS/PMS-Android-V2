@@ -58,15 +58,14 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             changePwCv.setOnClickListener {
                 (activity as MainActivity).startChangePassword()
             }
-            startAddStudentBtn.setOnClickListener {
-                showAddStudentDialog()
-            }
             logoutCv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
                 logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
             }
 
             studentNameTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
-                showStudentBottomDialog()
+                if(requireActivity().supportFragmentManager.findFragmentByTag("studentBottomDialog")?.isAdded != false){
+                    showStudentBottomDialog()
+                }
             }
 
             startAddStudentBtn.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
@@ -107,23 +106,23 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         vm.run {
 
             binding.plusLayout.setOnClickListener {
-                val number = info.value!!.students[studentIndex.value!!.peekContent()].studentNumber
+                val number = students.value?.get(studentIndex.value!!.peekContent())?.studentNumber?:0
                 (activity as MainActivity).startPoint(number)
             }
 
             binding.minusLayout.setOnClickListener {
-                val number = info.value!!.students[studentIndex.value!!.peekContent()].studentNumber
+                val number = students.value?.get(studentIndex.value!!.peekContent())?.studentNumber?:0
                 (activity as MainActivity).startPoint(number)
             }
 
             binding.introOutingCv.setOnClickListener {
-                val number = info.value!!.students[studentIndex.value!!.peekContent()].studentNumber
+                val number = students.value?.get(studentIndex.value!!.peekContent())?.studentNumber?:0
                 (activity as MainActivity).startOuting(number)
             }
             studentIndex.observe(viewLifecycleOwner, EventObserver {
                 if (info.value != null) {
                     loadStudentInfo()
-                    val student = info.value!!.students[it]
+                    val student = students.value!![it]
                     binding.studentName = student.studentName
                     binding.studentNumber = student.studentNumber
                 }
@@ -135,9 +134,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 binding.run {
                     nickName = it.name
                     if (!it.students.isNullOrEmpty()) {
-                        val student = it.students[studentIndex.value!!.peekContent()]
+                        val student = students.value!![studentIndex.value!!.peekContent()]
                         studentNumber = student.studentNumber
                         studentName = student.studentName
+                        successCertifitcation.value = true
                     } else {
                         successCertifitcation.value = false
                         studentNumber = null

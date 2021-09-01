@@ -56,7 +56,7 @@ class NotifyViewModel(
     fun getNoticeList(next: Int) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeList(accessToken, (noticePage.value!! + next) - 1, 6)
-            .subscribe { response ->
+            .subscribe ({ response ->
                 if (response.isSuccessful) {
                     if (response.body()!!.isNotEmpty()) {
                         if (next > 0) {
@@ -65,7 +65,9 @@ class NotifyViewModel(
                         _noticeList.value = response.body()
                     }
                 }
-            }
+            },{
+                it
+            })
     }
 
     fun searchNotice(keyword: String) {

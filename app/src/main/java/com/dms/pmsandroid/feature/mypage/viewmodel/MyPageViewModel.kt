@@ -24,16 +24,15 @@ class MyPageViewModel(
     private val _info = MutableLiveData<UserListResponse>()
     val info: LiveData<UserListResponse> get() = _info
 
+    private val _students = MutableLiveData<List<StudentResponse>>()
+    val students: LiveData<List<StudentResponse>> get() = _students
+
     val newName = MutableLiveData<String>()
 
     val studentIndex = MutableLiveData(Event(0))
 
     private val _basicInfo = MutableLiveData<BasicInformationResponse>()
     val basicInfo: LiveData<BasicInformationResponse> get() = _basicInfo
-
-    init {
-        inputBasicInfo()
-    }
 
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
@@ -74,10 +73,8 @@ class MyPageViewModel(
     }
 
 
-
-
     fun loadStudentInfo() {
-        val number = _info.value!!.students[studentIndex.value?.peekContent()?:0].studentNumber
+        val number = _info.value!!.students[studentIndex.value?.peekContent() ?: 0].studentNumber
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserApi(accessToken, number).subscribe({
             if (it.isSuccessful) {
@@ -92,9 +89,11 @@ class MyPageViewModel(
         myPageApiImpl.getBasicInfo(accessToken).subscribe({
             if (it.isSuccessful) {
                 _info.value = it.body()
+                _students.value = (it.body()?.students as MutableList<StudentResponse>).sortedWith(
+                    compareBy { student -> student.studentNumber })
                 if (it.body()!!.students.isNotEmpty()) {
                     successCertifitcation.value = true
-                    if(basicInfo.value==null){
+                    if (basicInfo.value == null) {
                         loadStudentInfo()
                     }
                 }
