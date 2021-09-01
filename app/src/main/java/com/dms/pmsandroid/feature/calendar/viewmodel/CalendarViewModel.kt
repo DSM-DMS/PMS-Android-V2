@@ -66,7 +66,7 @@ class CalendarViewModel(
         eventDatabase.eventDao().getLocalEvent().observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io()).subscribe { events ->
                 for (event in events) {
-                    val month = (event.date.substring(4, 6).toInt())+1
+                    val month = event.date.substring(5, 7).toInt()
                     val eventKey = EventKeyModel(month, event.date)
                     val dotTypes = event.dot.split(",").map { it.trim().toInt() }
                     val eventModel = EventModel(event.event, dotTypes as ArrayList<Int>)
