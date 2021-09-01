@@ -140,6 +140,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
             studentIndex.observe(viewLifecycleOwner, EventObserver {
                 vm.loadStudentInfo(it)
+                vm.saveIndex(it)
                 if (students.value != null) {
                     changeStudent(students.value!![it])
                 }

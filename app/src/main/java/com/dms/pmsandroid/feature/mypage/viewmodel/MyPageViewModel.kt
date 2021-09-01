@@ -35,6 +35,9 @@ class MyPageViewModel(
     private val _studentInfo = MutableLiveData<BasicInformationResponse>()
     val studentInfo: LiveData<BasicInformationResponse> get() = _studentInfo
 
+    init {
+        studentIndex.value = Event(sharedPreferenceStorage.getIntInfo("student_index"))
+    }
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val nameRequest = ChangeNameRequest(newName.value!!.toString())
@@ -123,5 +126,8 @@ class MyPageViewModel(
         }
     }
 
+    fun saveIndex(index: Int){
+        sharedPreferenceStorage.saveInfo(index,"student_index")
+    }
 
 }
