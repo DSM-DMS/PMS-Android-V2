@@ -8,6 +8,7 @@ import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.GalleryListContent
 import com.dms.pmsandroid.feature.notify.model.NoticeListModel
+import com.dms.pmsandroid.feature.notify.model.NoticeResponseModel
 
 class NotifyViewModel(
     private val notifyApiImpl: NotifyApiImpl,
@@ -25,8 +26,8 @@ class NotifyViewModel(
     private val _galleryList = MutableLiveData<List<GalleryListContent>>()
     val galleryList: LiveData<List<GalleryListContent>> get() = _galleryList
 
-    private val _noticeList = MutableLiveData<List<NoticeListModel>>()
-    val noticeList: LiveData<List<NoticeListModel>> get() = _noticeList
+    private val _noticeList = MutableLiveData<NoticeResponseModel>()
+    val noticeList: LiveData<NoticeResponseModel> get() = _noticeList
 
     private val _homeList = MutableLiveData<List<NoticeListModel>>()
     val homeList: LiveData<List<NoticeListModel>> get() = _homeList
@@ -56,18 +57,16 @@ class NotifyViewModel(
     fun getNoticeList(next: Int) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeList(accessToken, (noticePage.value!! + next) - 1, 6)
-            .subscribe ({ response ->
+            .subscribe{ response ->
                 if (response.isSuccessful) {
-                    if (response.body()!!.isNotEmpty()) {
+                    if (response.body()!=null) {
                         if (next > 0) {
                             _noticePage.value = _noticePage.value!! + 1
                         }
                         _noticeList.value = response.body()
                     }
                 }
-            },{
-                it
-            })
+            }
     }
 
     fun searchNotice(keyword: String) {

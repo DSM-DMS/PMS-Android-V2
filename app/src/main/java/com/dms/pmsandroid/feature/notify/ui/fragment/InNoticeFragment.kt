@@ -60,7 +60,7 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
         })
         vm.run {
             noticeList.observe(viewLifecycleOwner, {
-                noticeAdapter.setItems(it)
+                noticeAdapter.setItems(it.notices)
             })
             clickedNoticeId.observe(viewLifecycleOwner, EventObserver{
                 (activity as MainActivity).startNoticeDetail(it, vm.clickedNoticeTitle)
