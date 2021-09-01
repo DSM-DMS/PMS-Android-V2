@@ -50,6 +50,10 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         }
     }
 
+    private fun showChangeName(){
+        ChangeNameDialog(vm).show(requireActivity().supportFragmentManager,"changeNameDialog")
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,13 +76,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 showAddStudentDialog()
             }
             studentParentEditImg.setOnClickListener {
-                activity.let {
-                    val dialog = ChangeNameDialog(vm!!)
-                    activity?.supportFragmentManager?.let {
-                        dialog.show(
-                            it, "ChangeName"
-                        )
-                    }
+                if(requireActivity().supportFragmentManager.findFragmentByTag("changeNameDialog")?.isAdded != false){
+                    showChangeName()
                 }
             }
 
