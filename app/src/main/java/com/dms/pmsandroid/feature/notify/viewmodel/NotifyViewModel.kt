@@ -29,8 +29,8 @@ class NotifyViewModel(
     private val _noticeList = MutableLiveData<NoticeResponseModel>()
     val noticeList: LiveData<NoticeResponseModel> get() = _noticeList
 
-    private val _homeList = MutableLiveData<List<NoticeListModel>>()
-    val homeList: LiveData<List<NoticeListModel>> get() = _homeList
+    private val _homeList = MutableLiveData<NoticeResponseModel>()
+    val homeList: LiveData<NoticeResponseModel> get() = _homeList
 
     private val _clickedGalleryId = MutableLiveData<Event<Int>>()
     val clickedGalleryId: LiveData<Event<Int>> get() = _clickedGalleryId
@@ -84,7 +84,7 @@ class NotifyViewModel(
         notifyApiImpl.getHomeNoticeList(accessToken, (homePage.value!! + next) - 1, 6)
             .subscribe { response ->
                 if (response.isSuccessful) {
-                    if (response.body()!!.isNotEmpty()) {
+                    if (response.body()!!.notices.isNotEmpty()) {
                         if (next > 0) {
                             _homePage.value = _homePage.value!! + 1
                         }
