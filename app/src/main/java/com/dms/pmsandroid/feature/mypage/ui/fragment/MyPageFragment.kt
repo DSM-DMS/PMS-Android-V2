@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.FragmentMypageBinding
+import com.dms.pmsandroid.feature.mypage.model.StudentResponse
 import com.dms.pmsandroid.feature.mypage.ui.dialog.ChangeNameDialog
 import com.dms.pmsandroid.feature.mypage.ui.dialog.LogoutDialog
 import com.dms.pmsandroid.feature.mypage.ui.dialog.MyPageAddStudentDialog
@@ -62,14 +62,24 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
             }
 
-            studentNameTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
-                if(requireActivity().supportFragmentManager.findFragmentByTag("studentBottomDialog")?.isAdded != false){
+            studentNameTv.clicks().debounce(150, TimeUnit.MILLISECONDS).subscribe {
+                if (requireActivity().supportFragmentManager.findFragmentByTag("studentBottomDialog")?.isAdded != false) {
                     showStudentBottomDialog()
                 }
             }
 
             startAddStudentBtn.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
                 showAddStudentDialog()
+            }
+            studentParentEditImg.setOnClickListener {
+                activity.let {
+                    val dialog = ChangeNameDialog(vm!!)
+                    activity?.supportFragmentManager?.let {
+                        dialog.show(
+                            it, "ChangeName"
+                        )
+                    }
+                }
             }
 
         }
@@ -100,96 +110,83 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
     override fun observeEvent() {
         mainVm.doneToken.observe(viewLifecycleOwner, {
             if (it) {
-                vm.inputBasicInfo()
+                vm.loadBaseInfo()
             }
         })
         vm.run {
-
             binding.plusLayout.setOnClickListener {
-                val number = students.value?.get(studentIndex.value!!.peekContent())?.studentNumber?:0
+                val number =
+                    students.value?.get(studentIndex.value!!.peekContent())?.studentNumber ?: 0
                 (activity as MainActivity).startPoint(number)
             }
-
             binding.minusLayout.setOnClickListener {
-                val number = students.value?.get(studentIndex.value!!.peekContent())?.studentNumber?:0
+                val number =
+                    students.value?.get(studentIndex.value!!.peekContent())?.studentNumber ?: 0
                 (activity as MainActivity).startPoint(number)
             }
-
             binding.introOutingCv.setOnClickListener {
-                val number = students.value?.get(studentIndex.value!!.peekContent())?.studentNumber?:0
+                val number =
+                    students.value?.get(studentIndex.value!!.peekContent())?.studentNumber ?: 0
                 (activity as MainActivity).startOuting(number)
             }
-            studentIndex.observe(viewLifecycleOwner, EventObserver {
-                if (info.value != null) {
-                    loadStudentInfo()
-                    val student = students.value!![it]
-                    binding.studentName = student.studentName
-                    binding.studentNumber = student.studentNumber
-                }
-            })
+
             toastMessage.observe(viewLifecycleOwner, EventObserver {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })
-            info.observe(viewLifecycleOwner, {
-                binding.run {
-                    nickName = it.name
-                    if (!it.students.isNullOrEmpty()) {
-                        val student = students.value!![studentIndex.value!!.peekContent()]
-                        studentNumber = student.studentNumber
-                        studentName = student.studentName
-                        successCertifitcation.value = true
-                    } else {
-                        successCertifitcation.value = false
-                        studentNumber = null
-                        studentName = null
+
+            students.observe(viewLifecycleOwner, {
+                changeStudent(it[studentIndex.value!!.peekContent()])
+            })
+
+            studentIndex.observe(viewLifecycleOwner, EventObserver {
+                vm.loadStudentInfo(it)
+                if (students.value != null) {
+                    changeStudent(students.value!![it])
+                }
+
+            })
+
+            studentInfo.observe(viewLifecycleOwner, {
+                changeComment(it.minusPoint?.toInt() ?: 0)
+                when (it.stayStatus) {
+                    1 -> {
+                        binding.stayTv.run {
+                            text = "금요귀가"
+                            setTextColor(requireContext().getColor(R.color.blue))
+                        }
+                    }
+                    2 -> {
+                        binding.stayTv.run {
+                            text = "토요귀가"
+                            setTextColor(requireContext().getColor(R.color.red))
+                        }
+                    }
+                    3 -> {
+                        binding.stayTv.run {
+                            text = "토요귀사"
+                            setTextColor(requireContext().getColor(R.color.red))
+                        }
+                    }
+                    4 -> {
+                        binding.stayTv.run {
+                            text = "잔류"
+                            setTextColor(requireContext().getColor(R.color.green))
+                        }
+                    }
+                    else -> {
+                        binding.stayTv.run {
+                            text = "미선택"
+                            setTextColor(requireContext().getColor(R.color.gray))
+                        }
                     }
                 }
             })
-
-            basicInfo.observe(viewLifecycleOwner, {
-                binding.run {
-                    pluspoint = it.bonusPoint
-                    minuspoint = it.minusPoint
-                    changeComment((it.minusPoint ?: "0").toInt())
-                    if (it.stayStatus == "4") {
-                        binding.stayTv.setText("잔류")
-                        binding.stayTv.setTextColor(requireContext().getColor(R.color.blue))
-                    } else if (it.stayStatus == "1") {
-                        binding.stayTv.setText("금요귀가")
-                        binding.stayTv.setTextColor(requireContext().getColor(R.color.red))
-                    } else if (it.stayStatus == "2") {
-                        binding.stayTv.setText("토요귀가")
-                        binding.stayTv.setTextColor(requireContext().getColor(R.color.green))
-                    } else if (it.stayStatus == "3") {
-                        binding.stayTv.setText("토요귀사")
-                        binding.stayTv.setTextColor(requireContext().getColor(R.color.gray))
-                    } else {
-                        binding.stayTv.setText("미선택")
-                    }
-
-                    if (it.mealApplied) {
-                        binding.mealAppliedImg.setImageDrawable(context?.let { it1 ->
-                            ContextCompat.getDrawable(
-                                it1, R.drawable.ic_baseline_radio_button_unchecked_24
-                            )
-                        })
-                    } else
-                        binding.mealAppliedImg.setImageDrawable(context?.let { it1 ->
-                            ContextCompat.getDrawable(it1, R.drawable.ic_baseline_clear_24)
-                        })
-                }
-            })
-            binding.studentParentEditImg.setOnClickListener {
-                activity.let {
-                    val dialog = ChangeNameDialog(vm)
-                    activity?.supportFragmentManager?.let { it ->
-                        dialog.show(
-                            it, "ChangeName"
-                        )
-                    }
-                }
-            }
         }
+    }
+
+    private fun changeStudent(student: StudentResponse) {
+        binding.studentNumber = student.studentNumber
+        binding.studentName = student.studentName
     }
 }
 

@@ -42,7 +42,7 @@ class StudentsBottomDialog(private val fragment: MyPageFragment, private val vm:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.studentLl.removeAllViews()
-        val students = vm.info.value?.students
+        val students = vm.students.value
         if (!students.isNullOrEmpty()) {
             var ct = 0
             for (student in students) {

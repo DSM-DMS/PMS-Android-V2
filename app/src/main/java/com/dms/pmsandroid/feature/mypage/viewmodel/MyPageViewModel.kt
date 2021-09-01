@@ -8,6 +8,7 @@ import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.mypage.MyPageApiImpl
 import com.dms.pmsandroid.feature.mypage.model.*
+import java.lang.Exception
 
 class MyPageViewModel(
     private val myPageApiImpl: MyPageApiImpl,
@@ -31,8 +32,8 @@ class MyPageViewModel(
 
     val studentIndex = MutableLiveData(Event(0))
 
-    private val _basicInfo = MutableLiveData<BasicInformationResponse>()
-    val basicInfo: LiveData<BasicInformationResponse> get() = _basicInfo
+    private val _studentInfo = MutableLiveData<BasicInformationResponse>()
+    val studentInfo: LiveData<BasicInformationResponse> get() = _studentInfo
 
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
@@ -40,7 +41,7 @@ class MyPageViewModel(
         myPageApiImpl.changeUserNameApi(accessToken, nameRequest).subscribe { nameResponse ->
             if (nameResponse.isSuccessful) {
                 _toastMessage.value = Event("변경에 성공했습니다")
-                inputBasicInfo()
+                loadBaseInfo()
             }
         }
     }
@@ -48,12 +49,11 @@ class MyPageViewModel(
     fun studentCertification() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val request = StudentCertificationResponse(certification.value!!)
-        myPageApiImpl.certificationStudentApi(accessToken, request).subscribe { request ->
-            when (request.code()) {
+        myPageApiImpl.certificationStudentApi(accessToken, request).subscribe { response ->
+            when (response.code()) {
                 201 -> {
                     _toastMessage.value = Event("학생 등록에 성공하셨습니다")
-                    successCertifitcation.value = true
-                    inputBasicInfo()
+                    loadBaseInfo()
 
                 }
                 400 -> {
@@ -73,29 +73,33 @@ class MyPageViewModel(
     }
 
 
-    fun loadStudentInfo() {
-        val number = _info.value!!.students[studentIndex.value?.peekContent() ?: 0].studentNumber
-        val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.getUserApi(accessToken, number).subscribe({
-            if (it.isSuccessful) {
-                _basicInfo.value = it.body()
+    fun loadStudentInfo(index: Int) {
+        if (students.value != null) {
+            val number =
+                students.value!![index].studentNumber
+            val accessToken = sharedPreferenceStorage.getInfo("access_token")
+            myPageApiImpl.getUserApi(accessToken, number).subscribe { it ->
+                if (it.isSuccessful) {
+                    _studentInfo.value = it.body()
+                }
             }
-        }, {
-        })
+        }
+
     }
 
-    fun inputBasicInfo() {
+    fun loadBaseInfo() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getBasicInfo(accessToken).subscribe({
             if (it.isSuccessful) {
                 _info.value = it.body()
-                _students.value = (it.body()?.students as MutableList<StudentResponse>).sortedWith(
-                    compareBy { student -> student.studentNumber })
+                if (it.body() != null) {
+                    _students.value =
+                        (it.body()!!.students as MutableList<StudentResponse>).sortedWith(
+                            compareBy { student -> student.studentNumber })
+                }
                 if (it.body()!!.students.isNotEmpty()) {
                     successCertifitcation.value = true
-                    if (basicInfo.value == null) {
-                        loadStudentInfo()
-                    }
+                    loadStudentInfo(studentIndex.value!!.peekContent())
                 }
             }
         }, {
@@ -112,11 +116,12 @@ class MyPageViewModel(
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.deleteStudent(accessToken, request).subscribe { response ->
             if (response.isSuccessful) {
-                inputBasicInfo()
+                loadBaseInfo()
             } else {
                 _toastMessage.value = Event("학생삭제를 실패하였습니다")
             }
         }
     }
+
 
 }
