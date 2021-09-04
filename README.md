@@ -6,7 +6,7 @@
 
 ## 주요기능
 1. 학사일정 확인
-![Calendar](https://user-images.githubusercontent.com/67100819/132100410-adf35f5a-cf09-476c-97e8-058c472b7f2f.jpg)
+![Calendar](https://user-images.githubusercontent.com/67100819/132100410-adf35f5a-cf09-476c-97e8-058c472b7f2f.jpg){: width="70" height="70"}
 2. 급식확인
 ![Meal_1](https://user-images.githubusercontent.com/67100819/132100438-8fa9185b-6437-4ead-9e9f-30e1b8ef77c9.jpg)
 ![Meal_2](https://user-images.githubusercontent.com/67100819/132100442-ce7c4b7a-77b1-4e26-a407-6fbd37e2cb9d.jpg)
