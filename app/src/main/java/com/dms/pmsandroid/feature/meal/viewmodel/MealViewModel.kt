@@ -35,7 +35,6 @@ class MealViewModel(
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val date = date.value?.format(formatter) ?: ""
         mealApiImpl.getMeal(accessToken, date).subscribe({ response ->
-            response.raw()
             if (response.isSuccessful) {
                 _meals.value = response.body()
             } else {
