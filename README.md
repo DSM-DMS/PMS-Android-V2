@@ -4,6 +4,10 @@
 
 > PMS(Parents' Management System - 대덕소프트마이스터고 학부모님들의 자녀관리시스템)
 
+## 주요기능
+1. 학사일정 확인
+![calendar](./pictures/Calendar.jpg)
+
 ## Language
 1. Kotlin
 ## Resource Rule
