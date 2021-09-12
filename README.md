@@ -6,14 +6,17 @@
 
 ## 주요기능
 1. 학사일정 확인
-![Calendar](https://user-images.githubusercontent.com/67100819/132100410-adf35f5a-cf09-476c-97e8-058c472b7f2f.jpg){: width="70" height="70"}
+
+    <img src="https://user-images.githubusercontent.com/67100819/132100410-adf35f5a-cf09-476c-97e8-058c472b7f2f.jpg" width="120" height="250">
 2. 급식확인
-![Meal_1](https://user-images.githubusercontent.com/67100819/132100438-8fa9185b-6437-4ead-9e9f-30e1b8ef77c9.jpg)
-![Meal_2](https://user-images.githubusercontent.com/67100819/132100442-ce7c4b7a-77b1-4e26-a407-6fbd37e2cb9d.jpg)
+
+    <img src="https://user-images.githubusercontent.com/67100819/132100438-8fa9185b-6437-4ead-9e9f-30e1b8ef77c9.jpg" width="120" height="250">
+    <img src="https://user-images.githubusercontent.com/67100819/132100442-ce7c4b7a-77b1-4e26-a407-6fbd37e2cb9d.jpg" width="120" height="250">
 3. 학교소식확인
-![picture](https://user-images.githubusercontent.com/67100819/132100564-3adb5842-ee5d-4498-b8b9-65333bdbed34.jpg)
-![Notice_picture](https://user-images.githubusercontent.com/67100819/132100590-de4250a7-15e3-4517-8e09-1818710bad4d.jpg)
-![Notice_notify](https://user-images.githubusercontent.com/67100819/132100595-3eb5befb-935a-4c1b-815f-c70893ea6c3f.jpg)
+
+    <img src="https://user-images.githubusercontent.com/67100819/132100564-3adb5842-ee5d-4498-b8b9-65333bdbed34.jpg" width="120" height="250">
+    <img src="https://user-images.githubusercontent.com/67100819/132100590-de4250a7-15e3-4517-8e09-1818710bad4d.jpg" width="120" height="250">
+    <img src="https://user-images.githubusercontent.com/67100819/132100595-3eb5befb-935a-4c1b-815f-c70893ea6c3f.jpg" width="120" height="250">
 
 4. 학교소개
 ![Intro](https://user-images.githubusercontent.com/67100819/132100618-5037eeaf-eae0-454c-a297-cd47f0bf5e14.jpg)
