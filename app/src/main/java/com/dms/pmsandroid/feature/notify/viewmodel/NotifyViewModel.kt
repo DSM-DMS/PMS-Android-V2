@@ -39,13 +39,15 @@ class NotifyViewModel(
 
     lateinit var clickedNoticeTitle: String
 
-    var galleryTotalPage = MutableLiveData(1)
+    val galleryTotalPage = MutableLiveData(1)
+    val noticeTotalPage = MutableLiveData(1)
+    val homeTotalPage = MutableLiveData(1)
 
 
     val needDownLoad = MutableLiveData(false)
 
     fun getGalleryList() {
-        notifyApiImpl.getGalleryList(galleryPage.value!! - 1, 6).subscribe({
+        notifyApiImpl.getGalleryList(galleryPage.value!! - 1, 8).subscribe({
             if (it.isSuccessful) {
                 _galleryList.value = it.body()!!.galleries
                 galleryTotalPage.value = it.body()!!.totalPage
@@ -54,32 +56,26 @@ class NotifyViewModel(
         })
     }
 
-    fun getNoticeList(next: Int) {
+    fun getNoticeList() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.getNoticeList(accessToken, (noticePage.value!! + next) - 1, 6)
+        notifyApiImpl.getNoticeList(accessToken, noticePage.value!! - 1, 8)
             .subscribe { response ->
                 if (response.isSuccessful) {
                     if (response.body() != null) {
-                        if (next > 0) {
-                            _noticePage.value = _noticePage.value!! + 1
-                        }
                         _noticeList.value = response.body()
                     }
+                    noticeTotalPage.value = response.body()?.totalPage ?: 1
                 }
             }
     }
 
-    fun getHomeNoticeList(next: Int) {
+    fun getHomeNoticeList() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.getHomeNoticeList(accessToken, (homePage.value!! + next) - 1, 6)
+        notifyApiImpl.getHomeNoticeList(accessToken, homePage.value!! - 1, 8)
             .subscribe { response ->
                 if (response.isSuccessful) {
-                    if (response.body()!!.notices.isNotEmpty()) {
-                        if (next > 0) {
-                            _homePage.value = _homePage.value!! + 1
-                        }
-                        _homeList.value = response.body()
-                    }
+                    _homeList.value = response.body()
+                    homeTotalPage.value = response.body()?.totalPage ?: 1
                 }
             }
     }
@@ -106,7 +102,7 @@ class NotifyViewModel(
     }
 
     fun galleryBeforePage() {
-        _galleryPage.value = _galleryPage.value!! - 1
+        _galleryPage.value = galleryPage.value!! - 1
         getGalleryList()
     }
 
@@ -120,26 +116,24 @@ class NotifyViewModel(
     }
 
     fun noticeBeforePage() {
-        if (noticePage.value!! > 1) {
-            _noticePage.value = _noticePage.value!! - 1
-            getNoticeList(0)
-        }
+        _noticePage.value = noticePage.value!! - 1
+        getNoticeList()
     }
 
 
     fun noticeAfterPage() {
-        getNoticeList(1)
+        _noticePage.value = noticePage.value!! + 1
+        getNoticeList()
     }
 
     fun homeBeforePage() {
-        if (homePage.value!! > 1) {
-            _homePage.value = _homePage.value!! - 1
-            getHomeNoticeList(0)
-        }
+        _homePage.value = homePage.value!! - 1
+        getHomeNoticeList()
     }
 
     fun homeAfterPage() {
-        getHomeNoticeList(1)
+        _homePage.value = homePage.value!! + 1
+        getHomeNoticeList()
     }
 
     fun resetHomePage() {

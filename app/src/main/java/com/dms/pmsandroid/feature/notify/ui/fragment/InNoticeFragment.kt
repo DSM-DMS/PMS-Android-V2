@@ -56,7 +56,7 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
 
     override fun observeEvent() {
         mainVm.doneToken.observe(viewLifecycleOwner,{
-            vm.getNoticeList(0)
+            vm.getNoticeList()
         })
         vm.run {
             noticeList.observe(viewLifecycleOwner, {
@@ -83,7 +83,7 @@ class InNoticeFragment : BaseFragment<FragmentInNoticeBinding>(R.layout.fragment
                     binding.noticeLl.visibility = View.GONE
                 } else {
                     vm.resetNoticePage()
-                    vm.getNoticeList(0)
+                    vm.getNoticeList()
                     binding.noticeLl.visibility = View.VISIBLE
                 }
             }

@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
+            android:visibility="@{vm.noticeTotalPage==1?View.GONE:View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -55,7 +56,8 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:onClick="@{()->vm.noticeAfterPage()}"
-                android:src="@drawable/ic_baseline_arrow_right_blue" />
+                android:src="@drawable/ic_baseline_arrow_right_blue"
+                android:visibility="@{vm.noticePage==vm.noticeTotalPage?View.INVISIBLE:View.VISIBLE}" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

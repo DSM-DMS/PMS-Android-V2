@@ -47,7 +47,7 @@ class HomeNoticeFragment : BaseFragment<FragmentHomeNoticeBinding>(R.layout.frag
             checkDialog.show(requireActivity().supportFragmentManager,"CheckDialog")
             sharedPreferenceStorage.saveInfo("true","checked_notify")
         }
-        vm.getHomeNoticeList(0)
+        vm.getHomeNoticeList()
     }
     override fun observeEvent() {
         vm.run {
@@ -71,7 +71,7 @@ class HomeNoticeFragment : BaseFragment<FragmentHomeNoticeBinding>(R.layout.frag
                     binding.homePageLl.visibility = View.GONE
                 } else {
                     vm.resetHomePage()
-                    vm.getHomeNoticeList(0)
+                    vm.getHomeNoticeList()
                     binding.homePageLl.visibility = View.VISIBLE
                 }
             }
