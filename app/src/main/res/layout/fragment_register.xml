@@ -75,8 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@android:color/transparent"
-            android:paddingTop="0dp"
             android:orientation="horizontal"
+            android:paddingTop="0dp"
             app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
             app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
@@ -95,31 +95,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_code_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/transparent"
-            android:paddingTop="0dp"
-            android:orientation="horizontal"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
-            app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
-            app:layout_constraintTop_toBottomOf="@+id/signup_email_layout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signup_code_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_baseline_code_24"
-                android:drawablePadding="16dp"
-                android:hint="@string/please_check_code"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:text="@={vm.userEmail}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/make_password_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -131,7 +106,7 @@
             app:layout_constraintEnd_toStartOf="@+id/signup_right_gl"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/signup_left_gl"
-            app:layout_constraintTop_toBottomOf="@+id/signup_code_layout"
+            app:layout_constraintTop_toBottomOf="@+id/signup_email_layout"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
