@@ -363,7 +363,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:background="?android:attr/selectableItemBackground"
-            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_white"
             android:fontFamily="@font/nanumsquarebold"
             android:gravity="center"
             android:padding="10dp"
@@ -372,7 +371,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/student_parent_edit_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/student_parent_edit_img"
-            tools:text="name" />
+            tools:text="name"
+            app:drawableEndCompat="@drawable/ic_baseline_arrow_drop_down_white" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/change_pw_cv"

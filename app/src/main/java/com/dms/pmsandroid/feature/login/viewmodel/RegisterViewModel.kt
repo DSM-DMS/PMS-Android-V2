@@ -3,6 +3,7 @@ package com.dms.pmsandroid.feature.login.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.RegisterRequest
 
@@ -26,7 +27,7 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
-    private val _finishRegister = MutableLiveData(false)
+    private val _finishRegister = SingleLiveEvent<Boolean>()
     val finishRegister: LiveData<Boolean> get() = _finishRegister
 
     private val _inProgress = MutableLiveData(false)
@@ -40,7 +41,7 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
                 when (subscribe.code()) {
                     201 -> {
                         _toastMessage.value = "회원가입에 성공하셨습니다"
-                        _finishRegister.value = true
+                        _finishRegister.call()
                     }
                     400 -> {
                         _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"

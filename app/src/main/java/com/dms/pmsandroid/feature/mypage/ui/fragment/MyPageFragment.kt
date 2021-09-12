@@ -66,8 +66,8 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 logoutDialog.show(requireActivity().supportFragmentManager, "logoutDialog")
             }
 
-            studentNameTv.clicks().debounce(150, TimeUnit.MILLISECONDS).subscribe {
-                if (requireActivity().supportFragmentManager.findFragmentByTag("studentBottomDialog")?.isAdded != false) {
+            studentNameTv.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+                if (requireActivity().supportFragmentManager.findFragmentByTag("studentBottomDialog")?.isAdded != true) {
                     showStudentBottomDialog()
                 }
             }
@@ -76,7 +76,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 showAddStudentDialog()
             }
             studentParentEditImg.setOnClickListener {
-                if(requireActivity().supportFragmentManager.findFragmentByTag("changeNameDialog")?.isAdded != false){
+                if(requireActivity().supportFragmentManager.findFragmentByTag("changeNameDialog")?.isAdded != true){
                     showChangeName()
                 }
             }

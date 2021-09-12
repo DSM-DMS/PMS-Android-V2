@@ -42,9 +42,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     override fun observeEvent() {
         vm.run {
             finishRegister.observe(viewLifecycleOwner, {
-                if (it) {
-                    doneRegister()
-                }
+                doneRegister()
+
             })
             toastMessage.observe(viewLifecycleOwner, { message ->
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
