@@ -2,6 +2,7 @@ package com.dms.pmsandroid.feature.mypage.ui.activity
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,13 +38,17 @@ class OutingContentActivity :
         binding.backImg.setOnClickListener {
             finish()
         }
-
     }
 
     override fun observeEvent() {
         vm.run {
             outings.observe(this@OutingContentActivity, {
                 outingAdapter.setItem(it.outings)
+                if (it.outings.isNullOrEmpty()) {
+                    binding.outingNoTitle.visibility = View.VISIBLE
+                } else {
+                    binding.outingNoTitle.visibility = View.INVISIBLE
+                }
             })
         }
     }

@@ -53,5 +53,19 @@
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item_outing" />
 
+        <TextView
+            android:id="@+id/outing_no_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="@string/no_outing"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/outing_rc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

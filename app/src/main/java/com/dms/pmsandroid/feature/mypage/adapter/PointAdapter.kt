@@ -24,7 +24,7 @@ class PointAdapter(private val viewModel: PointContentViewModel, context: Contex
             binding.vm = viewModel
             binding.reason = pointList[position].reason
             binding.date = pointList[position].date
-            if (pointList[position].type == true) {
+            if (pointList[position].type) {
                 binding.point= "+" + pointList[position].point
                 binding.pointTv.setTextColor(blue)
                 binding.contentV.setBackgroundColor(blue)

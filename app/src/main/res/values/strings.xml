@@ -76,4 +76,5 @@
     <string name="change_password">비밀번호 변경</string>
     <string name="check_logout">로그아웃 하시겠습니까?</string>
     <string name="please_check_code">본인확인코드를 입력해주세요</string>
+    <string name="no_outing">외출내역이 없습니다</string>
 </resources>
