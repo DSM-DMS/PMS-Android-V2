@@ -7,7 +7,6 @@ import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.GalleryListContent
-import com.dms.pmsandroid.feature.notify.model.NoticeListModel
 import com.dms.pmsandroid.feature.notify.model.NoticeResponseModel
 
 class NotifyViewModel(
@@ -40,7 +39,8 @@ class NotifyViewModel(
 
     lateinit var clickedNoticeTitle: String
 
-    private var galleryTotalLength = 1
+    var galleryTotalPage = MutableLiveData(1)
+
 
     val needDownLoad = MutableLiveData(false)
 
@@ -48,7 +48,7 @@ class NotifyViewModel(
         notifyApiImpl.getGalleryList(galleryPage.value!! - 1, 6).subscribe({
             if (it.isSuccessful) {
                 _galleryList.value = it.body()!!.galleries
-                galleryTotalLength = (it.body()!!.totalLength / 6) + 1
+                galleryTotalPage.value = it.body()!!.totalPage
             }
         }, {
         })
@@ -57,24 +57,14 @@ class NotifyViewModel(
     fun getNoticeList(next: Int) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.getNoticeList(accessToken, (noticePage.value!! + next) - 1, 6)
-            .subscribe{ response ->
+            .subscribe { response ->
                 if (response.isSuccessful) {
-                    if (response.body()!=null) {
+                    if (response.body() != null) {
                         if (next > 0) {
                             _noticePage.value = _noticePage.value!! + 1
                         }
                         _noticeList.value = response.body()
                     }
-                }
-            }
-    }
-
-    fun searchNotice(keyword: String) {
-        val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.searchNotice(accessToken, keyword, 0)
-            .subscribe { response ->
-                if (response.isSuccessful) {
-                    _noticeList.value = response.body()
                 }
             }
     }
@@ -94,6 +84,17 @@ class NotifyViewModel(
             }
     }
 
+    fun searchNotice(keyword: String) {
+        val accessToken = sharedPreferenceStorage.getInfo("access_token")
+        notifyApiImpl.searchNotice(accessToken, keyword, 0)
+            .subscribe { response ->
+                if (response.isSuccessful) {
+                    _noticeList.value = response.body()
+                }
+            }
+    }
+
+
     fun searchHome(keyword: String) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         notifyApiImpl.searchHome(accessToken, keyword, 0)
@@ -105,17 +106,13 @@ class NotifyViewModel(
     }
 
     fun galleryBeforePage() {
-        if (galleryPage.value!! > 1) {
-            _galleryPage.value = _galleryPage.value!! - 1
-            getGalleryList()
-        }
+        _galleryPage.value = _galleryPage.value!! - 1
+        getGalleryList()
     }
 
     fun galleryAfterPage() {
-        if (galleryPage.value!! < galleryTotalLength) {
-            _galleryPage.value = _galleryPage.value!! + 1
-            getGalleryList()
-        }
+        _galleryPage.value = galleryPage.value!! + 1
+        getGalleryList()
     }
 
     fun resetNoticePage() {
@@ -145,7 +142,7 @@ class NotifyViewModel(
         getHomeNoticeList(1)
     }
 
-    fun resetHomePage(){
+    fun resetHomePage() {
         _homePage.value = 1
     }
 

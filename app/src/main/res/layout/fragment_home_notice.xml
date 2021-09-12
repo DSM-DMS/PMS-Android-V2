@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
@@ -32,7 +34,8 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:onClick="@{()->vm.homeBeforePage()}"
-                android:src="@drawable/ic_baseline_arrow_left_24" />
+                android:src="@drawable/ic_baseline_arrow_left_24"
+                android:visibility="@{vm.homePage&lt;=1?View.INVISIBLE:View.VISIBLE}" />
 
             <TextView
                 android:id="@+id/photo_page_tv"

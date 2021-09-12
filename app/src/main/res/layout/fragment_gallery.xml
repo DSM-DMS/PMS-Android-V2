@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,6 +33,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
+            android:visibility="@{vm.galleryTotalPage==1?View.GONE:View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -40,7 +45,8 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:onClick="@{()->vm.galleryBeforePage()}"
-                android:src="@drawable/ic_baseline_arrow_left_24" />
+                android:src="@drawable/ic_baseline_arrow_left_24"
+                android:visibility="@{vm.galleryPage&lt;=1?View.INVISIBLE:View.VISIBLE}" />
 
             <TextView
                 android:id="@+id/photo_page_tv"
@@ -60,7 +66,8 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:onClick="@{()->vm.galleryAfterPage()}"
-                android:src="@drawable/ic_baseline_arrow_right_blue" />
+                android:src="@drawable/ic_baseline_arrow_right_blue"
+                android:visibility="@{vm.galleryTotalPage==vm.galleryPage?View.INVISIBLE:View.VISIBLE}" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
