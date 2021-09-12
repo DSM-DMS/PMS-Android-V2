@@ -4,7 +4,7 @@
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
-/.idea/workspace.xml
+/PMS_Android/.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
@@ -15,3 +15,62 @@
 local.properties
 
 .idea/jarRepositories.xml
+
+/PMS_Android/.idea
+.idea/runConfigurations.xml
+
+.idea/compiler.xml
+
+.idea/misc.xml
+
+gradle/wrapper/gradle-wrapper.properties
+
+.idea/workspace.xml
+
+PMS pictures/Calendar.jpg
+
+PMS pictures/Intro.jpg
+
+PMS pictures/Meal_1.jpg
+
+PMS pictures/Meal_2.jpg
+
+PMS pictures/Notice_notify.jpg
+
+PMS pictures/Notice_picture.jpg
+
+PMS pictures/Screenshot_20210902-221434_PMS.jpg
+
+PMS pictures/Screenshot_20210902-221438_PMS.jpg
+
+PMS pictures/Screenshot_20210902-221444_PMS.jpg
+
+PMS pictures/Screenshot_20210902-221453_PMS.jpg
+
+PMS pictures/Screenshot_20210902-221456_PMS.jpg
+
+PMS pictures/Screenshot_20210902-221510_PMS.jpg
+
+pictures/Calendar.jpg
+
+pictures/Intro.jpg
+
+pictures/Meal_1.jpg
+
+pictures/Meal_2.jpg
+
+pictures/Notice_notify.jpg
+
+pictures/Notice_picture.jpg
+
+pictures/Screenshot_20210902-221434_PMS.jpg
+
+pictures/Screenshot_20210902-221438_PMS.jpg
+
+pictures/Screenshot_20210902-221444_PMS.jpg
+
+pictures/Screenshot_20210902-221453_PMS.jpg
+
+pictures/Screenshot_20210902-221456_PMS.jpg
+
+pictures/Screenshot_20210902-221510_PMS.jpg

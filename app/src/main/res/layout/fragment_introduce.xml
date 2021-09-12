@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.introduce.ui.fragment.IntroduceFragment">
+
+
+        <TextView
+            android:id="@+id/introduce_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nanumsquareextrabold"
+            android:text="@string/title_info"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/introduce_tilte2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="@string/intro_main_dms"
+            android:textColor="#4C75B2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/introduce_title_tv" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/introduce_club_cv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/introduce_tilte2_tv">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@color/gray_50">
+
+                <View
+                    android:id="@+id/introduce_club_v"
+                    android:layout_width="3dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/introduce_club_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/introduce_club_title_tv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/introduce_club_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/intro_club"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_size"
+                    app:layout_constraintStart_toEndOf="@id/introduce_club_v"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/introduce_club_detail"
+                    android:textColor="@color/gray_300"
+                    android:textSize="@dimen/body_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/introduce_club_title_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/introduce_work_cv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/introduce_club_cv">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@color/gray_50">
+
+                <View
+                    android:id="@+id/introduce_work_v"
+                    android:layout_width="3dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/introduce_work_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/introduce_work_title_tv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/introduce_work_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/intro_work"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_size"
+                    app:layout_constraintStart_toEndOf="@id/introduce_work_v"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/introduce_company_detail"
+                    android:textColor="@color/gray_300"
+                    android:textSize="@dimen/body_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/introduce_work_title_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/introduce_dev_cv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/introduce_work_cv">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:background="@color/gray_50">
+
+                <View
+                    android:id="@+id/introduce_dev_v"
+                    android:layout_width="3dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/introduce_dev_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/introduce_dev_title_tv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/introduce_dev_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@string/intro_developer"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_size"
+                    app:layout_constraintStart_toEndOf="@id/introduce_dev_v"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="@string/introduce_developer_detail"
+                    android:textColor="@color/gray_300"
+                    android:textSize="@dimen/body_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/introduce_dev_title_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.mypage.ui.activity.OutingContentActivity">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/title_bar_size"
+            android:background="@color/gray_100"
+            android:fontFamily="@font/nanumsquarebold"
+            android:gravity="center"
+            android:text="@string/outing_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_bar_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/title_tv"
+            app:layout_constraintStart_toStartOf="@+id/title_tv"
+            app:layout_constraintTop_toTopOf="@+id/title_tv"
+            app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/outing_rc"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_tv"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_outing" />
+
+        <TextView
+            android:id="@+id/outing_no_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="@string/no_outing"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/outing_rc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
