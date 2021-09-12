@@ -7,6 +7,7 @@ import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.notify.NotifyApiImpl
 import com.dms.pmsandroid.feature.notify.model.GalleryListContent
+import com.dms.pmsandroid.feature.notify.model.NoticeListModel
 import com.dms.pmsandroid.feature.notify.model.NoticeResponseModel
 
 class NotifyViewModel(
@@ -25,11 +26,11 @@ class NotifyViewModel(
     private val _galleryList = MutableLiveData<List<GalleryListContent>>()
     val galleryList: LiveData<List<GalleryListContent>> get() = _galleryList
 
-    private val _noticeList = MutableLiveData<NoticeResponseModel>()
-    val noticeList: LiveData<NoticeResponseModel> get() = _noticeList
+    private val _noticeList = MutableLiveData<List<NoticeListModel>>()
+    val noticeList: LiveData<List<NoticeListModel>> get() = _noticeList
 
-    private val _homeList = MutableLiveData<NoticeResponseModel>()
-    val homeList: LiveData<NoticeResponseModel> get() = _homeList
+    private val _homeList = MutableLiveData<List<NoticeListModel>>()
+    val homeList: LiveData<List<NoticeListModel>> get() = _homeList
 
     private val _clickedGalleryId = MutableLiveData<Event<Int>>()
     val clickedGalleryId: LiveData<Event<Int>> get() = _clickedGalleryId
@@ -62,7 +63,7 @@ class NotifyViewModel(
             .subscribe { response ->
                 if (response.isSuccessful) {
                     if (response.body() != null) {
-                        _noticeList.value = response.body()
+                        _noticeList.value = response.body()!!.notices
                     }
                     noticeTotalPage.value = response.body()?.totalPage ?: 1
                 }
@@ -74,7 +75,9 @@ class NotifyViewModel(
         notifyApiImpl.getHomeNoticeList(accessToken, homePage.value!! - 1, 8)
             .subscribe { response ->
                 if (response.isSuccessful) {
-                    _homeList.value = response.body()
+                    if(response.body()!=null){
+                        _homeList.value = response.body()!!.notices
+                    }
                     homeTotalPage.value = response.body()?.totalPage ?: 1
                 }
             }
@@ -82,7 +85,7 @@ class NotifyViewModel(
 
     fun searchNotice(keyword: String) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.searchNotice(accessToken, keyword, 0)
+        notifyApiImpl.searchNotice(accessToken, keyword)
             .subscribe { response ->
                 if (response.isSuccessful) {
                     _noticeList.value = response.body()
@@ -93,7 +96,7 @@ class NotifyViewModel(
 
     fun searchHome(keyword: String) {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        notifyApiImpl.searchHome(accessToken, keyword, 0)
+        notifyApiImpl.searchHome(accessToken, keyword)
             .subscribe { response ->
                 if (response.isSuccessful) {
                     _homeList.value = response.body()

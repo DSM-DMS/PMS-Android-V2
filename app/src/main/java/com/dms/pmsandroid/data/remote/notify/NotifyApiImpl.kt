@@ -29,9 +29,9 @@ class NotifyApiImpl {
             .subscribeOn(Schedulers.io())
 
     fun searchNotice(
-        accessToken: String, keyword: String, page: Int
-    ): @NonNull Single<Response<NoticeResponseModel>> =
-        provideNotifyApi().searchNotice(accessToken, keyword, page)
+        accessToken: String, keyword: String
+    ): @NonNull Single<Response<List<NoticeListModel>>> =
+        provideNotifyApi().searchNotice(accessToken, keyword)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
@@ -45,9 +45,9 @@ class NotifyApiImpl {
             .subscribeOn(Schedulers.io())
 
     fun searchHome(
-        accessToken: String, keyword: String, page: Int
-    ): @NonNull Single<Response<NoticeResponseModel>> =
-        provideNotifyApi().searchHome(accessToken, keyword, page)
+        accessToken: String, keyword: String
+    ): @NonNull Single<Response<List<NoticeListModel>>> =
+        provideNotifyApi().searchHome(accessToken, keyword)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

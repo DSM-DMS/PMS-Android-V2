@@ -22,9 +22,8 @@ interface NotifyApi {
     @GET("/notice/search")
     fun searchNotice(
         @Header("Authorization") accessToken: String,
-        @Query("q") keyWord: String,
-        @Query("page") page: Int
-    ): Single<Response<NoticeResponseModel>>
+        @Query("q") keyWord: String
+    ): Single<Response<List<NoticeListModel>>>
 
     @GET("/notice/news")
     fun getHomeNotice(
@@ -36,9 +35,8 @@ interface NotifyApi {
     @GET("/notice/news/search")
     fun searchHome(
         @Header("Authorization") accessToken: String,
-        @Query("q") keyWord: String,
-        @Query("page") page: Int
-    ): Single<Response<NoticeResponseModel>>
+        @Query("q") keyWord: String
+    ): Single<Response<List<NoticeListModel>>>
 
     @GET("/gallery")
     fun getGallery(
