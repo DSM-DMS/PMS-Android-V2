@@ -19,7 +19,7 @@ fun MealResponse.toEntity() =
         },
         dinner = try {
             dinner as ArrayList<String>
-        } catch (e: Exception){
+        } catch (e: Exception) {
             ArrayList()
         }
     )
