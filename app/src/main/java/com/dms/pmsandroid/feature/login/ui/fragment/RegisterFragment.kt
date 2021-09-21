@@ -4,6 +4,7 @@ import android.widget.Toast
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentRegisterBinding
+import com.dms.pmsandroid.feature.login.ui.WelcomeDialog
 import com.dms.pmsandroid.feature.login.viewmodel.RegisterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,6 +38,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         val fragmentManager = fragment.beginTransaction()
         fragmentManager.setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container, LoginFragment()).commit()
+        WelcomeDialog().show(requireActivity().supportFragmentManager,"welcomeDialog")
     }
 
     override fun observeEvent() {
