@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.meal.MealApiImpl
+import com.dms.pmsandroid.feature.meal.entity.Meal
 import com.dms.pmsandroid.feature.meal.model.MealPictureResponse
 import com.dms.pmsandroid.feature.meal.model.MealResponse
+import com.dms.pmsandroid.feature.meal.model.toEntity
 import java.time.format.DateTimeFormatter
 
 class MealViewModel(
@@ -23,8 +25,8 @@ class MealViewModel(
     private val _showPicture = MutableLiveData(false)
     val showPicture:LiveData<Boolean> get() = _showPicture
 
-    private val _meals = MutableLiveData<MealResponse>()
-    val meals: LiveData<MealResponse> get() = _meals
+    private val _meals = MutableLiveData<Meal>()
+    val meals: LiveData<Meal> get() = _meals
 
     private val _mealsPicture = MutableLiveData<MealPictureResponse>()
     val mealPicture: LiveData<MealPictureResponse> get() = _mealsPicture
@@ -36,12 +38,12 @@ class MealViewModel(
         val date = date.value?.format(formatter) ?: ""
         mealApiImpl.getMeal(accessToken, date).subscribe({ response ->
             if (response.isSuccessful) {
-                _meals.value = response.body()
+                _meals.value = response.body()?.toEntity()
             } else {
-                _meals.value = MealResponse(null, null, null)
+                _meals.value = MealResponse(null, null, null).toEntity()
             }
         }, {
-            _meals.value = MealResponse(null, null, null)
+            _meals.value = MealResponse(null, null, null).toEntity()
         })
         getMealPicture(accessToken, date)
     }

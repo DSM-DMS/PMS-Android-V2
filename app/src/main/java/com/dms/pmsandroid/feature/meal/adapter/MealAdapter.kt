@@ -8,8 +8,8 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.databinding.ItemMealBinding
+import com.dms.pmsandroid.feature.meal.entity.Meal
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
-import com.dms.pmsandroid.feature.meal.model.MealResponse
 import kotlin.collections.ArrayList
 
 class MealAdapter(
@@ -17,7 +17,7 @@ class MealAdapter(
     context: Context
 ) :
     RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
-    private var meals = MealResponse(null, null, null)
+    private var meals = Meal(null, null, null)
 
     private val blue = context.resources.getColor(R.color.blue)
     private val green = context.resources.getColor(R.color.green)
@@ -84,7 +84,7 @@ class MealAdapter(
 
     override fun getItemCount(): Int = Int.MAX_VALUE
 
-    fun setItems(meals: MealResponse) {
+    fun setItems(meals: Meal) {
         this.meals = meals
         notifyDataSetChanged()
     }
