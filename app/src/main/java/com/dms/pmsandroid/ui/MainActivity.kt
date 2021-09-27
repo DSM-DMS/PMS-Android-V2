@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         vm.checkLogin(isNetworkConnected())
     }
 
-    private fun isNetworkConnected():Boolean{
+    private fun isNetworkConnected(): Boolean {
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         return activeNetwork?.isConnectedOrConnecting == true
@@ -60,21 +60,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(loginIntent)
     }
 
-    fun startOuting(number: Int){
-        val outingIntent = Intent(this,OutingContentActivity::class.java)
-        outingIntent.putExtra("number",number)
+    fun startOuting(number: Int) {
+        val outingIntent = Intent(this, OutingContentActivity::class.java)
+        outingIntent.putExtra("number", number)
         startActivity(outingIntent)
     }
 
-    fun startPoint(number: Int){
-        val pointIntent = Intent(this,PointContentActivity::class.java)
-        pointIntent.putExtra("number",number)
+    fun startPoint(number: Int) {
+        val pointIntent = Intent(this, PointContentActivity::class.java)
+        pointIntent.putExtra("number", number)
         startActivity(pointIntent)
     }
 
 
-    fun startChangePassword(){
-        val changePWIntent = Intent(this,ChangePasswordActivity::class.java)
+    fun startChangePassword() {
+        val changePWIntent = Intent(this, ChangePasswordActivity::class.java)
         startActivity(changePWIntent)
     }
 
@@ -85,16 +85,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun startCompany() {
-        Toast.makeText(this,"아직 준비중 입니다",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "아직 준비중인 기능입니다", Toast.LENGTH_SHORT).show()
         //todo 취업처 api 나오면 startActivity로 넘어가기
         //val workintent = Intent(this, IntroduceCompanyActivity::class.java)
         //startActivity(workintent)
     }
 
     fun startClub() {
-        val clubIntent = Intent(this, IntroduceClubActivity::class.java)
-        clubIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-        startActivity(clubIntent)
+        Toast.makeText(this, "아직 준비중인 기능입니다", Toast.LENGTH_SHORT).show()
+        //todo 동아리 api 나오면 넘어가기
+        //val clubIntent = Intent(this, IntroduceClubActivity::class.java)
+        //clubIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        //startActivity(clubIntent)
     }
 
     fun startGalleryDetail(id: Int) {
@@ -108,7 +110,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun startNoticeDetail(id: Int, title: String) {
         val noticeIntent = Intent(this, NoticeDetailActivity::class.java)
-        noticeIntent.run{
+        noticeIntent.run {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             putExtra("id", id)
             putExtra("title", title)
@@ -116,11 +118,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         startActivity(noticeIntent)
     }
 
-    fun startDownloadFileViewer(){
+    fun startDownloadFileViewer() {
         try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.tf.thinkdroid.viewer")))
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=com.tf.thinkdroid.viewer")
+                )
+            )
         } catch (e: ActivityNotFoundException) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.tf.thinkdroid.viewer")))
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=com.tf.thinkdroid.viewer")
+                )
+            )
         }
     }
 
@@ -154,11 +166,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             hide(notifyFragment)
             hide(mypageFragment)
         }.commit()
-        changeFragment(vm.activeFragment?:calendarFragment)
+        changeFragment(vm.activeFragment ?: calendarFragment)
     }
 
     private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().hide(vm.activeFragment?:calendarFragment).show(fragment).commit()
+        supportFragmentManager.beginTransaction().hide(vm.activeFragment ?: calendarFragment)
+            .show(fragment).commit()
         vm.activeFragment = fragment
     }
 
@@ -183,7 +196,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     }
                 }
             })
-            needToLogin.observe(this@MainActivity, EventObserver{
+            needToLogin.observe(this@MainActivity, EventObserver {
                 if (it) {
                     startLogin()
                 }
