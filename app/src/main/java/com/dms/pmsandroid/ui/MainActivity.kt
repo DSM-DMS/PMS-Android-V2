@@ -14,7 +14,6 @@ import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.ActivityMainBinding
 import com.dms.pmsandroid.feature.calendar.ui.CalendarFragment
-import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity

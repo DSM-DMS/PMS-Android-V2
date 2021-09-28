@@ -33,6 +33,9 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
     private val _inProgress = MutableLiveData(false)
     val inProgress: LiveData<Boolean> get() = _inProgress
 
+    private val _doneRegister = SingleLiveEvent<Boolean>()
+    val doneRegister: LiveData<Boolean> get() = _doneRegister
+
     fun doRegister() {
         if (doneInput.value == true) {
             _inProgress.value = true
@@ -41,7 +44,7 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
                 when (subscribe.code()) {
                     201 -> {
                         _toastMessage.value = "회원가입에 성공하셨습니다"
-                        _finishRegister.call()
+                        _doneRegister.call()
                     }
                     400 -> {
                         _toastMessage.value = "입력하신 정보의 형식이 잘못되었습니다"
@@ -63,7 +66,7 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
     }
 
     fun finishRegister() {
-        _finishRegister.value = true
+        _finishRegister.call()
     }
 
 

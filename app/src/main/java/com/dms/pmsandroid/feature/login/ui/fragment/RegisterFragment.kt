@@ -38,7 +38,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         val fragmentManager = fragment.beginTransaction()
         fragmentManager.setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container, LoginFragment()).commit()
-        WelcomeDialog().show(requireActivity().supportFragmentManager,"welcomeDialog")
     }
 
     override fun observeEvent() {
@@ -46,6 +45,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             finishRegister.observe(viewLifecycleOwner, {
                 doneRegister()
 
+            })
+            doneRegister.observe(viewLifecycleOwner, {
+                WelcomeDialog().show(requireActivity().supportFragmentManager, "welcomeDialog")
+                doneRegister()
             })
             toastMessage.observe(viewLifecycleOwner, { message ->
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
