@@ -1,6 +1,9 @@
 package com.dms.pmsandroid.feature.login.ui.fragment
 
+import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
 import com.dms.pmsandroid.databinding.FragmentRegisterBinding
@@ -11,6 +14,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
 
     override val vm: RegisterViewModel by viewModel()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                doneRegister()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+    }
 
     private fun passwordErrorMessage() {
         if (vm.nEmptyPassword.value!!) {

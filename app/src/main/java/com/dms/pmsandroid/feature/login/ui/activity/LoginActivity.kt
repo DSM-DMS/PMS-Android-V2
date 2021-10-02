@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityLoginBinding
+import com.dms.pmsandroid.feature.login.ui.fragment.FindPasswordFragment
 import com.dms.pmsandroid.feature.login.ui.fragment.LoginFragment
 import com.dms.pmsandroid.feature.login.ui.fragment.RegisterFragment
 import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
@@ -36,20 +37,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         val fragmentManager = supportFragmentManager.beginTransaction()
         fragmentManager.setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container, RegisterFragment()).commit()
-        Retrofit.Builder()
     }
 
-    private var lastTimeBackPressed: Long = -1500
-
-    override fun onBackPressed() {
-        if (System.currentTimeMillis() - lastTimeBackPressed <= 1500) {
-            moveTaskToBack(true)
-            finish()
-            android.os.Process.killProcess(android.os.Process.myPid())
+    private fun startFindPassword() {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.run {
+            setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
+            replace(R.id.login_container, FindPasswordFragment()).commit()
         }
-        lastTimeBackPressed = System.currentTimeMillis()
-        Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
-
     }
 
     override fun observeEvent() {
@@ -57,6 +52,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             needRegister.observe(this@LoginActivity, {
                 startRegister()
 
+            })
+
+            findPassword.observe(this@LoginActivity, {
+                startFindPassword()
             })
             doneLogin.observe(this@LoginActivity, {
                 if (it) {
