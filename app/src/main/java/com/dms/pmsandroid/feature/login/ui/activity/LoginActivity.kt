@@ -12,11 +12,12 @@ import com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel
 import com.dms.pmsandroid.ui.MainViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.Retrofit
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     override val vm: LoginViewModel by viewModel()
-    private val mainVm:MainViewModel by inject()
+    private val mainVm: MainViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         val fragmentManager = supportFragmentManager.beginTransaction()
         fragmentManager.setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
         fragmentManager.replace(R.id.login_container, RegisterFragment()).commit()
-        vm.needRegister.value = false
+        Retrofit.Builder()
     }
 
     private var lastTimeBackPressed: Long = -1500
@@ -54,9 +55,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     override fun observeEvent() {
         vm.run {
             needRegister.observe(this@LoginActivity, {
-                if (it) {
-                    startRegister()
-                }
+                startRegister()
+
             })
             doneLogin.observe(this@LoginActivity, {
                 if (it) {

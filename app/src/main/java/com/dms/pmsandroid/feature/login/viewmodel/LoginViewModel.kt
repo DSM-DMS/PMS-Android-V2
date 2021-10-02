@@ -3,6 +3,7 @@ package com.dms.pmsandroid.feature.login.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.LoginRequest
@@ -17,9 +18,10 @@ class LoginViewModel(
 
     val userPassword = MutableLiveData<String>()
     val passwordDone = MutableLiveData(false)
-    // SingleLiveEvent & Event Wrapper
 
-    val needRegister = MutableLiveData(false)
+    val needRegister = SingleLiveEvent<Unit>()
+
+    val findPassword = SingleLiveEvent<Unit>()
 
     val doneInput = MutableLiveData(false)
 
@@ -63,9 +65,13 @@ class LoginViewModel(
         }
     }
 
+    fun findPassword(){
+        findPassword.call()
+    }
+
     fun needRegister(){
         userEmail.value = null
         userPassword.value = null
-        needRegister.value = true
+        needRegister.call()
     }
 }
