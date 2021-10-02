@@ -38,5 +38,8 @@ class FindPasswordFragment :
     }
 
     override fun observeEvent() {
+        vm.email.observe(viewLifecycleOwner, {
+            vm.doneInput.value = it.contains('@') && it.contains('.')
+        })
     }
 }

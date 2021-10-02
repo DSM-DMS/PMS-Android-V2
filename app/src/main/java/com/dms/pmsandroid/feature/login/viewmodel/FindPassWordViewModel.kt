@@ -8,6 +8,8 @@ class FindPassWordViewModel: ViewModel() {
 
     val inProgress = MutableLiveData<Boolean>()
 
+    val doneInput = MutableLiveData<Boolean>()
+
     fun sendEmail(){
 
     }
