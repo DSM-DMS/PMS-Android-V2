@@ -18,20 +18,32 @@ class FindPassWordViewModel(private val loginApiImpl: LoginApiImpl) : ViewModel(
     val toastMessage = MutableLiveData<String>()
 
     fun sendEmail() {
+        if (doneInput.value == true) {
+            sendResetPasswordEmail()
+        } else {
+            toastMessage.value = "이메일을 입력해주세요"
+        }
+
+    }
+
+    private fun sendResetPasswordEmail() {
         inProgress.value = true
         val request = ResetPasswordRequest(email.value.toString())
         loginApiImpl.resetPassword(request).subscribe { response ->
-            when(response.code()){
-                200 ->{
+            when (response.code()) {
+                200 -> {
                     doneResetPassword.call()
+                    toastMessage.value = "이메일을 전송했습니다"
                 }
-                401 ->{
+                401 -> {
                     toastMessage.value = "존재하지 않는 이메일 입니다"
                 }
-                else ->{
-                    toastMessage.value = ""
+                else -> {
+                    toastMessage.value = "오류가 발생했습니다"
                 }
+
             }
+            inProgress.value = false
         }
     }
 

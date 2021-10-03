@@ -2,6 +2,7 @@ package com.dms.pmsandroid.feature.login.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseFragment
@@ -38,8 +39,16 @@ class FindPasswordFragment :
     }
 
     override fun observeEvent() {
-        vm.email.observe(viewLifecycleOwner, {
-            vm.doneInput.value = it.contains('@') && it.contains('.')
-        })
+        vm.run {
+            email.observe(viewLifecycleOwner, {
+                vm.doneInput.value = it.contains('@') && it.contains('.')
+            })
+            toastMessage.observe(viewLifecycleOwner, {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            })
+            doneResetPassword.observe(viewLifecycleOwner, {
+                finishFindPassword()
+            })
+        }
     }
 }
