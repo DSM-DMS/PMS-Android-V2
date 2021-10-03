@@ -11,13 +11,15 @@ import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChangeNameDialog(override val vm:MyPageViewModel) : BaseDialog<DialogChangeNameBinding>(R.layout.dialog_change_name) {
+class ChangeNameDialog(override val vm: MyPageViewModel) :
+    BaseDialog<DialogChangeNameBinding>(R.layout.dialog_change_name) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        vm.newName.value = vm.info.value?.name
         binding.confirmTv.setOnClickListener {
             vm.changeName()
             dismiss()
