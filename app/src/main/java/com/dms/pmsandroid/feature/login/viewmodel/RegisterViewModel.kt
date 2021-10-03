@@ -52,6 +52,9 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
                     409 -> {
                         _toastMessage.value = "해당 정보로 회원가입된 계정이 있습니다"
                     }
+                    else -> {
+                        _toastMessage.value = "회원가입에 실패하였습니다"
+                    }
                 }
                 _inProgress.value = false
             },{
