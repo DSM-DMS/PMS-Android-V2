@@ -57,7 +57,7 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
                     }
                 }
                 _inProgress.value = false
-            },{
+            }, {
                 _toastMessage.value = "회원가입에 실패하였습니다"
                 _inProgress.value = false
             })
@@ -70,6 +70,15 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
 
     fun finishRegister() {
         _finishRegister.call()
+    }
+
+    fun clear() {
+        _toastMessage.value = null
+        userName.value = null
+        userEmail.value = null
+        userPassword.value = null
+        userPasswordCheck.value = null
+        doneInput.value = false
     }
 
 

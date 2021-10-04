@@ -47,6 +47,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     }
 
     private fun doneRegister() {
+        vm.clear()
         val fragment = requireActivity().supportFragmentManager
         val fragmentManager = fragment.beginTransaction()
         fragmentManager.setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
@@ -57,14 +58,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
         vm.run {
             finishRegister.observe(viewLifecycleOwner, {
                 doneRegister()
-
             })
             doneRegister.observe(viewLifecycleOwner, {
                 WelcomeDialog().show(requireActivity().supportFragmentManager, "welcomeDialog")
                 doneRegister()
             })
             toastMessage.observe(viewLifecycleOwner, { message ->
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                if(message != null){
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
             })
             userEmail.observe(viewLifecycleOwner, {
                 vm.nEmptyEmail.value = !it.isNullOrBlank()
