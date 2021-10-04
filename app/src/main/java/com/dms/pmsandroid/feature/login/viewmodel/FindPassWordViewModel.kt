@@ -41,11 +41,11 @@ class FindPassWordViewModel(
             when (response.code()) {
                 200 -> {
                     doneResetPassword.call()
-                    val currentTime = LocalDateTime.now()
+                    val currentTime = System.currentTimeMillis()
                     localStorage.saveInfo(currentTime.toString(), "reset_password_time")
                     toastMessage.value = "이메일을 전송했습니다"
                 }
-                401 -> {
+                401, 500 -> {
                     toastMessage.value = "존재하지 않는 이메일 입니다"
                 }
                 else -> {

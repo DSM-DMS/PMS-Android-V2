@@ -1,7 +1,9 @@
 package com.dms.pmsandroid.feature.mypage.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.databinding.ActivityChangePasswordBinding
@@ -13,8 +15,10 @@ class ChangePasswordActivity :
     BaseActivity<ActivityChangePasswordBinding>(R.layout.activity_change_password) {
     override val vm: ChangePasswordViewModel by viewModel()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        vm.checkResetPasswordTime()
         binding.backBtn.setOnClickListener {
             finish()
         }

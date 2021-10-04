@@ -1,11 +1,16 @@
 package com.dms.pmsandroid.feature.mypage.viewmodel
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.mypage.model.ChangePasswordRequest
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class ChangePasswordViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage,
@@ -18,10 +23,24 @@ class ChangePasswordViewModel(
     val doneInput = MutableLiveData(false)
 
     private val _inProgress = MutableLiveData(false)
-    val inProgress:LiveData<Boolean> get() = _inProgress
+    val inProgress: LiveData<Boolean> get() = _inProgress
 
     private val _toast = MutableLiveData<String>()
     val toast: LiveData<String> get() = _toast
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkResetPasswordTime() {
+        val savedTimeString = sharedPreferenceStorage.getInfo("reset_password_time")
+        if (savedTimeString != "") {
+            val savedTime = savedTimeString.toLong()
+            val currentTime = System.currentTimeMillis()
+            val minuteDiff = (currentTime - savedTime)/60000
+            if(minuteDiff<6){
+                prePassword.value = sharedPreferenceStorage.getInfo("user_password")
+            }
+        }
+
+    }
 
     fun changePassword() {
         if (doneInput.value!!) {

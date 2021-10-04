@@ -45,8 +45,8 @@ class LoginViewModel(
                     200 -> {
                         if (autoLogin.value!!) {
                             sharedPreferenceStorage.saveInfo(userEmail.value!!, "user_email")
-                            sharedPreferenceStorage.saveInfo(userPassword.value!!, "user_password")
                         }
+                        sharedPreferenceStorage.saveInfo(userPassword.value!!, "user_password")
                         sharedPreferenceStorage.saveInfo(it.body()!!.accessToken, "access_token")
                         _doneLogin.value = true
                     }
