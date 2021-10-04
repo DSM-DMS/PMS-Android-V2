@@ -9,7 +9,7 @@ import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.local.room.EventDatabase
 import com.dms.pmsandroid.data.local.room.RoomEvents
-import com.dms.pmsandroid.data.remote.calendar.CalendarApiImpl
+import com.dms.pmsandroid.data.remote.calendar.ProvideCalendarApi
 import com.dms.pmsandroid.feature.calendar.model.EventKeyModel
 import com.dms.pmsandroid.feature.calendar.model.EventModel
 import com.google.gson.JsonObject
@@ -22,7 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CalendarViewModel(
-    private val calendarApiImpl: CalendarApiImpl,
+    private val provideCalendarApi: ProvideCalendarApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage,
     private val eventDatabase: EventDatabase
 ) : ViewModel() {
@@ -52,7 +52,7 @@ class CalendarViewModel(
 
     fun loadSchedules() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        calendarApiImpl.scheduleApi(accessToken).subscribe { response ->
+        provideCalendarApi.scheduleApi(accessToken).subscribe { response ->
             if (response.isSuccessful) {
                 CoroutineScope(Dispatchers.IO).launch {
                     eventDatabase.eventDao().deleteEvents()

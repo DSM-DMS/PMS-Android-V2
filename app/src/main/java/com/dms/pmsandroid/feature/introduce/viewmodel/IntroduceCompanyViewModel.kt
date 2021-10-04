@@ -1,10 +1,8 @@
 package com.dms.pmsandroid.feature.introduce.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dms.pmsandroid.data.remote.Introduce.IntroduceClubApiImpl
-import com.dms.pmsandroid.ui.MainActivity
+import com.dms.pmsandroid.data.remote.Introduce.ProvideIntroduceClubApi
 
-class IntroduceCompanyViewModel(private val introduceClubApiImpl: IntroduceClubApiImpl) : ViewModel() {
+class IntroduceCompanyViewModel(private val provideIntroduceClubApi: ProvideIntroduceClubApi) : ViewModel() {
 
 }

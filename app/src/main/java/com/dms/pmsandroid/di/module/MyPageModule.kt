@@ -1,6 +1,6 @@
 package com.dms.pmsandroid.di.module
 
-import com.dms.pmsandroid.data.remote.mypage.MyPageApiImpl
+import com.dms.pmsandroid.data.remote.mypage.ProvideMyPageApi
 import com.dms.pmsandroid.feature.mypage.viewmodel.ChangePasswordViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel
@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val myPageModule = module{
     viewModel { MyPageViewModel(get(),get())}
 
-    single { MyPageApiImpl() }
+    single { ProvideMyPageApi() }
 
     viewModel { OutingContentViewModel(get(),get()) }
 

@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
-class LoginApiImpl {
+class ProvideLoginApi {
     private fun provideLoginApi(): LoginApi =
         ApiProvider.jungBinRetroFitBuilder.create(LoginApi::class.java)
 

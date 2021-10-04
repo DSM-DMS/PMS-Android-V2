@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
-class IntroduceClubApiImpl {
+class ProvideIntroduceClubApi {
     private fun providerIntroduceClubApi(): IntroduceClubApi =
         ApiProvider.jiWooRetrofitBuilder.create(
             IntroduceClubApi::class.java

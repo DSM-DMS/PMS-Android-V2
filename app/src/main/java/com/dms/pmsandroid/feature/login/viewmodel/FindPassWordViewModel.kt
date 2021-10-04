@@ -6,12 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.login.LoginApiImpl
+import com.dms.pmsandroid.data.remote.login.ProvideLoginApi
 import com.dms.pmsandroid.feature.mypage.model.ResetPasswordRequest
-import java.time.LocalDateTime
 
 class FindPassWordViewModel(
-    private val loginApiImpl: LoginApiImpl,
+    private val provideLoginApi: ProvideLoginApi,
     private val localStorage: SharedPreferenceStorage
 ) : ViewModel() {
     val email = MutableLiveData<String>()
@@ -37,7 +36,7 @@ class FindPassWordViewModel(
     private fun sendResetPasswordEmail() {
         inProgress.value = true
         val request = ResetPasswordRequest(email.value.toString())
-        loginApiImpl.resetPassword(request).subscribe { response ->
+        provideLoginApi.resetPassword(request).subscribe { response ->
             when (response.code()) {
                 200 -> {
                     doneResetPassword.call()

@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.login.LoginApiImpl
+import com.dms.pmsandroid.data.remote.login.ProvideLoginApi
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class LoginViewModel(
-    private val apiImpl: LoginApiImpl,
+    private val apiProvide: ProvideLoginApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
@@ -40,7 +40,7 @@ class LoginViewModel(
         if (doneInput.value!!) {
             _inProgress.value = true
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
-            apiImpl.loginApi(request).subscribe({
+            apiProvide.loginApi(request).subscribe({
                 when (it.code()) {
                     200 -> {
                         if (autoLogin.value!!) {

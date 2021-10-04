@@ -1,20 +1,17 @@
 package com.dms.pmsandroid.feature.mypage.viewmodel
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.login.LoginApiImpl
+import com.dms.pmsandroid.data.remote.login.ProvideLoginApi
 import com.dms.pmsandroid.feature.mypage.model.ChangePasswordRequest
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class ChangePasswordViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage,
-    private val loginApiImpl: LoginApiImpl
+    private val provideLoginApi: ProvideLoginApi
 ) : ViewModel() {
     val prePassword = MutableLiveData<String>()
     val newPassword = MutableLiveData<String>()
@@ -51,7 +48,7 @@ class ChangePasswordViewModel(
             val token = sharedPreferenceStorage.getInfo("access_token")
             val changePasswordRequest =
                 ChangePasswordRequest(newPassword.value!!, prePassword.value!!)
-            loginApiImpl.changePassword(token, changePasswordRequest).subscribe { response ->
+            provideLoginApi.changePassword(token, changePasswordRequest).subscribe { response ->
                 _inProgress.value = false
                 when (response.code()) {
                     201 -> {

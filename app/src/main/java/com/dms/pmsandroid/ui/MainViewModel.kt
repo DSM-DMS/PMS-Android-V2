@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.login.LoginApiImpl
+import com.dms.pmsandroid.data.remote.login.ProvideLoginApi
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class MainViewModel(
-    private val loginApiImpl: LoginApiImpl,
+    private val provideLoginApi: ProvideLoginApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
@@ -46,7 +46,7 @@ class MainViewModel(
 
     private fun doLogin(email: String, password: String) {
         val request = LoginRequest(email, password)
-        loginApiImpl.loginApi(request).subscribe({ response ->
+        provideLoginApi.loginApi(request).subscribe({ response ->
             if (response.isSuccessful) {
                 sharedPreferenceStorage.saveInfo(response.body()!!.accessToken, "access_token")
             } else {

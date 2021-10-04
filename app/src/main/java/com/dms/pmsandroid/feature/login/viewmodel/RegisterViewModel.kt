@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.SingleLiveEvent
-import com.dms.pmsandroid.data.remote.login.LoginApiImpl
+import com.dms.pmsandroid.data.remote.login.ProvideLoginApi
 import com.dms.pmsandroid.feature.login.model.RegisterRequest
 
 class
-RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
+RegisterViewModel(private val apiProvide: ProvideLoginApi) : ViewModel() {
 
     val userName = MutableLiveData<String>()
     val nEmptyName = MutableLiveData(false)
@@ -40,7 +40,7 @@ RegisterViewModel(private val apiImpl: LoginApiImpl) : ViewModel() {
         if (doneInput.value == true) {
             _inProgress.value = true
             val request = RegisterRequest(userEmail.value!!, userName.value!!, userPassword.value!!)
-            apiImpl.registerApi(request).subscribe({ subscribe ->
+            apiProvide.registerApi(request).subscribe({ subscribe ->
                 when (subscribe.code()) {
                     201 -> {
                         _toastMessage.value = "회원가입에 성공하셨습니다"

@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
-class MealApiImpl {
+class ProvideMealApi {
     private fun provideMealApi(): MealApi = ApiProvider.jiWooRetrofitBuilder.create(MealApi::class.java)
 
     fun getMeal(accessToken:String,dateTime:String):@NonNull Single<Response<MealResponse>> = provideMealApi().getMeal(accessToken,dateTime)

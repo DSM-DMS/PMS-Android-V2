@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.meal.MealApiImpl
+import com.dms.pmsandroid.data.remote.meal.ProvideMealApi
 import com.dms.pmsandroid.feature.meal.entity.Meal
 import com.dms.pmsandroid.feature.meal.model.MealPictureResponse
 import com.dms.pmsandroid.feature.meal.model.MealResponse
@@ -14,7 +14,7 @@ import com.dms.pmsandroid.feature.meal.model.toEntity
 import java.time.format.DateTimeFormatter
 
 class MealViewModel(
-    private val mealApiImpl: MealApiImpl,
+    private val provideMealApi: ProvideMealApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
@@ -36,7 +36,7 @@ class MealViewModel(
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val date = date.value?.format(formatter) ?: ""
-        mealApiImpl.getMeal(accessToken, date).subscribe({ response ->
+        provideMealApi.getMeal(accessToken, date).subscribe({ response ->
             if (response.isSuccessful) {
                 _meals.value = response.body()?.toEntity()
             } else {
@@ -49,7 +49,7 @@ class MealViewModel(
     }
 
     private fun getMealPicture(accessToken: String, date: String) {
-        mealApiImpl.getMealPicture(accessToken, date).subscribe({
+        provideMealApi.getMealPicture(accessToken, date).subscribe({
             if(it.isSuccessful){
                 _mealsPicture.value = it.body()
             }else{

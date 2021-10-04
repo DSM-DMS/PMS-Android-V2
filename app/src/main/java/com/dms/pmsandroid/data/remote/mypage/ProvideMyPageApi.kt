@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
-class MyPageApiImpl {
+class ProvideMyPageApi {
     private fun providerMyPageApi(): MyPageApi =
         ApiProvider.jungBinRetroFitBuilder.create(MyPageApi::class.java)
 

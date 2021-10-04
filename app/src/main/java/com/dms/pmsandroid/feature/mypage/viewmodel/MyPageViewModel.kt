@@ -6,12 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.mypage.MyPageApiImpl
+import com.dms.pmsandroid.data.remote.mypage.ProvideMyPageApi
 import com.dms.pmsandroid.feature.mypage.model.*
-import java.lang.Exception
 
 class MyPageViewModel(
-    private val myPageApiImpl: MyPageApiImpl,
+    private val provideMyPageApi: ProvideMyPageApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
@@ -41,7 +40,7 @@ class MyPageViewModel(
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val nameRequest = ChangeNameRequest(newName.value!!.toString())
-        myPageApiImpl.changeUserNameApi(accessToken, nameRequest).subscribe { nameResponse ->
+        provideMyPageApi.changeUserNameApi(accessToken, nameRequest).subscribe { nameResponse ->
             if (nameResponse.isSuccessful) {
                 _toastMessage.value = Event("변경에 성공했습니다")
                 loadBaseInfo()
@@ -52,7 +51,7 @@ class MyPageViewModel(
     fun studentCertification() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val request = StudentCertificationResponse(certification.value!!)
-        myPageApiImpl.certificationStudentApi(accessToken, request).subscribe { response ->
+        provideMyPageApi.certificationStudentApi(accessToken, request).subscribe { response ->
             when (response.code()) {
                 201 -> {
                     _toastMessage.value = Event("학생 등록에 성공하셨습니다")
@@ -81,7 +80,7 @@ class MyPageViewModel(
             val number =
                 students.value!![index].studentNumber
             val accessToken = sharedPreferenceStorage.getInfo("access_token")
-            myPageApiImpl.getUserApi(accessToken, number).subscribe { it ->
+            provideMyPageApi.getUserApi(accessToken, number).subscribe { it ->
                 if (it.isSuccessful) {
                     _studentInfo.value = it.body()
                 }
@@ -92,7 +91,7 @@ class MyPageViewModel(
 
     fun loadBaseInfo() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.getBasicInfo(accessToken).subscribe({
+        provideMyPageApi.getBasicInfo(accessToken).subscribe({
             if (it.isSuccessful) {
                 _info.value = it.body()
                 if (it.body() != null) {
@@ -117,7 +116,7 @@ class MyPageViewModel(
     fun deleteStudent(number: Int) {
         val request = DeleteStudentRequest(number)
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.deleteStudent(accessToken, request).subscribe { response ->
+        provideMyPageApi.deleteStudent(accessToken, request).subscribe { response ->
             if (response.isSuccessful) {
                 loadBaseInfo()
             } else {
