@@ -86,4 +86,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="find_password_comment">이메일주소로 새 비밀번호 확인 메일이 전송됩니다. 해당메일에는 새 비밀번호를 확인할 수 있는 링크가 있습니다. 링크를 클릭해 새 비밀번호를 확인하세요.\n(링크는 메일전송후 30분동안만 유효합니다)</string>
+    <string name="change_password_comment">비밀번호 찾기이후 5분안에 들어오셨다면 임시비밀번호가 자동으로 입력되어있습니다.</string>
 </resources>
