@@ -23,7 +23,6 @@ class FindPassWordViewModel(private val loginApiImpl: LoginApiImpl) : ViewModel(
         } else {
             toastMessage.value = "이메일을 입력해주세요"
         }
-
     }
 
     private fun sendResetPasswordEmail() {

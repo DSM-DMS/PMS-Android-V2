@@ -9,8 +9,8 @@ import com.dms.pmsandroid.data.remote.login.LoginApiImpl
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class LoginViewModel(
-        private val apiImpl: LoginApiImpl,
-        private val sharedPreferenceStorage: SharedPreferenceStorage
+    private val apiImpl: LoginApiImpl,
+    private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val userEmail = MutableLiveData<String>()
@@ -26,52 +26,57 @@ class LoginViewModel(
     val doneInput = MutableLiveData(false)
 
     private val _doneLogin = MutableLiveData(false)
-    val doneLogin : LiveData<Boolean> get() = _doneLogin
+    val doneLogin: LiveData<Boolean> get() = _doneLogin
 
     private val _toastMessage = MutableLiveData<String>()
-    val toastMessage : LiveData<String> get() = _toastMessage
+    val toastMessage: LiveData<String> get() = _toastMessage
 
     private val _inProgress = MutableLiveData(false)
     val inProgress: LiveData<Boolean> get() = _inProgress
 
     val autoLogin = MutableLiveData(false)
 
-    fun login(){
-        if(doneInput.value!!){
+    fun login() {
+        if (doneInput.value!!) {
             _inProgress.value = true
             val request = LoginRequest(userEmail.value!!, userPassword.value!!)
             apiImpl.loginApi(request).subscribe({
-                when(it.code()){
-                    200->{
-                        if(autoLogin.value!!){
-                            sharedPreferenceStorage.saveInfo(userEmail.value!!,"user_email")
-                            sharedPreferenceStorage.saveInfo(userPassword.value!!,"user_password")
+                when (it.code()) {
+                    200 -> {
+                        if (autoLogin.value!!) {
+                            sharedPreferenceStorage.saveInfo(userEmail.value!!, "user_email")
+                            sharedPreferenceStorage.saveInfo(userPassword.value!!, "user_password")
                         }
-                        sharedPreferenceStorage.saveInfo(it.body()!!.accessToken,"access_token")
+                        sharedPreferenceStorage.saveInfo(it.body()!!.accessToken, "access_token")
                         _doneLogin.value = true
                     }
-                    else->{
+                    else -> {
                         _toastMessage.value = "잘못된 로그인 정보입니다"
                     }
                 }
                 _inProgress.value = false
-            },{
+            }, {
                 _toastMessage.value = "로그인에 실패하였습니다"
                 _inProgress.value = false
             })
-        }
-        else{
+        } else {
             _toastMessage.value = "정보를 모두 입력해주세요"
         }
     }
 
-    fun findPassword(){
+    fun findPassword() {
+        clear()
         findPassword.call()
     }
 
-    fun needRegister(){
+    fun needRegister() {
+        clear()
+        needRegister.call()
+    }
+
+    private fun clear() {
         userEmail.value = null
         userPassword.value = null
-        needRegister.call()
+        _toastMessage.value = null
     }
 }

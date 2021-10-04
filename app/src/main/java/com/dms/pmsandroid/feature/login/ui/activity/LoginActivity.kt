@@ -51,7 +51,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         vm.run {
             needRegister.observe(this@LoginActivity, {
                 startRegister()
-
             })
 
             findPassword.observe(this@LoginActivity, {

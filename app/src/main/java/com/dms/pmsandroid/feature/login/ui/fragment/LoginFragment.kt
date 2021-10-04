@@ -37,7 +37,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override fun observeEvent() {
         vm.run {
             toastMessage.observe(viewLifecycleOwner, {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                if(it!=null){
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
             })
             userEmail.observe(viewLifecycleOwner, {
                 vm.emailDone.value = !it.isNullOrBlank()
