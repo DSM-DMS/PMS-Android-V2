@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.login.ProvideLoginApi
+import com.dms.pmsandroid.data.remote.notification.ProvideNotificationApi
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 
 class LoginViewModel(
     private val apiProvide: ProvideLoginApi,
+    private val notificationApi: ProvideNotificationApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
@@ -49,6 +51,7 @@ class LoginViewModel(
                         sharedPreferenceStorage.saveInfo(userPassword.value!!, "user_password")
                         sharedPreferenceStorage.saveInfo(it.body()!!.accessToken, "access_token")
                         _doneLogin.value = true
+                        notificationApi.subscribeNotification() // fcm 구독 시작
                     }
                     else -> {
                         _toastMessage.value = "잘못된 로그인 정보입니다"

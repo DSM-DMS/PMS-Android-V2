@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.mypage.ProvideMyPageApi
+import com.dms.pmsandroid.data.remote.notification.ProvideNotificationApi
 import com.dms.pmsandroid.feature.mypage.model.*
 
 class MyPageViewModel(
     private val provideMyPageApi: ProvideMyPageApi,
+    private val notificationApi: ProvideNotificationApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
@@ -37,6 +39,7 @@ class MyPageViewModel(
     init {
         studentIndex.value = Event(sharedPreferenceStorage.getIntInfo("student_index"))
     }
+
     fun changeName() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         val nameRequest = ChangeNameRequest(newName.value!!.toString())
@@ -111,6 +114,7 @@ class MyPageViewModel(
     fun logout() {
         sharedPreferenceStorage.clearAll()
         successCertifitcation.value = false
+        notificationApi.unSubscribeNotification()
     }
 
     fun deleteStudent(number: Int) {
@@ -125,8 +129,8 @@ class MyPageViewModel(
         }
     }
 
-    fun saveIndex(index: Int){
-        sharedPreferenceStorage.saveInfo(index,"student_index")
+    fun saveIndex(index: Int) {
+        sharedPreferenceStorage.saveInfo(index, "student_index")
     }
 
 }
