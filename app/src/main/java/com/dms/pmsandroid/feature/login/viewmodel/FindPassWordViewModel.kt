@@ -46,4 +46,9 @@ class FindPassWordViewModel(private val loginApiImpl: LoginApiImpl) : ViewModel(
         }
     }
 
+    fun clear(){
+        toastMessage.value = null
+        doneInput.value = false
+    }
+
 }

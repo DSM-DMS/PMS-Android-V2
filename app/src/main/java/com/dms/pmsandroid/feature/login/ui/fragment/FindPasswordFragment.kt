@@ -36,6 +36,7 @@ class FindPasswordFragment :
             setCustomAnimations(R.anim.silde_in_up, R.anim.slide_out_down)
             replace(R.id.login_container, LoginFragment()).commit()
         }
+        vm.clear()
     }
 
     override fun observeEvent() {
@@ -44,7 +45,9 @@ class FindPasswordFragment :
                 vm.doneInput.value = it.contains('@') && it.contains('.')
             })
             toastMessage.observe(viewLifecycleOwner, {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                if(it!=null){
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
             })
             doneResetPassword.observe(viewLifecycleOwner, {
                 finishFindPassword()
