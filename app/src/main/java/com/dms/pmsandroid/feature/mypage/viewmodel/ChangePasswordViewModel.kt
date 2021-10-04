@@ -28,6 +28,8 @@ class ChangePasswordViewModel(
     private val _toast = MutableLiveData<String>()
     val toast: LiveData<String> get() = _toast
 
+    val resetPassword = MutableLiveData<Boolean>()
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkResetPasswordTime() {
         val savedTimeString = sharedPreferenceStorage.getInfo("reset_password_time")
@@ -36,6 +38,7 @@ class ChangePasswordViewModel(
             val currentTime = System.currentTimeMillis()
             val minuteDiff = (currentTime - savedTime)/60000
             if(minuteDiff<6){
+                resetPassword.value = true
                 prePassword.value = sharedPreferenceStorage.getInfo("user_password")
             }
         }
