@@ -2,11 +2,15 @@ package com.dms.pmsandroid.feature.fcm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
+import com.dms.pmsandroid.feature.mypage.ui.activity.OutingContentActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.koin.android.ext.android.inject
@@ -44,10 +48,18 @@ class FCMService : FirebaseMessagingService() {
                 NotificationCompat.Builder(applicationContext)
             }
 
+        val outingNotificationIntent = Intent(this, OutingContentActivity::class.java)
+
+        val resultPendingIntent = TaskStackBuilder.create(this).run {
+            addNextIntent(outingNotificationIntent)
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
         builder.run {
             setSmallIcon(R.mipmap.ic_launcher)
             setContentTitle(message.notification?.title)
             setContentText(message.notification?.body)
+            setContentIntent(resultPendingIntent)
         }
 
         val notification = builder.build()
