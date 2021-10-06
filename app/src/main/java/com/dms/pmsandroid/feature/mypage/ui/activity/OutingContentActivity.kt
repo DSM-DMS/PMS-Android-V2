@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
+import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.databinding.ActivityOutingContentBinding
 import com.dms.pmsandroid.feature.introduce.ui.HorizontalItemDecorator
 import com.dms.pmsandroid.feature.introduce.ui.VerticalItemDecorator
 import com.dms.pmsandroid.feature.mypage.adapter.OutingAdapter
 import com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel
 import org.koin.android.ext.android.bind
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -22,15 +24,13 @@ class OutingContentActivity :
     BaseActivity<ActivityOutingContentBinding>(R.layout.activity_outing_content) {
 
     override val vm: OutingContentViewModel by viewModel()
+    private val sharedPreferenceStorage: SharedPreferenceStorage by inject()
     private val outingAdapter by lazy { OutingAdapter(vm, binding.outingRc.context) }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val number = intent.getIntExtra("number", 0)
-        if (number != 0) {
-            vm.loadOuting(number)
-        }
+        vm.loadOuting()
         binding.outingRc.adapter = outingAdapter
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = RecyclerView.VERTICAL

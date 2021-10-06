@@ -83,6 +83,7 @@ class MyPageViewModel(
             val number =
                 students.value!![index].studentNumber
             val accessToken = sharedPreferenceStorage.getInfo("access_token")
+            sharedPreferenceStorage.saveInfo(number, "student_number")
             provideMyPageApi.getUserApi(accessToken, number).subscribe { it ->
                 if (it.isSuccessful) {
                     _studentInfo.value = it.body()

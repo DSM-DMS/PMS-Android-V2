@@ -14,7 +14,8 @@ class OutingContentViewModel(
     private val _outing = MutableLiveData<OutingListResponse>()
     val outings: MutableLiveData<OutingListResponse> get() = _outing
 
-    fun loadOuting(number: Int) {
+    fun loadOuting() {
+        val number = sharedPreferenceStorage.getIntInfo("student_number")
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         provideMyPageApi.getOutingApi(accessToken, number).subscribe({
             if (it.isSuccessful) {

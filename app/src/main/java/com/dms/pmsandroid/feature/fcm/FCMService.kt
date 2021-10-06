@@ -48,7 +48,7 @@ class FCMService : FirebaseMessagingService() {
                 NotificationCompat.Builder(applicationContext)
             }
 
-        val outingNotificationIntent = Intent(this, OutingContentActivity::class.java)
+        val outingNotificationIntent = Intent(applicationContext, OutingContentActivity::class.java)
 
         val resultPendingIntent = TaskStackBuilder.create(this).run {
             addNextIntent(outingNotificationIntent)

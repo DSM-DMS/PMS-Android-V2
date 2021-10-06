@@ -38,7 +38,12 @@
             android:name=".feature.mypage.ui.activity.OutingContentActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".ui.MainActivity"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity" >
+            <intent-filter>
+                <action android:name=".feature.mypage.ui.activity.OutingContentActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".feature.notify.ui.activity.GalleryDetailActivity"
             android:screenOrientation="portrait"
