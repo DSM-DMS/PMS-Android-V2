@@ -42,16 +42,15 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
     }
 
     fun showAddStudentDialog() {
-        activity?.supportFragmentManager?.let { it1 ->
-            MyPageAddStudentDialog(vm).show(
-                it1,
-                "AddStudentDialog"
-            )
-        }
+        MyPageAddStudentDialog(vm).show(
+            requireActivity().supportFragmentManager,
+            "AddStudentDialog"
+        )
+
     }
 
-    private fun showChangeName(){
-        ChangeNameDialog(vm).show(requireActivity().supportFragmentManager,"changeNameDialog")
+    private fun showChangeName() {
+        ChangeNameDialog(vm).show(requireActivity().supportFragmentManager, "changeNameDialog")
     }
 
 
@@ -76,7 +75,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 showAddStudentDialog()
             }
             studentParentEditImg.setOnClickListener {
-                if(requireActivity().supportFragmentManager.findFragmentByTag("changeNameDialog")?.isAdded != true){
+                if (requireActivity().supportFragmentManager.findFragmentByTag("changeNameDialog")?.isAdded != true) {
                     showChangeName()
                 }
             }

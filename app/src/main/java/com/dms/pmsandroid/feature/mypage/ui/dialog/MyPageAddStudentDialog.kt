@@ -12,7 +12,8 @@ import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MyPageAddStudentDialog(override val vm: MyPageViewModel) : BaseDialog<DialogStudentPlusBinding>(R.layout.dialog_student_plus){
+class MyPageAddStudentDialog(override val vm: MyPageViewModel) :
+    BaseDialog<DialogStudentPlusBinding>(R.layout.dialog_student_plus) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,7 +21,7 @@ class MyPageAddStudentDialog(override val vm: MyPageViewModel) : BaseDialog<Dial
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.addstudentConfirmTv.setOnClickListener {
-            if(binding.checkcodeEt.text.length==6){
+            if (binding.checkcodeEt.text.length == 6) {
                 dismiss()
                 vm.studentCertification()
             }

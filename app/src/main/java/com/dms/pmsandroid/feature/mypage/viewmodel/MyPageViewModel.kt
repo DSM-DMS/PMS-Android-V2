@@ -73,6 +73,7 @@ class MyPageViewModel(
 
                 }
             }
+            certification.value = null
 
         }
     }
