@@ -107,6 +107,8 @@ class MyPageViewModel(
                 if (it.body()!!.students.isNotEmpty()) {
                     successCertifitcation.value = true
                     loadStudentInfo(studentIndex.value!!.peekContent())
+                } else {
+                    successCertifitcation.value = false
                 }
             }
         }, {
