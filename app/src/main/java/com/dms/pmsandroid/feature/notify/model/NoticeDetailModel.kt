@@ -7,7 +7,7 @@ data class NoticeDetailModel(
     @SerializedName("upload-date") val uploadDate: String,
     val title: String,
     val body: String,
-    val writer: String,
+    val writer: String?,
     val attach: List<DetailAttach>,
     val comment:List<CommentModel>
 )
