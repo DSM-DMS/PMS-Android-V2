@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
-class NotifyApiImpl {
+class ProvideNotifyApi {
     private fun provideNotifyApi(): NotifyApi =
         ApiProvider.jiWooRetrofitBuilder.create(NotifyApi::class.java)
 
