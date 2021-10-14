@@ -126,6 +126,7 @@ class MyPageViewModel(
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
         provideMyPageApi.deleteStudent(accessToken, request).subscribe { response ->
             if (response.isSuccessful) {
+                studentIndex.value = Event(0)
                 loadBaseInfo()
             } else {
                 _toastMessage.value = Event("학생삭제를 실패하였습니다")

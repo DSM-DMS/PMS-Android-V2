@@ -366,13 +366,13 @@
             android:fontFamily="@font/nanumsquarebold"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@{studentName.length()>0?studentNumber+studentName:`학생추가하기`}"
+            android:text="@{vm.students.size()>0&amp;vm.successCertifitcation?vm.students[vm.studentIndex.peekContent()].studentName+vm.students[vm.studentIndex.peekContent()].studentNumber:`학생추가하기`}"
             android:textColor="@color/white"
+            app:drawableEndCompat="@drawable/ic_baseline_arrow_drop_down_white"
             app:layout_constraintBottom_toBottomOf="@+id/student_parent_edit_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/student_parent_edit_img"
-            tools:text="name"
-            app:drawableEndCompat="@drawable/ic_baseline_arrow_drop_down_white" />
+            tools:text="name" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/change_pw_cv"

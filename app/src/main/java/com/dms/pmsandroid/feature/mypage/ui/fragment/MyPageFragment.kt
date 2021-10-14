@@ -133,6 +133,9 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             })
 
             students.observe(viewLifecycleOwner, {
+                if(it.isEmpty()){
+                    successCertifitcation.value = false
+                }
                 changeStudent(it[studentIndex.value!!.peekContent()])
             })
 
@@ -142,7 +145,6 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                 if (students.value != null) {
                     changeStudent(students.value!![it])
                 }
-
             })
 
             studentInfo.observe(viewLifecycleOwner, {
