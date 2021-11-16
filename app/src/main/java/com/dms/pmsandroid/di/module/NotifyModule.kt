@@ -8,7 +8,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val notifyModule = module {
-    single { ProvideNotifyApi() }
+    single { ProvideNotifyApi(get()) }
 
     viewModel { GalleryDetailViewModel(get()) }
     viewModel { NotifyViewModel(get(),get()) }

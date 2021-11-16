@@ -6,7 +6,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val calendarModule = module {
-    single { ProvideCalendarApi() }
+    single { ProvideCalendarApi(get()) }
 
     viewModel { CalendarViewModel(get(),get(),get()) }
 }

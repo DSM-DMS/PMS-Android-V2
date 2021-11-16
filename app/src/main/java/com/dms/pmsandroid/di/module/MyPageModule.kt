@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val myPageModule = module {
     viewModel { MyPageViewModel(get(), get(), get()) }
 
-    single { ProvideMyPageApi() }
+    single { ProvideMyPageApi(get()) }
 
     viewModel { OutingContentViewModel(get(), get()) }
 

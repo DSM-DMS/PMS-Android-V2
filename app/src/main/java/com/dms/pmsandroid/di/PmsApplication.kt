@@ -21,7 +21,8 @@ class PmsApplication : Application() {
                     mealModule,
                     myPageModule,
                     notifyModule,
-                    notificationModule
+                    notificationModule,
+                    networkModule
                 )
             )
         }
