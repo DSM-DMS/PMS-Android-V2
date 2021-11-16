@@ -8,14 +8,13 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface IntroduceClubApi {
-
-    @GET("potatochips.live/api//introduce/clubs")
+    @GET("/introduce/clubs")
     fun club(
             @Header("Authorization") accessToken: String
     ): Single<Response<ClubListModel>>
 
 
-    @GET("potatochips.live/api//introduce/clubs/{clubname}")
+    @GET("/introduce/clubs/{clubname}")
     fun clubDetail(
             @Header("Authorization")accessToken: String,
             @Path("clubname")clubname:String

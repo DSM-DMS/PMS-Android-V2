@@ -100,7 +100,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun startGalleryDetail(id: Int) {
         val galleryIntent = Intent(this, GalleryDetailActivity::class.java)
-        galleryIntent.run {
+        galleryIntent.apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             putExtra("id", id)
         }

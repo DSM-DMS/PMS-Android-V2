@@ -9,9 +9,9 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface MealApi {
-    @GET("potatochips.live/api//event/meal/{datetime}")
+    @GET("/event/meal/{datetime}")
     fun getMeal(@Header("Authorization") accessToken: String,@Path("datetime")time:String): Single<Response<MealResponse>>
 
-    @GET("potatochips.live/api//event/meal/picture/{datetime}")
+    @GET("/event/meal/picture/{datetime}")
     fun getMealPicture(@Header("Authorization") accessToken: String,@Path("datetime")time:String): Single<Response<MealPictureResponse>>
 }

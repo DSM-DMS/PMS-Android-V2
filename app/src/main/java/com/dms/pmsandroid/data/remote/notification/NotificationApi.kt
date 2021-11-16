@@ -9,13 +9,13 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface NotificationApi {
-    @POST("smooth-bear.live/notification")
+    @POST("/notification")
     fun subscribeNotification(
         @Header("Authorization") token: String,
         @Body request: NotificationRequest
     ): Single<Response<Unit>>
 
-    @DELETE("smooth-bear.live/notification")
+    @DELETE("/notification")
     fun unSubscribeNotification(@Header("Authorization") token: String): Single<Response<Unit>>
 
 }

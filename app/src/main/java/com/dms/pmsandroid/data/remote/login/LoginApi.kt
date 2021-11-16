@@ -13,18 +13,19 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 
 interface LoginApi {
-    @POST("smooth-bear.live/user")
+
+    @POST("/user")
     fun register(@Body request: RegisterRequest): Single<Response<Void>>
 
-    @POST("smooth-bear.live/auth")
+    @POST("/auth")
     fun login(@Body request: LoginRequest): Single<Response<LoginResponse>>
 
-    @PUT("smooth-bear.live/auth/password")
+    @PUT("/password")
     fun changePassword(
         @Header("Authorization") token: String,
         @Body request: ChangePasswordRequest
     ): Single<Response<Void>>
 
-    @POST("smooth-bear.live/auth/password/reset")
+    @POST("/auth/password/reset")
     fun resetPassword(@Body request: ResetPasswordRequest): Single<Response<Void>>
 }

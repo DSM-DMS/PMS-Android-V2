@@ -3,6 +3,8 @@ package com.dms.pmsandroid.di.module
 import android.util.Log
 import com.dms.pmsandroid.BuildConfig
 import com.dms.pmsandroid.data.interceptor.AuthInterceptor
+import com.dms.pmsandroid.data.remote.PotatoChipApi
+import com.dms.pmsandroid.data.remote.SmoothBearApi
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,14 +20,13 @@ val networkModule = module {
     RxDogTag.install()
     RxJavaPlugins.setErrorHandler { Log.d("RxError", it.toString()) }
 
-    val BASE_URL = "https://api."
     val CONNECT_TIME_OUT: Long = 15
     val WRITE_TIME_OUT: Long = 15
     val READ_TIME_OUT: Long = 15
 
     single {
         HttpLoggingInterceptor().apply {
-            level = if(BuildConfig.DEBUG){
+            level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE
@@ -46,12 +47,11 @@ val networkModule = module {
     factory { AuthInterceptor(get()) }
 
     single {
-        Retrofit.Builder().apply {
-            baseUrl(BASE_URL)
-            client(get<OkHttpClient>())
-            addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            addConverterFactory(GsonConverterFactory.create())
-        }.build()
+        SmoothBearApi(get())
+    }
+
+    single {
+        PotatoChipApi(get())
     }
 }
 

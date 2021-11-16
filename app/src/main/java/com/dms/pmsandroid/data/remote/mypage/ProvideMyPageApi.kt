@@ -1,15 +1,15 @@
 package com.dms.pmsandroid.data.remote.mypage
 
+import com.dms.pmsandroid.data.remote.SmoothBearApi
 import com.dms.pmsandroid.feature.mypage.model.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
-import retrofit2.Retrofit
 
-class ProvideMyPageApi(retrofit: Retrofit) {
-    private val myPageApi = retrofit.create(MyPageApi::class.java)
+class ProvideMyPageApi(api: SmoothBearApi) {
+    private val myPageApi = api.retrofit.create(MyPageApi::class.java)
 
     fun getBasicInfo(accessToken: String): @NonNull Single<Response<UserListResponse>> =
         myPageApi.getStudents(accessToken)

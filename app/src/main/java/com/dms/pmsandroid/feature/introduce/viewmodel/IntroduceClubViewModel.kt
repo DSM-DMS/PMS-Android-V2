@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.Introduce.ProvideIntroduceClubApi
+import com.dms.pmsandroid.data.remote.introduce.ProvideIntroduceClubApi
 import com.dms.pmsandroid.feature.introduce.model.ClubListModel
 
 class IntroduceClubViewModel(

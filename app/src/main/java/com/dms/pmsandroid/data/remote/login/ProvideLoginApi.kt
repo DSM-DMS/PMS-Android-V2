@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.data.remote.login
 
+import com.dms.pmsandroid.data.remote.SmoothBearApi
 import com.dms.pmsandroid.feature.login.model.LoginRequest
 import com.dms.pmsandroid.feature.login.model.LoginResponse
 import com.dms.pmsandroid.feature.login.model.RegisterRequest
@@ -10,11 +11,10 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
-import retrofit2.Retrofit
 
-class ProvideLoginApi(retrofit: Retrofit) {
+class ProvideLoginApi(api: SmoothBearApi) {
 
-    private val loginApi = retrofit.create(LoginApi::class.java)
+    private val loginApi = api.retrofit.create(LoginApi::class.java)
 
     fun registerApi(request: RegisterRequest): @NonNull Single<Response<Void>> =
         loginApi.register(request)
