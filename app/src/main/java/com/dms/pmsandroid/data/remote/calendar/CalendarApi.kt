@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 interface CalendarApi {
-    @GET("/calendar")
+    @GET("potatochips.live/api/calendar")
     fun schedules(@Header("Authorization") accessToken: String): Single<Response<JsonObject>>
 
 }

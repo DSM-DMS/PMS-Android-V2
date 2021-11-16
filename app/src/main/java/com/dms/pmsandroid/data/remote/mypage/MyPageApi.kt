@@ -6,40 +6,40 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface MyPageApi {
-    @GET("/user")
+    @GET("smooth-bear.live/user")
     fun getStudents(@Header("Authorization") accessToken: String): Single<Response<UserListResponse>>
 
-    @POST("/user/student")
-    fun StudentCertification(
+    @POST("smooth-bear.live/user/student")
+    fun studentCertification(
         @Header("Authorization") accessToken: String,
         @Body request: StudentCertificationResponse
     ): Single<Response<Void>>
 
-    @GET("/user/student/{number}")
+    @GET("smooth-bear.live/user/student/{number}")
     fun getStudentInformation(
         @Header("Authorization") accessToken: String,
         @Path("number") number: Int
     ): Single<Response<BasicInformationResponse>>
 
-    @GET("/user/student/outing/{number}")
+    @GET("smooth-bear.live/user/student/outing/{number}")
     fun getStudentOuting(
         @Header("Authorization") accessToken: String,
         @Path("number") number: Int
     ): Single<Response<OutingListResponse>>
 
-    @GET("/user/student/point/{number}")
+    @GET("smooth-bear.live/user/student/point/{number}")
     fun getStudentPoint(
         @Header("Authorization") accessToken: String,
         @Path("number") number: Int
     ): Single<Response<PointListResponse>>
 
-    @PUT("/user/name")
+    @PUT("smooth-bear.live/user/name")
     fun changeUserName(
         @Header("Authorization") token: String,
         @Body changeNameRequest: ChangeNameRequest
     ): Single<Response<Unit>>
 
-    @HTTP(method = "DELETE", hasBody = true, path = "/user/student")
+    @HTTP(method = "DELETE", hasBody = true, path = "smooth-bear.live/user/student")
     fun deleteStudent(
         @Header("Authorization") token: String,
         @Body request: DeleteStudentRequest

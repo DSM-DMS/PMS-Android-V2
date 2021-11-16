@@ -6,56 +6,56 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface NotifyApi {
-    @GET("/notice")
+    @GET("potatochips.live/api//notice")
     fun getNoticeList(
         @Header("Authorization") accessToken: String,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Single<Response<NoticeResponseModel>>
 
-    @GET("/notice/{notice_id}")
+    @GET("potatochips.live/api//notice/{notice_id}")
     fun getNoticeDetail(
         @Header("Authorization") accessToken: String,
         @Path("notice_id") id: Int
     ): Single<Response<NoticeDetailModel>>
 
-    @GET("/notice/search")
+    @GET("potatochips.live/api//notice/search")
     fun searchNotice(
         @Header("Authorization") accessToken: String,
         @Query("q") keyWord: String
     ): Single<Response<List<NoticeListModel>>>
 
-    @GET("/notice/news")
+    @GET("potatochips.live/api//notice/news")
     fun getHomeNotice(
         @Header("Authorization") accessToken: String,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Single<Response<NoticeResponseModel>>
 
-    @GET("/notice/news/search")
+    @GET("potatochips.live/api//notice/news/search")
     fun searchHome(
         @Header("Authorization") accessToken: String,
         @Query("q") keyWord: String
     ): Single<Response<List<NoticeListModel>>>
 
-    @GET("/gallery")
+    @GET("potatochips.live/api//gallery")
     fun getGallery(
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Single<Response<GalleryListModel>>
 
-    @GET("/gallery/{gallery_id}")
+    @GET("potatochips.live/api//gallery/{gallery_id}")
     fun getGalleryDetail(
         @Path("gallery_id") galleryId: Int
     ): Single<Response<GalleryDetailResponse>>
 
-    @GET("/notice/{comment_id}/comment")
+    @GET("potatochips.live/api//notice/{comment_id}/comment")
     fun getReComments(
         @Header("Authorization") accessToken: String,
         @Path("comment_id") id: Int
     ): Single<Response<List<CommentModel>>>
 
-    @POST("/notice/{notice_id}/comment")
+    @POST("potatochips.live/api//notice/{notice_id}/comment")
     fun postComment(
         @Header("Authorization") accessToken: String,
         @Path("notice_id")noticeId:Int,
