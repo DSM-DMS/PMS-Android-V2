@@ -37,7 +37,6 @@ val networkModule = module {
     single {
         OkHttpClient().newBuilder().apply {
             addInterceptor(get<HttpLoggingInterceptor>())
-            addInterceptor(get<AuthInterceptor>())
             connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
             writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
             readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
@@ -51,7 +50,7 @@ val networkModule = module {
     }
 
     single {
-        PotatoChipApi(get())
+        PotatoChipApi(get(),get())
     }
 }
 
