@@ -18,7 +18,7 @@ class NoticeDetailActivity :
     override val vm: NoticeDetailViewModel by viewModel()
 
     private val noticeAdapter by lazy {
-        NoticeDetailAdapter(vm,this)
+        NoticeDetailAdapter(vm, this)
     }
 
     companion object {
@@ -41,7 +41,7 @@ class NoticeDetailActivity :
 
         binding.run {
             noticeDetailRv.run {
-                recycledViewPool.setMaxRecycledViews(1,0)
+                recycledViewPool.setMaxRecycledViews(1, 0)
                 adapter = noticeAdapter
                 layoutManager = noticeLayoutManager
             }
@@ -55,7 +55,7 @@ class NoticeDetailActivity :
 
     private val dialog = NoticeAttachDialog()
 
-    fun showContent(){
+    fun showContent() {
         dialog.show(supportFragmentManager, "AttachDialogFragment")
     }
 
@@ -66,10 +66,7 @@ class NoticeDetailActivity :
             })
 
             doneReComments.observe(this@NoticeDetailActivity, {
-                if (it) {
-                    vm.doneReComments.value = false
-                    noticeAdapter.notifyDataSetChanged()
-                }
+                noticeAdapter.notifyItemChanged(it)
             })
 
             resetComments.observe(this@NoticeDetailActivity, {
@@ -78,7 +75,7 @@ class NoticeDetailActivity :
                 doneInput = HashMap()
             })
 
-            clickedCommentId.observe(this@NoticeDetailActivity, EventObserver{
+            clickedCommentId.observe(this@NoticeDetailActivity, EventObserver {
                 binding.noticeDetailEt.requestFocus()
                 keyBoardManager.showSoftInput(binding.noticeDetailEt, 0)
             })

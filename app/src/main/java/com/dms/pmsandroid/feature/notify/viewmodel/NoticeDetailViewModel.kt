@@ -22,7 +22,7 @@ class NoticeDetailViewModel(
 
     val reComments = MutableLiveData(HashMap<Int, List<CommentModel>?>())
 
-    val doneReComments = MutableLiveData(false)
+    val doneReComments = MutableLiveData<Int>()
 
     private val _resetComments = MutableLiveData(Event(false))
     val resetComments: LiveData<Event<Boolean>> get() = _resetComments
@@ -43,13 +43,15 @@ class NoticeDetailViewModel(
     }
 
     private fun getReComments(accessToken: String, comments: List<CommentModel>) {
+        var position = 1
         for (comment in comments) {
             val id = comment.id
             provideNotifyApi.getReComments(accessToken, id).subscribe { response ->
                 if (response.isSuccessful) {
                     reComments.value!![id] = response.body()
                 }
-                doneReComments.value = true
+                doneReComments.value = position
+                position += 1
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.di.module
 
+import android.text.format.Time
 import android.util.Log
 import com.dms.pmsandroid.BuildConfig
 import com.dms.pmsandroid.data.interceptor.AuthInterceptor
@@ -33,6 +34,9 @@ val networkModule = module {
     single {
         OkHttpClient().newBuilder().apply {
             addInterceptor(get<HttpLoggingInterceptor>())
+            connectTimeout(15, TimeUnit.SECONDS)
+            writeTimeout(15, TimeUnit.SECONDS)
+            readTimeout(15, TimeUnit.SECONDS)
         }.build()
     }
 
