@@ -20,10 +20,6 @@ val networkModule = module {
     RxDogTag.install()
     RxJavaPlugins.setErrorHandler { Log.d("RxError", it.toString()) }
 
-    val CONNECT_TIME_OUT: Long = 15
-    val WRITE_TIME_OUT: Long = 15
-    val READ_TIME_OUT: Long = 15
-
     single {
         HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
@@ -37,9 +33,6 @@ val networkModule = module {
     single {
         OkHttpClient().newBuilder().apply {
             addInterceptor(get<HttpLoggingInterceptor>())
-            connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
-            writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
-            readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
         }.build()
     }
 

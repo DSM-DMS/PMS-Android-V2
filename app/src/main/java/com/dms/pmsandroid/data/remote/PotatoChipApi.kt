@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PotatoChipApi(okHttpClient: OkHttpClient, authInterceptor: AuthInterceptor) {
     val retrofit: Retrofit = Retrofit.Builder().apply {
-        baseUrl("http://api.potatochips.live")
+        baseUrl("https://api.potatochips.live")
         client(okHttpClient.apply {
             newBuilder().addInterceptor(authInterceptor)
         })
