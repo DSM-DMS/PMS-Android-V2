@@ -2,7 +2,6 @@ package com.dms.pmsandroid.feature.introduce.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
 import com.dms.pmsandroid.feature.introduce.ui.HorizontalItemDecorator
 import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
@@ -24,7 +23,7 @@ class IntroduceClubActivity :
         binding.introClubRc.addItemDecoration(HorizontalItemDecorator(25))
         binding.introClubRc.addItemDecoration(VerticalItemDecorator(20))
         binding.introClubRc.adapter = clubAdapter
-        binding.backBtn.setOnClickListener() {
+        binding.backBtn.setOnClickListener {
             finish()
         }
     }
