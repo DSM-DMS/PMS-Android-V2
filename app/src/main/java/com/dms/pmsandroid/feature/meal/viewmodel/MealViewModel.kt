@@ -9,10 +9,7 @@ import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.meal.ProvideMealApi
 import com.dms.pmsandroid.feature.meal.entity.Meal
 import com.dms.pmsandroid.feature.meal.model.MealPictureResponse
-import com.dms.pmsandroid.feature.meal.model.MealResponse
-import com.dms.pmsandroid.feature.meal.model.toEntity
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class MealViewModel(
     private val provideMealApi: ProvideMealApi,
@@ -32,6 +29,16 @@ class MealViewModel(
 
     private val _mealsPicture = MutableLiveData<MealPictureResponse>()
     val mealPicture: LiveData<MealPictureResponse> get() = _mealsPicture
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun nextDay() {
+        date.value = date.value!!.plusDays(1)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun beforeDay() {
+        date.value = date.value!!.minusDays(1)
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getMeal() {

@@ -45,6 +45,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         binding.mealViewVp.run {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             adapter = mealAdapter
+            offscreenPageLimit = 3
 
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(
@@ -63,7 +64,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     when (position % 3) {
-
+                        
                     }
                     vm.currentPosition.value = position
                 }
