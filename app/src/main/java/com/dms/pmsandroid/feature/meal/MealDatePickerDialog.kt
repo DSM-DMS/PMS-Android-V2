@@ -6,8 +6,6 @@ import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.base.DatePickerDialog
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class MealDatePickerDialog : DatePickerDialog() {
     override val vm: MealViewModel by inject()
@@ -16,37 +14,34 @@ class MealDatePickerDialog : DatePickerDialog() {
         vm.date.value!!
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override var year =
-        date.substring(0, 4).toInt()
+        date.year
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override var month: Int =
-        date.substring(4, 6).toInt()
+        date.monthValue
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override var day: Int =
-        date.substring(6, 8).toInt()
+        date.dayOfMonth
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCompleteClicked() {
-        val getDate = binding.dpYearNp.value.toString() + String.format(
-            "%02d",
-            binding.dpMonthNp.value
-        ) + String.format("%02d", binding.dpDayNp.value)
-        vm.date.value = getDate
-        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA)
-        val calculateDate = LocalDate.parse(getDate, formatter)
-        vm.weekDate.value = calculateDate.dayOfWeek.value
+        vm.date.value = LocalDate.of(binding.dpYearNp.value, binding.dpMonthNp.value, binding.dpDayNp.value)
         vm.getMeal()
         dismiss()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
         vm.date.observe(viewLifecycleOwner,{
-            day = it.substring(6, 8).toInt()
-            month = it.substring(4, 6).toInt()
-            year = it.substring(0,4).toInt()
+            day = it.dayOfMonth
+            month = it.monthValue
+            year = it.year
         })
     }
 }

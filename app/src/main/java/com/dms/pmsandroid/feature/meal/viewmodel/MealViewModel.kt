@@ -11,6 +11,7 @@ import com.dms.pmsandroid.feature.meal.entity.Meal
 import com.dms.pmsandroid.feature.meal.model.MealPictureResponse
 import com.dms.pmsandroid.feature.meal.model.MealResponse
 import com.dms.pmsandroid.feature.meal.model.toEntity
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class MealViewModel(
@@ -18,9 +19,10 @@ class MealViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
-    val date = MutableLiveData<String>()
+    @RequiresApi(Build.VERSION_CODES.O)
+    val date = MutableLiveData(LocalDate.now())
 
-    val weekDate = MutableLiveData<Int>()
+    val currentPosition = MutableLiveData(Int.MAX_VALUE / 2)
 
     private val _showPicture = MutableLiveData(false)
     val showPicture:LiveData<Boolean> get() = _showPicture
@@ -33,19 +35,7 @@ class MealViewModel(
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getMeal() {
-        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        val date = date.value?.format(formatter) ?: ""
-        provideMealApi.getMeal(accessToken, date).subscribe({ response ->
-            if (response.isSuccessful) {
-                _meals.value = response.body()?.toEntity()
-            } else {
-                _meals.value = MealResponse(null, null, null).toEntity()
-            }
-        }, {
-            _meals.value = MealResponse(null, null, null).toEntity()
-        })
-        getMealPicture(accessToken, date)
+
     }
 
     private fun getMealPicture(accessToken: String, date: String) {

@@ -16,10 +16,6 @@ import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.dms.pmsandroid.ui.MainViewModel
 import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
@@ -27,21 +23,17 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     override val vm: MealViewModel by inject()
     private val mainVm: MainViewModel by inject()
 
-    private val adapter by lazy {
+    private val mealAdapter by lazy {
         MealAdapter(vm, requireContext())
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setCurrentTime()
         initView()
         vm.getMeal()
-        changeTime()
         setIndicator()
     }
-
-    private var selectedPosition = Int.MAX_VALUE / 2
 
     private val dateDialog: MealDatePickerDialog by lazy {
         MealDatePickerDialog()
@@ -50,114 +42,57 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     private fun initView() {
 
-        binding.mealViewVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.mealViewVp.adapter = adapter
-        binding.mealViewVp.offscreenPageLimit = 1
+        binding.mealViewVp.run {
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            adapter = mealAdapter
 
-        binding.mealViewVp.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(
-                outRect: Rect,
-                view: View,
-                parent: RecyclerView,
-                state: RecyclerView.State
-            ) {
-                outRect.right = 20
-                outRect.left = 20
-            }
-        })
-        binding.mealViewVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            @RequiresApi(Build.VERSION_CODES.O)
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                when (position % 3) {
-                    0 -> {
-                        if (selectedPosition < position) {
-                            calculateTime(true)
-                        }
-                    }
-                    2 -> {
-                        if (selectedPosition > position) {
-                            calculateTime(false)
-                        }
-                    }
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    outRect.right = 20
+                    outRect.left = 20
                 }
-                selectedPosition = position
-            }
-        })
+            })
 
-        val screenWidth = resources.displayMetrics.widthPixels
-        val pageMargin = resources.getDimension(R.dimen.pageMargin)
-        val pageWidth = screenWidth - (pageMargin * 2) - 50
-        val offsetPx = screenWidth - pageWidth - pageMargin
-        binding.mealViewVp.setPageTransformer { page, position ->
-            page.translationX = -offsetPx * position
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    when (position % 3) {
+
+                    }
+                    vm.currentPosition.value = position
+                }
+            })
+
+            val screenWidth = resources.displayMetrics.widthPixels
+            val pageMargin = resources.getDimension(R.dimen.pageMargin)
+            val pageWidth = screenWidth - (pageMargin * 2) - 50
+            val offsetPx = screenWidth - pageWidth - pageMargin
+
+            setPageTransformer { page, position ->
+                page.translationX = -offsetPx * position
+            }
         }
 
         binding.mealDateCl.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
             dateDialog.show(requireActivity().supportFragmentManager, "MealDatePickerDialog")
         }
-
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setCurrentTime() {
-        val currentTime = LocalDate.now()
-        val dateFormat = currentTime.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
-        val weekDay = currentTime.dayOfWeek
-        vm.run {
-            date.value = dateFormat
-            weekDate.value = weekDay.value
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun changeTime() {
-        binding.mealNextBtn.setOnClickListener {
-            calculateTime(true)
-        }
-        binding.mealBeforeBtn.setOnClickListener {
-            calculateTime(false)
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun calculateTime(isPlus: Boolean) {
-        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA)
-        val calculateDate = LocalDate.parse(vm.date.value, formatter)
-        if (isPlus) {
-            val plusDate = calculateDate.plus(Period.ofDays(1))
-            vm.date.value = plusDate.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
-            vm.weekDate.value = plusDate.dayOfWeek.value
-        } else {
-            val minusDate = calculateDate.minus(Period.ofDays(1))
-            vm.date.value = minusDate.format(DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA))
-            vm.weekDate.value = minusDate.dayOfWeek.value
-        }
-        vm.getMeal()
-    }
-
-    private fun updatePageView() {
-        val position = binding.mealViewVp.currentItem
-        adapter.notifyDataSetChanged()
-        binding.mealViewVp.currentItem = position
     }
 
     private fun setIndicator() {
         binding.mealViewVp.post { binding.mealViewVp.setCurrentItem(Int.MAX_VALUE / 2, false) }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
         vm.run {
-            showPicture.observe(viewLifecycleOwner, {
-                updatePageView()
-            })
-            mealPicture.observe(viewLifecycleOwner, {
-                updatePageView()
-            })
             meals.observe(viewLifecycleOwner, {
-                adapter.setItems(it)
+                mealAdapter.setItems(it)
             })
         }
         mainVm.doneToken.observe(viewLifecycleOwner, {
