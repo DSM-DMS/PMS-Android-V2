@@ -88,7 +88,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:week_time="@{vm.weekDate}"
+                app:week_time="@{vm.date}"
                 tools:text="금요일" />
 
             <androidx.appcompat.widget.AppCompatImageView
