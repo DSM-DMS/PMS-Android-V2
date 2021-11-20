@@ -1,5 +1,6 @@
 package com.dms.pmsandroid.feature.introduce.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -76,7 +77,6 @@ class DeveloperAdapter(val model: ArrayList<DevelopModel>) :
                         .load("http://211.38.86.92/media/pms/static/jeongjiwoo0522.png")
                         .placeholder(R.drawable.ic_baseline_person_24)
                         .into(image)
-
                 }
             }
 

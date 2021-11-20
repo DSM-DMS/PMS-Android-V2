@@ -2,34 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_calendar_it"
-        android:enabled="true"
+        android:id="@+id/calendar_fragment"
         android:icon="@drawable/ic_baseline_calendar_today_24"
-        android:title="@string/title_calendar"
-        app:showAsAction="ifRoom" />
+        android:title="@string/title_calendar" />
     <item
-        android:id="@+id/menu_meal_it"
-        android:enabled="true"
+        android:id="@+id/meal_fragment"
         android:icon="@drawable/ic_baseline_restaurant_24"
-        app:showAsAction="ifRoom"
         android:title="@string/title_meal" />
     <item
-        android:id="@+id/menu_notify_it"
-        android:enabled="true"
+        android:id="@+id/notice_fragment"
         android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="@string/title_notify"
-        app:showAsAction="ifRoom" />
+        android:title="@string/title_notify" />
 
     <item
-        android:id="@+id/menu_info_it"
-        android:enabled="true"
+        android:id="@+id/intro_fragment"
         android:icon="@drawable/ic_baseline_info_24"
-        android:title="@string/title_info"
-        app:showAsAction="ifRoom" />
+        android:title="@string/title_info" />
     <item
-        android:id="@+id/menu_mypage_it"
-        android:enabled="true"
+        android:id="@+id/mypage_fragment"
         android:icon="@drawable/ic_baseline_perm_identity_24"
-        android:title="@string/title_mypage"
-        app:showAsAction="ifRoom" />
+        android:title="@string/title_mypage" />
 </menu>
