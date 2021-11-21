@@ -16,6 +16,7 @@ import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.dms.pmsandroid.ui.MainViewModel
 import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
+import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
@@ -32,7 +33,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         vm.getMeal()
-        setIndicator()
     }
 
     private val dateDialog: MealDatePickerDialog by lazy {
@@ -40,12 +40,16 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initView() {
 
         binding.mealViewVp.run {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             adapter = mealAdapter
             offscreenPageLimit = 3
+
+            setIndicator()
+            setCurrentItem(vm.currentPosition.value!!, false)
 
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(
@@ -64,7 +68,21 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     when (position % 3) {
-                        
+                        0 -> {
+                            if (vm.currentPosition.value!! % 3 == 2) { //이전페이지가 저녁이었을 때
+                                vm.run {
+                                    nextDay()
+                                }
+
+                            }
+                        }
+                        2 -> {
+                            if (vm.currentPosition.value!! % 3 == 0) { //이전페이지가 아침이었을 때
+                                vm.run {
+                                    beforeDay()
+                                }
+                            }
+                        }
                     }
                     vm.currentPosition.value = position
                 }
@@ -78,15 +96,33 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             setPageTransformer { page, position ->
                 page.translationX = -offsetPx * position
             }
+            
         }
 
-        binding.mealDateCl.clicks().debounce(200,TimeUnit.MILLISECONDS).subscribe {
+        binding.mealDateCl.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
             dateDialog.show(requireActivity().supportFragmentManager, "MealDatePickerDialog")
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setIndicator() {
-        binding.mealViewVp.post { binding.mealViewVp.setCurrentItem(Int.MAX_VALUE / 2, false) }
+        val currentTime = LocalDateTime.now()
+
+        when (currentTime.hour) {
+            in 10..14 -> {
+                vm.currentPosition.value = vm.currentPosition.value!! + 1
+            }
+
+            in 15..23 -> {
+                vm.currentPosition.value = vm.currentPosition.value!! + 2
+            }
+        }
+        binding.mealViewVp.post {
+            binding.mealViewVp.setCurrentItem(
+                vm.currentPosition.value!!,
+                false
+            )
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
