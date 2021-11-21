@@ -31,8 +31,10 @@ class MealDatePickerDialog : DatePickerDialog() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCompleteClicked() {
+        vm.meals.value!!.clear()
         vm.date.value = LocalDate.of(binding.dpYearNp.value, binding.dpMonthNp.value, binding.dpDayNp.value)
-        vm.getMeal()
+        vm.currentPosition.value = Int.MAX_VALUE / 2
+        vm.getInitMeal()
         dismiss()
     }
 

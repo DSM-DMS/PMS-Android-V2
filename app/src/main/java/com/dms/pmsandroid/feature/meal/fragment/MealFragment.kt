@@ -13,7 +13,6 @@ import com.dms.pmsandroid.databinding.FragmentMealBinding
 import com.dms.pmsandroid.feature.meal.MealDatePickerDialog
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
-import com.dms.pmsandroid.ui.MainViewModel
 import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
 import java.time.LocalDateTime
@@ -22,7 +21,6 @@ import java.util.concurrent.TimeUnit
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
     override val vm: MealViewModel by inject()
-    private val mainVm: MainViewModel by inject()
 
     private val mealAdapter by lazy {
         MealAdapter(vm, requireContext())
@@ -32,13 +30,13 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        vm.getMeal()
+        vm.currentPosition.value = Int.MAX_VALUE / 2
+        vm.getInitMeal()
     }
 
     private val dateDialog: MealDatePickerDialog by lazy {
         MealDatePickerDialog()
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initView() {
@@ -47,9 +45,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             adapter = mealAdapter
             offscreenPageLimit = 3
-
-            setIndicator()
-            setCurrentItem(vm.currentPosition.value!!, false)
 
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(
@@ -73,7 +68,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                                 vm.run {
                                     nextDay()
                                 }
-
                             }
                         }
                         2 -> {
@@ -96,7 +90,9 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             setPageTransformer { page, position ->
                 page.translationX = -offsetPx * position
             }
-            
+
+            //setIndicator()
+            setCurrentItem(Int.MAX_VALUE / 2, false)
         }
 
         binding.mealDateCl.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
@@ -110,18 +106,12 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
 
         when (currentTime.hour) {
             in 10..14 -> {
-                vm.currentPosition.value = vm.currentPosition.value!! + 1
+                vm.currentPosition.value = Int.MAX_VALUE / 2 + 1
             }
 
             in 15..23 -> {
-                vm.currentPosition.value = vm.currentPosition.value!! + 2
+                vm.currentPosition.value = Int.MAX_VALUE / 2 + 2
             }
-        }
-        binding.mealViewVp.post {
-            binding.mealViewVp.setCurrentItem(
-                vm.currentPosition.value!!,
-                false
-            )
         }
     }
 
@@ -129,13 +119,15 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     override fun observeEvent() {
         vm.run {
             meals.observe(viewLifecycleOwner, {
-                mealAdapter.setItems(it)
+                mealAdapter.setMeal(it)
+                binding.mealViewVp.setCurrentItem(vm.currentPosition.value!!, true)
+            })
+            currentPosition.observe(viewLifecycleOwner, {
+                binding.mealViewVp.setCurrentItem(it, true)
+            })
+            showPicture.observe(viewLifecycleOwner, {
+                mealAdapter.notifyDataSetChanged()
             })
         }
-        mainVm.doneToken.observe(viewLifecycleOwner, {
-            if (it) {
-                vm.getMeal()
-            }
-        })
     }
 }
