@@ -6,19 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.base.Event
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
+import com.dms.pmsandroid.data.remote.login.ProvideLoginApi
 import com.dms.pmsandroid.data.remote.mypage.ProvideMyPageApi
 import com.dms.pmsandroid.data.remote.notification.ProvideNotificationApi
+import com.dms.pmsandroid.feature.login.model.LoginRequest
 import com.dms.pmsandroid.feature.mypage.model.*
 
 class MyPageViewModel(
     private val provideMyPageApi: ProvideMyPageApi,
     private val notificationApi: ProvideNotificationApi,
+    private val provideLoginApi: ProvideLoginApi,
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val certification = MutableLiveData<String>()
 
-    val successCertifitcation = MutableLiveData(false)
+    val successCertification = MutableLiveData(false)
 
     private val _toastMessage = MutableLiveData<Event<String>>()
     val toastMessage: LiveData<Event<String>> get() = _toastMessage
@@ -59,22 +62,18 @@ class MyPageViewModel(
                 201 -> {
                     _toastMessage.value = Event("학생 등록에 성공하셨습니다")
                     loadBaseInfo()
-
                 }
                 400 -> {
                     _toastMessage.value = Event("입력하신 정보의 형식이 잘못되었습니다")
-
                 }
                 401 -> {
                     _toastMessage.value = Event("인증정보가 유효하지 않습니다")
                 }
                 404 -> {
                     _toastMessage.value = Event("해당 학생 정보가 없습니다")
-
                 }
             }
             certification.value = null
-
         }
     }
 
@@ -96,7 +95,7 @@ class MyPageViewModel(
 
     fun loadBaseInfo() {
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        provideMyPageApi.getBasicInfo(accessToken).subscribe({
+        provideMyPageApi.getBasicInfo(accessToken).subscribe{ it ->
             if (it.isSuccessful) {
                 _info.value = it.body()
                 if (it.body() != null) {
@@ -105,19 +104,26 @@ class MyPageViewModel(
                             compareBy { student -> student.studentNumber })
                 }
                 if (it.body()!!.students.isNotEmpty()) {
-                    successCertifitcation.value = true
+                    successCertification.value = true
                     loadStudentInfo(studentIndex.value!!.peekContent())
                 } else {
-                    successCertifitcation.value = false
+                    successCertification.value = false
                 }
+            } else if(it.code() == 401) {
+                provideLoginApi.loginApi(LoginRequest(sharedPreferenceStorage.getInfo("user_email"), sharedPreferenceStorage.getInfo("user_password")))
+                    .subscribe { it ->
+                        if(it.isSuccessful) {
+                            sharedPreferenceStorage.saveInfo(it.body()!!.accessToken, "access_token")
+                            loadBaseInfo()
+                        }
+                    }
             }
-        }, {
-        })
+        }
     }
 
     fun logout() {
         sharedPreferenceStorage.clearAll()
-        successCertifitcation.value = false
+        successCertification.value = false
         notificationApi.unSubscribeNotification()
     }
 

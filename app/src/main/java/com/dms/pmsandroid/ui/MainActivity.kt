@@ -14,6 +14,7 @@ import com.dms.pmsandroid.R
 import com.dms.pmsandroid.base.BaseActivity
 import com.dms.pmsandroid.base.EventObserver
 import com.dms.pmsandroid.databinding.ActivityMainBinding
+import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceClubActivity
 import com.dms.pmsandroid.feature.introduce.ui.activity.IntroduceDeveloperActivity
 import com.dms.pmsandroid.feature.login.ui.activity.LoginActivity
 import com.dms.pmsandroid.feature.mypage.ui.activity.ChangePasswordActivity
@@ -86,11 +87,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun startClub() {
-        Toast.makeText(this, "아직 준비중인 기능입니다", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "아직 준비중인 기능입니다", Toast.LENGTH_SHORT).show()
         //todo 동아리 api 나오면 넘어가기
-        //val clubIntent = Intent(this, IntroduceClubActivity::class.java)
-        //clubIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-        //startActivity(clubIntent)
+        val clubIntent = Intent(this, IntroduceClubActivity::class.java)
+        clubIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(clubIntent)
     }
 
     fun startGalleryDetail(id: Int) {

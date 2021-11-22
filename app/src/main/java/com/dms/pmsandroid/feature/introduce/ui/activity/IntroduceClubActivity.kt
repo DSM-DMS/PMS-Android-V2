@@ -26,6 +26,9 @@ class IntroduceClubActivity :
         binding.backBtn.setOnClickListener {
             finish()
         }
+        binding.clubMyCl.setOnClickListener {
+            startMyClubDetail()
+        }
     }
 
     override fun observeEvent() {
@@ -39,7 +42,13 @@ class IntroduceClubActivity :
         }
     }
 
-    fun startClubDetail(clubname: String) {
+    private fun startMyClubDetail() {
+        val clubIntent = Intent(this, IntroduceClubDetailActivity::class.java)
+        clubIntent.putExtra("clubname", "DMS")
+        startActivity(clubIntent)
+    }
+
+    private fun startClubDetail(clubname: String) {
         val clubIntent = Intent(this, IntroduceClubDetailActivity::class.java)
         clubIntent.putExtra("clubname", clubname)
         startActivity(clubIntent)

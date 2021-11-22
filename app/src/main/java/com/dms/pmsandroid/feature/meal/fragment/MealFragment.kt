@@ -91,7 +91,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
                 page.translationX = -offsetPx * position
             }
 
-            //setIndicator()
+            setIndicator()
             setCurrentItem(Int.MAX_VALUE / 2, false)
         }
 
@@ -103,8 +103,8 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setIndicator() {
         val currentTime = LocalDateTime.now()
-
         when (currentTime.hour) {
+
             in 10..14 -> {
                 vm.currentPosition.value = Int.MAX_VALUE / 2 + 1
             }

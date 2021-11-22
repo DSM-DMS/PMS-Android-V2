@@ -90,6 +90,7 @@
             app:cardElevation="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/club_my_cl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"
@@ -102,6 +103,7 @@
                     android:layout_height="70dp"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="15dp"
+                    android:src="@drawable/dms_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -117,6 +119,7 @@
                     android:fontFamily="@font/nanumsquarebold"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+                    android:text="DMS"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/club_img"
                     app:layout_constraintStart_toStartOf="@+id/club_img"

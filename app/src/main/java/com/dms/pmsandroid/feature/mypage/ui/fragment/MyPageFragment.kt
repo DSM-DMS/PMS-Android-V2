@@ -16,10 +16,10 @@ import com.dms.pmsandroid.feature.mypage.ui.dialog.StudentsBottomDialog
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.ui.MainActivity
 import com.dms.pmsandroid.ui.MainViewModel
+import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
-import com.jakewharton.rxbinding4.view.clicks
 import java.util.concurrent.TimeUnit
 
 class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
@@ -134,7 +134,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
             students.observe(viewLifecycleOwner, {
                 if(it.isEmpty()){
-                    successCertifitcation.value = false
+                    successCertification.value = false
                 }
                 changeStudent(it[studentIndex.value!!.peekContent()])
             })
