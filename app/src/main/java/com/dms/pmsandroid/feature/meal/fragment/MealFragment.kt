@@ -15,6 +15,7 @@ import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
@@ -31,6 +32,7 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         vm.currentPosition.value = Int.MAX_VALUE / 2
+        vm.date.value = LocalDate.now()
         vm.getInitMeal()
     }
 
