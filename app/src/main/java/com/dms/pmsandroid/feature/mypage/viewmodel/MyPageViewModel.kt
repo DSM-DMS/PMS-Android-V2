@@ -39,6 +39,9 @@ class MyPageViewModel(
     private val _studentInfo = MutableLiveData<BasicInformationResponse>()
     val studentInfo: LiveData<BasicInformationResponse> get() = _studentInfo
 
+    private val _inProgress = MutableLiveData(false)
+    val inProgress: LiveData<Boolean> get() = _inProgress
+
     init {
         studentIndex.value = Event(sharedPreferenceStorage.getIntInfo("student_index"))
     }
@@ -90,12 +93,12 @@ class MyPageViewModel(
                 }
             }
         }
-
     }
 
     fun loadBaseInfo() {
+        _inProgress.value = true
         val accessToken = sharedPreferenceStorage.getInfo("access_token")
-        provideMyPageApi.getBasicInfo(accessToken).subscribe{ it ->
+        provideMyPageApi.getBasicInfo(accessToken).subscribe({ it ->
             if (it.isSuccessful) {
                 _info.value = it.body()
                 if (it.body() != null) {
@@ -111,14 +114,17 @@ class MyPageViewModel(
                 }
             } else if(it.code() == 401) {
                 provideLoginApi.loginApi(LoginRequest(sharedPreferenceStorage.getInfo("user_email"), sharedPreferenceStorage.getInfo("user_password")))
-                    .subscribe { it ->
-                        if(it.isSuccessful) {
-                            sharedPreferenceStorage.saveInfo(it.body()!!.accessToken, "access_token")
+                    .subscribe { response ->
+                        if(response.isSuccessful) {
+                            sharedPreferenceStorage.saveInfo(response.body()!!.accessToken, "access_token")
                             loadBaseInfo()
                         }
                     }
             }
-        }
+            _inProgress.value = false
+        }, {
+            _inProgress.value = false
+        })
     }
 
     fun logout() {

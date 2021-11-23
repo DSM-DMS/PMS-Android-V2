@@ -182,6 +182,14 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
                     }
                 }
             })
+
+            inProgress.observe(viewLifecycleOwner, {
+                if(it) {
+                    binding.mypageShimmerFl.startShimmer()
+                } else {
+                    binding.mypageShimmerFl.hideShimmer()
+                }
+            })
         }
     }
 
