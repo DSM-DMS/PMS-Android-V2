@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.di.module
 
-import android.text.format.Time
 import android.util.Log
 import com.dms.pmsandroid.BuildConfig
 import com.dms.pmsandroid.data.interceptor.AuthInterceptor
@@ -10,9 +9,6 @@ import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import rxdogtag2.RxDogTag
 import java.util.concurrent.TimeUnit
 

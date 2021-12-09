@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SmoothBearApi(okHttpClient: OkHttpClient) {
     val retrofit: Retrofit = Retrofit.Builder().apply {
-        baseUrl("https://api.smooth-bear.live")
+        baseUrl("https://api.smoothbear.me")
         client(okHttpClient)
         addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         addConverterFactory(GsonConverterFactory.create())
