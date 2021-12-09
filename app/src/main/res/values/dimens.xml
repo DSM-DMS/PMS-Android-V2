@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dot_size">50dp</dimen>
+    <dimen name="dot_padding">8dp</dimen>
+    <dimen name="intro_main">17dp</dimen>
+    <dimen name="intro_second">12dp</dimen>
+    <dimen name="point_size">15dp</dimen>
+    <dimen name="point_int">30dp</dimen>
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="body_size">14sp</dimen>
+
+    <dimen name="dialog_text">14dp</dimen>
+    <dimen name="title_bar_size">55dp</dimen>
+    <dimen name="title_bar_text_size">23sp</dimen>
+
+    <dimen name="pageMargin">35dp</dimen>
+</resources>

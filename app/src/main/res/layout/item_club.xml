@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="picture"
+            type="String" />
+
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{()->vm.onClubClicked(name)}">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:backgroundTint="@color/gray_100"
+                android:backgroundTintMode="multiply">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/club_img"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="15dp"
+                    app:civ_border_color="@color/gray"
+                    app:civ_border_width="1dp"
+                    app:glide_image_load="@{picture}"
+                    app:layout_constraintBottom_toTopOf="@id/club_name_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/club_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/nanumsquarebold"
+                    android:text="@{name}"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/club_img"
+                    app:layout_constraintStart_toStartOf="@+id/club_img"
+                    app:layout_constraintTop_toBottomOf="@+id/club_img"
+                    tools:text="DMS" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </FrameLayout>
+</layout>

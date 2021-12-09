@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.notify.viewmodel.GalleryDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_100">
+
+        <TextView
+            android:id="@+id/gallery_header_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="@{vm.galleryDetail.title}"
+            android:textColor="@color/blue_2"
+            android:textSize="@dimen/title_bar_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gallery_cancel_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="제목제목제목제목제목제목메" />
+
+        <TextView
+            android:id="@+id/gallery_detail_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:text="@{vm.galleryDetail.body}"
+            android:textColor="@color/black"
+            android:fontFamily="@font/nanumsquareregular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gallery_header_tv"
+            tools:text="내용내용내용내용내용kjflejwijkjaldjflesijlidjflkesidjfilesjllfj;esji용내" />
+
+        <View
+            android:id="@+id/gallery_detail_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/gallery_detail_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="@{vm.galleryDetail.uploadDate}"
+            android:textColor="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gallery_detail_tv"
+            tools:text="2021-07-05" />
+
+
+        <ImageView
+            android:id="@+id/gallery_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="@{()->vm.close()}"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/gallery_header_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gallery_header_tv"
+            app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

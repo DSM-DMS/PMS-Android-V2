@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.login.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/login_left_gl"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/login_right_gl"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/login_top_gl"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_email_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/transparent"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@+id/login_right_gl"
+            app:layout_constraintStart_toStartOf="@+id/login_left_gl"
+            app:layout_constraintTop_toBottomOf="@+id/login_title_tv">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_get_email_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:drawablePadding="10dp"
+                android:hint="@string/please_email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:text="@={vm.userEmail}" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_password_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@+id/login_right_gl"
+            app:layout_constraintStart_toStartOf="@+id/login_left_gl"
+            app:layout_constraintTop_toBottomOf="@+id/login_email_layout"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="16dp"
+                android:hint="@string/please_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:text="@={vm.userPassword}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/login_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="@string/login"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/login_left_gl"
+            app:layout_constraintTop_toTopOf="@+id/login_top_gl" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@{vm.doneInput&amp;!vm.inProgress?@drawable/shape_border_blue:@drawable/shape_border_gray}"
+            android:fontFamily="@font/nanumsquarebold"
+            android:onClick="@{()->vm.login()}"
+            android:padding="5dp"
+            android:text="@{vm.inProgress?@string/loading:@string/login}"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toStartOf="@+id/login_right_gl"
+            app:layout_constraintHorizontal_bias="0.63"
+            app:layout_constraintStart_toStartOf="@+id/login_left_gl"
+            app:layout_constraintTop_toBottomOf="@+id/login_auto_cb" />
+
+        <TextView
+            android:id="@+id/login_register_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:fontFamily="@font/nanumsquarebold"
+            android:onClick="@{()->vm.needRegister()}"
+            android:padding="15dp"
+            android:text="@string/register"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@+id/login_register_comment_tv"
+            app:layout_constraintEnd_toStartOf="@+id/login_right_gl"
+            app:layout_constraintTop_toTopOf="@+id/login_register_comment_tv" />
+
+        <TextView
+            android:id="@+id/login_register_comment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="@string/ask_need_register"
+            app:layout_constraintStart_toStartOf="@+id/login_left_gl"
+            app:layout_constraintTop_toBottomOf="@id/login_button" />
+
+        <TextView
+            android:id="@+id/login_find_password_ask_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="@string/ask_lost_password"
+            app:layout_constraintStart_toStartOf="@id/login_left_gl"
+            app:layout_constraintTop_toBottomOf="@id/login_register_comment_tv" />
+
+        <TextView
+            android:id="@+id/login_find_password_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:fontFamily="@font/nanumsquarebold"
+            android:onClick="@{()->vm.findPassword()}"
+            android:padding="15dp"
+            android:text="@string/find_password"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@+id/login_find_password_ask_tv"
+            app:layout_constraintEnd_toStartOf="@+id/login_right_gl"
+            app:layout_constraintTop_toTopOf="@+id/login_find_password_ask_tv" />
+
+        <CheckBox
+            android:id="@+id/login_auto_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={vm.autoLogin}"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="@string/save_login_info"
+            app:buttonTint="@color/blue"
+            app:layout_constraintStart_toStartOf="@+id/login_left_gl"
+            app:layout_constraintTop_toBottomOf="@+id/login_password_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

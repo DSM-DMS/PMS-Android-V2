@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel">
+        </variable>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/student_plus_dialog"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:background="@drawable/radius_dialog_white"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="280dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/border_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkcode_et" />
+
+        <TextView
+            android:id="@+id/check_student_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquarebold"
+            android:layout_marginTop="40dp"
+            android:text="@string/check_student_code"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/checkcode_et"
+            android:layout_width="287dp"
+            android:layout_height="52dp"
+            android:background="@null"
+            android:fontFamily="@font/nanumsquareregular"
+            android:gravity="center"
+            android:hint="6자리 인증코드 입력"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLength="6"
+            android:text="@={vm.certification}"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/check_student_tv" />
+
+        <TextView
+            android:id="@+id/addstudent_confirm_tv"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nanumsquareregular"
+            android:gravity="center"
+            android:text="@string/pass"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/dialog_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkcode_et"
+            app:layout_constraintVertical_bias="0.45" />
+
+        <TextView
+            android:id="@+id/addstudent_cancle_tv"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="00dp"
+            android:fontFamily="@font/nanumsquareregular"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textSize="@dimen/dialog_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkcode_et"
+            app:layout_constraintVertical_bias="0.45" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

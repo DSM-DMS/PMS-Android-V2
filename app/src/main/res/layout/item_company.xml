@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceClubViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="170dp"
+        android:layout_height="230dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/work_img"
+            android:layout_width="99dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="35dp"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/work_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="마이다스아이티"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/work_img" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

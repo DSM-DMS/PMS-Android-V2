@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/calendar_fragment"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="@string/title_calendar" />
+    <item
+        android:id="@+id/meal_fragment"
+        android:icon="@drawable/ic_baseline_restaurant_24"
+        android:title="@string/title_meal" />
+    <item
+        android:id="@+id/notice_fragment"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:title="@string/title_notify" />
+
+    <item
+        android:id="@+id/intro_fragment"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/title_info" />
+    <item
+        android:id="@+id/mypage_fragment"
+        android:icon="@drawable/ic_baseline_perm_identity_24"
+        android:title="@string/title_mypage" />
+</menu>
