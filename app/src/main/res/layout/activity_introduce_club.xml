@@ -62,7 +62,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/nanumsquareregular"
-            android:text="@string/children_club"
+            android:text="@string/developer_club"
             android:textColor="@color/gray_300"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_tv" />
