@@ -73,4 +73,9 @@ class MealAdapter(
         meals.putAll(mealList)
         notifyDataSetChanged()
     }
+
+    fun updateMeal(startPosition: Int, endPosition: Int, mealList: HashMap<Int, MealItem>) {
+        meals.putAll(mealList)
+        notifyItemRangeChanged(startPosition, endPosition)
+    }
 }
