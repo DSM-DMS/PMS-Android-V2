@@ -13,7 +13,7 @@ android {
         applicationId "com.dms.pmsandroid"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 4 //업데이트 할때마다 1씩 올려주세요
+        versionCode 5 //업데이트 할때마다 1씩 올려주세요
         versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
