@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.data.remote.meal
+package com.dms.pmsandroid.data.meal.remote
 
 import com.dms.pmsandroid.data.remote.PotatoChipApi
 import com.dms.pmsandroid.feature.meal.entity.MealItem

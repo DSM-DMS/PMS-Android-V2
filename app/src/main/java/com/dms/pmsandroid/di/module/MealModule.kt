@@ -1,6 +1,6 @@
 package com.dms.pmsandroid.di.module
 
-import com.dms.pmsandroid.data.remote.meal.ProvideMealApi
+import com.dms.pmsandroid.data.meal.remote.ProvideMealApi
 import com.dms.pmsandroid.feature.meal.viewmodel.MealViewModel
 import org.koin.dsl.module
 
