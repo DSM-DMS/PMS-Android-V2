@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.meal.repository.MealRepository
 import com.dms.pmsandroid.feature.meal.entity.MealItem
+import java.time.LocalDate
 import kotlin.collections.HashMap
 
 class MealViewModel(
     private val mealRepository: MealRepository
 ) : ViewModel() {
 
+    val selectedDate = MutableLiveData(LocalDate.now())
     val currentPosition = MutableLiveData(Int.MAX_VALUE / 2)
 
     private val _showPicture = MutableLiveData(false)
@@ -73,7 +75,7 @@ class MealViewModel(
     }
 
     private fun appendMealItems(position: Int) {
-        mealRepository.getBeforeDayMeal(position).subscribe { result ->
+        mealRepository.getOneDayMeal(selectedDate.value!!, position).subscribe { result ->
             _meals.value!!.putAll(result)
         }
     }
@@ -81,7 +83,7 @@ class MealViewModel(
     private fun positionIsEmpty(position: Int): Boolean = !meals.value!!.containsKey(position)
 
     fun getInitMeal() {
-        mealRepository.getYesterdayTodayTomorrowMeals(currentPosition.value!!).subscribe { result ->
+        mealRepository.getYesterdayTodayTomorrowMeals(selectedDate.value!!, currentPosition.value!!).subscribe { result ->
             _meals.value = result
         }
     }
