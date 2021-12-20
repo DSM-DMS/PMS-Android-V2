@@ -128,6 +128,9 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             showPicture.observe(viewLifecycleOwner, {
                 mealAdapter.notifyDataSetChanged()
             })
+            needUpdateMealItems.observe(viewLifecycleOwner, {
+                mealAdapter.updateMeal(it.startPosition, it.meals)
+            })
         }
     }
 }
