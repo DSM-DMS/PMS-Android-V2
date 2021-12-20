@@ -27,22 +27,17 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         MealAdapter(vm, requireContext())
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        vm.currentPosition.value = Int.MAX_VALUE / 2
-        vm.date.value = LocalDate.now()
-        vm.getInitMeal()
     }
 
     private val dateDialog: MealDatePickerDialog by lazy {
         MealDatePickerDialog()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun initView() {
-
+        initViewModel()
         binding.mealViewVp.run {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             adapter = mealAdapter
@@ -61,7 +56,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             })
 
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     when (position % 3) {
@@ -102,7 +96,12 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    private fun initViewModel() {
+        vm.currentPosition.value = Int.MAX_VALUE / 2
+        vm.selectedDate.value = LocalDate.now()
+        vm.getInitMeal()
+    }
+
     private fun setIndicator() {
         val currentTime = LocalDateTime.now()
         when (currentTime.hour) {
@@ -117,7 +116,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
         vm.run {
             meals.observe(viewLifecycleOwner, {

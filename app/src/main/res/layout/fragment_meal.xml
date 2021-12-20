@@ -78,7 +78,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:meal_time="@{vm.date}"
+                app:meal_time="@{vm.selectedDate}"
                 tools:text="2021/06/18" />
 
             <TextView
@@ -90,7 +90,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:week_time="@{vm.date}"
+                app:week_time="@{vm.selectedDate}"
                 tools:text="금요일" />
 
             <androidx.appcompat.widget.AppCompatImageView
