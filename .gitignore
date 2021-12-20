@@ -80,3 +80,5 @@ app/google-services.json
 app/release/app-release 3.aab
 
 app/release/app-release 2.aab
+
+.idea/deploymentTargetDropDown.xml
