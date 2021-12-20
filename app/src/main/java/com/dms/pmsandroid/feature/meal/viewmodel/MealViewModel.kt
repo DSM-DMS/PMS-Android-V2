@@ -3,8 +3,10 @@ package com.dms.pmsandroid.feature.meal.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.base.SingleLiveEvent
 import com.dms.pmsandroid.data.meal.repository.MealRepository
 import com.dms.pmsandroid.feature.meal.entity.MealItem
+import com.dms.pmsandroid.feature.meal.entity.NeedUpdateMealItems
 import java.time.LocalDate
 import kotlin.collections.HashMap
 
@@ -21,14 +23,12 @@ class MealViewModel(
     private val _meals = MutableLiveData(HashMap<Int, MealItem>())
     val meals: LiveData<HashMap<Int, MealItem>> get() = _meals
 
+    private val _needUpdateMealItemsPosition = SingleLiveEvent<NeedUpdateMealItems>()
+    val needUpdateMealItems: LiveData<NeedUpdateMealItems> get() = _needUpdateMealItemsPosition
+
     fun clickNextDay() {
         movePositionToNextDayMorning()
         nextDay()
-    }
-
-    fun nextDay() {
-        plusOneToPosition()
-        loadNextDayMeal()
     }
 
     fun clickBeforeDay() {
@@ -36,27 +36,17 @@ class MealViewModel(
         beforeDay()
     }
 
+    fun nextDay() {
+        plusOneToPosition()
+        plusOneDay()
+        loadNextDayMeal()
+    }
+
     fun beforeDay() {
         minusOneToPosition()
+        minusOneDay()
         loadBeforeDayMeal()
     }
-
-    private fun movePositionToNextDayMorning() {
-        currentPosition.value = currentPosition.value!! + (2 - (currentPosition.value!! % 3))
-    }
-
-    private fun movePositionToBeforeDayMorning() {
-        currentPosition.value = currentPosition.value!! - (currentPosition.value!! % 3)
-    }
-
-    private fun plusOneToPosition() {
-        currentPosition.value = currentPosition.value!! + 1
-    }
-
-    private fun minusOneToPosition() {
-        currentPosition.value = currentPosition.value!! - 1
-    }
-
 
     private fun loadNextDayMeal() {
         val position = currentPosition.value!!
@@ -76,7 +66,7 @@ class MealViewModel(
 
     private fun appendMealItems(position: Int) {
         mealRepository.getOneDayMeal(selectedDate.value!!, position).subscribe { result ->
-            _meals.value!!.putAll(result)
+            _needUpdateMealItemsPosition.value = NeedUpdateMealItems(position, result)
         }
     }
 
@@ -94,4 +84,27 @@ class MealViewModel(
         }
     }
 
+    private fun plusOneDay() {
+        selectedDate.value = selectedDate.value!!.plusDays(1)
+    }
+
+    private fun minusOneDay() {
+        selectedDate.value = selectedDate.value!!.minusDays(1)
+    }
+
+    private fun movePositionToNextDayMorning() {
+        currentPosition.value = currentPosition.value!! + (2 - (currentPosition.value!! % 3))
+    }
+
+    private fun movePositionToBeforeDayMorning() {
+        currentPosition.value = currentPosition.value!! - (currentPosition.value!! % 3)
+    }
+
+    private fun plusOneToPosition() {
+        currentPosition.value = currentPosition.value!! + 1
+    }
+
+    private fun minusOneToPosition() {
+        currentPosition.value = currentPosition.value!! - 1
+    }
 }
