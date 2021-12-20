@@ -11,7 +11,7 @@ class MealDatePickerDialog : DatePickerDialog() {
     override val vm: MealViewModel by inject()
 
     private val date by lazy {
-        vm.date.value!!
+        vm.selectedDate.value!!
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -32,7 +32,7 @@ class MealDatePickerDialog : DatePickerDialog() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCompleteClicked() {
         vm.meals.value!!.clear()
-        vm.date.value = LocalDate.of(binding.dpYearNp.value, binding.dpMonthNp.value, binding.dpDayNp.value)
+        vm.selectedDate.value = LocalDate.of(binding.dpYearNp.value, binding.dpMonthNp.value, binding.dpDayNp.value)
         vm.currentPosition.value = Int.MAX_VALUE / 2
         vm.getInitMeal()
         dismiss()
@@ -40,7 +40,7 @@ class MealDatePickerDialog : DatePickerDialog() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun observeEvent() {
-        vm.date.observe(viewLifecycleOwner,{
+        vm.selectedDate.observe(viewLifecycleOwner,{
             day = it.dayOfMonth
             month = it.monthValue
             year = it.year
