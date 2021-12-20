@@ -32,7 +32,7 @@ class MealViewModel(
     }
 
     fun clickBeforeDay() {
-        movePositionToBeforeDayMorning()
+        movePositionToBeforeDayDinner()
         beforeDay()
     }
 
@@ -96,7 +96,7 @@ class MealViewModel(
         currentPosition.value = currentPosition.value!! + (2 - (currentPosition.value!! % 3))
     }
 
-    private fun movePositionToBeforeDayMorning() {
+    private fun movePositionToBeforeDayDinner() {
         currentPosition.value = currentPosition.value!! - (currentPosition.value!! % 3)
     }
 

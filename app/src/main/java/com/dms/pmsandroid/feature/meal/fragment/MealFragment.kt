@@ -27,93 +27,19 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
         MealAdapter(vm, requireContext())
     }
 
+    private val dateDialog: MealDatePickerDialog by lazy {
+        MealDatePickerDialog()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
 
-    private val dateDialog: MealDatePickerDialog by lazy {
-        MealDatePickerDialog()
-    }
-
     private fun initView() {
         initViewModel()
-        binding.mealViewVp.run {
-            orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            adapter = mealAdapter
-            offscreenPageLimit = 3
-
-            addItemDecoration(object : RecyclerView.ItemDecoration() {
-                override fun getItemOffsets(
-                    outRect: Rect,
-                    view: View,
-                    parent: RecyclerView,
-                    state: RecyclerView.State
-                ) {
-                    outRect.right = 20
-                    outRect.left = 20
-                }
-            })
-
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    when (position % 3) {
-                        0 -> {
-                            if (vm.currentPosition.value!! % 3 == 2) { //이전페이지가 저녁이었을 때
-                                vm.run {
-                                    nextDay()
-                                }
-                            }
-                        }
-                        2 -> {
-                            if (vm.currentPosition.value!! % 3 == 0) { //이전페이지가 아침이었을 때
-                                vm.run {
-                                    beforeDay()
-                                }
-                            }
-                        }
-                    }
-                    vm.currentPosition.value = position
-                }
-            })
-
-            val screenWidth = resources.displayMetrics.widthPixels
-            val pageMargin = resources.getDimension(R.dimen.pageMargin)
-            val pageWidth = screenWidth - (pageMargin * 2) - 50
-            val offsetPx = screenWidth - pageWidth - pageMargin
-
-            setPageTransformer { page, position ->
-                page.translationX = -offsetPx * position
-            }
-
-            setIndicator()
-            setCurrentItem(Int.MAX_VALUE / 2, false)
-        }
-
-        binding.mealDateCl.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
-            dateDialog.show(requireActivity().supportFragmentManager, "MealDatePickerDialog")
-        }
-    }
-
-    private fun initViewModel() {
-        vm.currentPosition.value = Int.MAX_VALUE / 2
-        vm.selectedDate.value = LocalDate.now()
-        vm.getInitMeal()
-    }
-
-    private fun setIndicator() {
-        val currentTime = LocalDateTime.now()
-        when (currentTime.hour) {
-
-            in 10..14 -> {
-                vm.currentPosition.value = Int.MAX_VALUE / 2 + 1
-            }
-
-            in 15..23 -> {
-                vm.currentPosition.value = Int.MAX_VALUE / 2 + 2
-            }
-        }
+        setMealViewPager()
+        setOpenDatePickerDialog()
     }
 
     override fun observeEvent() {
@@ -133,4 +59,84 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             })
         }
     }
+
+    private fun initViewModel() {
+        vm.run {
+            currentPosition.value = Int.MAX_VALUE / 2
+            selectedDate.value = LocalDate.now()
+            getInitMeal()
+        }
+    }
+
+    private fun setMealViewPager() {
+        initViewPager()
+        showSideItemsCorner()
+        setViewPagerIndicator()
+        setViewPagerSelectedListener()
+    }
+
+    private fun initViewPager() {
+        binding.mealViewVp.run {
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            adapter = mealAdapter
+            offscreenPageLimit = 3
+        }
+    }
+
+    private fun setViewPagerIndicator() {
+        val screenWidth = resources.displayMetrics.widthPixels
+        val pageMargin = resources.getDimension(R.dimen.pageMargin)
+        val pageWidth = screenWidth - (pageMargin * 2) - 50
+        val offsetPx = screenWidth - pageWidth - pageMargin
+
+        binding.mealViewVp.setPageTransformer { page, position ->
+            page.translationX = -offsetPx * position
+        }
+
+    }
+
+    private fun setViewPagerSelectedListener() {
+        binding.mealViewVp.run {
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    when (position % 3) {
+                        0 -> {
+                            if (positionWasDinner()) {
+                                vm.run {
+                                    nextDay()
+                                }
+                            }
+                        }
+                        2 -> {
+                            if (positionWasBreakfast()) {
+                                vm.run {
+                                    beforeDay()
+                                }
+                            }
+                        }
+                    }
+                    vm.currentPosition.value = position
+                }
+            })
+            setCurrentItem(Int.MAX_VALUE / 2, false)
+        }
+    }
+    private fun showSideItemsCorner() {
+         binding.mealViewVp.addItemDecoration(object : RecyclerView.ItemDecoration() {
+             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                 outRect.right = 20
+                 outRect.left = 20
+             }
+         })
+    }
+    private fun setOpenDatePickerDialog() {
+        binding.mealDateCl.clicks().debounce(200, TimeUnit.MILLISECONDS).subscribe {
+            dateDialog.show(requireActivity().supportFragmentManager, "MealDatePickerDialog")
+        }
+    }
+
+    private fun positionWasDinner() = vm.currentPosition.value!! % 3 == 2
+
+    private fun positionWasBreakfast() = vm.currentPosition.value!! % 3 == 0
 }
