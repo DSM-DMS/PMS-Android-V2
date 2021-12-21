@@ -18,8 +18,6 @@ class MainViewModel(
 
     val doneToken = MutableLiveData(false)
 
-    var activeFragment: Fragment? = null
-
     private val _connectedInternet = MutableLiveData<Boolean>()
     val connectedInternet: LiveData<Boolean> get() = _connectedInternet
 
