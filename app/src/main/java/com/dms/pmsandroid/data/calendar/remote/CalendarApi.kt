@@ -1,5 +1,6 @@
-package com.dms.pmsandroid.data.remote.calendar
+package com.dms.pmsandroid.data.calendar.remote
 
+import com.dms.pmsandroid.data.calendar.dto.CalendarResponse
 import com.google.gson.JsonObject
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
@@ -9,6 +10,6 @@ import retrofit2.http.Header
 interface CalendarApi {
 
     @GET("/calendar")
-    fun schedules(@Header("Authorization") accessToken: String): Single<Response<JsonObject>>
+    fun schedules(@Header("Authorization") accessToken: String): Single<Response<CalendarResponse>>
 
 }
