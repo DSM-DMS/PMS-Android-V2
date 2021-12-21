@@ -7,8 +7,9 @@ import android.graphics.Paint
 import android.text.style.LineBackgroundSpan
 import androidx.core.content.ContextCompat
 import com.dms.pmsandroid.R
+import com.dms.pmsandroid.data.calendar.EventTypes
 
-class CustomMultipleDotSpan(private val dots: List<Int>, context: Context) : LineBackgroundSpan {
+class CustomMultipleDotSpan(private val eventTypes: List<EventTypes>, context: Context) : LineBackgroundSpan {
 
     private val radius = 10F
 
@@ -31,28 +32,25 @@ class CustomMultipleDotSpan(private val dots: List<Int>, context: Context) : Lin
         end: Int,
         lineNumber: Int
     ) {
-        val total = if (dots.size > 3) 3 else dots.size
+        val total = if (eventTypes.size > 3) 3 else eventTypes.size
         var leftMost = (total - 1) * -12
 
         for (i in 0 until total) {
             val oldColor = paint.color
-            when (dots[i]) {
-                Color.GREEN -> {
+            when (eventTypes[i]) {
+                EventTypes.MUST_GO_HOME -> {
                     paint.color = green
                 }
-                Color.RED->{
+                EventTypes.HOLIDAYS->{
                     paint.color = red
                 }
-                Color.GRAY->{
-                    paint.color = red
-                }
-                Color.BLUE->{
+                EventTypes.ETC->{
                     paint.color = blue
                 }
-                Color.YELLOW->{
+                EventTypes.VACATION->{
                     paint.color = yellow
                 }
-                else->{
+                EventTypes.EXAM->{
                     paint.color = purple
                 }
 

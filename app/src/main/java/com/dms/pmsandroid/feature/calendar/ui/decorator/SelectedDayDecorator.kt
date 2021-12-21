@@ -1,6 +1,5 @@
 package com.dms.pmsandroid.feature.calendar.ui.decorator
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat

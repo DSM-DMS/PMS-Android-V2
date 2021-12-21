@@ -1,15 +1,11 @@
 package com.dms.pmsandroid.data.calendar
 
 enum class EventTypes {
-    SATURDAY, MUST_GO_HOME, EXAM, VACATION, HOLIDAYS, ETC
+    MUST_GO_HOME, EXAM, VACATION, HOLIDAYS, ETC
 }
 
 fun String.toEventType(): EventTypes{
     return when (this) {
-        "토요휴업일" -> {
-            EventTypes.SATURDAY
-        }
-
         "의무귀가" -> {
             EventTypes.MUST_GO_HOME
         }
