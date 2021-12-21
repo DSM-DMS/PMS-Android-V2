@@ -5,17 +5,18 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.text.style.LineBackgroundSpan
+import androidx.core.content.ContextCompat
 import com.dms.pmsandroid.R
 
 class CustomMultipleDotSpan(private val dots: List<Int>, context: Context) : LineBackgroundSpan {
 
     private val radius = 10F
 
-    private val green = context.resources.getColor(R.color.green)
-    private val red = context.resources.getColor(R.color.red)
-    private val yellow = context.resources.getColor(R.color.yellow)
-    private val blue = context.resources.getColor(R.color.blue)
-    private val purple = context.resources.getColor(R.color.purple)
+    private val green = ContextCompat.getColor(context, R.color.green)
+    private val red = ContextCompat.getColor(context, R.color.red)
+    private val yellow = ContextCompat.getColor(context, R.color.yellow)
+    private val blue = ContextCompat.getColor(context, R.color.blue)
+    private val purple = ContextCompat.getColor(context, R.color.purple)
 
     override fun drawBackground(
         canvas: Canvas,
