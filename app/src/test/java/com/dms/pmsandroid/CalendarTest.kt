@@ -2,6 +2,7 @@ package com.dms.pmsandroid
 
 import com.dms.pmsandroid.feature.calendar.toCalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import java.time.LocalDate
@@ -13,7 +14,8 @@ class CalendarTest {
 
     @Test
     fun `LocalDateToCalendarDay 성공`() {
-        `when`(testDate.toCalendarDay())
-            .thenReturn(testCalendarDay)
+        println(testDate.toCalendarDay())
+        println(testCalendarDay)
+        assert(testDate.toCalendarDay() == testCalendarDay)
     }
 }
