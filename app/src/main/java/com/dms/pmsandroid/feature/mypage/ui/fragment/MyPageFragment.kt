@@ -90,7 +90,7 @@ class MyPageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
     private fun changeComment(minusPoint: Int) {
         val randomIndex = Random.nextInt(3)
         when (minusPoint) {
-            in 0..10 -> {
+            in -10..10 -> {
                 binding.introCommentTv.text = changecomment[randomIndex]
             }
             in 11..14 -> {
