@@ -1,3 +1,5 @@
 package com.dms.pmsandroid.feature.calendar.model
 
-data class EventModel(val eventName: String, val dotTypes: ArrayList<Int>)
+import com.dms.pmsandroid.data.calendar.EventTypes
+
+data class EventModel(val eventNames: List<String>, val eventTypes: List<EventTypes>)
