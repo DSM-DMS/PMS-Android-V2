@@ -81,9 +81,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun startCompany() {
         Toast.makeText(this, "아직 준비중인 기능입니다", Toast.LENGTH_SHORT).show()
-        //todo 취업처 api 나오면 startActivity로 넘어가기
-        //val workintent = Intent(this, IntroduceCompanyActivity::class.java)
-        //startActivity(workintent)
+        //todo 취업처 api 나오면 startActivity 로 넘어가기
+        //val workIntent = Intent(this, IntroduceCompanyActivity::class.java)
+        //startActivity(workIntent)
     }
 
     fun startClub() {
