@@ -8,6 +8,7 @@
         <variable
             name="vm"
             type="com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,13 +20,15 @@
             android:id="@+id/calendar_month_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:background="?android:attr/selectableItemBackground"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
             android:padding="5dp"
             android:textColor="@color/gray_300"
             android:textSize="22sp"
+            app:calendar_month_text="@{vm.selectedDate}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2021년7월" />
@@ -109,12 +112,14 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/calendar_event_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="15dp"
                     android:textColor="@color/black"
                     android:textSize="15sp"
+                    app:event_text="@{vm.selectedEventModel}"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/calendar_date_tv"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="일정" />
@@ -128,6 +133,7 @@
                     android:padding="15dp"
                     android:textColor="@color/gray"
                     android:textSize="13sp"
+                    app:calendar_date_text="@{vm.selectedDate}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
