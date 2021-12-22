@@ -19,9 +19,7 @@ class MealRepositoryImpl(
         val yesterdayMealItemObservable = provideMealApi.getMealItem(yesterdayDate, yesterdayPosition(currentPosition))
         val todayMealItemObservable = provideMealApi.getMealItem(currentDate, currentPosition)
         val tomorrowMealItemObservable = provideMealApi.getMealItem(tomorrowDate, tomorrowPosition(currentPosition))
-
-        val internetDisConnectedComment = "인터넷 연결상태를 확인해주세요."
-        val internetDisConnectedItem = MealItem(internetDisConnectedComment, null, false)
+        
         return Single.zip(
             todayMealItemObservable,
             tomorrowMealItemObservable,
@@ -35,13 +33,6 @@ class MealRepositoryImpl(
             }
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .onErrorReturn {
-                val pleaseCheckInternetItems = HashMap<Int, MealItem>()
-                pleaseCheckInternetItems[currentPosition] = internetDisConnectedItem
-                pleaseCheckInternetItems[currentPosition - 1] = internetDisConnectedItem
-                pleaseCheckInternetItems[currentPosition + 1] = internetDisConnectedItem
-                pleaseCheckInternetItems
-            }
     }
 
     private fun yesterdayPosition(currentPosition: Int) = currentPosition - 3

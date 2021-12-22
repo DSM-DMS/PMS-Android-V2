@@ -76,11 +76,16 @@ class MealViewModel(
     private fun positionIsEmpty(position: Int): Boolean = !meals.value!!.containsKey(position)
 
     fun getInitMeal() {
-        mealRepository.getYesterdayTodayTomorrowMeals(selectedDate.value!!, currentPosition.value!!).subscribe { result ->
+        val internetDisConnectedComment = "인터넷 연결상태를 확인해주세요."
+        val internetDisConnectedItem = MealItem(internetDisConnectedComment, null, false)
+        mealRepository.getYesterdayTodayTomorrowMeals(selectedDate.value!!, currentPosition.value!!).onErrorReturn {
             val pleaseCheckInternetItems = HashMap<Int, MealItem>()
-            pleaseCheckInternetItems[currentPosition.value!!] =
-                MealItem("인터넷 연결상태를 확인해주세요", null, false)
-            _meals.value = if(result.isNotEmpty()) result else pleaseCheckInternetItems
+            pleaseCheckInternetItems[currentPosition.value!!] = internetDisConnectedItem
+            pleaseCheckInternetItems[currentPosition.value!! + 1] = internetDisConnectedItem
+            pleaseCheckInternetItems[currentPosition.value!! - 1] = internetDisConnectedItem
+            pleaseCheckInternetItems
+        }.subscribe { result ->
+            _meals.value = result
         }
     }
 
