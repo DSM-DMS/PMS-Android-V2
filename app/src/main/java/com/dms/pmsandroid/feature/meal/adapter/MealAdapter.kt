@@ -26,6 +26,7 @@ class MealAdapter(
     inner class MealViewHolder(private val binding: ItemMealBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
+            binding.position = position
             when (position % 3) {
                 0 -> {
                     binding.run {

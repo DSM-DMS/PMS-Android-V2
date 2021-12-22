@@ -17,11 +17,14 @@ class MealViewModel(
     val selectedDate = MutableLiveData(LocalDate.now())
     val currentPosition = MutableLiveData(Int.MAX_VALUE / 2)
 
-    private val _showPicture = MutableLiveData(false)
-    val showPicture: LiveData<Boolean> get() = _showPicture
+    private val _showPicturePosition = MutableLiveData<Int>()
+    val showPicturePosition: LiveData<Int> get() = _showPicturePosition
 
     private val _meals = MutableLiveData(HashMap<Int, MealItem>())
     val meals: LiveData<HashMap<Int, MealItem>> get() = _meals
+
+    private val _showingPicturePositions = HashMap<Int, Boolean>()
+    val showingPicturePositions: HashMap<Int, Boolean> get() = _showingPicturePositions
 
     private val _needUpdateMealItemsPosition = SingleLiveEvent<NeedUpdateMealItems>()
     val needUpdateMealItems: LiveData<NeedUpdateMealItems> get() = _needUpdateMealItemsPosition
@@ -74,13 +77,17 @@ class MealViewModel(
 
     fun getInitMeal() {
         mealRepository.getYesterdayTodayTomorrowMeals(selectedDate.value!!, currentPosition.value!!).subscribe { result ->
-            _meals.value = result
+            val pleaseCheckInternetItems = HashMap<Int, MealItem>()
+            pleaseCheckInternetItems[currentPosition.value!!] =
+                MealItem("인터넷 연결상태를 확인해주세요", null, false)
+            _meals.value = if(result.isNotEmpty()) result else pleaseCheckInternetItems
         }
     }
 
-    fun showPicture(hasPicture: Boolean) {
+    fun showPicture(hasPicture: Boolean, position: Int) {
         if (hasPicture) {
-            _showPicture.value = !showPicture.value!!
+            _showingPicturePositions[position] = !(showingPicturePositions[position]?:false)
+            _showPicturePosition.value = position
         }
     }
 

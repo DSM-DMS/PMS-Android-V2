@@ -1,10 +1,8 @@
 package com.dms.pmsandroid.feature.meal.fragment
 
 import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.dms.pmsandroid.R
@@ -16,7 +14,6 @@ import com.dms.pmsandroid.feature.meal.adapter.MealAdapter
 import com.jakewharton.rxbinding4.view.clicks
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
 class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
@@ -51,8 +48,8 @@ class MealFragment : BaseFragment<FragmentMealBinding>(R.layout.fragment_meal) {
             currentPosition.observe(viewLifecycleOwner, {
                 binding.mealViewVp.setCurrentItem(it, true)
             })
-            showPicture.observe(viewLifecycleOwner, {
-                mealAdapter.notifyDataSetChanged()
+            showPicturePosition.observe(viewLifecycleOwner, {
+                mealAdapter.notifyItemChanged(it)
             })
             needUpdateMealItems.observe(viewLifecycleOwner, {
                 mealAdapter.updateMeal(it.startPosition, it.meals)
