@@ -23,13 +23,15 @@ fun TextView.eventText(event: EventModel?) {
 @BindingAdapter("calendar_date_text")
 fun TextView.calendarDateText(calendarDay: CalendarDay?) {
     if(calendarDay != null) {
-        text = "${calendarDay.month + 1}월${calendarDay.day}일"
+        val dateText = "${calendarDay.month + 1}월${calendarDay.day}일"
+        text = dateText
     }
 }
 
 @BindingAdapter("calendar_month_text")
 fun TextView.calendarMonthText(calendarDay: CalendarDay?) {
     if(calendarDay != null) {
-        text = "${calendarDay.year}년 ${calendarDay.month + 1}월"
+        val dateText = "${calendarDay.year}년 ${calendarDay.month + 1}월"
+        text = dateText
     }
 }

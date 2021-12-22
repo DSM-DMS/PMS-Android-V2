@@ -27,9 +27,12 @@ class CalendarViewModel(
 
     val updateCurrentDate = MutableLiveData(Event(false))
 
+    private val _isLoading = SingleLiveEvent<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun nextMonth() {
         val nowMonth = showingMonth.value!!
-        selectedDate.value = if(isDecember(nowMonth)) CalendarDay.from(nowMonth.year + 1, 1, 1)
+        selectedDate.value = if(isDecember(nowMonth)) CalendarDay.from(nowMonth.year + 1, 0, 1)
         else CalendarDay.from(nowMonth.year, nowMonth.month + 1, nowMonth.day)
         updateCurrentDate.value = Event(true)
     }
@@ -42,17 +45,19 @@ class CalendarViewModel(
     }
 
     fun loadSchedules() {
+        _isLoading.value = true
         calendarRepository.getEvents().subscribe { result ->
             _events.value = events.value!!.apply {
                 putAll(result.mapKeys { it.key.toCalendarDay() })
             }
+            _isLoading.value = false
             doneEventsSetting.call()
         }
     }
 
     private fun isDecember(nowMonth: CalendarDay): Boolean =
-        nowMonth.month == 12
+        nowMonth.month > 10
 
     private fun isFebruary(nowMonth: CalendarDay): Boolean =
-        nowMonth.month == 1
+        nowMonth.month < 1
 }

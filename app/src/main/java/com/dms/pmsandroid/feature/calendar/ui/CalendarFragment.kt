@@ -54,14 +54,22 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                     currentDate = date
                     selectedDate = date
                 }
-                drawEventDots(date!!.month + 1)
+            })
+            showingMonth.observe(viewLifecycleOwner, {
+                drawEventDots(it.month)
+            })
+            isLoading.observe(viewLifecycleOwner, {
+                if(it) {
+                    binding.calendarShimmerContainer.startShimmer()
+                } else {
+                    binding.calendarShimmerContainer.hideShimmer()
+                }
             })
         }
     }
 
     private fun startLandingCalendarView() {
         binding.run {
-            calendarShimmerContainer.startShimmer()
             calendarEventTv.text = getString(R.string.loading_events)
         }
         val currentDate = CalendarDay.today()
@@ -81,11 +89,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
     }
 
     override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay?) {
-        val month = (date?.month ?: 0) + 1
         vm.showingMonth.value = date
-        if (alreadySetMonths[month] == false) {
-            drawEventDots(month)
-        }
     }
 
     override fun onDestroyView() {
@@ -117,10 +121,8 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                     )
                 )
             }, {
-                binding.calendarShimmerContainer.hideShimmer()
             }, {
                 binding.calendarView.addDecorators(decorators)
-                binding.calendarShimmerContainer.hideShimmer()
                 markAlreadySetMonths(month)
             })
     }
