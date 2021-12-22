@@ -3,7 +3,7 @@ package com.dms.pmsandroid.feature.mypage.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.mypage.ProvideMyPageApi
+import com.dms.pmsandroid.data.mypage.remote.ProvideMyPageApi
 import com.dms.pmsandroid.feature.mypage.model.OutingListResponse
 
 class OutingContentViewModel(

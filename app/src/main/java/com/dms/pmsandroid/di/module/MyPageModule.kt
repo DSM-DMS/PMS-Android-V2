@@ -1,6 +1,6 @@
 package com.dms.pmsandroid.di.module
 
-import com.dms.pmsandroid.data.remote.mypage.ProvideMyPageApi
+import com.dms.pmsandroid.data.mypage.remote.ProvideMyPageApi
 import com.dms.pmsandroid.feature.mypage.viewmodel.ChangePasswordViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel
 import com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel

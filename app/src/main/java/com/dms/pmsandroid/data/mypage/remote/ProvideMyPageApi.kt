@@ -1,4 +1,4 @@
-package com.dms.pmsandroid.data.remote.mypage
+package com.dms.pmsandroid.data.mypage.remote
 
 import com.dms.pmsandroid.data.remote.SmoothBearApi
 import com.dms.pmsandroid.feature.mypage.model.*
