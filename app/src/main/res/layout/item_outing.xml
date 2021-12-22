@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.mypage.viewmodel.OutingContentViewModel" />
 
         <variable
             name="reason"

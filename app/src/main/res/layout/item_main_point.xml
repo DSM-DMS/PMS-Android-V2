@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.PointContentViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.mypage.viewmodel.PointContentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

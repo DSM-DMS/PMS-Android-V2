@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.notify.viewmodel.NotifyViewModel" />
 
         <variable
             name="id"

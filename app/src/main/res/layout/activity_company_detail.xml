@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceCompanyDetailViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.introduce.viewmodel.IntroduceCompanyDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

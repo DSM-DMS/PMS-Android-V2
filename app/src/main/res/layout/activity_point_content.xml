@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.PointContentViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.mypage.viewmodel.PointContentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

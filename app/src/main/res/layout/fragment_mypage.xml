@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.MyPageViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.mypage.viewmodel.MyPageViewModel" />
 
         <variable
             name="pluspoint"
