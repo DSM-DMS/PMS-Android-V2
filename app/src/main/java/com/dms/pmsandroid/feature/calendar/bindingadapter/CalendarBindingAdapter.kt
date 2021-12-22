@@ -12,7 +12,7 @@ fun TextView.eventText(event: EventModel?) {
     if(event != null && event.eventNames.isNotEmpty()) {
         var resultEventText = ""
         for (eventIndex in event.eventNames.indices) {
-            resultEventText += "\n${event.eventTypes[eventIndex].toEmoji()} ${event.eventNames[eventIndex]}"
+            resultEventText += "\n${event.eventTypes[eventIndex].toEmoji()} ${event.eventNames[eventIndex]}\n"
         }
         text = resultEventText
     } else {
