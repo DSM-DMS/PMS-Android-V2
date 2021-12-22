@@ -28,7 +28,8 @@ fun String.toLocalDate():LocalDate =
 
 fun List<String>.toEventModel(): EventModel {
     val eventTypes = ArrayList<EventTypes>()
-    val resultEvents = (this as ArrayList<String>)
+    val resultEvents = ArrayList<String>()
+    resultEvents.addAll(this)
     resultEvents.removeIf { it == "토요휴업일" }
     for(event in resultEvents) {
         eventTypes.add(event.toEventType())

@@ -10,6 +10,7 @@ import com.dms.pmsandroid.databinding.FragmentCalendarBinding
 import com.dms.pmsandroid.feature.calendar.CalendarDatePickerDialog
 import com.dms.pmsandroid.feature.calendar.ui.decorator.*
 import com.dms.pmsandroid.feature.calendar.viewmodel.CalendarViewModel
+import com.dms.pmsandroid.ui.MainViewModel
 import com.jakewharton.rxbinding4.view.clicks
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -18,16 +19,19 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-//todo 달 이동구현 & 이동시 점 찍기
+
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar),
     OnDateSelectedListener, OnMonthChangedListener {
 
     override val vm: CalendarViewModel by viewModel()
+
+    private val mainVm: MainViewModel by inject()
 
     private val alreadySetMonths = HashMap<Int, Boolean>()
 
@@ -66,6 +70,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                 }
             })
         }
+        mainVm.doneToken.observe(viewLifecycleOwner, {
+            drawEventDots(vm.selectedDate.value!!.month + 1)
+        })
     }
 
     private fun startLandingCalendarView() {

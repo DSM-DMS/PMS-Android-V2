@@ -46,13 +46,15 @@ class CalendarViewModel(
 
     fun loadSchedules() {
         _isLoading.value = true
-        calendarRepository.getEvents().subscribe { result ->
+        calendarRepository.getEvents().subscribe ({ result ->
             _events.value = events.value!!.apply {
                 putAll(result.mapKeys { it.key.toCalendarDay() })
             }
             _isLoading.value = false
             doneEventsSetting.call()
-        }
+        },{
+            _isLoading.value = false
+        })
     }
 
     private fun isDecember(nowMonth: CalendarDay): Boolean =
