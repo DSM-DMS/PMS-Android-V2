@@ -24,14 +24,16 @@ private fun getEventsInResponse(response: CalendarResponse): Single<MutableMap<L
     })
 
 fun String.toLocalDate():LocalDate =
-    LocalDate.of(this.substring(0,3).toInt(), this.substring(4,6).toInt(), this.substring(7,9).toInt())
+    LocalDate.of(this.substring(0,4).toInt(), this.substring(5,7).toInt(), this.substring(8,10).toInt())
 
 fun List<String>.toEventModel(): EventModel {
     val eventTypes = ArrayList<EventTypes>()
-    for(event in this) {
+    val resultEvents = (this as ArrayList<String>)
+    resultEvents.removeIf { it == "토요휴업일" }
+    for(event in resultEvents) {
         eventTypes.add(event.toEventType())
     }
-    return EventModel(this, eventTypes)
+    return EventModel(resultEvents, eventTypes)
 }
 
 private fun Map<String, List<String>>.toEventModelMap() =
