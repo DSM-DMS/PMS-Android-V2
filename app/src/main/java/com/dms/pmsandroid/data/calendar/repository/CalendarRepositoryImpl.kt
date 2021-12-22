@@ -5,7 +5,8 @@ import com.dms.pmsandroid.data.calendar.toEventModel
 import com.dms.pmsandroid.data.calendar.toLocalDate
 import com.dms.pmsandroid.data.local.room.EventDatabase
 import com.dms.pmsandroid.data.local.room.RoomEvents
-import com.dms.pmsandroid.feature.calendar.model.EventModel
+import com.dms.pmsandroid.domain.calendar.repository.CalendarRepository
+import com.dms.pmsandroid.presentation.feature.calendar.model.EventModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers

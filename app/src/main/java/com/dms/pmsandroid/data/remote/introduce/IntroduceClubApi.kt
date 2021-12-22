@@ -1,8 +1,8 @@
 package com.dms.pmsandroid.data.remote.introduce
 
 
-import com.dms.pmsandroid.feature.introduce.model.ClubDetailModel
-import com.dms.pmsandroid.feature.introduce.model.ClubListModel
+import com.dms.pmsandroid.presentation.feature.introduce.model.ClubDetailModel
+import com.dms.pmsandroid.presentation.feature.introduce.model.ClubListModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.*

@@ -1,7 +1,7 @@
 package com.dms.pmsandroid.data.calendar
 
 import com.dms.pmsandroid.data.calendar.dto.CalendarResponse
-import com.dms.pmsandroid.feature.calendar.model.EventModel
+import com.dms.pmsandroid.presentation.feature.calendar.model.EventModel
 import io.reactivex.rxjava3.core.Single
 import java.time.LocalDate
 

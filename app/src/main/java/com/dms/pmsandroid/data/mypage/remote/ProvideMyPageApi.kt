@@ -1,7 +1,7 @@
 package com.dms.pmsandroid.data.mypage.remote
 
 import com.dms.pmsandroid.data.remote.SmoothBearApi
-import com.dms.pmsandroid.feature.mypage.model.*
+import com.dms.pmsandroid.presentation.feature.mypage.model.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single

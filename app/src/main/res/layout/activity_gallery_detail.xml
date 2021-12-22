@@ -5,7 +5,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.notify.ui.activity.GalleryDetailActivity">
+        tools:context=".presentation.feature.notify.ui.activity.GalleryDetailActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gallery_detail_rv"

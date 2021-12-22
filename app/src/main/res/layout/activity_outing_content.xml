@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.mypage.ui.activity.OutingContentActivity">
+        tools:context=".presentation.feature.mypage.ui.activity.OutingContentActivity">
 
         <TextView
             android:id="@+id/title_tv"

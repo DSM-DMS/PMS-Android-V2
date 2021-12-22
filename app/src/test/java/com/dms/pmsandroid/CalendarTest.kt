@@ -1,11 +1,8 @@
 package com.dms.pmsandroid
 
-import com.dms.pmsandroid.data.calendar.toLocalDate
-import com.dms.pmsandroid.feature.calendar.toCalendarDay
+import com.dms.pmsandroid.presentation.feature.calendar.toCalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import org.junit.Assert
 import org.junit.Test
-import org.mockito.Mockito.`when`
 import java.time.LocalDate
 
 class CalendarTest {

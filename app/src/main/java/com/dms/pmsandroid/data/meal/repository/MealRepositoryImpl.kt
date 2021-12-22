@@ -1,7 +1,8 @@
 package com.dms.pmsandroid.data.meal.repository
 
 import com.dms.pmsandroid.data.meal.remote.ProvideMealApi
-import com.dms.pmsandroid.feature.meal.entity.MealItem
+import com.dms.pmsandroid.domain.meal.repository.MealRepository
+import com.dms.pmsandroid.presentation.feature.meal.entity.MealItem
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
