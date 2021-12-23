@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.dms.pmsandroid.presentation.base.Event
 import com.dms.pmsandroid.presentation.base.SingleLiveEvent
 import com.dms.pmsandroid.domain.calendar.repository.CalendarRepository
-import com.dms.pmsandroid.presentation.feature.calendar.model.EventModel
+import com.dms.pmsandroid.domain.calendar.entity.EventModel
 import com.dms.pmsandroid.presentation.feature.calendar.toCalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarDay
 

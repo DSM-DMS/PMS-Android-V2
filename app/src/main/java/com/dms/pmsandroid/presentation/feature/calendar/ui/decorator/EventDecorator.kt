@@ -4,7 +4,7 @@ import android.content.Context
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.data.calendar.EventTypes
+import com.dms.pmsandroid.domain.calendar.entity.EventTypes
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade

@@ -1,12 +1,12 @@
 package com.dms.pmsandroid.data.calendar.repository
 
-import com.dms.pmsandroid.data.calendar.remote.ProvideCalendarApi
+import com.dms.pmsandroid.data.calendar.remote.CalendarRemoteDatasource
 import com.dms.pmsandroid.data.calendar.toEventModel
 import com.dms.pmsandroid.data.calendar.toLocalDate
 import com.dms.pmsandroid.data.local.room.EventDatabase
 import com.dms.pmsandroid.data.local.room.RoomEvents
 import com.dms.pmsandroid.domain.calendar.repository.CalendarRepository
-import com.dms.pmsandroid.presentation.feature.calendar.model.EventModel
+import com.dms.pmsandroid.domain.calendar.entity.EventModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -17,14 +17,14 @@ import java.time.LocalDate
 import kotlin.collections.HashMap
 
 class CalendarRepositoryImpl(
-    private val provideCalendarApi: ProvideCalendarApi,
+    private val calendarRemoteDatasource: CalendarRemoteDatasource,
     private val eventDatabase: EventDatabase
 ) : CalendarRepository {
     override fun getEvents(): Single<Map<LocalDate, EventModel>> =
         getSchedulesAtServerOrLocal()
 
     private fun getSchedulesAtServerOrLocal(): Single<Map<LocalDate, EventModel>> =
-        provideCalendarApi.getSchedules()
+        calendarRemoteDatasource.getSchedules()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .flatMap { response ->

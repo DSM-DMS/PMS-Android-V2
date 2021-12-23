@@ -1,6 +1,6 @@
 package com.dms.pmsandroid.presentation.feature.calendar
 
-import com.dms.pmsandroid.data.calendar.EventTypes
+import com.dms.pmsandroid.domain.calendar.entity.EventTypes
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.time.LocalDate
 

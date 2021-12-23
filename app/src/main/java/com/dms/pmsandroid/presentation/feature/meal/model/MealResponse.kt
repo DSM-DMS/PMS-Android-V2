@@ -1,6 +1,6 @@
 package com.dms.pmsandroid.presentation.feature.meal.model
 
-import com.dms.pmsandroid.presentation.feature.meal.entity.Meal
+import com.dms.pmsandroid.domain.meal.entity.Meal
 import java.lang.Exception
 
 data class MealResponse(val breakfast: Any?, val lunch: Any?, val dinner: Any?)

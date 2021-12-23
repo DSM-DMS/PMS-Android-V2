@@ -1,6 +1,4 @@
-package com.dms.pmsandroid.presentation.feature.meal.entity
-
-data class Meal(val breakfast: ArrayList<String>?, val lunch: ArrayList<String>?, val dinner: ArrayList<String>?)
+package com.dms.pmsandroid.presentation.feature.meal
 
 fun ArrayList<String>?.toMealText(): String {
     var mealString = ""

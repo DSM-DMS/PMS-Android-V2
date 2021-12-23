@@ -3,7 +3,7 @@ package com.dms.pmsandroid.presentation.feature.calendar.bindingadapter
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.presentation.feature.calendar.model.EventModel
+import com.dms.pmsandroid.domain.calendar.entity.EventModel
 import com.dms.pmsandroid.presentation.feature.calendar.toEmoji
 import com.prolificinteractive.materialcalendarview.CalendarDay
 

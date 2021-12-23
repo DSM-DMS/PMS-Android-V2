@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
-class ProvideCalendarApi(api: PotatoChipApi, private val sharedPreferenceStorage: SharedPreferenceStorage) {
+class CalendarRemoteDatasource(api: PotatoChipApi, private val sharedPreferenceStorage: SharedPreferenceStorage) {
 
     private val calendarApi = api.retrofit.create(CalendarApi::class.java)
 

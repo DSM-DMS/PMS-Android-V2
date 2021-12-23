@@ -3,10 +3,10 @@ package com.dms.pmsandroid.data.meal.remote
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
 import com.dms.pmsandroid.data.remote.PotatoChipApi
 import com.dms.pmsandroid.presentation.feature.meal.entity.MealItem
-import com.dms.pmsandroid.presentation.feature.meal.entity.toMealText
 import com.dms.pmsandroid.presentation.feature.meal.model.MealPictureResponse
 import com.dms.pmsandroid.presentation.feature.meal.model.MealResponse
 import com.dms.pmsandroid.presentation.feature.meal.model.toEntity
+import com.dms.pmsandroid.presentation.feature.meal.toMealText
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single

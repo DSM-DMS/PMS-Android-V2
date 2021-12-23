@@ -6,7 +6,7 @@ import android.graphics.Paint
 import android.text.style.LineBackgroundSpan
 import androidx.core.content.ContextCompat
 import com.dms.pmsandroid.R
-import com.dms.pmsandroid.data.calendar.EventTypes
+import com.dms.pmsandroid.domain.calendar.entity.EventTypes
 
 class CustomMultipleDotSpan(private val eventTypes: List<EventTypes>, context: Context) : LineBackgroundSpan {
 
