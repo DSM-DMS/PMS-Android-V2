@@ -1,6 +1,7 @@
-package com.dms.pmsandroid.data.remote.introduce
+package com.dms.pmsandroid.data.introduce.remote
 
 import com.dms.pmsandroid.data.remote.PotatoChipApi
+import com.dms.pmsandroid.data.remote.introduce.IntroduceClubApi
 import com.dms.pmsandroid.presentation.feature.introduce.model.ClubDetailModel
 import com.dms.pmsandroid.presentation.feature.introduce.model.ClubListModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -9,7 +10,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 
-class ProvideIntroduceClubApi(api: PotatoChipApi) {
+class IntroduceRemoteDatasource(api: PotatoChipApi) {
 
     private val introduceClubApi = api.retrofit.create(IntroduceClubApi::class.java)
 
