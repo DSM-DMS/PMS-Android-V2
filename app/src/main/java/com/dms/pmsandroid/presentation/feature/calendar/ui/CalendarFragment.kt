@@ -45,13 +45,13 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
 
     override fun observeEvent() {
         vm.run {
-            doneEventsSetting.observe(viewLifecycleOwner, {
+            doneEventsSetting.observe(viewLifecycleOwner) {
                 drawEventDots(selectedDate.value!!.month + 1)
-            })
-            selectedDate.observe(viewLifecycleOwner, {
+            }
+            selectedDate.observe(viewLifecycleOwner) {
                 val plusMonth = CalendarDay.from(it.year, it.month + 1, it.day)
                 selectedEventModel.value = events.value?.get(plusMonth)
-            })
+            }
             updateCurrentDate.observe(viewLifecycleOwner, EventObserver {
                 val date = vm.selectedDate.value
                 binding.calendarView.run{
@@ -59,20 +59,20 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(R.layout.fragment
                     selectedDate = date
                 }
             })
-            showingMonth.observe(viewLifecycleOwner, {
+            showingMonth.observe(viewLifecycleOwner) {
                 drawEventDots(it.month)
-            })
-            isLoading.observe(viewLifecycleOwner, {
-                if(it) {
+            }
+            isLoading.observe(viewLifecycleOwner) {
+                if (it) {
                     binding.calendarShimmerContainer.startShimmer()
                 } else {
                     binding.calendarShimmerContainer.hideShimmer()
                 }
-            })
+            }
         }
-        mainVm.doneToken.observe(viewLifecycleOwner, {
+        mainVm.doneToken.observe(viewLifecycleOwner) {
             drawEventDots(vm.selectedDate.value!!.month + 1)
-        })
+        }
     }
 
     private fun startLandingCalendarView() {
