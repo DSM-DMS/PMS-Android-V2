@@ -3,8 +3,8 @@ package com.dms.pmsandroid.presentation.feature.introduce.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dms.pmsandroid.data.introduce.remote.ProvideIntroduceClubApi
 import com.dms.pmsandroid.data.local.SharedPreferenceStorage
-import com.dms.pmsandroid.data.remote.introduce.ProvideIntroduceClubApi
 import com.dms.pmsandroid.presentation.feature.introduce.model.ClubListModel
 
 class IntroduceClubViewModel(

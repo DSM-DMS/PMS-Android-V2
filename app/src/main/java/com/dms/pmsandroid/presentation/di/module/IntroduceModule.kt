@@ -1,6 +1,6 @@
 package com.dms.pmsandroid.presentation.di.module
 
-import com.dms.pmsandroid.data.remote.introduce.ProvideIntroduceClubApi
+import com.dms.pmsandroid.data.introduce.remote.ProvideIntroduceClubApi
 import com.dms.pmsandroid.presentation.feature.introduce.viewmodel.IntroduceClubDetailViewModel
 import com.dms.pmsandroid.presentation.feature.introduce.viewmodel.IntroduceClubViewModel
 import com.dms.pmsandroid.presentation.feature.introduce.viewmodel.IntroduceCompanyViewModel
