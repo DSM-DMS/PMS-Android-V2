@@ -1,10 +1,10 @@
 package com.dms.pmsandroid.data.remote.login
 
-import com.dms.pmsandroid.feature.login.model.LoginRequest
-import com.dms.pmsandroid.feature.login.model.LoginResponse
-import com.dms.pmsandroid.feature.login.model.RegisterRequest
-import com.dms.pmsandroid.feature.mypage.model.ChangePasswordRequest
-import com.dms.pmsandroid.feature.mypage.model.ResetPasswordRequest
+import com.dms.pmsandroid.presentation.feature.login.model.LoginRequest
+import com.dms.pmsandroid.presentation.feature.login.model.LoginResponse
+import com.dms.pmsandroid.presentation.feature.login.model.RegisterRequest
+import com.dms.pmsandroid.presentation.feature.mypage.model.ChangePasswordRequest
+import com.dms.pmsandroid.presentation.feature.mypage.model.ResetPasswordRequest
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.Body

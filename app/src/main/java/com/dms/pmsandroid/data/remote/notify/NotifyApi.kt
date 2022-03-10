@@ -1,6 +1,6 @@
 package com.dms.pmsandroid.data.remote.notify
 
-import com.dms.pmsandroid.feature.notify.model.*
+import com.dms.pmsandroid.presentation.feature.notify.model.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.*

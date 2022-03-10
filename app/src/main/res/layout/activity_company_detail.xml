@@ -7,13 +7,13 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceCompanyDetailViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.introduce.viewmodel.IntroduceCompanyDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.introduce.ui.activity.IntroClubActivity">
+        tools:context=".presentation.feature.introduce.ui.activity.IntroClubActivity">
 
         <TextView
             android:id="@+id/title_tv"

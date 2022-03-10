@@ -3,7 +3,6 @@ package com.dms.pmsandroid.data.local
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.dms.pmsandroid.ui.MainActivity
 
 class SharedPreferenceStorage(private val context: Context) {
     private var pref: SharedPreferences? = null

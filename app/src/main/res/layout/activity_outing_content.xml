@@ -7,13 +7,13 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.mypage.viewmodel.OutingContentViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.mypage.viewmodel.OutingContentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.mypage.ui.activity.OutingContentActivity">
+        tools:context=".presentation.feature.mypage.ui.activity.OutingContentActivity">
 
         <TextView
             android:id="@+id/title_tv"

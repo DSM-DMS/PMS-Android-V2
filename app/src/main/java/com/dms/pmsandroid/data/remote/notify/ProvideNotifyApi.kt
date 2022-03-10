@@ -1,13 +1,12 @@
 package com.dms.pmsandroid.data.remote.notify
 
 import com.dms.pmsandroid.data.remote.PotatoChipApi
-import com.dms.pmsandroid.feature.notify.model.*
+import com.dms.pmsandroid.presentation.feature.notify.model.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class ProvideNotifyApi(api: PotatoChipApi) {
 

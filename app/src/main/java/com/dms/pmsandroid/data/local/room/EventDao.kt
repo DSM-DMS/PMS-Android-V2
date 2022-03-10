@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEvent(event: List<RoomEvents>): List<Long>
+    fun insertEvent(event: List<RoomEvents>)
 
     @Query("SELECT * FROM events")
     fun getLocalEvent(): Single<List<RoomEvents>>

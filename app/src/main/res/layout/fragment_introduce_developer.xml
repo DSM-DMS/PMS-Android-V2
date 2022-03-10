@@ -3,14 +3,14 @@
     <data>
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.introduce.viewmodel.IntroduceDeveloperViewModel" />
     </data>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.introduce.ui.fragment.IntroduceDeveloperFragment">
+        tools:context=".presentation.feature.introduce.ui.fragment.IntroduceDeveloperFragment">
 
 
         <TextView

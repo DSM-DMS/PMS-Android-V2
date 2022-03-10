@@ -8,14 +8,14 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.introduce.viewmodel.MainIntroduceViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.introduce.viewmodel.MainIntroduceViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.introduce.ui.fragment.IntroduceFragment">
+        tools:context=".presentation.feature.introduce.ui.fragment.IntroduceFragment">
 
 
         <TextView

@@ -1,15 +1,14 @@
 package com.dms.pmsandroid.data.local.room
 
 import android.content.Context
-import androidx.room.Room
-import androidx.room.Database
-import androidx.room.RoomDatabase
+import androidx.room.*
 
 @Database(
     entities = [RoomEvents::class],
     version = 1,
     exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class EventDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
 

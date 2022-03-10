@@ -9,13 +9,13 @@
 
         <variable
             name="vm"
-            type="com.dms.pmsandroid.feature.notify.viewmodel.NotifyViewModel" />
+            type="com.dms.pmsandroid.presentation.feature.notify.viewmodel.NotifyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.notify.ui.fragment.InNoticeFragment">
+        tools:context=".presentation.feature.notify.ui.fragment.InNoticeFragment">
 
         <LinearLayout
             android:id="@+id/notice_ll"

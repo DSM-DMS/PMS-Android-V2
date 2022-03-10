@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".di.PmsApplication"
+        android:name="com.dms.pmsandroid.presentation.di.PmsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:theme="@style/Theme.PmsAndroid"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.dms.pmsandroid.presentation.ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="adjustNothing"
@@ -28,16 +28,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.mypage.ui.activity.ChangePasswordActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.mypage.ui.activity.ChangePasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".feature.notify.ui.activity.NoticeDetailActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.notify.ui.activity.NoticeDetailActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.mypage.ui.activity.OutingContentActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.mypage.ui.activity.OutingContentActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName="com.dms.pmsandroid.presentation.ui.MainActivity"
             tools:ignore="LockedOrientationActivity" >
             <intent-filter>
                 <action android:name=".feature.mypage.ui.activity.OutingContentActivity"/>
@@ -45,39 +45,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".feature.notify.ui.activity.GalleryDetailActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.notify.ui.activity.GalleryDetailActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.introduce.ui.activity.IntroduceCompanyActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.introduce.ui.activity.IntroduceCompanyActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.introduce.ui.activity.IntroduceDeveloperActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.introduce.ui.activity.IntroduceDeveloperActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.login.ui.activity.LoginActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.login.ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.introduce.ui.activity.IntroduceCompanyDetailActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.introduce.ui.activity.IntroduceCompanyDetailActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.introduce.ui.activity.IntroduceClubDetailActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.introduce.ui.activity.IntroduceClubDetailActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.mypage.ui.activity.PointContentActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.mypage.ui.activity.PointContentActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".feature.introduce.ui.activity.IntroduceClubActivity"
+            android:name="com.dms.pmsandroid.presentation.feature.introduce.ui.activity.IntroduceClubActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
-        <service android:name=".feature.fcm.FCMService">
+        <service android:name="com.dms.pmsandroid.presentation.feature.fcm.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

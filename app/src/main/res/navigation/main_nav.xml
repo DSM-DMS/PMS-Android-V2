@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/calendar_fragment"
-        android:name="com.dms.pmsandroid.feature.calendar.ui.CalendarFragment"
+        android:name="com.dms.pmsandroid.presentation.feature.calendar.ui.CalendarFragment"
         android:label="calendarFragment"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/meal_fragment"
-        android:name="com.dms.pmsandroid.feature.meal.fragment.MealFragment"
+        android:name="com.dms.pmsandroid.presentation.feature.meal.fragment.MealFragment"
         android:label="mealFragment"
         tools:layout="@layout/fragment_meal" />
 
     <fragment
         android:id="@+id/notice_fragment"
-        android:name="com.dms.pmsandroid.feature.notify.ui.fragment.NotifyFragment"
+        android:name="com.dms.pmsandroid.presentation.feature.notify.ui.fragment.NotifyFragment"
         android:label="notifyFragment"
         tools:layout="@layout/fragment_notify" />
 
     <fragment
         android:id="@+id/intro_fragment"
-        android:name="com.dms.pmsandroid.feature.introduce.ui.fragment.IntroduceFragment"
+        android:name="com.dms.pmsandroid.presentation.feature.introduce.ui.fragment.IntroduceFragment"
         android:label="introduceFragment"
         tools:layout="@layout/fragment_introduce" />
 
     <fragment
         android:id="@+id/mypage_fragment"
-        android:name="com.dms.pmsandroid.feature.mypage.ui.fragment.MyPageFragment"
+        android:name="com.dms.pmsandroid.presentation.feature.mypage.ui.fragment.MyPageFragment"
         android:label="myPageFragment"
         tools:layout="@layout/fragment_mypage" />
 </navigation>
